@@ -5,15 +5,18 @@
 
    
         <div class="container2">
+            
             <h2>Inicio de Sesión</h2>
-            <label for="txtUsername">Usuario:</label>
-            <input type="text" id="txtUsername" runat="server" />
+            <asp:Label runat="server" ID="lblUsername" Text="Usuario:"></asp:Label>
+            <asp:TextBox runat="server" ID="txtUsername" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre de usuario"></asp:TextBox>
 
-            <label for="txtPassword">Contraseña:</label>
-            <input type="password" id="txtPassword" runat="server" />
+            <asp:Label runat="server" ID="lblPassword" Text="Contraseña:"></asp:Label>
+            <asp:TextBox runat="server" ID="txtPassword" AutoPostBack="true" AutoComplete="off" PlaceHolder="Ingrese su contraseña"></asp:TextBox>
 
-            <input type="submit" value="Iniciar Sesión" runat="server" />
-        </div>
+            <asp:Button runat="server" ID="btnEnter" Text="Ingresar"></asp:Button>
+            <label>No tenes cuenta? </label><a href="Registro.aspx">Registrate</a>
+
+            </div>
      <style>
         .container2{
             width: 300px;

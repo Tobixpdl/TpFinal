@@ -11,7 +11,7 @@
     <>--%>
    <header class="header">
     <section class="nav-bar">
-
+     <%--    <%
            <div id="search-container">
                       <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoPostBack="true" OnTextChanged="Busqueda_TextChanged" AutoComplete="off" PlaceHolder="Búsqueda"/>
                       <asp:CheckBox runat="server" ID="chBusqueda" Text="Filtrar" OnCheckedChanged="chBusqueda_CheckedChanged" AutoPostBack="true"></asp:CheckBox>
@@ -44,7 +44,7 @@
             </div>
                 </div>
             <% } %>
-
+        <>--%>
                          <div class="container text-center btnCarrito " id="count">
                            <div class="row">
                                <div class="col">
@@ -59,6 +59,7 @@
                        </div>
     </section>
   </header>
+        
 
     <section class="articulos">
         <div class="mega-main">

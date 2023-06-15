@@ -67,6 +67,7 @@
     <Content Include="Carrito.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DetallesArticulos.aspx" />
+    <Content Include="Registro.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
     <Content Include="styles\st-default.css" />
@@ -93,6 +94,13 @@
     </Compile>
     <Compile Include="DetallesArticulos.aspx.designer.cs">
       <DependentUpon>DetallesArticulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

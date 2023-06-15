@@ -38,7 +38,7 @@ namespace WebApplication1
             //
 
             carritoActual = this.Session["listaDeCompras"] != null ? (List<Articulo>)Session["listaDeCompras"] : new List<Articulo>();
-            BusquedaNull.Visible = false;
+            //BusquedaNull.Visible = false;
 
 
             if (!IsPostBack)
@@ -47,8 +47,8 @@ namespace WebApplication1
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
                 FiltroAvanzado = false;
-                ddlCategoria_Llenado(sender, e);
-            }
+               // ddlCategoria_Llenado(sender, e);
+            }/*/
             else
             {
                 if (!chBusqueda.Checked)
@@ -62,9 +62,9 @@ namespace WebApplication1
             }
 
             lblCompra.Text = this.Session["listaDeCompras"] != null ? ((List<Articulo>)Session["listaDeCompras"]).Count.ToString() : lblCompra.CssClass = "invisible";
+        /*/
 
         }
-
         protected void btnAdd_Click(object sender, EventArgs e)
         {
 
@@ -128,7 +128,7 @@ namespace WebApplication1
 
 
         }
-
+/*/
         protected void Busqueda_TextChanged(object sender, EventArgs e)
         {
 
@@ -350,6 +350,7 @@ namespace WebApplication1
 
             }
         }
+/*/
     }
 }
     
