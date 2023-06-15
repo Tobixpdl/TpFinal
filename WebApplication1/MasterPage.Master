@@ -24,9 +24,11 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="Default.aspx">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="Carrito.aspx">Carrito</a></li>
-                        </ul>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="Login.aspx">Login</a></li>
+
+                    </ul>
                 </div>
-                            </div>
+            </div>
         </nav>
     </header>
                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -51,4 +53,5 @@ nav {
   z-index: 9999;
   background-color: #f2f2f2;
 }
+
 </style>

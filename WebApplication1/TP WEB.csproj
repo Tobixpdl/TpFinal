@@ -67,6 +67,7 @@
     <Content Include="Carrito.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DetallesArticulos.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
     <Content Include="styles\st-default.css" />
     <Content Include="Web.config" />
@@ -92,6 +93,13 @@
     </Compile>
     <Compile Include="DetallesArticulos.aspx.designer.cs">
       <DependentUpon>DetallesArticulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
