@@ -11,7 +11,7 @@ namespace WebApplication1
     public partial class Carrito : System.Web.UI.Page
     {
 
-        public List<Articulo> listaDeCompras;
+        public List<Publicacion> listaDeCompras;
         public int contador { get; set; }
         public List<Monto> listaMontos;
         public int cantidad = 1;
@@ -21,8 +21,8 @@ namespace WebApplication1
         {
 
 
-            listaDeCompras = new List<Articulo>();
-            listaDeCompras = (List<Articulo>)Session["listaDeCompras"];
+            listaDeCompras = new List<Publicacion>();
+            listaDeCompras = (List<Publicacion>)Session["listaDeCompras"];
 
             listaMontos = new List<Monto>();
 
@@ -55,7 +55,7 @@ namespace WebApplication1
 
                 foreach (var item in listaDeCompras)
                 {
-                    acum += item.Precio * item.Cantidad;
+                    acum += item.Precio * item.Stock;
 
                 }
 
@@ -140,13 +140,13 @@ namespace WebApplication1
             if (e.CommandName == "Minus")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                if (listaDeCompras[index].Cantidad <= 1)
+                if (listaDeCompras[index].Stock <= 1)
                 {
                     listaDeCompras.RemoveAt(index);
                 }
                 else
                 {
-                    listaDeCompras[index].Cantidad--;
+                    listaDeCompras[index].Stock--;
                 }
 
                 Response.Redirect("Carrito.aspx", false);
@@ -155,7 +155,7 @@ namespace WebApplication1
             if (e.CommandName == "Plus")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                listaDeCompras[index].Cantidad++;
+                listaDeCompras[index].Stock++;
                 Response.Redirect("Carrito.aspx", false);
             }
 
@@ -213,4 +213,5 @@ namespace WebApplication1
             }
         }
     }
+    
 }

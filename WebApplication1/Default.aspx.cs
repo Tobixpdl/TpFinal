@@ -15,29 +15,20 @@ namespace WebApplication1
 {
     public partial class Default : System.Web.UI.Page
     {
-        public List<Articulo> ListaArticulos { get; set; }
-        public List<Articulo> carritoActual { get; set; }
-        public List<Imagen> listaImagenes { get; set; }
+        public List<Publicacion> ListaArticulos { get; set; }
+        public List<Publicacion> carritoActual { get; set; }
 
         public NegocioImagen negocioImg = new NegocioImagen();
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             // Generacion de los datos de las CARDS
-            NegocioArticulo negocio = new NegocioArticulo();
+            NegocioPublicacion negocio = new NegocioPublicacion();
             ListaArticulos = negocio.Listar();
-
-            NegocioImagen negocioImg = new NegocioImagen();
-
-            for (int i = 0; i < ListaArticulos.Count(); i++)
-            {
-                listaImagenes = negocioImg.Listar(ListaArticulos[i].Id);
-                ListaArticulos[i].Imagenes = listaImagenes;
-            }
 
             //
 
-            carritoActual = this.Session["listaDeCompras"] != null ? (List<Articulo>)Session["listaDeCompras"] : new List<Articulo>();
+            carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
             //BusquedaNull.Visible = false;
 
 
@@ -67,7 +58,7 @@ namespace WebApplication1
         }
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-
+            /*
             string valor = ((Button)sender).CommandArgument;
 
             var aux = buscarArticulo(valor);
@@ -86,6 +77,7 @@ namespace WebApplication1
             this.Session.Add("listaDeCompras", carritoActual);
 
             Response.Redirect("Default.aspx", false);
+            */
         }
         public bool ContainsArticulo(string id, ref int index)
         {
@@ -103,9 +95,9 @@ namespace WebApplication1
             }
             return aux;
         }
-        public Articulo buscarArticulo(string id)
+        public Publicacion buscarArticulo(string id)
         {
-            Articulo aux = new Articulo();
+            Publicacion aux = new Publicacion();
             int val = 0;
             bool numero = int.TryParse(id, out val);
             foreach (var item in ListaArticulos)
@@ -121,11 +113,8 @@ namespace WebApplication1
 
         protected void btnCarro_Click(object sender, EventArgs e)
         {
-
             Session.Add("listaDeCompras", carritoActual);
             Response.Redirect("Carrito.aspx", false);
-
-
 
         }
 /*/

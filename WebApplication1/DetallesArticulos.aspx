@@ -5,27 +5,10 @@
 
     <section class="detalles">
          <div class="card-detalle">
-             <div class="div-img">
-                      <%
-                          foreach (dominio.Imagen img in listaImagenes)
-                          {
-                              if (img.Url != null)
-                              {
-                       %>  
-                    
-                            <div class="img">
-                              <img src="<%:img.Url %>" class="d-block w-100" alt="...">
-                            </div>
-
-                 <%           }
-                     } %>
-
-           </div>
                   <div class="card-body">
-                        <h3 class="card-title"><%:art.Nombre %></h3>
+                        <h3 class="card-title"><%:art.Titulo %></h3>
                         <h5 class="card-text">Descripcion: <%:art.Descripcion %></h5>
                         <h5 class="card-text">Precio: <%:art.Precio %></h5>
-                        <h5 class="card-text">Marca: <%:art.Marca %></h5>
                         <h5 class="card-text">Categoria : <%:art.Categoria %></h5>
                         <asp:Button ID="Btn_volver" OnClick="Btn_volver_Click" runat="server" Text="Volver" />
                   </div>

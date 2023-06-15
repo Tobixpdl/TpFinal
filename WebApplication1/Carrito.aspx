@@ -7,7 +7,7 @@
   <div class="row border border-dark-subtle">
   <div class="col-12 " style="background:#0094ff;text-align:center;">
       
-      
+   
       <%if (contador == 0)
         {
 %>
