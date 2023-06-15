@@ -46,7 +46,7 @@ namespace WebApplication1
 
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
-                FiltroAvanzado = false;
+                //FiltroAvanzado = false;
                // ddlCategoria_Llenado(sender, e);
             }/*/
             else

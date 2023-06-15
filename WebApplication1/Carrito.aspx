@@ -114,6 +114,8 @@
               <p class="resultado"> Total</p>
               <asp:Label ID="lblTotal" runat="server" ></asp:Label> 
       
+                <asp:Button runat="server" ID="btnComprar" Text="Comprar"></asp:Button>
+
      
   </div>
 </div>
