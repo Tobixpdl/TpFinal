@@ -16,8 +16,8 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             ListaUsuarios = negocioU.Listar();
-
             LabelsVisibility("false");
+            
         }
 
         protected void btnEnter_Click(object sender, EventArgs e)
@@ -44,28 +44,33 @@ namespace WebApplication1
                 if (ListaUsuarios[i].usuario == newUser.usuario)
                 {
                     lblWrongUser.Visible = true;
+                    txtUsername.CssClass = "wrongInput";
                     canCreateUser = false;
                 }
                 if (ListaUsuarios[i].dni == newUser.dni)
                 {
                     lblDNI.Visible = true;
                     canCreateUser = false;
+                    txtDNI.CssClass = "wrongInput";
                 }
                 if (ListaUsuarios[i].mail == newUser.mail)
                 {
                     lblWrongMail.Visible = true;
                     canCreateUser = false;
+                    txtMail.CssClass = "wrongInput";
                 }
             }
             if(newUser.dni <10000000)
             {
                 lblDNI.Visible = true;
                 canCreateUser = false;
+                txtDNI.CssClass = "wrongInput";
             }
             if(newUser.password != TextBox1.Text)
             {
                 lblWrongPass2.Visible = true;
                 canCreateUser = false;
+                TextBox1.CssClass = "wrongInput";
             }
 
             if(canCreateUser)

@@ -6,11 +6,11 @@
 
                 <div class="container2">        
                     <h2>Inicio de Sesión</h2>
-                    <asp:Label runat="server" ID="lblUsername" Text="Usuario:"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtUsername" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre de usuario"></asp:TextBox>
+                        <asp:Label runat="server" ID="lblUsername" Text="Usuario:"></asp:Label>
+                        <asp:TextBox runat="server" ID="txtUsername" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre de usuario" Text="usuario0"></asp:TextBox>                  
 
                     <asp:Label runat="server" ID="lblPassword" Text="Contraseña:"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtPassword" AutoPostBack="true" AutoComplete="off" PlaceHolder="Ingrese su contraseña"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtPassword" AutoPostBack="true" AutoComplete="off" PlaceHolder="Ingrese su contraseña" Text="1234"></asp:TextBox>
 
                     <asp:Button runat="server" ID="btnEnter" Text="Ingresar" OnClick="btnEnter_Click"></asp:Button>
                     <label>No tenes cuenta? </label><a href="Registro.aspx">Registrate</a>

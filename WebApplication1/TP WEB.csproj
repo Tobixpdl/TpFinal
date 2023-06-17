@@ -67,6 +67,7 @@
     <Content Include="Carrito.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DetallesArticulos.aspx" />
+    <Content Include="Mi_Perfil.aspx" />
     <Content Include="Perfiles.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Login.aspx" />
@@ -95,6 +96,13 @@
     </Compile>
     <Compile Include="DetallesArticulos.aspx.designer.cs">
       <DependentUpon>DetallesArticulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mi_Perfil.aspx.cs">
+      <DependentUpon>Mi_Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mi_Perfil.aspx.designer.cs">
+      <DependentUpon>Mi_Perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Perfiles.aspx.cs">
       <DependentUpon>Perfiles.aspx</DependentUpon>

@@ -91,6 +91,11 @@
         .lblWrongUs{
             color:red;        
         }
+
+        .wrongInput{
+            color:red;
+            border: 2px solid red;
+        }
         
     </style>
 </asp:Content>
