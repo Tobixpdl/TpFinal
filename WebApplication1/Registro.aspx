@@ -17,25 +17,32 @@
 
             <asp:Label runat="server" ID="lblDNI" Text="Ingrese su DNI:"></asp:Label>
             <asp:TextBox runat="server" ID="txtDNI" AutoPostBack="true" AutoComplete="off" PlaceHolder="DNI"></asp:TextBox>
+            <asp:Label ID="lblWrongDNI" runat="server" Text="No es posible" CssClass="lblWrong"></asp:Label>
 
             <asp:Label runat="server" ID="lblTelefono" Text="Ingrese su teléfono:"></asp:Label>
             <asp:TextBox runat="server" ID="txtTelefono" AutoPostBack="true" AutoComplete="off" PlaceHolder="Número telefónico"></asp:TextBox>
+            <asp:Label ID="lblWrongTelefono" runat="server" Text="No es posible tener ese numero" CssClass="lblWrong"></asp:Label>
 
             <asp:Label runat="server" ID="lblMail" Text="Ingrese sus mail:"></asp:Label>
             <asp:TextBox runat="server" ID="txtMail" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail"></asp:TextBox>
+            <asp:Label ID="lblWrongMail" runat="server" Text="Mail incorrecto" CssClass="lblWrong"></asp:Label>
 
             <asp:Label runat="server" ID="lblUsername" Text="Ingrese un nombre de usuario:"></asp:Label>
             <asp:TextBox runat="server" ID="txtUsername" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre de usuario"></asp:TextBox>
+            <asp:Label ID="lblWrongUser" runat="server" Text="Este usuario ya existe" CssClass="lblWrong"></asp:Label>
 
             <asp:Label runat="server" ID="lblPassword" Text="Ingrese una contraseña:"></asp:Label>
             <asp:TextBox runat="server" ID="txtPassword" AutoPostBack="true" AutoComplete="off" PlaceHolder="Contraseña"></asp:TextBox>
 
             <asp:Label runat="server" ID="Label1" Text="Ingrese su contraseña nuevamente:"></asp:Label>
             <asp:TextBox runat="server" ID="TextBox1" AutoPostBack="true" AutoComplete="off" PlaceHolder="Contraseña"></asp:TextBox>
+            <asp:Label ID="lblWrongPass2" runat="server" Text="Contraseña mal copiada" CssClass="lblWrong"></asp:Label>
 
-
-            <asp:Button runat="server" ID="btnEnter" Text="Ingresar"></asp:Button>
-
+                    <div class="buttons">
+                        <asp:Button runat="server" ID="btnEnter" OnClick="btnEnter_Click" Text="Ingresar"></asp:Button>
+                        <asp:Button ID="BtnReturn" runat="server" OnClick="BtnReturn_Click" Text="Regresar" />
+                    </div>
+                        <asp:Label ID="lblIsUserCreated" runat="server" Text="" CssClass="lblWrongUs"></asp:Label>
             </div>
      <style>
         .container2{
@@ -61,16 +68,28 @@
         .container2 input[type="password"] {
             width: 100%;
             padding: 5px;
-            margin-bottom: 10px;
         }
 
         .container2 input[type="submit"] {
-            width: 100%;
-            padding: 10px;
             background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
+        }
+
+        .buttons{
+            display:flex;
+            justify-content:space-between;
+            padding-top:5px;
+        }
+
+        .lblWrong{
+            color:red;        
+            margin-bottom: 10px;
+        }
+
+        .lblWrongUs{
+            color:red;        
         }
         
     </style>

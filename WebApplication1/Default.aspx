@@ -69,15 +69,15 @@
                                      <div class="flip-card">
                                         <div class="flip-card-inner">
                                             <div class="flip-card-front">
-                                                   <img id="img-flip-card" alt="NO IMAGE">
+                                                   <img id="img-flip-card" src="<%#Eval("Url_Imagen") %>" alt="NO IMAGE">
                                                     <p class="title"><%#Eval("Titulo")%></p>
-                                                    <p><%#Eval("Descripcion") %></p>
+                                                    <p><%#Eval("Precio") %></p>
                                                     <div class="d-grid gap-2 d-md-block">              
                                                     </div>
                                             </div>
                                             <div class="flip-card-back">
                                                <h5 class="card-title"><%#Eval("Titulo") %></h5>
-                                                <p class="card-text"><small class="text-body-secondary">Precio <%#Eval("Precio")%></small></p>
+                                                <p class="card-text"><small class="text-body-secondary"><%#Eval("Descripcion")%></small></p>
                                                 <div class="btns">
                                                         <asp:Button ID="btnAdd" runat="server"  CssClass="btn-botones" OnClick="btnAdd_Click" type="button" Text=" Agregar " 
                                                             CommandArgument='<% #Eval("Id")%>' CommandName="artId" />
@@ -167,6 +167,13 @@
 .flip-card-front {
     background: #E76161;
     color: whitesmoke;
+}
+
+.flip-card-front img{
+    width:100%;
+    justify-content:center;
+    padding:10px;
+    height:50%;
 }
 
 .img-flip-card{

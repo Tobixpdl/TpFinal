@@ -3,20 +3,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-   
-        <div class="container2">
-            
-            <h2>Inicio de Sesión</h2>
-            <asp:Label runat="server" ID="lblUsername" Text="Usuario:"></asp:Label>
-            <asp:TextBox runat="server" ID="txtUsername" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre de usuario"></asp:TextBox>
 
-            <asp:Label runat="server" ID="lblPassword" Text="Contraseña:"></asp:Label>
-            <asp:TextBox runat="server" ID="txtPassword" AutoPostBack="true" AutoComplete="off" PlaceHolder="Ingrese su contraseña"></asp:TextBox>
+                <div class="container2">        
+                    <h2>Inicio de Sesión</h2>
+                    <asp:Label runat="server" ID="lblUsername" Text="Usuario:"></asp:Label>
+                    <asp:TextBox runat="server" ID="txtUsername" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre de usuario"></asp:TextBox>
 
-            <asp:Button runat="server" ID="btnEnter" Text="Ingresar"></asp:Button>
-            <label>No tenes cuenta? </label><a href="Registro.aspx">Registrate</a>
+                    <asp:Label runat="server" ID="lblPassword" Text="Contraseña:"></asp:Label>
+                    <asp:TextBox runat="server" ID="txtPassword" AutoPostBack="true" AutoComplete="off" PlaceHolder="Ingrese su contraseña"></asp:TextBox>
 
-            </div>
+                    <asp:Button runat="server" ID="btnEnter" Text="Ingresar" OnClick="btnEnter_Click"></asp:Button>
+                    <label>No tenes cuenta? </label><a href="Registro.aspx">Registrate</a>
+                    <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
+               </div>
+
      <style>
         .container2{
             width: 300px;
@@ -33,7 +33,7 @@
         }
 
         .container2 label {
-            display: block;
+            display:block;
             margin-bottom: 10px;
         }
 
