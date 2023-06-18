@@ -39,5 +39,15 @@ namespace WebApplication1
             Response.Redirect("Default.aspx", false);
 
         }
+
+        protected void btnAddPublicacion_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Crear.aspx", false);
+        }
+
+        protected void btnCrear_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Crear.aspx", false);
+        }
     }
 }

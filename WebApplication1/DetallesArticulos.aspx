@@ -9,7 +9,7 @@
                         <h3 class="card-title"><%:art.Titulo %></h3>
                         <h5 class="card-text">Descripcion: <%:art.Descripcion %></h5>
                         <h5 class="card-text">Precio: <%:art.Precio %></h5>
-                        <h5 class="card-text">Categoria : <%:art.Categoria %></h5>
+                        <h5 class="card-text">Categoria : <%:art.Categoria.Nombre %></h5>
                         <asp:Button ID="Btn_volver" OnClick="Btn_volver_Click" runat="server" Text="Volver" />
                   </div>
             </div>

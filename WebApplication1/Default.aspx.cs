@@ -69,7 +69,7 @@ namespace WebApplication1
             var lugar = 0;
             if (ContainsArticulo(valor, ref lugar))
             {
-                carritoActual[lugar].Stock++;
+                carritoActual[lugar].Cantidad++;
 
             }
             else

@@ -12,6 +12,8 @@
         {
 %>
     <h1>No haz publicado nada aún</h1>
+       <asp:Button ID="btnAddPublicacion" runat="server" OnClick="btnAddPublicacion_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Crear Publicacion" />  
+  
       <asp:Button ID="btnIrADefault" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Continuar Comprando" />  
     <% }
         else
@@ -31,9 +33,14 @@
                    <asp:BoundField  HeaderText="Precio" DataField="Precio" />
                     <asp:BoundField  HeaderText="Foto" DataField="Titulo" />
                     <asp:ButtonField   ButtonType="Button"
+            commandname="Modify" 
+            headertext="Acciones" 
+            text="Modificar"  />
+                   <asp:ButtonField   ButtonType="Button"
             commandname="Erase" 
             headertext="Acciones" 
             text="Eliminar"  />
+
 
                     
                   
@@ -44,7 +51,9 @@
 
                 </asp:GridView>
            
-            
+            <div class="nueva publicacion" >
+               <asp:Button ID="btnCrear" runat="server" OnClick="btnCrear_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Crear Publicación" /> 
+           </div>
        </div>
 
 

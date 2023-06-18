@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using dominio;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.Remoting.Messaging;
+using System.Threading;
 
 namespace negocio
 {
@@ -20,7 +21,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, p.URL_IMAGEN, c.NOMBRE as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID");
+                datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria, c.NOMBRE as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID");
 
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -34,7 +35,10 @@ namespace negocio
                     aux.Stock = (long)datos.Lector["STOCK"];
                     aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
 
-                   aux.Categoria = (string)datos.Lector["categoria"];
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["idCategoria"];
+                    cat.Nombre = (string)datos.Lector["categoria"];
+                    aux.Categoria = cat;
                     lista.Add(aux);
                 }
                 return lista;
@@ -57,7 +61,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, p.URL_IMAGEN, c.NOMBRE as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID AND p.ID_USUARIO=@id");
+                datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria,c.Nombre as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID AND p.ID_USUARIO=@id");
 
 
                 datos.setearParametro("@id", id);
@@ -73,8 +77,11 @@ namespace negocio
                     //aux.Stock = datos.Lector.GetInt32(6);
                     aux.Stock = (long)datos.Lector["STOCK"];
                     aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
-
-                    aux.Categoria = (string)datos.Lector["categoria"];
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["idCategoria"];
+                     cat.Nombre = (string)datos.Lector["categoria"];
+                    aux.Categoria = cat;
+                    aux.Cantidad = 1;
                     lista.Add(aux);
                 }
                 return lista;
@@ -90,6 +97,28 @@ namespace negocio
             }
 
             
+        }
+        public void AgregarPublicacion(Publicacion agregar, int idUsuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            
+            try
+            {
+                datos.setearConsulta("INSERT into PUBLICACIONES(Titulo,PRECIO,DESCRIPCION,CATEGORIA,STOCK,ID_USUARIO)" +
+                    " values ('" + agregar.Titulo + "','" + agregar.Precio + "','" + agregar.Descripcion + "',@IdCategoria,'"+agregar.Stock +"','"+ idUsuario + "')");
+              
+                datos.setearParametro("@IdCategoria", agregar.Categoria.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
         /*
              public List<Publicacion> ListarConSP()

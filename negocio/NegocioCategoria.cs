@@ -15,13 +15,13 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select ID, DESCRIPCION from CATEGORIAS ");
+                datos.setearConsulta("select ID, Nombre from CATEGORIAS ");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
                     Categoria categoria = new Categoria();
                     categoria.Id = datos.Lector.GetInt32(0);
-                    categoria.Descripcion = (string)datos.Lector["DESCRIPCION"];
+                    categoria.Nombre = (string)datos.Lector["Nombre"];
 
                     lista.Add(categoria);
                 }
@@ -40,7 +40,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("insert into CATEGORIAS values ('"+cat.Descripcion+"')");
+                datos.setearConsulta("insert into CATEGORIAS values ('"+cat.Nombre + "')");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

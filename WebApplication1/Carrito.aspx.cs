@@ -55,7 +55,7 @@ namespace WebApplication1
 
                 foreach (var item in listaDeCompras)
                 {
-                    acum += item.Precio * item.Stock;
+                    acum += item.Precio * item.Cantidad;
 
                 }
 
@@ -65,7 +65,7 @@ namespace WebApplication1
                 {
                     listaMontos.Add(new Monto("Costo de Envio", (decimal)Session["cambioDeCosto"]));
                     ddlZonas.SelectedIndex = (int)Session["idZona"];
-                    this.Session.Add("cambioDeCosto", null);
+                    //this.Session.Add("cambioDeCosto", null);
 
 
                 }
@@ -119,14 +119,14 @@ namespace WebApplication1
         }
         protected decimal CastPriceType(object oItem)
         {
-            decimal precio = (decimal)DataBinder.Eval(oItem, "Precio") * (long)DataBinder.Eval(oItem, "Stock");
+            decimal precio = (decimal)DataBinder.Eval(oItem, "Precio") * (int)DataBinder.Eval(oItem, "Cantidad");
 
             // rest of your code
             return precio;
         }
         protected string ReturnCant(object oItem)
         {
-            string cantidad = (DataBinder.Eval(oItem, "Stock")).ToString();
+            string cantidad = (DataBinder.Eval(oItem, "Cantidad")).ToString();
 
             // rest of your code
             return cantidad;
@@ -140,23 +140,23 @@ namespace WebApplication1
             if (e.CommandName == "Minus")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                if (listaDeCompras[index].Stock <= 1)
+                if (listaDeCompras[index].Cantidad <= 1)
                 {
                     listaDeCompras.RemoveAt(index);
                 }
                 else
                 {
-                    listaDeCompras[index].Stock--;
+                    listaDeCompras[index].Cantidad--;
                 }
 
-                Response.Redirect("Carrito.aspx", false);
+                //Response.Redirect("Carrito.aspx", false);
             }
             else
             if (e.CommandName == "Plus")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                listaDeCompras[index].Stock++;
-                Response.Redirect("Carrito.aspx", false);
+                listaDeCompras[index].Cantidad++;
+                //Response.Redirect("Carrito.aspx", false);
             }
 
         }
@@ -171,7 +171,7 @@ namespace WebApplication1
 
 
 
-            Response.Redirect("Carrito.aspx", false);
+           // Response.Redirect("Carrito.aspx", false);
         }
 
 
@@ -182,12 +182,12 @@ namespace WebApplication1
             decimal n = 0;
             calcularCostoEnvio(zona, ref n);
             listaMontos[1].precio = n;
-            this.Session.Add("cambioDeCosto", n);
-            this.Session.Add("idZona", zona);
+            /*this.Session.Add("cambioDeCosto", n);
+            this.Session.Add("idZona", zona);*/
 
 
 
-            Response.Redirect("Carrito.aspx", false);
+            
 
 
         }

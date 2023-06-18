@@ -16,7 +16,12 @@
     <% }
         else
         {  %>
-      <h1>Carrito</h1>
+         <asp:UpdatePanel runat="server">
+             <ContentTemplate>
+
+
+
+                 <h1>Carrito</h1>
      <div class="row">
        <div class="col-8" style="text-align:center">
 
@@ -29,6 +34,7 @@
                    
                    <asp:BoundField  HeaderText="Producto" DataField="Titulo" />
                    <asp:BoundField  HeaderText="Precio" DataField="Precio" />
+                   
                      <asp:ButtonField buttontype="Button" 
             commandname="Minus" 
             headertext="" 
@@ -42,6 +48,7 @@
 
                        </ItemTemplate>
                    </asp:TemplateField>
+                 
                      <asp:buttonfield buttontype="Button" 
             commandname="Plus"
             headertext="" 
@@ -83,9 +90,7 @@
              <asp:ScriptManager runat="server">
 
              </asp:ScriptManager>
-            <asp:UpdatePanel runat="server"> 
-
-               <ContentTemplate>
+           
 
               <div>
  <p>A que zona perteneces?</p>
@@ -97,8 +102,7 @@
          <asp:ListItem Text="CABA"/>--%>
          </asp:DropDownList>
           </div>
-               </ContentTemplate>
-            </asp:UpdatePanel>
+              
 
 
 
@@ -127,6 +131,13 @@
 
 
   </div>
+
+
+
+
+             </ContentTemplate>
+             </asp:UpdatePanel>
+      
       
 
     <%} %>
