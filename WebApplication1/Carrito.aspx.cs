@@ -119,14 +119,14 @@ namespace WebApplication1
         }
         protected decimal CastPriceType(object oItem)
         {
-            decimal precio = (decimal)DataBinder.Eval(oItem, "Precio") * (int)DataBinder.Eval(oItem, "Cantidad");
+            decimal precio = (decimal)DataBinder.Eval(oItem, "Precio") * (long)DataBinder.Eval(oItem, "Stock");
 
             // rest of your code
             return precio;
         }
         protected string ReturnCant(object oItem)
         {
-            string cantidad = (DataBinder.Eval(oItem, "Cantidad")).ToString();
+            string cantidad = (DataBinder.Eval(oItem, "Stock")).ToString();
 
             // rest of your code
             return cantidad;

@@ -30,21 +30,11 @@ namespace negocio
                     aux.Titulo = (string)datos.Lector["titulo"];
                     aux.Precio = (decimal)datos.Lector["precio"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                   // aux.Stock = (int)datos.Lector["stock"];
+                    //aux.Stock = datos.Lector.GetInt32(6);
+                    aux.Stock = (long)datos.Lector["STOCK"];
                     aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
 
-                    aux.Categoria = (string)datos.Lector["categoria"];
-                    if (datos.Lector != null && datos.Lector.HasRows)
-                    {
-                            if (!datos.Lector.IsDBNull(0)) // Verifica si la primera columna no es nula
-                            {
-                                aux.Url_Imagen = (string)datos.Lector["URL_IMAGEN"];
-                            }
-                    }
-                    else
-                    {
-                        aux.Url_Imagen = ("https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.carsaludable.com.ar%2Fwp-content%2Fuploads%2F2014%2F03%2Fdefault-placeholder.png&tbnid=A0pMe2lq2NT_jM&vet=12ahUKEwiswrnshMn_AhXAppUCHfC-CgYQMygEegUIARDoAQ..i&imgrefurl=http%3A%2F%2Fwww.carsaludable.com.ar%2Fdefault-placeholder%2F&docid=iZpYfY_1jgLREM&w=1500&h=1500&q=default%20image&ved=2ahUKEwiswrnshMn_AhXAppUCHfC-CgYQMygEegUIARDoAQ");
-                    }
+                   aux.Categoria = (string)datos.Lector["categoria"];
                     lista.Add(aux);
                 }
                 return lista;
@@ -59,6 +49,47 @@ namespace negocio
                 datos.cerrarConexion();
             }
 
+        }
+        public List<Publicacion> ListarXUsuario(int id)
+        {
+            List<Publicacion> lista = new List<Publicacion>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, p.URL_IMAGEN, c.NOMBRE as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID AND p.ID_USUARIO=@id");
+
+
+                datos.setearParametro("@id", id);
+
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Publicacion aux = new Publicacion();
+                    aux.Id = datos.Lector.GetInt32(0);
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    //aux.Stock = datos.Lector.GetInt32(6);
+                    aux.Stock = (long)datos.Lector["STOCK"];
+                    aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
+
+                    aux.Categoria = (string)datos.Lector["categoria"];
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            
         }
         /*
              public List<Publicacion> ListarConSP()

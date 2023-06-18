@@ -19,7 +19,7 @@ namespace WebApplication1
             ListaUsuarios = negocioU.Listar();
 
             string usuarioSession = Session["activeUser"].ToString();
-
+            
             for (int i = 0; i < ListaUsuarios.Count; i++)
             {
                 if (ListaUsuarios[i].usuario == usuarioSession)

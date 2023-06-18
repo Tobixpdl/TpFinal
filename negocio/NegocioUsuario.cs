@@ -26,7 +26,16 @@ namespace negocio
                     usuario.nombre = (string)datos.Lector["NOMBRES"];
                     usuario.apellido = (string)datos.Lector["APELLIDOS"];
                     //usuario.dni= datos.Lector.GetInt32(5);
-                    usuario.telefono = (string)datos.Lector["TELEFONO"];
+                    try
+                    {
+                        usuario.telefono = (string)datos.Lector["TELEFONO"];
+                    }
+                    catch (Exception)
+                    {
+
+                        usuario.telefono = "No tiene";
+                    }
+                    
                     usuario.mail = (string)datos.Lector["mail"];
 
                     lista.Add(usuario);

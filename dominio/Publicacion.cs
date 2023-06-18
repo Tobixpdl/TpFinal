@@ -14,7 +14,7 @@ namespace dominio
         public string Descripcion { get; set; }
         public string Url_Imagen { get; set; }
         public string Categoria { get; set; }
-        public int Stock { get; set; }
+        public long Stock { get; set; }
         public int Id_Usuario { get; set; }
 
     }

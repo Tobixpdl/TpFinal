@@ -18,6 +18,8 @@ namespace WebApplication1
         public List<Publicacion> ListaArticulos { get; set; }
         public List<Publicacion> carritoActual { get; set; }
 
+        public int UsuarioActual { get; set; }
+
         public NegocioImagen negocioImg = new NegocioImagen();
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -27,7 +29,7 @@ namespace WebApplication1
             ListaArticulos = negocio.Listar();
 
             //
-
+            Session.Add("idUsuario", 0);
             carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
             //BusquedaNull.Visible = false;
 
@@ -37,6 +39,7 @@ namespace WebApplication1
 
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
+                UsuarioActual = 0;
                 //FiltroAvanzado = false;
                // ddlCategoria_Llenado(sender, e);
             }/*/
@@ -52,20 +55,21 @@ namespace WebApplication1
 
             }
 
-            lblCompra.Text = this.Session["listaDeCompras"] != null ? ((List<Articulo>)Session["listaDeCompras"]).Count.ToString() : lblCompra.CssClass = "invisible";
+            
         /*/
+            lblCompra.Text = this.Session["listaDeCompras"] != null && ((List<Publicacion>)Session["listaDeCompras"]).Count !=0? ((List<Publicacion>)Session["listaDeCompras"]).Count.ToString() : lblCompra.CssClass = "invisible";
 
         }
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            /*
+            
             string valor = ((Button)sender).CommandArgument;
 
             var aux = buscarArticulo(valor);
             var lugar = 0;
             if (ContainsArticulo(valor, ref lugar))
             {
-                carritoActual[lugar].Cantidad++;
+                carritoActual[lugar].Stock++;
 
             }
             else
@@ -77,7 +81,7 @@ namespace WebApplication1
             this.Session.Add("listaDeCompras", carritoActual);
 
             Response.Redirect("Default.aspx", false);
-            */
+            
         }
         public bool ContainsArticulo(string id, ref int index)
         {

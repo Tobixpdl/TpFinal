@@ -13,7 +13,7 @@ namespace WebApplication1
     public partial class Formulario_web1 : System.Web.UI.Page
     {
         public List<Usuario> ListaUsuarios { get; set; }
-
+        public int idUsuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioUsuario negocio = new NegocioUsuario();
@@ -32,17 +32,19 @@ namespace WebApplication1
                         isregistered = true;
                         string message = "Ingresaste con éxito!";
                         lblMessage.Text = message;
-                        lblMessage.ForeColor = System.Drawing.Color.Green;                       
+                        lblMessage.ForeColor = System.Drawing.Color.Green;
+                    idUsuario = ListaUsuarios[i].Id;
                         break;
                     }
                 }
                 if (isregistered) 
                 {
                     Session.Add("activeUser", txtUsername.Text);
-                }
+                    Session.Add("idUsuario", idUsuario);
+            }
                 if (!isregistered)
                 {
-                    string message = "El usuario ingresado es incorrecto";
+                    string message = "Verifique los datos y vuelva a intentarlo";
                     lblMessage.Text = message;
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                 }

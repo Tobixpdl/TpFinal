@@ -13,5 +13,11 @@ namespace WebApplication1
         {
 
         }
+
+        protected void btnPublicaciones_Click(object sender, EventArgs e)
+        {
+            //Session.Add("idUsuario", carritoActual);
+            Response.Redirect("Publicaciones.aspx", false);
+        }
     }
 }

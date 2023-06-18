@@ -27,7 +27,7 @@
                
                <Columns>
                    
-                   <asp:BoundField  HeaderText="Producto" DataField="Nombre" />
+                   <asp:BoundField  HeaderText="Producto" DataField="Titulo" />
                    <asp:BoundField  HeaderText="Precio" DataField="Precio" />
                      <asp:ButtonField buttontype="Button" 
             commandname="Minus" 

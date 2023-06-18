@@ -69,6 +69,7 @@
     <Content Include="DetallesArticulos.aspx" />
     <Content Include="Mi_Perfil.aspx" />
     <Content Include="Perfiles.aspx" />
+    <Content Include="Publicaciones.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
@@ -110,6 +111,13 @@
     </Compile>
     <Compile Include="Perfiles.aspx.designer.cs">
       <DependentUpon>Perfiles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Publicaciones.aspx.cs">
+      <DependentUpon>Publicaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publicaciones.aspx.designer.cs">
+      <DependentUpon>Publicaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
