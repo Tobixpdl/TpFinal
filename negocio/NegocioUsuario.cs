@@ -69,5 +69,54 @@ namespace negocio
             }
         }
 
+
+        public Usuario ListarXUsuario(int id)
+        {
+            Usuario usuario = new Usuario();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta(" select id, usuario, CONTRASEÑA, NOMBRES, APELLIDOS, DNI, TELEFONO, mail from USUARIOS where id= '"+ id +"'");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+            {
+                usuario.Id = datos.Lector.GetInt32(0);
+                usuario.usuario = (string)datos.Lector["usuario"];
+                usuario.password = (string)datos.Lector["CONTRASEÑA"];
+                usuario.nombre = (string)datos.Lector["NOMBRES"];
+                usuario.apellido = (string)datos.Lector["APELLIDOS"];
+                //usuario.dni= datos.Lector.GetInt32(5);
+                try
+                {
+                    usuario.telefono = (string)datos.Lector["TELEFONO"];
+                }
+                catch (Exception)
+                {
+
+                    usuario.telefono = "No tiene";
+                }
+
+                usuario.mail = (string)datos.Lector["mail"];
+
+            }
+
+        }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return usuario;
+        }
     }
 }
+
+
+
+
+
+
+
+
+

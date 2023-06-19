@@ -69,8 +69,9 @@
                                      <div class="flip-card">
                                         <div class="flip-card-inner">
                                             <div class="flip-card-front">
-                                                   <img id="img-flip-card" src="<%#Eval("Url_Imagen") %>" alt="NO IMAGE">
-                                                    <p class="title"><%#Eval("Titulo")%></p>
+<%--                                                   <img id="img-flip-card" src="<%#Eval("Url_Imagen") %>" alt="NO IMAGE">--%>
+                                                   
+                                                <p class="title"><%#Eval("Titulo")%></p>
                                                     <p><%#Eval("Precio") %></p>
                                                     <div class="d-grid gap-2 d-md-block">              
                                                     </div>
@@ -95,137 +96,6 @@
     <style>
 
 
-.articulos{
-    min-height: auto;
-    padding-bottom: 10rem;
-}
-
-
-.mega-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
- .main{
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 5rem;
-}
-
-.flip-card {
-    background-color: transparent;
-    width: 300px;
-    height: 450px;
-    perspective: 1000px;
-    font-family: sans-serif;
-    padding: 2rem; 
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.title {
-  font-size: 1.5em;
-  font-weight: 900;
-  text-align: center;
-  margin: 0;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  box-shadow: -30px 30px 20px rgba(245,245,245,0.2);
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border: 2px solid #FF0060;
-  border-radius: 1rem;
-}
-
-.flip-card-front {
-    background: #E76161;
-    color: whitesmoke;
-}
-
-.flip-card-front img{
-    width:100%;
-    justify-content:center;
-    padding:10px;
-    height:50%;
-}
-
-.img-flip-card{
-    border-bottom: 2px solid black;
-}
-
-.flip-card-back {
-  justify-content:space-around;
-  background: #E76161;
-  color: white;
-  transform: rotateY(180deg);
-}
-
-.btns{
-    display:grid;
-    font-size: 13px;
-    padding-left: 10px;
-    padding-right: 10px;
-    gap:20px;
-}
-
-.btn-botones{
-  text-decoration:none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  outline: 2px solid #212A3E;
-  outline-offset: 0px;
-  background: #394867;
-  border: 0;
-  font-weight: bolder;
-  color: white;
-  transition: all .1s ease-in-out;
-  cursor: pointer;
-}
-
-.btn-botones:hover {
-  outline-offset: 3px;
-  outline: 3px solid #212A3E;
-
-}
-#search-container {
-  position: relative;
-  top: 0;
-  left: 0;
-  padding: 10px;
-  background-color: #f2f2f2;
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-#search-container:focus-within {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); 
-}
 
  #search-box {
         width: 200px;
