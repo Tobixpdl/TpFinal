@@ -65,7 +65,7 @@ namespace WebApplication1
                 {
                     listaMontos.Add(new Monto("Costo de Envio", (decimal)Session["cambioDeCosto"]));
                     ddlZonas.SelectedIndex = (int)Session["idZona"];
-                    //this.Session.Add("cambioDeCosto", null);
+                    this.Session.Add("cambioDeCosto", null);
 
 
                 }
@@ -149,14 +149,14 @@ namespace WebApplication1
                     listaDeCompras[index].Cantidad--;
                 }
 
-                //Response.Redirect("Carrito.aspx", false);
+                Response.Redirect("Carrito.aspx", false);
             }
             else
             if (e.CommandName == "Plus")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 listaDeCompras[index].Cantidad++;
-                //Response.Redirect("Carrito.aspx", false);
+                Response.Redirect("Carrito.aspx", false);
             }
 
         }
@@ -171,7 +171,7 @@ namespace WebApplication1
 
 
 
-           // Response.Redirect("Carrito.aspx", false);
+            Response.Redirect("Carrito.aspx", false);
         }
 
 

@@ -50,5 +50,11 @@ VALUES('Cuello Polar Capucha Pasamontaña Térmico Moto',2998.00,'Especificacion
 - Color: CONSULTAR',1,1,0)
 
 
+create TABLE IMAGENES(
+  ID int not null PRIMARY key IDENTITY(1,1),
+  IdPublicacion int not null FOREIGN key REFERENCES PUBLICACIONES(id),
+  imagenUrl VARCHAR(2000) not null 
+
+)
 insert into CATEGORIAS(NOMBRE)
 VALUES('JUEGOS')

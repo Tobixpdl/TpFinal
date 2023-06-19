@@ -55,5 +55,26 @@ namespace negocio
 
             return lista;
         }
+        public void CrearImagen(string url,int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("insert into IMAGENES(IdPublicacion, imagenUrl) VALUES("+id+", '"+url+ "')");
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
+        }
     }
 }

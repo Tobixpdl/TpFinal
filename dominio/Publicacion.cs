@@ -17,6 +17,8 @@ namespace dominio
         public long Stock { get; set; }
         public int Cantidad { get; set; } = 1;
         public int Id_Usuario { get; set; }
+        public List<Imagen> imagenes { get; set; }
+
 
     }
 }

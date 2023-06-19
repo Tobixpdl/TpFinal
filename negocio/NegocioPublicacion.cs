@@ -120,6 +120,36 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public int GetLastPublicacion()
+        {
+            AccesoDatos datos=  new AccesoDatos();
+            int id= 0;
+            try
+            {
+                datos.setearConsulta("select top 1 ID from PUBLICACIONES ORDER by ID DESC");
+
+               
+                datos.ejecutarAccion();
+                while (datos.Lector.Read())
+                {
+
+                    id = (int)datos.Lector["ID"];
+                }
+                return id;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
+
+        }
         /*
              public List<Publicacion> ListarConSP()
              {

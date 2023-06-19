@@ -19,6 +19,7 @@ namespace WebApplication1
         public List<Publicacion> carritoActual { get; set; }
 
         public int UsuarioActual { get; set; }
+        public Usuario user;
 
         public NegocioImagen negocioImg = new NegocioImagen();
         public bool FiltroAvanzado { get; set; }
@@ -30,6 +31,12 @@ namespace WebApplication1
 
             //
             Session.Add("idUsuario", 0);
+            NegocioUsuario negocioUsuario = new NegocioUsuario();
+            user= negocioUsuario.ListarXUsuario(0);
+            Session.Add("user", user);
+
+
+            //
             carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
             //BusquedaNull.Visible = false;
 
