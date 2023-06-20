@@ -109,6 +109,50 @@ namespace negocio
             }
             return usuario;
         }
+
+        public void ModificarUsuario(Usuario modificado)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+
+            try
+            {
+                datos.setearConsulta("update usuarios set usuario=@usuario, contraseña=@password, mail=@mail, telefono=@telefono where Id=@id");
+                datos.setearParametro("@id", modificado.Id);
+                datos.setearParametro("@usuario", modificado.usuario);
+                datos.setearParametro("@password", modificado.password);
+                datos.setearParametro("@mail", modificado.mail);
+                datos.setearParametro("@telefono", modificado.telefono);
+                datos.EjecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarUsuario(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("delete from usuarios where Id=@id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }
 

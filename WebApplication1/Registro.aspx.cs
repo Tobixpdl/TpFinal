@@ -22,6 +22,16 @@ namespace WebApplication1
 
         protected void btnEnter_Click(object sender, EventArgs e)
         {
+
+            txtUsername.CssClass = " ";
+            txtMail.CssClass = " ";
+            txtDNI.CssClass = " ";
+            TextBox1.CssClass = " ";
+            txtNombres.CssClass = " ";
+            txtApellidos.CssClass = " ";
+            TextBox1.CssClass = " ";
+            txtPassword.CssClass = " ";
+
             bool canCreateUser = true;
             Usuario newUser = new Usuario();
             newUser.usuario = txtUsername.Text;
@@ -34,14 +44,37 @@ namespace WebApplication1
             }
             else
             {
-                newUser.dni = 0;
+                txtDNI.CssClass = "wrongInput";
             }
             newUser.telefono = txtTelefono.Text;
             newUser.mail = txtMail.Text;
 
-            for (int i=0; i<ListaUsuarios.Count; i++)
+            if (newUser.usuario.Length == 0)
             {
-                if (ListaUsuarios[i].usuario == newUser.usuario)
+                lblMissing.Visible = true;
+                txtUsername.CssClass = "wrongInput";
+            }
+            if (newUser.nombre.Length == 0)
+            {
+                txtNombres.CssClass = "wrongInput";
+            }
+            if (newUser.apellido.Length == 0)
+            {
+                txtApellidos.CssClass = "wrongInput";
+            }
+            if (newUser.mail.Length == 0)
+            {
+                txtMail.CssClass = "wrongInput";
+            }
+            if (newUser.password.Length == 0)
+            {
+                txtPassword.CssClass = "wrongInput";
+                TextBox1.CssClass = "wrongInput";
+            }
+
+            for (int i = 0; i < ListaUsuarios.Count; i++)
+            {
+                if (ListaUsuarios[i].usuario == newUser.usuario && newUser.usuario.Length != 0)
                 {
                     lblWrongUser.Visible = true;
                     txtUsername.CssClass = "wrongInput";
@@ -53,27 +86,21 @@ namespace WebApplication1
                     canCreateUser = false;
                     txtDNI.CssClass = "wrongInput";
                 }
-                if (ListaUsuarios[i].mail == newUser.mail)
+                if (ListaUsuarios[i].mail == newUser.mail && newUser.mail.Length != 0)
                 {
                     lblWrongMail.Visible = true;
                     canCreateUser = false;
                     txtMail.CssClass = "wrongInput";
                 }
             }
-            if(newUser.dni <10000000)
-            {
-                lblDNI.Visible = true;
-                canCreateUser = false;
-                txtDNI.CssClass = "wrongInput";
-            }
-            if(newUser.password != TextBox1.Text)
+            if (newUser.password != TextBox1.Text)
             {
                 lblWrongPass2.Visible = true;
                 canCreateUser = false;
                 TextBox1.CssClass = "wrongInput";
             }
 
-            if(canCreateUser)
+            if (canCreateUser)
             {
                 negocioU.AgregarUsuario(newUser);
                 lblIsUserCreated.Text = "Usuario creado";
@@ -89,9 +116,9 @@ namespace WebApplication1
 
         private void LabelsVisibility(string t)
         {
-            if(t == "false")
+            if (t == "false")
             {
-                lblWrongDNI.Visible = false;
+                lblMissing.Visible = false;
                 lblWrongMail.Visible = false;
                 lblWrongPass2.Visible = false;
                 lblWrongTelefono.Visible = false;
@@ -100,7 +127,7 @@ namespace WebApplication1
             }
             else
             {
-                lblWrongDNI.Visible = true;
+                lblMissing.Visible = true;
                 lblWrongMail.Visible = true;
                 lblWrongPass2.Visible = true;
                 lblWrongTelefono.Visible = true;

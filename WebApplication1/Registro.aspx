@@ -17,7 +17,6 @@
 
             <asp:Label runat="server" ID="lblDNI" Text="Ingrese su DNI:"></asp:Label>
             <asp:TextBox runat="server" ID="txtDNI" AutoPostBack="true" AutoComplete="off" PlaceHolder="DNI"></asp:TextBox>
-            <asp:Label ID="lblWrongDNI" runat="server" Text="No es posible" CssClass="lblWrong"></asp:Label>
 
             <asp:Label runat="server" ID="lblTelefono" Text="Ingrese su teléfono:"></asp:Label>
             <asp:TextBox runat="server" ID="txtTelefono" AutoPostBack="true" AutoComplete="off" PlaceHolder="Número telefónico"></asp:TextBox>
@@ -43,6 +42,7 @@
                         <asp:Button ID="BtnReturn" runat="server" OnClick="BtnReturn_Click" Text="Regresar" />
                     </div>
                         <asp:Label ID="lblIsUserCreated" runat="server" Text="" CssClass="lblWrongUs"></asp:Label>
+                        <asp:Label ID="lblMissing" runat="server" Text="Faltan datos" CssClass="lblWrongUs"></asp:Label>
             </div>
      <style>
         .container2{
@@ -96,6 +96,10 @@
             color:red;
             border: 2px solid red;
         }
-        
+
+        .noneInput{
+            color:black;
+        }
     </style>
+
 </asp:Content>

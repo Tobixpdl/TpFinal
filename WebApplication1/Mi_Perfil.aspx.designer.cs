@@ -15,6 +15,15 @@ namespace WebApplication1
     {
 
         /// <summary>
+        /// Control lblUserBorrado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUserBorrado;
+
+        /// <summary>
         /// Control lblUsername.
         /// </summary>
         /// <remarks>
@@ -42,13 +51,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblWrongUser;
 
         /// <summary>
-        /// Control Button1.
+        /// Control BtnChangeUser.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button BtnChangeUser;
 
         /// <summary>
         /// Control lblPassword.
@@ -69,13 +78,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
 
         /// <summary>
-        /// Control Button3.
+        /// Control btnChangePass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.Button btnChangePass;
 
         /// <summary>
         /// Control lblMail.
@@ -105,13 +114,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblWrongMail;
 
         /// <summary>
-        /// Control Button4.
+        /// Control btnChangeMail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button4;
+        protected global::System.Web.UI.WebControls.Button btnChangeMail;
 
         /// <summary>
         /// Control lblTelefono.
@@ -141,13 +150,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblWrongTelefono;
 
         /// <summary>
-        /// Control Button5.
+        /// Control btnChangePhone.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button5;
+        protected global::System.Web.UI.WebControls.Button btnChangePhone;
 
         /// <summary>
         /// Control BtnChange.
@@ -159,13 +168,40 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button BtnChange;
 
         /// <summary>
-        /// Control Button2.
+        /// Control btnEliminarUser.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnEliminarUser;
+
+        /// <summary>
+        /// Control lblSeguroBorrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSeguroBorrar;
+
+        /// <summary>
+        /// Control btnYes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnYes;
+
+        /// <summary>
+        /// Control btnNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNo;
 
         /// <summary>
         /// Control lblChangeUser.
