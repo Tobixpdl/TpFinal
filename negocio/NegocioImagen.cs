@@ -60,8 +60,29 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("insert into IMAGENES(IdPublicacion, imagenUrl) VALUES("+id+", '"+url+ "')");
+                datos.setearConsulta("insert into IMAGENES(IdPublicacion, imagenUrl) VALUES('"+id+"', '"+url+ "')");
 
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
+        }
+        public void EliminarImagen(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("delete from IMAGENES where IdPublicacion = @idPublicacion");
+                datos.setearParametro("@idPublicacion", id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

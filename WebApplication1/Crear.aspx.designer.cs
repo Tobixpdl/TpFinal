@@ -132,13 +132,22 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnCrear;
 
         /// <summary>
-        /// Control txtImagen.
+        /// Control url.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputFile txtImagen;
+        protected global::System.Web.UI.WebControls.FileUpload url;
+
+        /// <summary>
+        /// Control btnUpload.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpload;
 
         /// <summary>
         /// Control imgPublicacion.
@@ -148,14 +157,5 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgPublicacion;
-
-        /// <summary>
-        /// Control btnSubirImagen.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubirImagen;
     }
 }

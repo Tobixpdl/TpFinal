@@ -40,14 +40,35 @@ namespace WebApplication1
 
         }
 
-        protected void btnAddPublicacion_Click(object sender, EventArgs e)
+      
+        protected void btnCrear_Click(object sender, EventArgs e)
         {
             Response.Redirect("Crear.aspx", false);
         }
 
-        protected void btnCrear_Click(object sender, EventArgs e)
+        protected void dgvArticulos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            Response.Redirect("Crear.aspx", false);
+           
+                if (e.CommandName == "Erase")
+                {
+                NegocioPublicacion negocio = new NegocioPublicacion();
+                NegocioImagen negocioImg = new NegocioImagen();
+               
+                int index = Convert.ToInt32(e.CommandArgument);
+                negocioImg.EliminarImagen(listaDePublicaciones[index].Id);
+                negocio.EliminarPublicacion(listaDePublicaciones[index].Id);
+                Response.Redirect("Publicaciones.aspx", false);
+
+            }/*
+                else
+                if (e.CommandName == "Erase")
+                {
+                    int index = Convert.ToInt32(e.CommandArgument);
+                listaDePublicaciones[index].Cantidad++;
+                    Response.Redirect("Carrito.aspx", false);
+                }*/
+
+            
         }
     }
 }

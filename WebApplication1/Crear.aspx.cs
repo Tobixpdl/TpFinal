@@ -21,15 +21,18 @@ namespace WebApplication1
             NegocioUsuario negocioUsuario = new NegocioUsuario();
             idUsuario = Session["idUsuario"] != null ? (int)Session["idUsuario"] : idUsuario = 0;
             user = Session["user"] !=null ? (Usuario)Session["user"]:negocioUsuario.ListarXUsuario(idUsuario);
-            imgPublicacion.ImageUrl = Session["url"] != null ? (string)Session["url"] : "https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg";
-
+            
             categorias = new List<Categoria>();
             NegocioCategoria negocio = new NegocioCategoria();
             categorias = negocio.Listar();
             catAux = new Categoria();
+           
+
             if (!IsPostBack)
             {
-                catAux=new Categoria();
+                imgPublicacion.ImageUrl = Session["url"] != null ? (string)Session["url"] :
+               "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930";
+                catAux = new Categoria();
                 ddlCategorias.DataSource = categorias;
                 ddlCategorias.DataValueField = "Id";
                 ddlCategorias.DataTextField = "Nombre";
@@ -58,12 +61,13 @@ namespace WebApplication1
 
             catAux.Nombre = ddlCategorias.SelectedItem.Value;
             aux.Categoria = catAux;
-
-            negocioImagen.CrearImagen(imgPublicacion.ImageUrl, negocioPublicacion.GetLastPublicacion());
+            negocioPublicacion.AgregarPublicacion(aux, idUsuario);
+            var id = negocioPublicacion.GetLastPublicacion().Id;
+            negocioImagen.CrearImagen(imgPublicacion.ImageUrl,id );
             
            
 
-            negocioPublicacion.AgregarPublicacion(aux, idUsuario);
+            
 
             Response.Redirect("Default.aspx", false);
 
@@ -88,25 +92,38 @@ namespace WebApplication1
             //Response.Redirect("Crear.aspx", false);
         }
 
-        protected void btnSubirImagen_Click(object sender, EventArgs e)
+    
+
+        protected void btnUpload_Click(object sender, EventArgs e)
         {
-            try
+            if(url.HasFile)
             {
-                string ruta = Server.MapPath("./Images/");
+                try
+                {
+                    string ruta = Server.MapPath("./Images/");
 
-                txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id+".jpg");
-                string finalRuta = "~"+ ruta + "perfil-" + user.Id + ".jpg";
+                    //FileURL.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
+                    url.PostedFile.SaveAs(ruta + System.IO.Path.GetFileName(url.PostedFile.FileName));
+                    string finalRuta = "~/Images/" + System.IO.Path.GetFileName(url.PostedFile.FileName);
 
-                Session.Add("url", finalRuta);
-                Response.Redirect("Crear.aspx",false);
+                    Image img = (Image)imgPublicacion;
+                    img.ImageUrl = finalRuta;
 
-                
+                    /* Session.Add("url", finalRuta);
+                     Response.Redirect("Crear.aspx", false);*/
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
-            catch (Exception)
-            {
+           
+               
+                    
 
-                throw;
-            }
+
+               
         }
     }
 }

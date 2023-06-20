@@ -11,7 +11,7 @@
       <%if (contador == 0)
         {
 %>
-    <h1>No hay elementos en el carro</h1>
+    <h1>No hay elementos en el Carro</h1>
       <asp:Button ID="btnIrADefault" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Continuar Comprando" />  
     <% }
         else

@@ -57,24 +57,31 @@
                     <div class="col-4" >
     <h1> Imagenes </h1>
                         
-                                 <div class="mb-3">
+          
+
+
+                <div class="mb-3">
   
-                                   <label for="formFile" class="form-label">Default file input example</label>
-  <input type="file" id="txtImagen" runat="server" class="form-control" />
+     <label for="formFile" class="form-label">Default file input example</label>
+     <asp:FileUpload runat="server" ID="url" class="form-control"  />
+  
+ <asp:Button runat="server" ID="btnUpload" Text="Cargar Imagen" OnClick="btnUpload_Click"></asp:Button>
+              
                        
 </div>
                         
-                        <asp:Image ID="imgPublicacion" runat="server" 
-                           
+                        <asp:Image ID="imgPublicacion" runat="server" ImageUrl="C:\Users\manue\Desktop\TpFinal-ca847c293587d731c06448c0714042654a0d2b53\WebApplication1\Images\pancho.jpg"
+                           CssClass="img-fluid mb-3"
                             
-                           CssClass="img-fluid" />
+                           />
 
-                         <div class="mb-3">
-                    <asp:Button runat="server" ID="btnSubirImagen" Text="Guardar" OnClick="btnSubirImagen_Click"></asp:Button>
-               </div> 
+                        
 
                           
             </div>    
+
+                                        
+                                
 
             
           

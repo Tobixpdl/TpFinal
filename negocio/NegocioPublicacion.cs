@@ -120,22 +120,48 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        public int GetLastPublicacion()
+        public void EliminarPublicacion( int id)
         {
-            AccesoDatos datos=  new AccesoDatos();
-            int id= 0;
+            AccesoDatos datos = new AccesoDatos();
             try
-            {
-                datos.setearConsulta("select top 1 ID from PUBLICACIONES ORDER by ID DESC");
+                {
+                   
+                    datos.setearConsulta("delete from PUBLICACIONES where Id=@id");
+                    datos.setearParametro("@id", id);
+                    datos.ejecutarAccion();
 
-               
-                datos.ejecutarAccion();
-                while (datos.Lector.Read())
+                }
+                catch (Exception)
                 {
 
-                    id = (int)datos.Lector["ID"];
+                    throw;
                 }
-                return id;
+
+            
+        
+        }
+        public Publicacion GetLastPublicacion()
+        {
+            AccesoDatos datos=  new AccesoDatos();
+
+            Publicacion aux = new Publicacion();
+            try
+            {
+                datos.setearConsulta("select top 1 p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria, c.NOMBRE as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID\r\nORDER by p.ID DESC");
+
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                   
+                    aux.Id = datos.Lector.GetInt32(0);
+                    
+                   
+                }
+
+
+              
+             
+                return aux;
             }
             catch (Exception)
             {
@@ -147,7 +173,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
 
-
+            
 
         }
         /*

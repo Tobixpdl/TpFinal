@@ -12,8 +12,7 @@
         {
 %>
     <h1>No haz publicado nada aún</h1>
-       <asp:Button ID="btnAddPublicacion" runat="server" OnClick="btnAddPublicacion_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Crear Publicacion" />  
-  
+       
       <asp:Button ID="btnIrADefault" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Continuar Comprando" />  
     <% }
         else
@@ -25,7 +24,7 @@
          
              <h1></h1>
               
-           <asp:GridView ID="dgvArticulos" runat="server" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" >
+           <asp:GridView ID="dgvArticulos" runat="server" OnRowCommand="dgvArticulos_RowCommand" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" >
                
                <Columns>
                    <asp:BoundField  HeaderText="Foto" />
