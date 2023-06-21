@@ -12,6 +12,7 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             liMiPerfil.Visible = false;
+            salirbtn.Visible = false;
 
             if (!IsPostBack)
             {
@@ -19,12 +20,14 @@ namespace WebApplication1
                 {
                     liLogin.Visible = false;
                     liMiPerfil.Visible = true;
+                    salirbtn.Visible = true;
 
                 }
                 else
                 {
                     liLogin.Visible = true;
                     liMiPerfil.Visible = false;
+                    salirbtn.Visible = false;
 
                 }
             }
@@ -34,16 +37,40 @@ namespace WebApplication1
                 {
                     liLogin.Visible = false;
                     liMiPerfil.Visible = true;
+                    salirbtn.Visible = true;
 
                 }
                 else
                 {
                     liLogin.Visible = true;
                     liMiPerfil.Visible = false;
+                    salirbtn.Visible = false;
 
                 }
             }
 
         }
-    }
+        protected void salirbtn_OnClick(object sender, EventArgs e)
+        {
+            if (this.Session["activeUser"] != null)
+            {
+                this.Session["activeUser"] = null;
+                this.Session["idUsuario"] = null;
+                liLogin.Visible = true;
+                liMiPerfil.Visible = false;
+                salirbtn.Visible = false;
+                Response.Redirect("Default.aspx", false);
+
+            }
+            else
+            {
+                liLogin.Visible = true;
+                liMiPerfil.Visible = false;
+                salirbtn.Visible = false;
+                Response.Redirect("Default.aspx", false);
+
+            }
+        }
+
+            }
 }

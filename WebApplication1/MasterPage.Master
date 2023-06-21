@@ -29,10 +29,11 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="Login.aspx" id="liLogin">Login</a></li>
            
 
-           
+                            
 
                     </ul>
-                </div>
+                      <asp:Button runat="server" CssClass="btn-botones" id="salirbtn" OnClick="salirbtn_OnClick" Text="Salir" /></asp:Button>  
+                  </div>
             </div>
         </nav>
     </header>
