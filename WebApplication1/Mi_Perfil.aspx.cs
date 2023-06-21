@@ -127,25 +127,25 @@ namespace WebApplication1
         protected void Button1_Click(object sender, EventArgs e)
         {
             SetControlEnabled(txtUsername, true);
-            txtUsername.CssClass = "active";
+            //txtUsername.CssClass = "active";
         }
 
         protected void btnChangePass_Click(object sender, EventArgs e)
         {
             SetControlEnabled(txtPassword, true);
-            txtPassword.CssClass = "active";
+            //txtPassword.CssClass = "active";
         }
 
         protected void btnChangeMail_Click(object sender, EventArgs e)
         {
             SetControlEnabled(txtMail, true);
-            txtMail.CssClass = "active";
+            //txtMail.CssClass = "active";
         }
 
         protected void btnChangePhone_Click(object sender, EventArgs e)
         {
             SetControlEnabled(txtTelefono, true);
-            txtTelefono.CssClass = "active";
+            //txtTelefono.CssClass = "active";
         }
         private void SetControlEnabled(Control control, bool enabled)
         {

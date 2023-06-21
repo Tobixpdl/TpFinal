@@ -19,8 +19,7 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioPublicacion negocio = new NegocioPublicacion();
-            artADetallar = negocio.Listar();
-            //artADetallar = negocio.Listar(Request.QueryString["Titulo"].ToString());
+            artADetallar = negocio.ListarXTitulo(Request.QueryString["Titulo"].ToString());
 
             art = artADetallar.FirstOrDefault();
             

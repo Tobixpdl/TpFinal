@@ -17,8 +17,8 @@
                     <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
                </div>
 
-     <style>
-        .container2{
+   <style>
+       .container2{
             width: 300px;
             margin: 0 auto;
             padding: 20px;
@@ -32,17 +32,24 @@
             text-align: center;
         }
 
-        .container2 label {
-            display:block;
-            margin-bottom: 10px;
+        .container2 label{
+            display:flex;
+            justify-content:space-between;
         }
 
         .container2 input[type="text"],
         .container2 input[type="password"] {
+            text-decoration:none;
             width: 100%;
             padding: 5px;
             margin-bottom: 10px;
         }
+
+        .container2 input[type="text"]:focus,
+        .container2 input[type="password"]:focus {
+            border: 2px solid green;
+        }
+
 
         .container2 input[type="submit"] {
             width: 100%;
@@ -54,5 +61,4 @@
         }   
         
     </style>
-
 </asp:Content>

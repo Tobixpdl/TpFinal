@@ -176,6 +176,51 @@ namespace negocio
             
 
         }
+
+        public List<Publicacion> ListarXTitulo(string titulo)
+        {
+            List<Publicacion> lista = new List<Publicacion>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Select p.Id, p.titulo,p.stock, p.ID_USUARIO, p.precio,p.Descripcion,p.categoria,c.nombre as Categoria from Publicaciones p , categorias c where p.categoria=c.ID and p.titulo = @titulo");
+                datos.setearParametro("@titulo", titulo);
+
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Publicacion aux = new Publicacion();
+                    string ttitulo = (string)datos.Lector["titulo"];
+                    if (ttitulo.IndexOf(titulo, StringComparison.OrdinalIgnoreCase) > -1)
+                    {
+                        aux.Id = datos.Lector.GetInt32(0);
+                        aux.Titulo = (string)datos.Lector["titulo"];
+                        aux.Precio = (decimal)datos.Lector["Precio"];
+                        aux.Descripcion = (string)datos.Lector["Descripcion"];
+                        aux.Stock = datos.Lector.GetInt64(2);
+                        aux.Id_Usuario = datos.Lector.GetInt32(3);
+
+                        aux.Categoria = new Categoria();
+                        aux.Categoria.Id = datos.Lector.GetInt32(6);
+                        aux.Categoria.Nombre = (string)datos.Lector["Categoria"];
+
+
+                        lista.Add(aux);
+                    }
+                }
+
+                return lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         /*
              public List<Publicacion> ListarConSP()
              {

@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    
-    <div class="container2">
+   <div class="container2">
             
             <h2>Mi Perfil</h2>
 
@@ -81,6 +81,12 @@
         .container2 input[type="password"] {
             width: 100%;
             padding: 5px;
+        }
+        .container2 input[type="text"]:focus,
+        .container2 input[type="password"]:focus {
+            color:forestgreen;
+            border: 2px solid green;
+            z-index:10;
         }
 
         .btnContent{
