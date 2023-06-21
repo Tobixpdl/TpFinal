@@ -16,35 +16,47 @@ namespace WebApplication1
         public Usuario usuarioActivo { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ListaUsuarios = negocioU.Listar();
-
-            string usuarioSession = Session["activeUser"].ToString();
-
-            for (int i = 0; i < ListaUsuarios.Count; i++)
+            if (this.Session["activeUser"] != null)
             {
-                if (ListaUsuarios[i].usuario == usuarioSession)
+                string usuarioSession = Session["activeUser"].ToString();
+                ListaUsuarios = negocioU.Listar();
+
+
+
+                for (int i = 0; i < ListaUsuarios.Count; i++)
                 {
-                    usuarioActivo = ListaUsuarios[i];
+                    if (ListaUsuarios[i].usuario == usuarioSession)
+                    {
+                        usuarioActivo = ListaUsuarios[i];
+                    }
                 }
-            }
 
-            if (!IsPostBack)
+                if (!IsPostBack)
+                {
+
+                    txtUsername.Text = usuarioActivo.usuario;
+                    txtPassword.Text = usuarioActivo.password;
+                    txtMail.Text = usuarioActivo.mail;
+                    txtTelefono.Text = usuarioActivo.telefono;
+                }
+
+                LabelsVisibility("false");
+                btnYes.Visible = false;
+                btnNo.Visible = false;
+                lblUserBorrado.Visible = false;
+
+                SetControlEnabled(txtUsername, false);
+                SetControlEnabled(txtPassword, false);
+                SetControlEnabled(txtMail, false);
+                SetControlEnabled(txtTelefono, false);
+            }
+            else
             {
-                txtUsername.Text = usuarioActivo.usuario;
-                txtPassword.Text = usuarioActivo.password;
-                txtMail.Text = usuarioActivo.mail;
-                txtTelefono.Text = usuarioActivo.telefono;
+                Response.Redirect("Default.aspx", false);
+
             }
 
-            LabelsVisibility("false");
-            btnYes.Visible = false;
-            btnNo.Visible = false;
-            lblUserBorrado.Visible = false;
 
-            SetControlEnabled(txtUsername, false);
-            SetControlEnabled(txtPassword, false);
-            SetControlEnabled(txtMail, false);
-            SetControlEnabled(txtTelefono, false);
         }
 
         protected void BtnChange_Click(object sender, EventArgs e)

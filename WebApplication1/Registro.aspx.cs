@@ -17,7 +17,12 @@ namespace WebApplication1
         {
             ListaUsuarios = negocioU.Listar();
             LabelsVisibility("false");
-            
+
+            if (this.Session["activeUser"] != null)
+            {
+                Response.Redirect("Default.aspx", false);
+            }
+
         }
 
         protected void btnEnter_Click(object sender, EventArgs e)
@@ -105,6 +110,11 @@ namespace WebApplication1
                 negocioU.AgregarUsuario(newUser);
                 lblIsUserCreated.Text = "Usuario creado";
                 lblIsUserCreated.Visible = true;
+                Session.Add("activeUser", txtUsername.Text);
+                NegocioUsuario negocio=new NegocioUsuario();
+                Session.Add("idUsuario", negocio.ListarXUsuario(txtUsername.Text));
+                Response.Redirect("Mi_Perfil.aspx", false);
+
             }
             else
             {
