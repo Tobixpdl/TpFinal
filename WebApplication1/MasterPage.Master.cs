@@ -59,7 +59,7 @@ namespace WebApplication1
                 liLogin.Visible = true;
                 liMiPerfil.Visible = false;
                 salirbtn.Visible = false;
-                Response.Redirect("Default.aspx", false);
+                Response.Redirect("Login.aspx", false);
 
             }
             else
@@ -67,7 +67,7 @@ namespace WebApplication1
                 liLogin.Visible = true;
                 liMiPerfil.Visible = false;
                 salirbtn.Visible = false;
-                Response.Redirect("Default.aspx", false);
+                Response.Redirect("Login.aspx", false);
 
             }
         }
