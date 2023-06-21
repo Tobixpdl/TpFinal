@@ -46,10 +46,21 @@ namespace WebApplication1
 
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
+                /*/if (this.Session[] == null)
+                {/*/
                 UsuarioActual = 0;
+                //}
                 //FiltroAvanzado = false;
-               // ddlCategoria_Llenado(sender, e);
+                // ddlCategoria_Llenado(sender, e);
             }/*/
+            else
+            {
+                if (this.Session[] == null)
+                {
+                    UsuarioActual = 0;
+                }
+            }/*/
+            /*/
             else
             {
                 if (!chBusqueda.Checked)
