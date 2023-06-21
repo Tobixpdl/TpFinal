@@ -43,7 +43,7 @@ namespace WebApplication1
                 Session.Add("idUsuario", idUsuario);
                 Response.Redirect("Default.aspx",false);
 
-            }
+                }
                 if (!isregistered)
                 {
                     string message = "Verifique los datos y vuelva a intentarlo";

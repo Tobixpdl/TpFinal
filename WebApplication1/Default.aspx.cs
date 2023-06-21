@@ -48,18 +48,32 @@ namespace WebApplication1
                 rprCards.DataBind();
                 /*/if (this.Session[] == null)
                 {/*/
-                UsuarioActual = 0;
+                if (this.Session["activeUser"] != null)
+                {
+                    user.usuario = this.Session["activeUser"].ToString();
+
+                }
                 //}
                 //FiltroAvanzado = false;
                 // ddlCategoria_Llenado(sender, e);
-            }/*/
-            else
-            {
-                if (this.Session[] == null)
+            }else{
+
+                if (this.Session["activeUser"] != null)
                 {
-                    UsuarioActual = 0;
+                    user.usuario = this.Session["activeUser"].ToString();
+
                 }
-            }/*/
+
+            }
+
+            /*/
+        else
+        {
+            if (this.Session[] == null)
+            {
+                UsuarioActual = 0;
+            }
+        }/*/
             /*/
             else
             {
@@ -68,12 +82,12 @@ namespace WebApplication1
                     ddlMarca.SelectedValue = "";
 
                 }
-                
+
                 lblCompra.CssClass = "count";
 
             }
 
-            
+
         /*/
             lblCompra.Text = this.Session["listaDeCompras"] != null && ((List<Publicacion>)Session["listaDeCompras"]).Count !=0? ((List<Publicacion>)Session["listaDeCompras"]).Count.ToString() : lblCompra.CssClass = "invisible";
 

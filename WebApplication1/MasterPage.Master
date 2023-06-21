@@ -16,7 +16,7 @@
       
    
     <form id="form1" runat="server">
-       
+
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container">
@@ -25,7 +25,11 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="Default.aspx">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="Carrito.aspx">Carrito</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="Perfiles.aspx">Perfiles</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="Login.aspx">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="Mi_Perfil.aspx" id="liMiPerfil">Mi Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="Login.aspx" id="liLogin">Login</a></li>
+           
+
+           
 
                     </ul>
                 </div>

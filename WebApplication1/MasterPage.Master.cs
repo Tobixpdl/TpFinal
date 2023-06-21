@@ -11,6 +11,38 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            liMiPerfil.Visible = false;
+
+            if (!IsPostBack)
+            {
+                if (this.Session["activeUser"] != null)
+                {
+                    liLogin.Visible = false;
+                    liMiPerfil.Visible = true;
+
+                }
+                else
+                {
+                    liLogin.Visible = true;
+                    liMiPerfil.Visible = false;
+
+                }
+            }
+            else
+            {
+                if (this.Session["activeUser"] != null)
+                {
+                    liLogin.Visible = false;
+                    liMiPerfil.Visible = true;
+
+                }
+                else
+                {
+                    liLogin.Visible = true;
+                    liMiPerfil.Visible = false;
+
+                }
+            }
 
         }
     }
