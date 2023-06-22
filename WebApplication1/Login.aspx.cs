@@ -29,20 +29,33 @@ namespace WebApplication1
         protected void btnEnter_Click(object sender, EventArgs e)
         {
                 bool isregistered = false;
+                bool badPass = false;
+                bool badUser = false;
                 
                 for (int i = 0; i < ListaUsuarios.Count; i++)
                 {
                     if (ListaUsuarios[i].usuario == txtUsername.Text &&
-                      ListaUsuarios[i].password == txtPassword.Text)
+                        ListaUsuarios[i].password == txtPassword.Text)
                     {
                         isregistered = true;
                         string message = "Ingresaste con éxito!";
                         lblMessage.Text = message;
                         lblMessage.ForeColor = System.Drawing.Color.Green;
-                    idUsuario = ListaUsuarios[i].Id;
+                        idUsuario = ListaUsuarios[i].Id;
                         break;
                     }
+                    else if(ListaUsuarios[i].usuario == txtUsername.Text &&
+                            ListaUsuarios[i].password != txtPassword.Text)
+                    {
+                        badPass = true;
+                    }
+                    else if (ListaUsuarios[i].usuario != txtUsername.Text &&
+                             ListaUsuarios[i].password == txtPassword.Text)
+                    {
+                        badUser = true;
+                    }
                 }
+
                 if (isregistered) 
                 {
                     Session.Add("activeUser", txtUsername.Text);
@@ -50,9 +63,15 @@ namespace WebApplication1
                     Response.Redirect("Default.aspx",false);
 
                 }
-                if (!isregistered)
+                else  if (badUser)
                 {
-                    string message = "Verifique los datos y vuelva a intentarlo";
+                    string message = "Usuario incorrecto";
+                    lblMessage.Text = message;
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                }
+                else if (badPass)
+                {
+                    string message = "Contraseña incorrecta";
                     lblMessage.Text = message;
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                 }

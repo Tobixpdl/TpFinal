@@ -23,7 +23,7 @@
         </div>
 
         <div class="div-content">
-            <asp:Label runat="server" ID="lblMail" Text="Ingrese sus mail:"></asp:Label>
+            <asp:Label runat="server" ID="lblMail" Text="Mail:"></asp:Label>
             <asp:TextBox runat="server" ID="txtMail" AutoPostBack="true"  AutoComplete="off" PlaceHolder="Mail"></asp:TextBox>
             <asp:Label ID="lblWrongMail" runat="server" Text="Mail incorrecto" CssClass="lblWrong"></asp:Label>
             <asp:Button ID="btnChangeMail" runat="server" OnClick="btnChangeMail_Click" Text="Cambiar mail" CssClass="btnClickableText" />
@@ -46,14 +46,10 @@
                    <asp:Button ID="btnYes" runat="server" Text="Borrar definitivamente" OnClick="btnYes_Click" />
                    <asp:Button ID="btnNo" runat="server" Text="Me arrepiento" />
             </div>
-
           <asp:Label ID="lblChangeUser" runat="server" Text="Cambios Guardados!"></asp:Label>
 
    </div>
     <div class="updateUser">
-
-
-
 
     </div>
     
