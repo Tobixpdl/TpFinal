@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,8 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             liMiPerfil.Visible = false;
+            liMiPerfil2.Visible = false;
+            liMiPerfil3.Visible = false;
             salirbtn.Visible = false;
 
             if (!IsPostBack)
@@ -20,6 +23,8 @@ namespace WebApplication1
                 {
                     liLogin.Visible = false;
                     liMiPerfil.Visible = true;
+                    liMiPerfil2.Visible = true;
+                    liMiPerfil3.Visible = true;
                     salirbtn.Visible = true;
 
                 }
@@ -27,6 +32,8 @@ namespace WebApplication1
                 {
                     liLogin.Visible = true;
                     liMiPerfil.Visible = false;
+                    liMiPerfil2.Visible = false;
+                    liMiPerfil3.Visible = false;
                     salirbtn.Visible = false;
 
                 }

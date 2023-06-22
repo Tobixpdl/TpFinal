@@ -46,8 +46,8 @@ namespace WebApplication1
                 if (isregistered) 
                 {
                     Session.Add("activeUser", txtUsername.Text);
-                Session.Add("idUsuario", idUsuario);
-                Response.Redirect("Default.aspx",false);
+                    Session.Add("idUsuario", idUsuario);
+                    Response.Redirect("Default.aspx",false);
 
                 }
                 if (!isregistered)

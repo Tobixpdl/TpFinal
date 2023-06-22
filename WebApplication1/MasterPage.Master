@@ -25,12 +25,14 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="Default.aspx">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="Carrito.aspx">Carrito</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="Perfiles.aspx">Perfiles</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="Mi_Perfil.aspx" id="liMiPerfil">Mi Perfil</a></li>
+                        <li class="dropdown">
+                            <a class="nav-link" runat="server" href="#" id="liMiPerfil"><%:Session["activeUser"] %></a>
+                            <div class="dropdown-content">
+                                <a class="nav-link" runat="server" href="Mi_Perfil.aspx" id="liMiPerfil2">Mi Perfil</a>
+                                <a class="nav-link" runat="server" href="Publicaciones.aspx" id="liMiPerfil3">Publicaciones</a>
+                            </div>
+                        </li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="Login.aspx" id="liLogin">Login</a></li>
-           
-
-                            
-
                     </ul>
                       <asp:Button runat="server" CssClass="btn-botones" id="salirbtn" OnClick="salirbtn_OnClick" Text="Salir" /></asp:Button>  
                   </div>
@@ -51,6 +53,38 @@
 </body>
 </html>
 <style>
+    /* Dropdown styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            transition: 5s;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #000;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color:black;
+        }
+
+
 nav {
   position: fixed;
   top: 0;
