@@ -58,3 +58,44 @@ create TABLE IMAGENES(
 )
 insert into CATEGORIAS(NOMBRE)
 VALUES('JUEGOS')
+
+INSERT INTO PUBLICACIONES (Titulo, Precio, Descripcion, URL_Imagen, Categoria, Stock, ID_Usuario)
+VALUES
+  ('Camiseta de algodón', 14395.20, 'Camiseta de manga corta hecha de algodón suave y cómodo.', NULL, '1', 10, 0),
+  ('Monopoly', 19195.20, 'Clásico juego de mesa Monopoly para disfrutar en familia y amigos.', NULL, '3', 8, 2),
+  ('Puzzle de 1000 piezas', 5995.20, 'Rompecabezas de 1000 piezas con hermoso diseño y alta resolución.', NULL, '6', 6, 0),
+  ('Juego de sábanas', 43195.20, 'Juego de sábanas de alta calidad en suave algodón, incluye sábana bajera, funda de almohada y sábana encimera.', NULL, '8', 9, 2),
+  ('Camiseta de algodón', 14395.20, 'Camiseta de manga corta hecha de algodón suave y cómodo.', NULL, '1', 10, 0),
+  ('Controlador inalámbrico para PlayStation', 28795.20, 'Joystick inalámbrico compatible con PlayStation 4 y PlayStation 5.', NULL, '2', 5, 2),
+  ('Dominio Total', 4600.00, 'Con su diseño de alta calidad y su temática envolvente, "Dominio Total" te ofrece horas de diversión y entretenimiento sin igual. ¿Estás listo para demostrar tu estrategia y convertirte en el líder supremo? ¡Adquiere tu juego de cartas "Dominio Total" y prepárate para vivir emocionantes batallas en la palma de tu mano!', NULL, '3', 32, 10),
+  ('Set de maquillaje profesional', 43195.20, 'Set completo de maquillaje profesional con sombras, labiales y brochas.', NULL, '4', 3, 11),
+  ('Balón de fútbol', 7199.20, 'Balón oficial de fútbol con diseño duradero y alta calidad.', NULL, '5', 7, 12),
+  ('Aventuras en la Isla Perdida', 12000.00, 'Enfréntate a desafiantes pruebas, resuelve enigmas y trabaja en equipo para encontrar el tesoro escondido. El juego incluye un tablero cautivador que representa la isla, cartas de desafío, fichas de personaje y un dado especial.', NULL, '6', 20, 0),
+  ('Destornillador eléctrico', 9599.20, 'Destornillador eléctrico recargable con múltiples puntas intercambiables.', NULL, '7', 4, 2),
+  ('Acolchado', 50000.00, '¡Descubre nuestro acolchado de lujo, la mejor opción para disfrutar de un descanso excepcional! Confeccionado con materiales suaves y duraderos, nuestro acolchado ofrece una experiencia de dormir incomparable. Su tamaño perfecto se adapta a tu cama, brindando comodidad y calidez en cada noche. El relleno de alta calidad garantiza una sensación de suavidad envolvente, proporcionando el calor adecuado sin ser abrumador.', NULL, '8', 5, 13);
+
+insert into imagenes(IdPublicacion, imagenUrl) 
+values(4,'https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.carsaludable.com.ar%2Fwp-content%2Fuploads%2F2014%2F03%2Fdefault-placeholder.png&tbnid=A0pMe2lq2NT_jM&vet=12ahUKEwiswrnshMn_AhXAppUCHfC-CgYQMygEegUIARDoAQ..i&imgrefurl=http%3A%2F%2Fwww.carsaludable.com.ar%2Fdefault-placeholder%2F&docid=iZpYfY_1jgLREM&w=1500&h=1500&q=default%20image&ved=2ahUKEwiswrnshMn_AhXAppUCHfC-CgYQMygEegUIARDoAQ'),
+	(9,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4byvUSdWXE0y2hNISnOYsACl03pRK0qJslw&usqp=CAU'),
+	(14,'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/401/327/products/p-sakamjsquli01-santista-kamacolor-150-hilos-blanco-to1-dd366176ed3d49933d16364572605113-1024-1024.webp'),
+	(12,'https://http2.mlstatic.com/D_NQ_NP_611393-MLA43776143771_102020-O.jpg'),
+	(15,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA8BiDFFkVGUn_LBzvyRBbTi__K0GksBEzVA&usqp=CAU'),
+	(16,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcRvLvmJZYQ7DVcYu4GvQaYrvhMM3rKHtKNaNUnEhRnyJl6doKiGBVc9GSUQlRsQTcrWg&usqp=CAU'),
+	(17,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb_a-psSNTPzST4UWdLPNszrzOw8FceQXwxg&usqp=CAU'),
+	(18,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQENNaFIceJGcuwlCSN1P1dlrSa_0kXgpLUSA&usqp=CAU'),
+	(19,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_YJSxaT34ReNsqVnmsZIxBRByAT5irfNbng&usqp=CAU'),
+	(20,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6ZVwLww9VusM3jDiVgtKoUbSEPbeYk8HTYA&usqp=CAU'),
+	(21,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6PiOvt6H-bYbJJRSZUhP6T3cQEqj8H2zQ3g&usqp=CAU'),
+	(22,'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSqKGWFaKiVdDrryOP4r0jY1nQRTFh9-dboBU4ks6tDF086BHZt');
+
+
+INSERT INTO Categorias (nombre)
+VALUES 
+  ('Ropa'),
+  ('Gaming'),
+  ('Juegos'),
+  ('Belleza y Salud'),
+  ('Deportes'),
+  ('Entretenimiento'),
+  ('Herramientas'),
+  ('Hogar');
