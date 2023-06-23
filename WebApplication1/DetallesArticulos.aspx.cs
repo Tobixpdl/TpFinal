@@ -11,29 +11,18 @@ namespace WebApplication1
 {
     public partial class DetallesArticulos : System.Web.UI.Page
     {
-        public List<Publicacion> artADetallar { get; set; }
-        public Publicacion art { get; set; }
+        public Publicacion artADetallar { get; set; }
 
-        public List<Imagen> listaImagenes { get; set; }
-        public Imagen imagenes { get; set; }
+        public NegocioImagen negocioImg = new NegocioImagen();
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioPublicacion negocio = new NegocioPublicacion();
-            artADetallar = negocio.ListarXTitulo(Request.QueryString["Titulo"].ToString());
-
-            art = artADetallar.FirstOrDefault();
-            Image img = (Image)imgPublicacion;
-
-
-            img.ImageUrl = art.imagenes[0].Url;
-
+            artADetallar = negocio.ListarXId(Request.QueryString["Id"].ToString());
         }
 
         protected void Btn_volver_Click(object sender, EventArgs e)
         {
                 Response.Redirect("Default.aspx", false);
-
-            
         }
     }
 }

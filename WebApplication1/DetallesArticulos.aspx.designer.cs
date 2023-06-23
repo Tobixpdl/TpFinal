@@ -15,21 +15,12 @@ namespace WebApplication1
     {
 
         /// <summary>
-        /// Control imgPublicacion.
+        /// Control Button2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPublicacion;
-
-        /// <summary>
-        /// Control Btn_volver.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btn_volver;
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }

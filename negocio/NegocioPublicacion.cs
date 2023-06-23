@@ -9,6 +9,7 @@ using dominio;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
+using System.Collections;
 
 namespace negocio
 {
@@ -31,7 +32,6 @@ namespace negocio
                     aux.Titulo = (string)datos.Lector["titulo"];
                     aux.Precio = (decimal)datos.Lector["precio"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    //aux.Stock = datos.Lector.GetInt32(6);
                     aux.Stock = (long)datos.Lector["STOCK"];
                     aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
 
@@ -217,10 +217,7 @@ namespace negocio
                     aux.Cantidad = 1;
                     aux.imagenes = negocioImagen.Listar(aux.Id);
 
-
                 }
-
-
 
 
                 return aux;
@@ -239,49 +236,89 @@ namespace negocio
 
         }
 
-        public List<Publicacion> ListarXTitulo(string titulo)
+        public Publicacion ListarXId(string id)
         {
-            List<Publicacion> lista = new List<Publicacion>();
             AccesoDatos datos = new AccesoDatos();
+
+            Publicacion aux = new Publicacion();
             NegocioImagen negocioImagen = new NegocioImagen();
             try
             {
-                datos.setearConsulta("Select p.Id, p.titulo,p.stock, p.ID_USUARIO, p.precio,p.Descripcion,p.categoria,c.nombre as Categoria from Publicaciones p , categorias c where p.categoria=c.ID and p.titulo = @titulo");
-                datos.setearParametro("@titulo", titulo);
-
+                datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria,c.Nombre as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID AND p.ID=@id");
+                datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
-                    Publicacion aux = new Publicacion();
-                    string ttitulo = (string)datos.Lector["titulo"];
-                    if (ttitulo.IndexOf(titulo, StringComparison.OrdinalIgnoreCase) > -1)
-                    {
-                        aux.Id = datos.Lector.GetInt32(0);
-                        aux.Titulo = (string)datos.Lector["titulo"];
-                        aux.Precio = (decimal)datos.Lector["Precio"];
-                        aux.Descripcion = (string)datos.Lector["Descripcion"];
-                        aux.Stock = datos.Lector.GetInt64(2);
-                        aux.Id_Usuario = datos.Lector.GetInt32(3);
 
-                        aux.Categoria = new Categoria();
-                        aux.Categoria.Id = datos.Lector.GetInt32(6);
-                        aux.Categoria.Nombre = (string)datos.Lector["Categoria"];
-                        aux.imagenes = negocioImagen.Listar(aux.Id);
+                    aux.Id = datos.Lector.GetInt32(0);
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    //aux.Stock = datos.Lector.GetInt32(6);
+                    aux.Stock = (long)datos.Lector["STOCK"];
+                    aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["idCategoria"];
+                    cat.Nombre = (string)datos.Lector["categoria"];
+                    aux.Categoria = cat;
+                    aux.Cantidad = 1;
+                    aux.imagenes = negocioImagen.Listar(aux.Id);
 
-                        lista.Add(aux);
-                    }
                 }
 
-                return lista;
+
+                return aux;
             }
             catch (Exception)
             {
+
                 throw;
             }
             finally
             {
                 datos.cerrarConexion();
             }
+
+            //Publicacion detallar = new Publicacion();
+            //AccesoDatos datos = new AccesoDatos();
+            //NegocioImagen negocioImagen = new NegocioImagen();
+            //try
+            //{
+            //    datos.setearConsulta("Select p.Id, p.titulo,p.stock, p.ID_USUARIO, p.precio,p.Descripcion,c.id as idCategoria, c.NOMBRE as categoria from Publicaciones p , categorias c where p.categoria=c.ID and p.id = @id");
+            //    datos.setearParametro("@id", id);
+
+            //    datos.ejecutarLectura();
+            //    while (datos.Lector.Read())
+            //    {
+            //        string iid = (string)datos.Lector["id"];
+            //        if (iid.IndexOf(id, StringComparison.OrdinalIgnoreCase) > -1)
+            //        {
+            //            detallar.Id = datos.Lector.GetInt32(0);
+            //            detallar.Titulo = (string)datos.Lector["titulo"];
+            //            detallar.Precio = (decimal)datos.Lector["Precio"];
+            //            detallar.Descripcion = (string)datos.Lector["Descripcion"];
+            //            detallar.Stock = (long)datos.Lector["STOCK"];
+            //            detallar.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
+
+            //            Categoria cat = new Categoria();
+            //            cat.Id = (int)datos.Lector["idCategoria"];
+            //            cat.Nombre = (string)datos.Lector["categoria"];
+            //            detallar.Categoria = cat;
+
+            //            detallar.imagenes = negocioImagen.Listar(detallar.Id);
+
+            //        }
+            //    }
+            //    return detallar;
+            //}
+            //catch (Exception)
+            //{
+            //    throw;
+            //}
+            //finally
+            //{
+            //    datos.cerrarConexion();
+            //}
         }
         public void ModificarPublicacion(Publicacion modificado)
         {

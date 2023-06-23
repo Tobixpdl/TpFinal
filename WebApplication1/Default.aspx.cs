@@ -29,6 +29,18 @@ namespace WebApplication1
             NegocioPublicacion negocio = new NegocioPublicacion();
             ListaArticulos = negocio.Listar();
 
+            for(int i=0; i<ListaArticulos.Count; i++)
+            {
+                ListaArticulos[i].imagenes = negocioImg.Listar(ListaArticulos[i].Id);
+                if (ListaArticulos[i].imagenes.Count == 0)
+                {                             
+                    Imagen img = new Imagen();
+                    img.Id = ListaArticulos[i].Id;
+                    img.Url = "https://wpdirecto.com/wp-content/uploads/2017/08/alt-de-una-imagen.png";
+                    ListaArticulos[i].imagenes.Add(img);
+                }
+            }
+
             //
             Session.Add("idUsuario", 0);
             NegocioUsuario negocioUsuario = new NegocioUsuario();

@@ -6,22 +6,19 @@
  
     <section class="detalles">
          <div class="card-detalle">
-             <asp:Image ID="imgPublicacion" runat="server" 
-                           CssClass="img-fluid mb-3"
-                            
-                           />
+                  <img src="<%:artADetallar.imagenes[0].Url %>" alt="NO IMAGE" class="card-image" />
          </div>
-         <div class="card-detalle">
-               <div class="card">
-                  <h3 class="card-title"><%:art.Titulo %></h3>
-                  <h5 class="card-desc">Descripcion: <%:art.Descripcion %></h5>
-                  <h5 class="card-precio">Precio: <%:art.Precio %></h5>
-                  <h5 class="card-cat">Categoria : <%:art.Categoria.Nombre %></h5>                 
-                  <a href="Publicaciones.aspx" class="card-user">Creador: <%:art.Id_Usuario %></a>
-                  <h5 class="card-stock">Stock : <%:art.Stock %></h5>
-                  <asp:Button ID="Btn_volver" OnClick="Btn_volver_Click" runat="server" Text="Volver" CssClass="btnBack" />
+        <div class="card-detalle">
+               <div class="card">  
+                  <h3 class="card-title"><%:artADetallar.Titulo %></h3>
+                  <h5 class="card-desc">Descripcion: <%:artADetallar.Descripcion %></h5>
+                  <h5 class="card-precio">Precio: <%:artADetallar.Precio %></h5>
+                   <h5 class="card-cat">Categoria : <%:artADetallar.Categoria.Nombre %></h5>                 
+                  <a href="Publicaciones.aspx" class="card-user">Creador: <%:artADetallar.Id_Usuario %></a>
+                  <h5 class="card-stock">Stock : <%:artADetallar.Stock %></h5>
+                  <asp:Button ID="Button2" OnClick="Btn_volver_Click" runat="server" Text="Volver" CssClass="btnBack" />
                </div>
-          </div>  
+          </div>   
     </section>
 
     <style>
