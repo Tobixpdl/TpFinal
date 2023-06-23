@@ -58,6 +58,7 @@ namespace negocio
         {
             List<Publicacion> lista = new List<Publicacion>();
             AccesoDatos datos = new AccesoDatos();
+            NegocioImagen negocioImagen = new NegocioImagen();  
 
             try
             {
@@ -82,6 +83,7 @@ namespace negocio
                      cat.Nombre = (string)datos.Lector["categoria"];
                     aux.Categoria = cat;
                     aux.Cantidad = 1;
+                    aux.imagenes = negocioImagen.Listar(aux.Id);
                     lista.Add(aux);
                 }
                 return lista;
@@ -152,10 +154,21 @@ namespace negocio
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
-                   
+
                     aux.Id = datos.Lector.GetInt32(0);
-                    
-                   
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    //aux.Stock = datos.Lector.GetInt32(6);
+                    aux.Stock = (long)datos.Lector["STOCK"];
+                    aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["idCategoria"];
+                    cat.Nombre = (string)datos.Lector["categoria"];
+                    aux.Categoria = cat;
+                    aux.Cantidad = 1;
+
+
                 }
 
 
@@ -176,12 +189,61 @@ namespace negocio
             
 
         }
+        public Publicacion GetPublicacion(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            Publicacion aux = new Publicacion();
+            NegocioImagen negocioImagen = new NegocioImagen();  
+            try
+            {
+                datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria,c.Nombre as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID AND p.ID=@id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+
+                    aux.Id = datos.Lector.GetInt32(0);
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    //aux.Stock = datos.Lector.GetInt32(6);
+                    aux.Stock = (long)datos.Lector["STOCK"];
+                    aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["idCategoria"];
+                    cat.Nombre = (string)datos.Lector["categoria"];
+                    aux.Categoria = cat;
+                    aux.Cantidad = 1;
+                    aux.imagenes = negocioImagen.Listar(aux.Id);
+
+
+                }
+
+
+
+
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
+
+        }
 
         public List<Publicacion> ListarXTitulo(string titulo)
         {
             List<Publicacion> lista = new List<Publicacion>();
             AccesoDatos datos = new AccesoDatos();
-
+            NegocioImagen negocioImagen = new NegocioImagen();
             try
             {
                 datos.setearConsulta("Select p.Id, p.titulo,p.stock, p.ID_USUARIO, p.precio,p.Descripcion,p.categoria,c.nombre as Categoria from Publicaciones p , categorias c where p.categoria=c.ID and p.titulo = @titulo");
@@ -204,7 +266,7 @@ namespace negocio
                         aux.Categoria = new Categoria();
                         aux.Categoria.Id = datos.Lector.GetInt32(6);
                         aux.Categoria.Nombre = (string)datos.Lector["Categoria"];
-
+                        aux.imagenes = negocioImagen.Listar(aux.Id);
 
                         lista.Add(aux);
                     }
@@ -214,6 +276,33 @@ namespace negocio
             }
             catch (Exception)
             {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void ModificarPublicacion(Publicacion modificado)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+
+            try
+            {
+                datos.setearConsulta("update PUBLICACIONES set TITULO=@titulo,PRECIO=@precio,DESCRIPCION=@descripcion,CATEGORIA=@idcategoria,STOCK=@idstock where id=@id" );
+                datos.setearParametro("@id", modificado.Id);
+                datos.setearParametro("@titulo", modificado.Titulo);
+              
+                datos.setearParametro("@descripcion", modificado.Descripcion);
+                datos.setearParametro("@idstock", modificado.Stock);
+                datos.setearParametro("@idcategoria", modificado.Categoria.Id);
+                datos.setearParametro("@precio", modificado.Precio);
+                datos.EjecutarAccion();
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
             finally

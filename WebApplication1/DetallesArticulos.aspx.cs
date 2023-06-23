@@ -22,7 +22,11 @@ namespace WebApplication1
             artADetallar = negocio.ListarXTitulo(Request.QueryString["Titulo"].ToString());
 
             art = artADetallar.FirstOrDefault();
-            
+            Image img = (Image)imgPublicacion;
+
+
+            img.ImageUrl = art.imagenes[0].Url;
+
         }
 
         protected void Btn_volver_Click(object sender, EventArgs e)

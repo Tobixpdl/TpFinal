@@ -29,14 +29,14 @@ namespace negocio
             lista.Add(aux);*/
             try
             {
-                datos.setearConsulta("SELECT G.ID,G.IDARTICULO,G.IMAGENURL AS IMAGEN from IMAGENES G, ARTICULOS A WHERE G.IDARTICULO=A.ID AND A.ID=@id");
+                datos.setearConsulta("select ID, IdPublicacion,imagenUrl from imagenes where IdPublicacion=@id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
                     Imagen imagen = new Imagen();
                     imagen.Id = datos.Lector.GetInt32(0);
-                    imagen.Url = (string)datos.Lector["IMAGEN"];
+                    imagen.Url = (string)datos.Lector["imagenUrl"];
                     imagen.IdArticulo = datos.Lector.GetInt32(1);
                   
                     lista.Add(imagen);
@@ -83,6 +83,28 @@ namespace negocio
             {
                 datos.setearConsulta("delete from IMAGENES where IdPublicacion = @idPublicacion");
                 datos.setearParametro("@idPublicacion", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
+        }
+        public void ModificarImagen(string url, int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update IMAGENES set imagenUrl=@url where IdPublicacion= @idPublicacion");
+                datos.setearParametro("@idPublicacion", id);
+                datos.setearParametro("@url", url);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

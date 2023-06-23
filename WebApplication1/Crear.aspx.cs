@@ -50,9 +50,9 @@ namespace WebApplication1
             Publicacion aux = new Publicacion();
             aux.Titulo = txtTitulo.Text;
             aux.Descripcion = txtDescripcion.Text;
-            aux.Precio = txtDescripcion.Text.Count() != 0 ? decimal.Parse(txtPrecio.Text) : 0;
+            aux.Precio = txtPrecio.Text.Count() != 0 ? decimal.Parse(txtPrecio.Text) : 0;
             //aux.Precio = decimal.Parse(txtPrecio.Text) ;
-            aux.Stock = txtPrecio.Text.Count() != 0 ? int.Parse(txtPrecio.Text) : 0;
+            aux.Stock = txtstock.Text.Count() != 0 ? long.Parse(txtstock.Text) : 0;
             //aux.Stock = int.Parse(txtstock.Text);
             /*Categoria cat = new Categoria();
             cat.Id = 1;
@@ -69,7 +69,7 @@ namespace WebApplication1
 
             
 
-            Response.Redirect("Default.aspx", false);
+            Response.Redirect("Publicaciones.aspx", false);
 
         }
 

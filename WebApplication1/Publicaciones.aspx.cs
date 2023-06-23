@@ -2,8 +2,11 @@
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
+using System.Web.Handlers;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -17,21 +20,37 @@ namespace WebApplication1
         public int idUsuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            listaDePublicaciones = new List<Publicacion>();
-            NegocioPublicacion negocio= new NegocioPublicacion();
            
-                idUsuario = Session["idUsuario"]!=null? (int)Session["idUsuario"] : idUsuario = 0; 
-            
-        
+           
+                idUsuario = Session["idUsuario"]!=null? (int)Session["idUsuario"] : idUsuario = 0;
 
+
+            ContarItems();
  
             
            
            
-            listaDePublicaciones = negocio.ListarXUsuario(idUsuario);
-            contador = listaDePublicaciones.Count;
             dgvArticulos.DataSource = listaDePublicaciones;
             dgvArticulos.DataBind();
+        }
+        public void ContarItems()
+        {
+            listaDePublicaciones = new List<Publicacion>();
+            NegocioPublicacion negocio = new NegocioPublicacion();
+
+            listaDePublicaciones = negocio.ListarXUsuario(idUsuario);
+            contador = listaDePublicaciones.Count;
+        }
+        public int GetIndex(int id)
+        {
+            for (int i = 0; i < listaDePublicaciones.Count; i++)
+            {
+                if (listaDePublicaciones[i].Id==id)
+                {
+                    return i;
+                }
+            } 
+            return 0;
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
@@ -51,22 +70,44 @@ namespace WebApplication1
            
                 if (e.CommandName == "Erase")
                 {
+
+                string message = "Seguro que quieres eliminar?";
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+                sb.Append("return confirm('");
+
+                sb.Append(message);
+
+                sb.Append("');");
+
+                ClientScript.RegisterOnSubmitStatement(this.GetType(), "alert", sb.ToString());
+               
+
                 NegocioPublicacion negocio = new NegocioPublicacion();
                 NegocioImagen negocioImg = new NegocioImagen();
-               
-                int index = Convert.ToInt32(e.CommandArgument);
-                negocioImg.EliminarImagen(listaDePublicaciones[index].Id);
-                negocio.EliminarPublicacion(listaDePublicaciones[index].Id);
-                Response.Redirect("Publicaciones.aspx", false);
-
-            }/*
-                else
-                if (e.CommandName == "Erase")
+                ContarItems();
+                int index = GetIndex(Convert.ToInt32(e.CommandArgument)); 
+              if(contador>0)
                 {
-                    int index = Convert.ToInt32(e.CommandArgument);
-                listaDePublicaciones[index].Cantidad++;
-                    Response.Redirect("Carrito.aspx", false);
-                }*/
+                    negocioImg.EliminarImagen(listaDePublicaciones[index].Id);
+                    negocio.EliminarPublicacion(listaDePublicaciones[index].Id);
+                }else
+                {
+                    listaDePublicaciones = new List<Publicacion>();
+                }
+                   
+               
+                
+
+              
+            }
+               
+                if (e.CommandName == "Modify")
+                {
+                int index = GetIndex(Convert.ToInt32(e.CommandArgument));
+                Response.Redirect("Modificar.aspx?id=" + listaDePublicaciones[index].Id.ToString());
+                }
 
             
         }

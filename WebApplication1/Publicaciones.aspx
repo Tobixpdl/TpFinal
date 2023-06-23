@@ -11,9 +11,9 @@
       <%if (contador == 0)
         {
 %>
-    <h1>No haz publicado nada aún</h1>
+    <h1>No has publicado nada aún</h1>
        
-      <asp:Button ID="btnIrADefault" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Continuar Comprando" />  
+      <asp:Button ID="btnIrADefault" runat="server" OnClick="btnCrear_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Crear Publicacion" />  
     <% }
         else
         {  %>
@@ -34,8 +34,9 @@
                     <asp:ButtonField   ButtonType="Button"
             commandname="Modify" 
             headertext="Acciones" 
-            text="Modificar"  />
-                   <asp:ButtonField   ButtonType="Button"
+                       
+            text="Modificar"   />
+                   <asp:ButtonField  ButtonType="Button"
             commandname="Erase" 
             headertext="Acciones" 
             text="Eliminar"  />

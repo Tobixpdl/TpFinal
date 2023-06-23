@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Crear.aspx.cs" Inherits="WebApplication1.Crear" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Modificar.aspx.cs" Inherits="WebApplication1.Modificar" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -13,7 +13,7 @@
                   <div class="col-8" style="text-align:center">
 
                        <div class="mb-3">
-                    <h2>Nueva Publicacion</h2>
+                    <h2>Modificar Publicacion</h2>
               
               <div class="mb-3">
                         <asp:Label runat="server" ID="lblTitulo" PlaceHolder="¿Qué vas a vender?" Text="Título:"></asp:Label>
@@ -51,7 +51,7 @@
 
                  </div>
                          <div class="mb-3">
-                    <asp:Button runat="server" ID="btnCrear" Text="Crear Publicacíon" OnClick="btnCrear_Click"></asp:Button>
+                    <asp:Button runat="server" ID="btnModificar" Text="Modificar Publicacíon" OnClick="btnModificar_Click"></asp:Button>
                </div> 
             </div>
                     <div class="col-4" >
@@ -70,7 +70,7 @@
                        
 </div>
                         
-                        <asp:Image ID="imgPublicacion" runat="server" 
+                        <asp:Image ID="imgPublicacion" runat="server" ImageUrl="C:\Users\manue\Desktop\TpFinal-ca847c293587d731c06448c0714042654a0d2b53\WebApplication1\Images\pancho.jpg"
                            CssClass="img-fluid mb-3"
                             
                            />
@@ -99,7 +99,6 @@
             
 
             </div>
-  
+
+
 </asp:Content>
-
-
