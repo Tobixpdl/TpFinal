@@ -27,8 +27,7 @@ namespace WebApplication1
 
             if (!IsPostBack)
             {
-                imgPublicacion.ImageUrl = Session["url"] != null ? (string)Session["url"] :
-               "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930";
+               
                 catAux = new Categoria();
                 ddlCategorias.DataSource = categorias;
                 ddlCategorias.DataValueField = "Id";
@@ -45,6 +44,7 @@ namespace WebApplication1
               
 
                 img.ImageUrl = target.imagenes[0].Url;
+
             }
 
 
@@ -69,6 +69,7 @@ namespace WebApplication1
         {
             if (url.HasFile)
             {
+                 
                 try
                 {
                     string ruta = Server.MapPath("./Images/");
@@ -79,6 +80,7 @@ namespace WebApplication1
 
                     Image img = (Image)imgPublicacion;
                     img.ImageUrl = finalRuta;
+
 
                     /* Session.Add("url", finalRuta);
                      Response.Redirect("Crear.aspx", false);*/

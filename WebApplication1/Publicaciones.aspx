@@ -24,7 +24,7 @@
          
              <h1></h1>
               
-           <asp:GridView ID="dgvArticulos" runat="server" OnRowCommand="dgvArticulos_RowCommand" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" >
+           <asp:GridView ID="dgvPublicaciones" runat="server" OnRowCommand="dgvPublicaciones_RowCommand" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" >
                
                <Columns>
                    <asp:BoundField  HeaderText="Foto" />

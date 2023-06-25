@@ -59,7 +59,7 @@
                        </div>
     </section>
   </header>
-        
+    
 
     <section class="articulos">
         <div class="mega-main">
@@ -69,7 +69,8 @@
                                      <div class="flip-card">
                                         <div class="flip-card-inner">
                                             <div class="flip-card-front">
-                                               <img id="img-flip-card" src="<%#Eval("imagenes[0].Url") %>" alt="NO IMAGE">                                            
+                                              <asp:Image ID="imgPublicacion" runat="server" 
+                           CssClass="img-fluid mb-3" OnPreRender="imgPublicacion_PreRender" ImageUrl=<%#ReturnUrl(Container.DataItem)%>/>                                        
                                                 <p class="title"><%#Eval("Titulo")%></p>
                                                     <p>$<%#Eval("Precio") %></p>
                                                     <div class="d-grid gap-2 d-md-block">              

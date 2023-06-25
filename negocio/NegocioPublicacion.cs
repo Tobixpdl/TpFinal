@@ -19,6 +19,7 @@ namespace negocio
         {
             List<Publicacion> lista = new List<Publicacion>();
             AccesoDatos datos = new AccesoDatos();
+            NegocioImagen negocioImagen = new NegocioImagen();
 
             try
             {
@@ -34,7 +35,7 @@ namespace negocio
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Stock = (long)datos.Lector["STOCK"];
                     aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
-
+                    aux.imagenes = negocioImagen.Listar(aux.Id);
                     Categoria cat = new Categoria();
                     cat.Id = (int)datos.Lector["idCategoria"];
                     cat.Nombre = (string)datos.Lector["categoria"];

@@ -70,7 +70,7 @@
                        
 </div>
                         
-                        <asp:Image ID="imgPublicacion" runat="server" ImageUrl="C:\Users\manue\Desktop\TpFinal-ca847c293587d731c06448c0714042654a0d2b53\WebApplication1\Images\pancho.jpg"
+                        <asp:Image ID="imgPublicacion" runat="server" 
                            CssClass="img-fluid mb-3"
                             
                            />

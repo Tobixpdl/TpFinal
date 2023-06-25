@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
 
 namespace WebApplication1
 {
@@ -18,6 +19,13 @@ namespace WebApplication1
         {
             NegocioPublicacion negocio = new NegocioPublicacion();
             artADetallar = negocio.ListarXId(Request.QueryString["Id"].ToString());
+           
+
+           
+            Image img = (Image)imgPublicacion;
+
+
+            img.ImageUrl = artADetallar.imagenes[0].Url;
         }
 
         protected void Btn_volver_Click(object sender, EventArgs e)

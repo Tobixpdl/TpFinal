@@ -22,24 +22,24 @@ namespace WebApplication1
         {
            
            
-                idUsuario = Session["idUsuario"]!=null? (int)Session["idUsuario"] : idUsuario = 0;
+                idUsuario = (int)Session["idUsuario"];
 
 
-            ContarItems();
- 
-            
-           
-           
-            dgvArticulos.DataSource = listaDePublicaciones;
-            dgvArticulos.DataBind();
+            ContarItems(ref listaDePublicaciones);
+
+
+
+
+            dgvPublicaciones.DataSource = listaDePublicaciones;
+            dgvPublicaciones.DataBind();
         }
-        public void ContarItems()
+        public void ContarItems(ref List<Publicacion> list)
         {
-            listaDePublicaciones = new List<Publicacion>();
+            list = new List<Publicacion>();
             NegocioPublicacion negocio = new NegocioPublicacion();
 
-            listaDePublicaciones = negocio.ListarXUsuario(idUsuario);
-            contador = listaDePublicaciones.Count;
+            list = negocio.ListarXUsuario(idUsuario);
+            contador = list.Count;
         }
         public int GetIndex(int id)
         {
@@ -65,11 +65,13 @@ namespace WebApplication1
             Response.Redirect("Crear.aspx", false);
         }
 
-        protected void dgvArticulos_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void dgvPublicaciones_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+         
            
                 if (e.CommandName == "Erase")
                 {
+                int index = Convert.ToInt32(e.CommandArgument);
 
                 string message = "Seguro que quieres eliminar?";
 
@@ -86,8 +88,8 @@ namespace WebApplication1
 
                 NegocioPublicacion negocio = new NegocioPublicacion();
                 NegocioImagen negocioImg = new NegocioImagen();
-                ContarItems();
-                int index = GetIndex(Convert.ToInt32(e.CommandArgument)); 
+                ContarItems(ref listaDePublicaciones);
+                index = GetIndex(Convert.ToInt32(e.CommandArgument)); 
               if(contador>0)
                 {
                     negocioImg.EliminarImagen(listaDePublicaciones[index].Id);
@@ -102,10 +104,11 @@ namespace WebApplication1
 
               
             }
+                else
                
                 if (e.CommandName == "Modify")
                 {
-                int index = GetIndex(Convert.ToInt32(e.CommandArgument));
+                int index = Convert.ToInt32(e.CommandArgument);
                 Response.Redirect("Modificar.aspx?id=" + listaDePublicaciones[index].Id.ToString());
                 }
 

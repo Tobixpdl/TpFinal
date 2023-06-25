@@ -42,7 +42,8 @@ namespace WebApplication1
                         lblMessage.Text = message;
                         lblMessage.ForeColor = System.Drawing.Color.Green;
                         idUsuario = ListaUsuarios[i].Id;
-                        break;
+                    Session.Add("idUsuario", idUsuario);
+                    break;
                     }
                     else if(ListaUsuarios[i].usuario == txtUsername.Text &&
                             ListaUsuarios[i].password != txtPassword.Text)
@@ -59,7 +60,7 @@ namespace WebApplication1
                 if (isregistered) 
                 {
                     Session.Add("activeUser", txtUsername.Text);
-                    Session.Add("idUsuario", idUsuario);
+                  
                     Response.Redirect("Default.aspx",false);
 
                 }

@@ -10,6 +10,7 @@ namespace WebApplication1
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             liMiPerfil.Visible = false;
@@ -26,6 +27,7 @@ namespace WebApplication1
                     liMiPerfil2.Visible = true;
                     liMiPerfil3.Visible = true;
                     salirbtn.Visible = true;
+
 
                 }
                 else

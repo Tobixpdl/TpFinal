@@ -6,7 +6,8 @@
  
     <section class="detalles">
          <div class="card-detalle">
-                  <img src="<%:artADetallar.imagenes[0].Url %>" alt="NO IMAGE" class="card-image" />
+                   <asp:Image ID="imgPublicacion" runat="server" 
+                           CssClass="img-fluid mb-3" />
          </div>
         <div class="card-detalle">
                <div class="card">  
