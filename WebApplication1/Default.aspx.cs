@@ -174,9 +174,13 @@ namespace WebApplication1
         {
             string id = (DataBinder.Eval(oItem, "Id")).ToString();
             NegocioPublicacion negocio = new NegocioPublicacion();
+            var imagenes = negocio.ListarXId(id).imagenes;
 
-           
-            return negocio.ListarXId(id).imagenes[0].Url;
+            if (imagenes != null && imagenes.Count > 0)
+            {
+                return imagenes[0].Url;
+            }
+            return string.Empty;
         }
         protected void imgPublicacion_PreRender(object sender, EventArgs e)
         {

@@ -11,11 +11,11 @@
          </div>
         <div class="card-detalle">
                <div class="card">  
-                  <h3 class="card-title"><%:artADetallar.Titulo %></h3>
+                  <h3 class="card-title"><%:artADetallar.Titulo%></h3>
                   <h5 class="card-desc">Descripcion: <%:artADetallar.Descripcion %></h5>
                   <h5 class="card-precio">Precio: <%:artADetallar.Precio %></h5>
                    <h5 class="card-cat">Categoria : <%:artADetallar.Categoria.Nombre %></h5>                 
-                  <a href="Publicaciones.aspx" class="card-user">Creador: <%:artADetallar.Id_Usuario %></a>
+                  <a href="Publicaciones.aspx" class="card-user">Creador: <%:userDetalle.usuario%></a>
                   <h5 class="card-stock">Stock : <%:artADetallar.Stock %></h5>
                   <asp:Button ID="Button2" OnClick="Btn_volver_Click" runat="server" Text="Volver" CssClass="btnBack" />
                </div>

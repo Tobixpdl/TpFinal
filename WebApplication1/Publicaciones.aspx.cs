@@ -20,18 +20,28 @@ namespace WebApplication1
         public int idUsuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-           
+
+            if (this.Session["idUsuario"] != null)
+            {
+
                 idUsuario = (int)Session["idUsuario"];
 
 
-            ContarItems(ref listaDePublicaciones);
+                ContarItems(ref listaDePublicaciones);
 
 
+                dgvPublicaciones.DataSource = listaDePublicaciones;
+                dgvPublicaciones.DataBind();
+            }
+            else
+            {
+                idUsuario =0;
+
+                Response.Redirect("Default.aspx", false);
+
+            }
 
 
-            dgvPublicaciones.DataSource = listaDePublicaciones;
-            dgvPublicaciones.DataBind();
         }
         public void ContarItems(ref List<Publicacion> list)
         {

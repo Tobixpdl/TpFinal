@@ -37,15 +37,15 @@ namespace WebApplication1
                     {
                         case 0:
                             Lista1 = negocio.ListarXUsuario(x);
-                            lblNombre1.Text = ListaUsuarios[x].nombre + " " + ListaUsuarios[x].apellido;
+                            lblNombre1.Text = ListaUsuarios[x].usuario;
                             break;
                         case 1:
                             Lista2 = negocio.ListarXUsuario(x);
-                            lblNombre2.Text = ListaUsuarios[x].nombre+" "+ ListaUsuarios[x].apellido;
+                            lblNombre2.Text = ListaUsuarios[x].usuario;
                             break;
                         case 2:
                             Lista3 = negocio.ListarXUsuario(x);
-                            lblNombre3.Text = ListaUsuarios[x].nombre + " " + ListaUsuarios[x].apellido;
+                            lblNombre3.Text = ListaUsuarios[x].usuario;
 
                             break;
                     }
@@ -75,7 +75,7 @@ namespace WebApplication1
                     NegocioPublicacion negocio = new NegocioPublicacion();
 
                             Lista1 = negocio.ListarXUsuario(0);
-                            lblNombre1.Text = ListaUsuarios[0].nombre + " " + ListaUsuarios[0].apellido;
+                            lblNombre1.Text = ListaUsuarios[0].usuario;
 
                 if (!IsPostBack)
                 {
@@ -95,11 +95,11 @@ namespace WebApplication1
                     {
                         case 0:
                             Lista1 = negocio.ListarXUsuario(x);
-                            lblNombre1.Text = ListaUsuarios[x].nombre + " " + ListaUsuarios[x].apellido;
+                            lblNombre1.Text = ListaUsuarios[x].usuario;
                             break;
                         case 1:
                             Lista2 = negocio.ListarXUsuario(x);
-                            lblNombre2.Text = ListaUsuarios[x].nombre + " " + ListaUsuarios[x].apellido;
+                            lblNombre2.Text = ListaUsuarios[x].usuario;
                             break;
                     }
 
