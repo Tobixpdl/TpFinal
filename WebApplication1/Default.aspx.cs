@@ -179,7 +179,7 @@ namespace WebApplication1
             if (imagenes != null && imagenes.Count > 0)
             {
                 return imagenes[0].Url;
-            }
+            }  
             return string.Empty;
         }
         protected void imgPublicacion_PreRender(object sender, EventArgs e)
