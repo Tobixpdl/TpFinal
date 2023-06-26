@@ -19,9 +19,11 @@ namespace WebApplication1
         public int contador { get; set; }
 
         public int UsuarioActual { get; set; }
+        public NegocioImagen negocioImg = new NegocioImagen();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
 
             NegocioUsuario usuarios = new NegocioUsuario();
             ListaUsuarios = usuarios.Listar();
@@ -129,6 +131,24 @@ namespace WebApplication1
             //Session.Add("idUsuario", carritoActual);
             Response.Redirect("Publicaciones.aspx", false);
         }
+        protected void imgPublicacion_PreRender(object sender, EventArgs e)
+        {
+        }
+
+        protected string ReturnUrl(object oItem)
+        {
+            string id = (DataBinder.Eval(oItem, "Id")).ToString();
+            NegocioPublicacion negocio = new NegocioPublicacion();
+            var imagenes = negocio.ListarXId(id).imagenes;
+
+            if (imagenes != null && imagenes.Count > 0)
+            {
+                return imagenes[0].Url;
+            }
+            return string.Empty;
+        }
+
     }
+
 }
 

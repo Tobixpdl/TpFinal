@@ -78,6 +78,7 @@
                                             </div>
                                             <div class="flip-card-back">
                                                <h5 class="card-title"><%#Eval("Titulo") %></h5>
+                                                <p><%#Eval("Descripcion") %></p>
                                                 <div class="btns">
                                                         <asp:Button ID="btnAdd" runat="server"  CssClass="btn-botones" OnClick="btnAdd_Click" type="button" Text=" Agregar " 
                                                             CommandArgument='<% #Eval("Id")%>' CommandName="artId" />
