@@ -9,8 +9,7 @@
          <input type="text" id="search-box" placeholder="Buscar">
          </div>
     <>--%>
-   <header class="header">
-    <section class="nav-bar">
+
      <%--    <%
            <div id="search-container">
                       <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoPostBack="true" OnTextChanged="Busqueda_TextChanged" AutoComplete="off" PlaceHolder="Búsqueda"/>
@@ -44,21 +43,22 @@
             </div>
                 </div>
             <% } %>
-        <>--%>
+        <>--%>      <%--    <%--    <%
+
                          <div class="container text-center btnCarrito " id="count">
-                           <div class="row">
+                           <>--%>
+                            <div class="row">
                                <div class="col">
                                   <asp:Button ID="btnCarro" runat="server" CssClass="btn btn-primary "  OnClick="btnCarro_Click" type="button" Text="Carrito " />
                                </div>
                                <div class="col">
                                    <div>           
-                                       <asp:Label ID="lblCompra"  runat="server" CssClass="count" ></asp:Label>
+                                       <asp:Label ID="lblCompra"  runat="server" CssClass="contador" ></asp:Label>
                                   </div>  
                                </div>
                             </div>
-                       </div>
-    </section>
-  </header>
+                         <%--  </div><>--%>
+
     
 
     <section class="articulos">
@@ -119,11 +119,25 @@
 
 }
 .col{
-  flex: 1;
+  flex: 0;
+  margin-left:50px;
   padding: 10px;
-  margin-left:10px;
+  align-content:space-around;
 }
+.contador{
+  flex: 0;
+  padding: 5px;
+  align-content:space-around;
+      color: #ffffff;
+    background-color: #ff0000;
+    border-radius: 10px;
+    height: 23px;
+    align-items: center;
+    position: relative;
+    display: flex;
+    max-width: none;
 
+}
  .FiltroPrecio {
 float:right;    
 margin:5px;
