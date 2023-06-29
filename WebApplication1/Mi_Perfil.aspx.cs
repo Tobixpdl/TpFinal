@@ -176,6 +176,10 @@ namespace WebApplication1
 
         protected void btnYes_Click(object sender, EventArgs e)
         {
+            NegocioImagen negImg = new NegocioImagen();
+            NegocioPublicacion publi=new NegocioPublicacion();
+            negImg.EliminarImagen(usuarioActivo.Id);
+            publi.EliminarPublicacion(usuarioActivo.Id);
             negocioU.eliminarUsuario(usuarioActivo.Id);
             eliminarOpciones();
         }

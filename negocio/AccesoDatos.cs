@@ -56,6 +56,10 @@ namespace negocio
 
                 throw ex;
             }
+            finally
+            {
+                conexion.Close();
+            }
         }
 
         public void setearParametro(string nombre, object valor)

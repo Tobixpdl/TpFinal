@@ -123,25 +123,24 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        public void EliminarPublicacion( int id)
+        public void EliminarPublicacion( int IdPubli)
         {
             AccesoDatos datos = new AccesoDatos();
             try
-                {
-                   
-                    datos.setearConsulta("delete from PUBLICACIONES where Id=@id");
-                    datos.setearParametro("@id", id);
-                    datos.ejecutarAccion();
+            {
+                datos.setearConsulta("delete from IMAGENES where IdPublicacion = @idpub");
+                datos.setearParametro("@idpub", IdPubli);
+                datos.ejecutarAccion();
 
-                }
-                catch (Exception)
-                {
+                datos.setearConsulta("delete from PUBLICACIONES where Id = @id");
+                datos.setearParametro("@id", IdPubli);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-                    throw;
-                }
-
-            
-        
         }
         public Publicacion GetLastPublicacion()
         {
