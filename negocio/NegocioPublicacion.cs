@@ -140,8 +140,9 @@ namespace negocio
             {
                 throw;
             }
-
         }
+
+
         public Publicacion GetLastPublicacion()
         {
             AccesoDatos datos=  new AccesoDatos();

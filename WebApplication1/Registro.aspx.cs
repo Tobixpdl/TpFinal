@@ -3,6 +3,7 @@ using negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -37,6 +38,8 @@ namespace WebApplication1
             TextBox1.CssClass = " ";
             txtPassword.CssClass = " ";
 
+            Regex rex = new Regex(@"^[a-zA-Z\s]+$");
+
             bool canCreateUser = true;
             Usuario newUser = new Usuario();
             newUser.usuario = txtUsername.Text;
@@ -58,23 +61,30 @@ namespace WebApplication1
             {
                 lblMissing.Visible = true;
                 txtUsername.CssClass = "wrongInput";
+                canCreateUser = false;
             }
-            if (newUser.nombre.Length == 0)
+            if (newUser.nombre.Length == 0 || !rex.IsMatch(newUser.nombre))
             {
                 txtNombres.CssClass = "wrongInput";
+                canCreateUser = false;
+                lblWrongName.Visible = true;
             }
-            if (newUser.apellido.Length == 0)
+            if (newUser.apellido.Length == 0 || !rex.IsMatch(newUser.apellido))
             {
                 txtApellidos.CssClass = "wrongInput";
+                canCreateUser = false;
+                lblWrongApellido.Visible = true;
             }
             if (newUser.mail.Length == 0)
             {
                 txtMail.CssClass = "wrongInput";
+                canCreateUser = false;
             }
             if (newUser.password.Length == 0)
             {
                 txtPassword.CssClass = "wrongInput";
                 TextBox1.CssClass = "wrongInput";
+                canCreateUser = false;
             }
 
             for (int i = 0; i < ListaUsuarios.Count; i++)
@@ -134,6 +144,8 @@ namespace WebApplication1
                 lblWrongTelefono.Visible = false;
                 lblWrongUser.Visible = false;
                 lblIsUserCreated.Visible = false;
+                lblWrongApellido.Visible = false;
+                lblWrongName.Visible = false;
             }
             else
             {
@@ -143,6 +155,8 @@ namespace WebApplication1
                 lblWrongTelefono.Visible = true;
                 lblWrongUser.Visible = true;
                 lblIsUserCreated.Visible = true;
+                lblWrongApellido.Visible = true;
+                lblWrongName.Visible = true;
             }
         }
 

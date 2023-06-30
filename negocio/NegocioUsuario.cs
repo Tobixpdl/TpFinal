@@ -141,6 +141,8 @@ namespace negocio
             try
             {
                 AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("delete from imagenes where Id=@id");
+                datos.setearConsulta("delete from publicaciones where Id=@id");
                 datos.setearConsulta("delete from usuarios where Id=@id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();

@@ -11,9 +11,11 @@
 
             <asp:Label runat="server" ID="lblNombres" Text="Ingrese sus nombres:"></asp:Label>
             <asp:TextBox runat="server" ID="txtNombres" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombres"></asp:TextBox>
+            <asp:Label ID="lblWrongName" runat="server" Text="Nombre no puede tener numeros" CssClass="lblWrong"></asp:Label>
 
             <asp:Label runat="server" ID="lblApellidos" Text="Ingrese sus apellidos:"></asp:Label>
             <asp:TextBox runat="server" ID="txtApellidos" AutoPostBack="true" AutoComplete="off" PlaceHolder="Apellidos"></asp:TextBox>
+            <asp:Label ID="lblWrongApellido" runat="server" Text="Apellido no puede tener numeros" CssClass="lblWrong"></asp:Label>
 
             <asp:Label runat="server" ID="lblDNI" Text="Ingrese su DNI:"></asp:Label>
             <asp:TextBox runat="server" ID="txtDNI" AutoPostBack="true" AutoComplete="off" PlaceHolder="DNI"></asp:TextBox>
@@ -23,7 +25,7 @@
             <asp:Label ID="lblWrongTelefono" runat="server" Text="No es posible tener ese numero" CssClass="lblWrong"></asp:Label>
 
             <asp:Label runat="server" ID="lblMail" Text="Ingrese sus mail:"></asp:Label>
-            <asp:TextBox runat="server" ID="txtMail" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtMail" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail" TextMode="Email"></asp:TextBox>
             <asp:Label ID="lblWrongMail" runat="server" Text="Mail incorrecto" CssClass="lblWrong"></asp:Label>
 
             <asp:Label runat="server" ID="lblUsername" Text="Ingrese un nombre de usuario:"></asp:Label>
