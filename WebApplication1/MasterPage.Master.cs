@@ -16,6 +16,7 @@ namespace WebApplication1
             liMiPerfil.Visible = false;
             liMiPerfil2.Visible = false;
             liMiPerfil3.Visible = false;
+            liMiPerfil4.Visible = false;
             salirbtn.Visible = false;
 
             if (!IsPostBack)
@@ -26,6 +27,7 @@ namespace WebApplication1
                     liMiPerfil.Visible = true;
                     liMiPerfil2.Visible = true;
                     liMiPerfil3.Visible = true;
+                    liMiPerfil4.Visible = true;
                     salirbtn.Visible = true;
 
 
@@ -36,6 +38,7 @@ namespace WebApplication1
                     liMiPerfil.Visible = false;
                     liMiPerfil2.Visible = false;
                     liMiPerfil3.Visible = false;
+                    liMiPerfil4.Visible = false;
                     salirbtn.Visible = false;
 
                 }

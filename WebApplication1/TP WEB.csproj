@@ -65,9 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Carrito.aspx" />
+    <Content Include="Comprar.aspx" />
     <Content Include="Crear.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DetallesArticulos.aspx" />
+    <Content Include="MisCompras.aspx" />
     <Content Include="Mi_Perfil.aspx" />
     <Content Include="Modificar.aspx" />
     <Content Include="Perfiles.aspx" />
@@ -86,6 +88,13 @@
     </Compile>
     <Compile Include="Carrito.aspx.designer.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar.aspx.cs">
+      <DependentUpon>Comprar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Comprar.aspx.designer.cs">
+      <DependentUpon>Comprar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Crear.aspx.cs">
       <DependentUpon>Crear.aspx</DependentUpon>
@@ -107,6 +116,13 @@
     </Compile>
     <Compile Include="DetallesArticulos.aspx.designer.cs">
       <DependentUpon>DetallesArticulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MisCompras.aspx.cs">
+      <DependentUpon>MisCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MisCompras.aspx.designer.cs">
+      <DependentUpon>MisCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Mi_Perfil.aspx.cs">
       <DependentUpon>Mi_Perfil.aspx</DependentUpon>

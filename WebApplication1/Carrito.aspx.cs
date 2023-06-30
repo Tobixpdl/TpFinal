@@ -131,10 +131,6 @@ namespace WebApplication1
             // rest of your code
             return cantidad;
         }
-         
-
-             
-
 
         protected void dgvArticulos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -212,6 +208,11 @@ namespace WebApplication1
 
                     break;
             }
+        }
+
+        protected void btnComprar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Comprar.aspx", false);
         }
     }
     
