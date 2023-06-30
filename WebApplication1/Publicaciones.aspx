@@ -30,7 +30,7 @@
                    <asp:BoundField  HeaderText="Foto" />
                    <asp:BoundField  HeaderText="Producto" DataField="Titulo" />
                    <asp:BoundField  HeaderText="Precio" DataField="Precio" />
-                    <asp:BoundField  HeaderText="Vendidos" DataField="Stock" />
+                    <asp:BoundField  HeaderText="Imagen" DataField="Titulo" />
                     <asp:ButtonField   ButtonType="Button"
             commandname="Modify" 
             headertext="Acciones" 

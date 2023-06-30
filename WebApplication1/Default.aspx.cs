@@ -125,9 +125,7 @@ namespace WebApplication1
                 carritoActual.Add(buscarArticulo(valor));
             }
 
-
             this.Session.Add("listaDeCompras", carritoActual);
-
             Response.Redirect("Default.aspx", false);
             
         }

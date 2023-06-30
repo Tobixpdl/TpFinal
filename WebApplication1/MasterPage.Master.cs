@@ -13,53 +13,51 @@ namespace WebApplication1
        
         protected void Page_Load(object sender, EventArgs e)
         {
-            liMiPerfil.Visible = false;
-            liMiPerfil2.Visible = false;
-            liMiPerfil3.Visible = false;
-            liMiPerfil4.Visible = false;
-            salirbtn.Visible = false;
+            //liMiPerfil.Visible = false;
+            //liMiPerfil2.Visible = false;
+            //liMiPerfil3.Visible = false;
+            //liMiPerfil4.Visible = false;
+            //salirbtn.Visible = false;
 
-            if (!IsPostBack)
-            {
-                if (this.Session["activeUser"] != null)
-                {
-                    liLogin.Visible = false;
-                    liMiPerfil.Visible = true;
-                    liMiPerfil2.Visible = true;
-                    liMiPerfil3.Visible = true;
-                    liMiPerfil4.Visible = true;
-                    salirbtn.Visible = true;
+            //if (!IsPostBack)
+            //{
+            //    if (this.Session["activeUser"] != null)
+            //    {
+            //        liLogin.Visible = false;
+            //        liMiPerfil.Visible = true;
+            //        liMiPerfil2.Visible = true;
+            //        liMiPerfil3.Visible = true;
+            //        liMiPerfil4.Visible = true;
+            //        salirbtn.Visible = true;
+            //    }
+            //    else
+            //    {
+            //        liLogin.Visible = true;
+            //        liMiPerfil.Visible = false;
+            //        liMiPerfil2.Visible = false;
+            //        liMiPerfil3.Visible = false;
+            //        liMiPerfil4.Visible = false;
+            //        salirbtn.Visible = false;
 
+            //    }
+            //}
+            //else
+            //{
+            //    if (this.Session["activeUser"] != null)
+            //    {
+            //        liLogin.Visible = false;
+            //        liMiPerfil.Visible = true;
+            //        salirbtn.Visible = true;
 
-                }
-                else
-                {
-                    liLogin.Visible = true;
-                    liMiPerfil.Visible = false;
-                    liMiPerfil2.Visible = false;
-                    liMiPerfil3.Visible = false;
-                    liMiPerfil4.Visible = false;
-                    salirbtn.Visible = false;
+            //    }
+            //    else
+            //    {
+            //        liLogin.Visible = true;
+            //        liMiPerfil.Visible = false;
+            //        salirbtn.Visible = false;
 
-                }
-            }
-            else
-            {
-                if (this.Session["activeUser"] != null)
-                {
-                    liLogin.Visible = false;
-                    liMiPerfil.Visible = true;
-                    salirbtn.Visible = true;
-
-                }
-                else
-                {
-                    liLogin.Visible = true;
-                    liMiPerfil.Visible = false;
-                    salirbtn.Visible = false;
-
-                }
-            }
+            //    }
+            //}
 
         }
         protected void salirbtn_OnClick(object sender, EventArgs e)

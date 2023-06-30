@@ -47,18 +47,31 @@
 
                          <div class="container text-center btnCarrito " id="count">
                            <>--%>
-                            <div class="row">
-                               <div class="col">
-                                  <asp:Button ID="btnCarro" runat="server" CssClass="btn btn-primary "  OnClick="btnCarro_Click" type="button" Text="Carrito " />
-                               </div>
-                               <div class="col">
-                                   <div>           
-                                       <asp:Label ID="lblCompra"  runat="server" CssClass="contador" ></asp:Label>
-                                  </div>  
-                               </div>
-                            </div>
+    <div class="headerT">
+                
+               <div class="row">
+                    <div class="col">
+                        <asp:Button ID="btnCarro" runat="server" CssClass="btn btn-primary "  OnClick="btnCarro_Click" type="button" Text="Carrito" />
+                    </div>
+                    <div class="col">
+                        <div>           
+                          <asp:Label ID="lblCompra"  runat="server" CssClass="contador" ></asp:Label>
+                        </div>  
+                   </div>
+                </div>
                          <%--  </div><>--%>
-
+    
+        <div class="rowT">
+            <div class="col-2T">
+                <h1>Compra todo <br/>en un mismo lugar!</h1>
+                <p>Descubre un mundo de compras ilimitadas donde tus deseos se hacen realidad.<br/> Encuentra todo lo que necesitas aquí.</p>
+            </div>
+            <div class="col-2T">
+                <%-- ACA VA UNA IMAGEN PARA LA DEFAULT --%>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBQCPZrrZIbE6FA_GJQ5veTphSiMjg8NpKAQbrGyLwEG4qd7T0WdNMPZUP4lQJBYx9JjU&usqp=CAU" alt="Alternate Text" />
+            </div>
+        </div>
+    </div>
     
 
     <section class="articulos">
@@ -88,6 +101,38 @@
         </section>
 
     <style>
+        .headerT{
+            background:radial-gradient(#fff, #ffd6d6);
+            height: 75vh;
+        }
+
+        .rowT{
+            display:flex;
+            align-items:center;
+            flex-wrap: wrap;
+            justify-content:space-around;
+        }
+
+        .col-2T {
+            flex-basis: 50%;
+            min-width: 300px;
+            padding: 100px;
+        }
+        .col-2T img{
+            max-width:100%;
+            padding: 50px 0;
+        }
+
+        .col-2T h1{
+            font-size:70px;
+            line-height: 60px;
+            margin: 25px 0;
+        }
+
+        .col-2T p{
+            font-size:20px;
+        }
+
 
         .img-{
             max-width:100%;
