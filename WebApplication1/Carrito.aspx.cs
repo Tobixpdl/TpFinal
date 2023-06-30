@@ -165,9 +165,6 @@ namespace WebApplication1
             {
                 aux = -50000; this.Session.Add("cupon", aux);
             }
-
-
-
             Response.Redirect("Carrito.aspx", false);
         }
 
@@ -181,12 +178,6 @@ namespace WebApplication1
             listaMontos[1].precio = n;
             /*this.Session.Add("cambioDeCosto", n);
             this.Session.Add("idZona", zona);*/
-
-
-
-            
-
-
         }
 
         protected void calcularCostoEnvio(int lugar, ref decimal costo)
@@ -212,7 +203,14 @@ namespace WebApplication1
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Comprar.aspx", false);
+            if (this.Session["activeUser"] != null)
+            {
+               Response.Redirect("Comprar.aspx", false);
+            }
+            else
+            {
+               Response.Redirect("Login.aspx", false);
+            }
         }
     }
     

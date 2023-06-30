@@ -67,7 +67,6 @@
                     <div class="container-items">
                     <asp:Repeater ID="rprCards" runat="server">
                      <ItemTemplate>
-                            
 			                    <div class="item">
 				                    <figure>
 					                     <asp:Image ID="imgPublicacion" runat="server" 
@@ -78,10 +77,9 @@
 					                    <p class="price">$<%#Eval("Precio")%></p>
                                         <asp:Button ID="btnAdd" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar" 
                                         CommandArgument ='<% #Eval("Id")%>' CommandName="artId" />
-                                        <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Detalles</a>					                    
+                                        <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Detalles</a>
                                     </div>
 			                   </div>
-                           
                       </ItemTemplate>
                     </asp:Repeater>
                   </div>

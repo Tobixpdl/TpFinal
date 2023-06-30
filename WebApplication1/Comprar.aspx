@@ -9,7 +9,7 @@
                 <h2>Datos de contacto</h2>
                     <div class="form-group">
                         <label for="email">Correo electrónico:</label>
-                        <input type="email" id="email" name="email" required />
+                        <asp:TextBox ID="txtMail" runat="server" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail" TextMode="Email"></asp:TextBox>
                     </div>
                 <h2>Entrega</h2>
                 <div class="radio-group">
@@ -27,10 +27,21 @@
     <div class="col-6 col-md-4" style="padding: 10px">
         <div class="container">
             <div class="card">
-                <h2>Nombre del artículo</h2>
-                <p>Precio: $100</p>
-                <img src="ruta_de_la_imagen.jpg" alt="Imagen del artículo" />
-                <p>Total de compra: $100</p>
+                          <asp:Repeater ID="RepeaterProductos" runat="server">
+                            <ItemTemplate>
+                                <div class="card">
+                                    <div class="img-container">
+                                      <asp:Image ID="imgPublicacion" runat="server" 
+                                      CssClass="card-img"  ImageUrl=<%#ReturnUrl(Container.DataItem)%>/> 
+                                    </div>
+                                    <div>
+                                        <h2><%# Eval("Titulo") %></h2>
+                                        <p>Precio: $<%# Eval("Precio") %></p>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                <p>Total de compra: $<asp:Literal ID="TotalLiteral" runat="server" /></p>
             </div>
 
             <div class="discount-code">
@@ -38,14 +49,16 @@
                 <input type="text" id="codigo-descuento" name="codigo-descuento" />
             </div>
 
-            <input type="submit" value="Confirmar compra" />
+            <asp:Button ID="btnComprar" runat="server" Text="Confirmar Compra" OnClick="btnComprar_Click"/>
        </div>
         </div>
         </div>
       <style>
 
         .container {
-            max-width:500px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #f9f9f9;
@@ -93,6 +106,8 @@
         }
 
         .card {
+            display: flex;
+            align-items: center;
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 10px;
@@ -107,8 +122,15 @@
             margin-bottom: 10px;
         }
 
-        .card img {
+        .card .img-container {
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+
+        .card .card-img {
             max-width: 100%;
+            height: auto;
+            max-height: 50px;
         }
 
         .discount-code {

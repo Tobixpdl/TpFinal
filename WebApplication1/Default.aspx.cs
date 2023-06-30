@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.EnterpriseServices;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Policy;
 using System.Web;
 using System.Web.UI;
@@ -28,8 +29,6 @@ namespace WebApplication1
             // Generacion de los datos de las CARDS
             NegocioPublicacion negocio = new NegocioPublicacion();
             ListaArticulos = negocio.Listar();
-
-
 
             /*
              *   ListaArticulos[i].imagenes = negocioImg.Listar(ListaArticulos[i].Id);
@@ -168,7 +167,6 @@ namespace WebApplication1
         {
             Session.Add("listaDeCompras", carritoActual);
             Response.Redirect("Carrito.aspx", false);
-
         }
         protected string ReturnUrl(object oItem)
         {
@@ -193,227 +191,227 @@ namespace WebApplication1
             
         }
         /*/
-       protected void Busqueda_TextChanged(object sender, EventArgs e)
-       {
+protected void Busqueda_TextChanged(object sender, EventArgs e)
+{
 
-           List<Articulo> listaFiltrada = ListaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(txtBusqueda.Text.ToUpper()));
-           if (listaFiltrada.Count == 0)
-           {
-               BusquedaNull.Visible = true;
-               rprCards.DataSource = ListaArticulos;
-               rprCards.DataBind();
+  List<Articulo> listaFiltrada = ListaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(txtBusqueda.Text.ToUpper()));
+  if (listaFiltrada.Count == 0)
+  {
+      BusquedaNull.Visible = true;
+      rprCards.DataSource = ListaArticulos;
+      rprCards.DataBind();
 
-           }
-           else {
+  }
+  else {
 
-               rprCards.DataSource = listaFiltrada;
-               rprCards.DataBind();
-               BusquedaNull.Visible = false;
-           }
+      rprCards.DataSource = listaFiltrada;
+      rprCards.DataBind();
+      BusquedaNull.Visible = false;
+  }
 
-       }
+}
 
-       protected void chBusqueda_CheckedChanged(object sender, EventArgs e)
-       {
-           FiltroAvanzado = chBusqueda.Checked;
-           txtBusqueda.Enabled = !FiltroAvanzado;
-           if (!(string.IsNullOrEmpty(txtBusqueda.Text)))
-           {
-               txtBusqueda.Text ="";
+protected void chBusqueda_CheckedChanged(object sender, EventArgs e)
+{
+  FiltroAvanzado = chBusqueda.Checked;
+  txtBusqueda.Enabled = !FiltroAvanzado;
+  if (!(string.IsNullOrEmpty(txtBusqueda.Text)))
+  {
+      txtBusqueda.Text ="";
 
-           }
-           if (!chBusqueda.Checked)
-           {
-               rprCards.DataSource = ListaArticulos;
-               rprCards.DataBind();
-               FiltroAvanzado = false;
-               chMenorPrecio.Enabled = true;
-               chMayorPrecio.Enabled = true;
-               ddlCategoria.SelectedIndex = 0;
-           }
-           else
-           {
-               chMenorPrecio.Enabled = false;
-               chMayorPrecio.Enabled = false;
-           }
+  }
+  if (!chBusqueda.Checked)
+  {
+      rprCards.DataSource = ListaArticulos;
+      rprCards.DataBind();
+      FiltroAvanzado = false;
+      chMenorPrecio.Enabled = true;
+      chMayorPrecio.Enabled = true;
+      ddlCategoria.SelectedIndex = 0;
+  }
+  else
+  {
+      chMenorPrecio.Enabled = false;
+      chMayorPrecio.Enabled = false;
+  }
 
-       }
+}
 
-       protected void ddlCategoria_Llenado(object sender, EventArgs e)
-       {
-           List<string> categorias = new List<string>();
-           ddlCategoria.Items.Clear();
-           categorias.Add("");
+protected void ddlCategoria_Llenado(object sender, EventArgs e)
+{
+  List<string> categorias = new List<string>();
+  ddlCategoria.Items.Clear();
+  categorias.Add("");
 
-           foreach (Articulo articulo in ListaArticulos)
-           {
+  foreach (Articulo articulo in ListaArticulos)
+  {
 
-               string categoria = articulo.Categoria.Descripcion;
+      string categoria = articulo.Categoria.Descripcion;
 
-               if (!categorias.Contains(categoria))
-               {
-                   categorias.Add(categoria);
-               }
-           }
-           ddlCategoria.DataSource = categorias;
-           ddlCategoria.DataBind();
+      if (!categorias.Contains(categoria))
+      {
+          categorias.Add(categoria);
+      }
+  }
+  ddlCategoria.DataSource = categorias;
+  ddlCategoria.DataBind();
 
-       }
+}
 
-       protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
-       {
-           List<string> marcas= new List<string>();
-           ddlMarca.Items.Clear();
-           marcas.Add("");
+protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+{
+  List<string> marcas= new List<string>();
+  ddlMarca.Items.Clear();
+  marcas.Add("");
 
-           foreach (Articulo articulo in ListaArticulos)
-           {
-               if (articulo.Categoria.Descripcion == ddlCategoria.SelectedItem.Text)
-               {
-                   string marca = articulo.Marca.Descripcion;
+  foreach (Articulo articulo in ListaArticulos)
+  {
+      if (articulo.Categoria.Descripcion == ddlCategoria.SelectedItem.Text)
+      {
+          string marca = articulo.Marca.Descripcion;
 
-                   if (!marcas.Contains(marca))
-                   {
-                       marcas.Add(marca);
-                   }
-               }
+          if (!marcas.Contains(marca))
+          {
+              marcas.Add(marca);
+          }
+      }
 
-           } 
+  } 
 
-           ddlMarca.DataSource = marcas;
-           ddlMarca.DataBind();
-           Filtro_porCategoria(sender, e);
-           FiltroAvanzado = true;
-           txtBusAvanzada.Enabled = false;
+  ddlMarca.DataSource = marcas;
+  ddlMarca.DataBind();
+  Filtro_porCategoria(sender, e);
+  FiltroAvanzado = true;
+  txtBusAvanzada.Enabled = false;
 
-       }
+}
 
-       protected void ddlMarca_SelectedIndexChanged(object sender, EventArgs e)
-       {
-           List<Articulo> listaFiltrada = ListaArticulos.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(ddlMarca.SelectedItem.Text.ToUpper()) && x.Categoria.Descripcion.ToUpper().Contains(ddlCategoria.SelectedItem.Text.ToUpper()));
+protected void ddlMarca_SelectedIndexChanged(object sender, EventArgs e)
+{
+  List<Articulo> listaFiltrada = ListaArticulos.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(ddlMarca.SelectedItem.Text.ToUpper()) && x.Categoria.Descripcion.ToUpper().Contains(ddlCategoria.SelectedItem.Text.ToUpper()));
 
-           if (listaFiltrada.Count == 0)
-           {
-               BusquedaNull.Visible = true;
+  if (listaFiltrada.Count == 0)
+  {
+      BusquedaNull.Visible = true;
 
-           }
-           else
-           {
+  }
+  else
+  {
 
-               rprCards.DataSource = listaFiltrada;
-               rprCards.DataBind();
-               BusquedaNull.Visible = false;
-           }
-           FiltroAvanzado = true;
-           if (ddlMarca.SelectedValue == "") { 
-           ddlCategoria_SelectedIndexChanged(sender, e);
-           }
-           else
-           {
-               txtBusAvanzada.Enabled = true;
+      rprCards.DataSource = listaFiltrada;
+      rprCards.DataBind();
+      BusquedaNull.Visible = false;
+  }
+  FiltroAvanzado = true;
+  if (ddlMarca.SelectedValue == "") { 
+  ddlCategoria_SelectedIndexChanged(sender, e);
+  }
+  else
+  {
+      txtBusAvanzada.Enabled = true;
 
-           }
-
-
-       }
-       protected void txtBusAvanzada_TextChanged(object sender, EventArgs e)
-       {
-           List<Articulo> listaFiltrada = ListaArticulos.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(ddlMarca.SelectedItem.Text.ToUpper()) && x.Categoria.Descripcion.ToUpper().Contains(ddlCategoria.SelectedItem.Text.ToUpper())&& x.Nombre.ToUpper().Contains(txtBusAvanzada.Text.ToUpper()));
-           if (listaFiltrada.Count == 0)
-           {
-               ddlMarca_SelectedIndexChanged(sender, e);
-               BusquedaNull.Visible = true;
-               FiltroAvanzado = true;
+  }
 
 
-           }
-           else
-           {
-
-               rprCards.DataSource = listaFiltrada;
-               rprCards.DataBind();
-               BusquedaNull.Visible = false;
-               FiltroAvanzado = true;
-
-           }
-       }
-
-       protected void Filtro_porCategoria(object sender, EventArgs e)
-       {
+}
+protected void txtBusAvanzada_TextChanged(object sender, EventArgs e)
+{
+  List<Articulo> listaFiltrada = ListaArticulos.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(ddlMarca.SelectedItem.Text.ToUpper()) && x.Categoria.Descripcion.ToUpper().Contains(ddlCategoria.SelectedItem.Text.ToUpper())&& x.Nombre.ToUpper().Contains(txtBusAvanzada.Text.ToUpper()));
+  if (listaFiltrada.Count == 0)
+  {
+      ddlMarca_SelectedIndexChanged(sender, e);
+      BusquedaNull.Visible = true;
+      FiltroAvanzado = true;
 
 
-           List<Articulo> listaFiltrada = ListaArticulos.FindAll(x => x.Categoria.Descripcion.ToUpper().Contains(ddlCategoria.SelectedItem.Text.ToUpper()));
-           if (listaFiltrada.Count == 0)
-           {
-               BusquedaNull.Visible = true;
-               rprCards.DataSource = ListaArticulos;
-               rprCards.DataBind();
+  }
+  else
+  {
 
-           }
-           else
-           {
+      rprCards.DataSource = listaFiltrada;
+      rprCards.DataBind();
+      BusquedaNull.Visible = false;
+      FiltroAvanzado = true;
 
-               rprCards.DataSource = listaFiltrada;
-               rprCards.DataBind();
-               BusquedaNull.Visible = false;
-           }
+  }
+}
 
-       }
-       protected void chMenorPrecio_CheckedChanged(object sender, EventArgs e)
-       {
+protected void Filtro_porCategoria(object sender, EventArgs e)
+{
 
 
-           if(chMenorPrecio.Checked)
-           {
-               chBusqueda.Enabled = false;
-               chMenorPrecio.Enabled = true;
-               chMayorPrecio.Enabled = false;
+  List<Articulo> listaFiltrada = ListaArticulos.FindAll(x => x.Categoria.Descripcion.ToUpper().Contains(ddlCategoria.SelectedItem.Text.ToUpper()));
+  if (listaFiltrada.Count == 0)
+  {
+      BusquedaNull.Visible = true;
+      rprCards.DataSource = ListaArticulos;
+      rprCards.DataBind();
 
-               List<Articulo> articulo = ListaArticulos;
+  }
+  else
+  {
 
-               articulo = articulo.OrderBy(p => p.Precio).ToList();
+      rprCards.DataSource = listaFiltrada;
+      rprCards.DataBind();
+      BusquedaNull.Visible = false;
+  }
 
-               rprCards.DataSource = articulo;
-               rprCards.DataBind();
-
-           }
-           else if(!chMayorPrecio.Checked)
-           {
-               rprCards.DataSource = ListaArticulos;
-               rprCards.DataBind();
-               chMayorPrecio.Enabled = true;
-               chMenorPrecio.Enabled = true;
-               chBusqueda.Enabled = true;
-
-           }
-       }
-       protected void chMayorPrecio_CheckedChanged(object sender, EventArgs e)
-       {
-           if (chMayorPrecio.Checked)
-           {
-               chBusqueda.Enabled = false;
-               chMenorPrecio.Enabled = false;
-               chMayorPrecio.Enabled = true;
-
-               List<Articulo> articulo = ListaArticulos;
-
-               articulo = articulo.OrderByDescending(p => p.Precio).ToList();
-
-               rprCards.DataSource = articulo;
-               rprCards.DataBind();
+}
+protected void chMenorPrecio_CheckedChanged(object sender, EventArgs e)
+{
 
 
-           }
-           else if(!chMenorPrecio.Checked)
-           {
-               rprCards.DataSource = ListaArticulos;
-               rprCards.DataBind();
-               chMayorPrecio.Enabled = true;
-               chMenorPrecio.Enabled = true;
-               chBusqueda.Enabled = true;
+  if(chMenorPrecio.Checked)
+  {
+      chBusqueda.Enabled = false;
+      chMenorPrecio.Enabled = true;
+      chMayorPrecio.Enabled = false;
 
-           }
-       }
+      List<Articulo> articulo = ListaArticulos;
+
+      articulo = articulo.OrderBy(p => p.Precio).ToList();
+
+      rprCards.DataSource = articulo;
+      rprCards.DataBind();
+
+  }
+  else if(!chMayorPrecio.Checked)
+  {
+      rprCards.DataSource = ListaArticulos;
+      rprCards.DataBind();
+      chMayorPrecio.Enabled = true;
+      chMenorPrecio.Enabled = true;
+      chBusqueda.Enabled = true;
+
+  }
+}
+protected void chMayorPrecio_CheckedChanged(object sender, EventArgs e)
+{
+  if (chMayorPrecio.Checked)
+  {
+      chBusqueda.Enabled = false;
+      chMenorPrecio.Enabled = false;
+      chMayorPrecio.Enabled = true;
+
+      List<Articulo> articulo = ListaArticulos;
+
+      articulo = articulo.OrderByDescending(p => p.Precio).ToList();
+
+      rprCards.DataSource = articulo;
+      rprCards.DataBind();
+
+
+  }
+  else if(!chMenorPrecio.Checked)
+  {
+      rprCards.DataSource = ListaArticulos;
+      rprCards.DataBind();
+      chMayorPrecio.Enabled = true;
+      chMenorPrecio.Enabled = true;
+      chBusqueda.Enabled = true;
+
+  }
+}
 /*/
     }
 }
