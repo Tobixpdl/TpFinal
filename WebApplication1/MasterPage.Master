@@ -19,8 +19,9 @@
        <div class="containerT">
            <div class="navbarT">
               <div class="logoT">
-                  <%-- ACA VA EL LOGO --%>
-                  <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-MzasUukIvqC1l8DqGfzHVq2V0poOyF_PTuTLysFATy0QSt5S" alt="Alternate Text" width="150px" />
+                  <%-- < ACÁ VA EL LOGO img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-MzasUukIvqC1l8DqGfzHVq2V0poOyF_PTuTLysFATy0QSt5S" alt="Alternate Text" width="150px" /> --%>
+                  <asp:Image ID="logoImage" runat="server" ImageUrl="~/Images/LogoSized.png" AlternateText="Logo" />
+
               </div>
              <nav class="navT">
                  <ul>
