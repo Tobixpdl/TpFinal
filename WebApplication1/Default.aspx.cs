@@ -17,6 +17,7 @@ namespace WebApplication1
     public partial class Default : System.Web.UI.Page
     {
         public List<Publicacion> ListaArticulos { get; set; }
+        public List<Publicacion> ListaArticulosFeatured { get; set; }
         public List<Publicacion> carritoActual { get; set; }
 
         public int UsuarioActual { get; set; }
@@ -29,6 +30,7 @@ namespace WebApplication1
             // Generacion de los datos de las CARDS
             NegocioPublicacion negocio = new NegocioPublicacion();
             ListaArticulos = negocio.Listar();
+            ListaArticulosFeatured = negocio.listarFeatured();
 
             /*
              *   ListaArticulos[i].imagenes = negocioImg.Listar(ListaArticulos[i].Id);
@@ -62,6 +64,8 @@ namespace WebApplication1
 
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
+                rprFeatured.DataSource = ListaArticulosFeatured;
+                rprFeatured.DataBind();
                 /*/if (this.Session[] == null)
                 {/*/
                 if (this.Session["activeUser"] != null)

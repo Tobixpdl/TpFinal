@@ -69,6 +69,7 @@
     <Content Include="Crear.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DetallesArticulos.aspx" />
+    <Content Include="Images\messi.png" />
     <Content Include="MisCompras.aspx" />
     <Content Include="Mi_Perfil.aspx" />
     <Content Include="Modificar.aspx" />
@@ -199,7 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

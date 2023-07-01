@@ -68,15 +68,40 @@
             </div>
             <div class="col-2T">
                 <%-- ACA VA UNA IMAGEN PARA LA DEFAULT --%>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBQCPZrrZIbE6FA_GJQ5veTphSiMjg8NpKAQbrGyLwEG4qd7T0WdNMPZUP4lQJBYx9JjU&usqp=CAU" alt="Alternate Text" />
+                <img src="\Images\messi.png" alt="Alternate Text" />
             </div>
         </div>
     </div>
-    
 
+      <%-- ARTICULOS TOP --%>
+    <div class="CT">
+          <h2 class="titleT">Productos top</h2>
+           <div class="container-items2">
+            <asp:Repeater ID="rprFeatured" runat="server">
+                <ItemTemplate>
+                         <div class="item">
+				                <figure>
+					                 <asp:Image ID="imgPublicacion" runat="server" 
+                                     CssClass="img-" OnPreRender="imgPublicacion_PreRender" ImageUrl=<%#ReturnUrl(Container.DataItem)%>/>                                                                          
+				                </figure>
+				                <div class="info-product">
+                                    <h2 class="info-title"><%#Eval("Titulo")%></h2>
+					                <p class="price">$<%#Eval("Precio")%></p>
+                                    <asp:Button ID="btnAdd" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar" 
+                                    CommandArgument ='<% #Eval("Id")%>' CommandName="artId" />
+                                    <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Detalles</a>
+                                </div>           
+                          </div>
+                </ItemTemplate>
+           </asp:Repeater>
+           </div>
+    </div>
+    
+    <%-- TODOS LOS ARTICULOS --%>
     <section class="articulos">
         <div class="mega-main">
                 <div class="main">
+                    <h2 class="titleT">Todos los productos</h2>
                     <div class="container-items">
                     <asp:Repeater ID="rprCards" runat="server">
                      <ItemTemplate>
@@ -88,9 +113,9 @@
 				                    <div class="info-product">
                                         <h2 class="info-title"><%#Eval("Titulo")%></h2>
 					                    <p class="price">$<%#Eval("Precio")%></p>
-                                        <asp:Button ID="btnAdd" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar" 
+                                        <asp:Button ID="btnAdd" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar al carrito" 
                                         CommandArgument ='<% #Eval("Id")%>' CommandName="artId" />
-                                        <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Detalles</a>
+                                        <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>
                                     </div>
 			                   </div>
                       </ItemTemplate>
@@ -101,23 +126,27 @@
         </section>
 
     <style>
+
         .headerT{
-            background:radial-gradient(#fff, #ffd6d6);
+            /*background: var(--bgColor);*/
+            background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
             height: 75vh;
         }
 
         .rowT{
             display:flex;
-            align-items:center;
             flex-wrap: wrap;
             justify-content:space-around;
         }
 
         .col-2T {
+            color:var(--textColorWhite);
+            text-shadow: 1px 1px 1px var(--textColorBlack);
             flex-basis: 50%;
             min-width: 300px;
             padding: 100px;
         }
+
         .col-2T img{
             max-width:100%;
             padding: 50px 0;
@@ -133,6 +162,37 @@
             font-size:20px;
         }
 
+        .titleT{
+            text-align: center;
+            position:relative;
+            line-height:60px;
+            color:var(--textColorBlack);
+            padding-top: 20px;
+            margin: 0 auto 80px;
+        }
+
+        .titleT::after{
+            content:'';
+            background: var(--bgColor);
+            width:80px;
+            height:5px;
+            border-radius:5px;
+            position:absolute;
+            bottom:0;
+            left:50%;
+            transform: translateX(-50%);
+        }
+
+        .container-items2{
+            flex-basis:25%;
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            margin: 0 150px;
+            gap: 100px;
+        }
+
+        .container-items2 .item{
+        }
 
         .img-{
             max-width:100%;
@@ -188,8 +248,8 @@
             border:none;
             background:none;
             text-decoration:none;
-            background:black;
-            color:white;
+            background:var(--textColorBlack);
+            color:var(--textColorWhite);
             padding:15px 10px;
             cursor:pointer;
             text-align:center;
@@ -199,6 +259,7 @@
         .info-product .btn-info:hover{
             background:grey;
         }
+        
         
 
  #search-box {

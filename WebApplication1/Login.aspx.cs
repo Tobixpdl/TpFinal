@@ -50,8 +50,7 @@ namespace WebApplication1
                     {
                         badPass = true;
                     }
-                    else if (ListaUsuarios[i].usuario != txtUsername.Text &&
-                             ListaUsuarios[i].password == txtPassword.Text)
+                    else if (ListaUsuarios[i].usuario != txtUsername.Text)
                     {
                         badUser = true;
                     }
