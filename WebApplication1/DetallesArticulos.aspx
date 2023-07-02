@@ -15,7 +15,8 @@
                   <h5 class="card-desc">Descripcion: <%:artADetallar.Descripcion %></h5>
                   <h5 class="card-precio">Precio: <%:artADetallar.Precio %></h5>
                    <h5 class="card-cat">Categoria : <%:artADetallar.Categoria.Nombre %></h5>                 
-                  <a href="Publicaciones.aspx" class="card-user">Creador: <%:userDetalle.usuario%></a>
+                  <a href="PerfilUsuario.aspx?User=<%#Eval(userDetalle.usuario)%>" class="card-user">Creador: <%: userDetalle.usuario%> </a>
+
                   <h5 class="card-stock">Stock : <%:artADetallar.Stock %></h5>
                   <asp:Button ID="Button2" OnClick="Btn_volver_Click" runat="server" Text="Volver" CssClass="btnBack" />
                </div>

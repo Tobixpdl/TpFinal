@@ -19,10 +19,10 @@ namespace WebApplication1
         public List<Publicacion> ListaArticulos { get; set; }
         public List<Publicacion> ListaArticulosFeatured { get; set; }
         public List<Publicacion> carritoActual { get; set; }
-
+        
         public int UsuarioActual { get; set; }
         public Usuario user;
-
+        public NegocioUsuario NegocioUsuario { get; set; }
         public NegocioImagen negocioImg = new NegocioImagen();
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -47,9 +47,12 @@ namespace WebApplication1
 
 
             //
+            if (this.Session["activeUser"] != null)
+            {
+                user.usuario = this.Session["activeUser"].ToString();
+                user = NegocioUsuario.ListarXUsuario(user.usuario); 
+            }
 
-            NegocioUsuario negocioUsuario = new NegocioUsuario();
-            user= negocioUsuario.ListarXUsuario(0);
             Session.Add("user", user);
 
 
@@ -71,16 +74,19 @@ namespace WebApplication1
                 if (this.Session["activeUser"] != null)
                 {
                     user.usuario = this.Session["activeUser"].ToString();
+                    user = NegocioUsuario.ListarXUsuario(user.usuario);
 
                 }
                 //}
                 //FiltroAvanzado = false;
                 // ddlCategoria_Llenado(sender, e);
-            }else{
+            }
+            else{
 
                 if (this.Session["activeUser"] != null)
                 {
                     user.usuario = this.Session["activeUser"].ToString();
+                    user = NegocioUsuario.ListarXUsuario(user.usuario);
 
                 }
 

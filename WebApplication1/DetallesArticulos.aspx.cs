@@ -3,6 +3,7 @@ using negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -14,17 +15,20 @@ namespace WebApplication1
     {
         public Publicacion artADetallar { get; set; }
         public Usuario userDetalle { get; set; }
-
+        
         public NegocioImagen negocioImg = new NegocioImagen();
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioPublicacion negocio = new NegocioPublicacion();
             string id = Request.QueryString["Id"];
+
             NegocioUsuario negocioUser = new NegocioUsuario();
             if (!string.IsNullOrEmpty(id))
             {
                 artADetallar = negocio.ListarXId(id);
                 userDetalle = negocioUser.ListarXUsuario(artADetallar.Id_Usuario);
+                string Creador = userDetalle.usuario;
+                this.Session.Add("selectedUser", Creador);
 
                 if (artADetallar != null && artADetallar.imagenes != null && artADetallar.imagenes.Count > 0)
                 {

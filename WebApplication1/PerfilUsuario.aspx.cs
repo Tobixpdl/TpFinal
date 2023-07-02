@@ -12,66 +12,80 @@ namespace WebApplication1
     public partial class PerfilUsuario : System.Web.UI.Page
     {
         public List<Publicacion> ListaArticulos { get; set; }
-        NegocioUsuario negocio = new NegocioUsuario();
+        public List<Publicacion> ListaArticulosFeatured { get; set; }
+
+        NegocioUsuario negocioUser = new NegocioUsuario();
         NegocioPublicacion negocioPublicacion = new NegocioPublicacion();
         public List<Publicacion> carritoActual { get; set; }
-        string userId = 0.ToString();// Request.QueryString["Id"];
+        public Usuario usuario { get; set; }
+        public Usuario SelectedUser { get; set; }
+
+        public string SelecUser;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario user = new Usuario();
-            if (!IsPostBack)
+            ListaArticulos = negocioPublicacion.Listar();
+            ListaArticulosFeatured = negocioPublicacion.listarFeatured();
+            SelecUser = Request.QueryString["User"];
+            if (SelecUser != null)
             {
-                if (!string.IsNullOrEmpty(userId))
-                {
-                    user=negocio.ListarXUsuario(userId);
-                    Tel.Text = user.usuario;
-                    EMail.Text = user.mail;
-                    UsuarioNombre.Text=user.usuario;
-                    List < Publicacion> publicaciones = negocioPublicacion.ListarXUsuario(user.Id);
+             SelectedUser = negocioUser.ListarXUsuario(SelecUser);
+            }
 
-                    Session.Add("idUsuario", 0);
+            if (this.Session["selectedUser"] != null)
+                {
+                    string selUser = this.Session["selectedUser"].ToString();
+                    SelectedUser.usuario = selUser;
+                    
+                    Tel.Text = SelectedUser.usuario;
+                    EMail.Text = SelectedUser.mail;
+                    UsuarioNombre.Text = SelectedUser.usuario;
+                    List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuario(SelectedUser.Id);
+
                     ListaArticulos = publicaciones;
                     carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
+                    rprCards.DataSource = ListaArticulos;
+                    rprCards.DataBind();
+            }
+                else
+                {
+                    Response.Redirect("Default.aspx", false);
 
-                    if (!IsPostBack)
-                        {
+                }
 
-                            rprCards.DataSource = ListaArticulos;
-                            rprCards.DataBind();
+            
 
-                        if (this.Session["activeUser"] != null)
-                        {
-                            user.usuario = this.Session["activeUser"].ToString();
+            if (!IsPostBack)
+            {
+                ListaArticulos = negocioPublicacion.Listar();
+                ListaArticulosFeatured = negocioPublicacion.listarFeatured();
+                SelecUser = Request.QueryString["User"];
+                if (SelecUser != null)
+                {
+                    SelectedUser = negocioUser.ListarXUsuario(SelecUser);
+                }
+                if (this.Session["selectedUser"] != null)
+                {
+                    string selUser = this.Session["selectedUser"].ToString();
+                    SelectedUser.usuario = selUser;
 
-                        }
-                        //}
-                        //FiltroAvanzado = false;
-                        // ddlCategoria_Llenado(sender, e);
-                    }
-                    else
-                    {
+                    Tel.Text = SelectedUser.usuario;
+                    EMail.Text = SelectedUser.mail;
+                    UsuarioNombre.Text = SelectedUser.usuario;
+                    List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuario(SelectedUser.Id);
 
-                        if (this.Session["activeUser"] != null)
-                        {
-                            user.usuario = this.Session["activeUser"].ToString();
-
-                        }
-
-                    }
-                    lblCompra.Text = this.Session["listaDeCompras"] != null && ((List<Publicacion>)Session["listaDeCompras"]).Count != 0 ? ((List<Publicacion>)Session["listaDeCompras"]).Count.ToString() : lblCompra.CssClass = "invisible";
-
+                    ListaArticulos = publicaciones;
+                    carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
+                    rprCards.DataSource = ListaArticulos;
+                    rprCards.DataBind();
                 }
                 else
                 {
-
+                    Response.Redirect("Default.aspx", false);
 
                 }
-                 
-                
             }
-            
-
 
         }
 

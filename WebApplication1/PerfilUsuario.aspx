@@ -39,36 +39,32 @@
 
     <h3>Publicaciones</h3>
 
-        <section class="articulos">
+     <section class="articulos">
         <div class="mega-main">
                 <div class="main">
+                    <h2 class="titleT">Todos los productos</h2>
+                    <div class="container-items">
                     <asp:Repeater ID="rprCards" runat="server">
-                        <ItemTemplate>
-                                     <div class="flip-card">
-                                        <div class="flip-card-inner">
-                                            <div class="flip-card-front">
-                                              <asp:Image ID="imgPublicacion" runat="server" 
-                           CssClass="img-fluid mb-3" OnPreRender="imgPublicacion_PreRender" ImageUrl=<%#ReturnUrl(Container.DataItem)%>/>                                        
-                                                <p class="title"><%#Eval("Titulo")%></p>
-                                                    <p>$<%#Eval("Precio") %></p>
-                                                    <div class="d-grid gap-2 d-md-block">              
-                                                    </div>
-                                            </div>
-                                            <div class="flip-card-back">
-                                               <h5 class="card-title"><%#Eval("Titulo") %></h5>
-                                                <p><%#Eval("Descripcion") %></p>
-                                                <div class="btns">
-                                                        <asp:Button ID="btnAdd" runat="server"  CssClass="btn-botones" OnClick="btnAdd_Click" type="button" Text=" Agregar " 
-                                                            CommandArgument='<% #Eval("Id")%>' CommandName="artId" />
-                                                      <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-botones">Detalles</a>                                                      
-                                              </div>
-                                           </div>
-                                        </div>
-                                    </div>    
-                        </ItemTemplate>
+                     <ItemTemplate>
+			                    <div class="item">
+				                    <figure>
+					                     <asp:Image ID="imgPublicacion" runat="server" 
+                                         CssClass="img-" OnPreRender="imgPublicacion_PreRender" ImageUrl=<%#ReturnUrl(Container.DataItem)%>/>                                                                          
+				                    </figure>
+				                    <div class="info-product">
+                                        <h2 class="info-title"><%#Eval("Titulo")%></h2>
+					                    <p class="price">$<%#Eval("Precio")%></p>
+                                        <asp:Button ID="btnAdd" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar al carrito" 
+                                        CommandArgument ='<% #Eval("Id")%>' CommandName="artId" />
+                                        <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>
+                                    </div>
+			                   </div>
+                      </ItemTemplate>
                     </asp:Repeater>
+                  </div>
                  </div>
             </div>
         </section>
+
 
 </asp:Content>
