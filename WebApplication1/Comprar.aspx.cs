@@ -12,22 +12,14 @@ namespace WebApplication1
     public partial class Comprar : System.Web.UI.Page
     {
 
-        public List<Publicacion> listaDeCompras;
+        public Publicacion listaDeCompras;
         protected void Page_Load(object sender, EventArgs e)
         {
-            listaDeCompras =(List<Publicacion>)Session["listaDeCompras"];
+            NegocioPublicacion negocio = new NegocioPublicacion();
+            string id = Request.QueryString["Id"];
+            listaDeCompras = negocio.ListarXId(id);
 
-            RepeaterProductos.DataSource = listaDeCompras;
-            RepeaterProductos.DataBind();
-
-            decimal total = 0;
-
-            for(int i=0; i<listaDeCompras.Count; i++)
-            {
-                total += listaDeCompras[i].Precio;
-            }
-
-            TotalLiteral.Text = total.ToString();
+            TotalLiteral.Text = listaDeCompras.Precio.ToString();
         }
 
         protected string ReturnUrl(object oItem)

@@ -13,6 +13,8 @@ namespace WebApplication1
        
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblCompra.Text = this.Session["listaDeCompras"] != null && ((List<Publicacion>)Session["listaDeCompras"]).Count != 0 ? ((List<Publicacion>)Session["listaDeCompras"]).Count.ToString() : lblCompra.CssClass = "invisible";
+
             //liMiPerfil.Visible = false;
             //liMiPerfil2.Visible = false;
             //liMiPerfil3.Visible = false;

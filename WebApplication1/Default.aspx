@@ -49,16 +49,6 @@
                            <>--%>
     <div class="headerT">
                 
-               <div class="row">
-                    <div class="col">
-                        <asp:Button ID="btnCarro" runat="server" CssClass="btn btn-primary "  OnClick="btnCarro_Click" type="button" Text="Carrito" />
-                    </div>
-                    <div class="col">
-                        <div>           
-                          <asp:Label ID="lblCompra"  runat="server" CssClass="contador" ></asp:Label>
-                        </div>  
-                   </div>
-                </div>
                          <%--  </div><>--%>
     
         <div class="rowT">
@@ -74,7 +64,7 @@
     </div>
 
       <%-- ARTICULOS TOP --%>
-    <div class="CT">
+    <div id="start-products" class="CT">
           <h2 class="titleT">Productos top</h2>
            <div class="container-items2">
             <asp:Repeater ID="rprFeatured" runat="server">
@@ -289,20 +279,7 @@
   padding: 10px;
   align-content:space-around;
 }
-.contador{
-  flex: 0;
-  padding: 5px;
-  align-content:space-around;
-      color: #ffffff;
-    background-color: #ff0000;
-    border-radius: 10px;
-    height: 23px;
-    align-items: center;
-    position: relative;
-    display: flex;
-    max-width: none;
 
-}
  .FiltroPrecio {
 float:right;    
 margin:5px;

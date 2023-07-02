@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Volver" />  
+
 <div class="container">
   <div class="row border border-dark-subtle">
   <div class="col-12 " style="background:#0094ff;text-align:center;">
@@ -11,17 +11,44 @@
       <%if (contador == 0)
         {
 %>
-    <h1>No hay elementos en el Carro</h1>
+      <h1>No hay elementos favoritos</h1>
       <asp:Button ID="btnIrADefault" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Continuar Comprando" />  
     <% }
         else
         {  %>
-         <asp:UpdatePanel runat="server">
-             <ContentTemplate>
+        
 
+             <section class="articulos">
+                <div class="mega-main">
+                        <div class="main">
+                            <h2 class="titleT">Todos los productos</h2>
+                            <div class="container-items">
+                            <asp:Repeater ID="rprCards" runat="server">
+                             <ItemTemplate>
+			                            <div class="item">
+				                            <figure>
+					                             <asp:Image ID="imgPublicacion" runat="server" 
+                                                 CssClass="img-" ImageUrl=<%#ReturnUrl(Container.DataItem)%>/>                                                                          
+				                            </figure>
+				                            <div class="info-product">
+                                                <h2 class="info-title"><%#Eval("Titulo")%></h2>
+					                            <p class="price">$<%#Eval("Precio")%></p>
+                                                <asp:Button ID="btnAdd" runat="server"  CssClass="btn-info" OnClick="btnComprar_Click" type="button" Text="Comprar" 
+                                                CommandArgument ='<% #Eval("Id")%>' CommandName="artId" />
+                                                <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>
+                                            </div>
+			                           </div>
+                              </ItemTemplate>
+                            </asp:Repeater>
+                          </div>
+                         </div>
+                    </div>
+                </section>
 
+       <asp:UpdatePanel runat="server">
+         <ContentTemplate>
 
-                 <h1>Carrito</h1>
+              <%--   <h1>Favoritos</h1>
      <div class="row">
                <div class="col-8" style="text-align:center">       
                      <h2></h2>
@@ -76,17 +103,6 @@
 
                      <asp:ScriptManager runat="server">
                      </asp:ScriptManager>
-
-                      <div>
-                         <p>A que zona perteneces?</p>
-                         <asp:DropDownList runat="server" ID="ddlZonas" CssClass="btn btn-danger dropdown-toggle dropdown-toggle-split" style="background:#b200ff"
-                         AutoPostBack="true" OnSelectedIndexChanged="ddlZonas_SelectedIndexChanged">
-                             <%--<asp:ListItem Text="Zona Norte"/>
-                                 <asp:ListItem Text="Zona Sur"/>
-                                 <asp:ListItem Text="Zona Oeste"/>
-                                 <asp:ListItem Text="CABA"/>--%>
-                        </asp:DropDownList>
-                    </div>
     
                     <div class="row"style="margin-left:20px">
                         <div class="col-sm-11">
@@ -100,7 +116,7 @@
                         </div>
                    </div>
              </div>
-  </div>
+  </div>--%>
              </ContentTemplate>
              </asp:UpdatePanel>
  

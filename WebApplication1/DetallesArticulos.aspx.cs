@@ -40,7 +40,6 @@ namespace WebApplication1
             else
             {
                 Response.Redirect("Default.aspx", false);
-
                 imgPublicacion.Visible = false; 
             }
         }

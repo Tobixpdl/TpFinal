@@ -11,7 +11,7 @@ namespace WebApplication1
 {
 
 
-    public partial class Carrito
+    public partial class favorito
     {
 
         /// <summary>

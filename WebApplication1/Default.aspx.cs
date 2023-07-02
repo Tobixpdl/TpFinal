@@ -109,7 +109,6 @@ namespace WebApplication1
 
 
         /*/
-            lblCompra.Text = this.Session["listaDeCompras"] != null && ((List<Publicacion>)Session["listaDeCompras"]).Count !=0? ((List<Publicacion>)Session["listaDeCompras"]).Count.ToString() : lblCompra.CssClass = "invisible";
 
         }
         protected void btnAdd_Click(object sender, EventArgs e)

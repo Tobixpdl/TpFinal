@@ -27,20 +27,16 @@
     <div class="col-6 col-md-4" style="padding: 10px">
         <div class="container">
             <div class="card">
-                          <asp:Repeater ID="RepeaterProductos" runat="server">
-                            <ItemTemplate>
-                                <div class="card">
-                                    <div class="img-container">
-                                      <asp:Image ID="imgPublicacion" runat="server" 
-                                      CssClass="card-img"  ImageUrl=<%#ReturnUrl(Container.DataItem)%>/> 
-                                    </div>
-                                    <div>
-                                        <h2><%# Eval("Titulo") %></h2>
-                                        <p>Precio: $<%# Eval("Precio") %></p>
-                                    </div>
-                                </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
+                        <div class="card">
+                            <div class="img-container">
+                              <asp:Image ID="imgPublicacion" runat="server" 
+                              CssClass="card-img"  ImageUrl=<%#ReturnUrl(listaDeCompras)%>/> 
+                            </div>
+                            <div>
+                               <h2><%:listaDeCompras.Titulo%></h2>
+                               <p>Precio: $<%:listaDeCompras.Precio%></p>
+                           </div>
+                        </div>
                 <p>Total de compra: $<asp:Literal ID="TotalLiteral" runat="server" /></p>
             </div>
 
@@ -49,7 +45,7 @@
                 <input type="text" id="codigo-descuento" name="codigo-descuento" />
             </div>
 
-            <asp:Button ID="btnComprar" runat="server" Text="Confirmar Compra" OnClick="btnComprar_Click"/>
+            <asp:Button ID="btnComprar" runat="server" CssClass="btn-info" Text="Confirmar Compra" OnClick="btnComprar_Click"/>
        </div>
         </div>
         </div>
