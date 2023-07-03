@@ -21,14 +21,16 @@ namespace WebApplication1
         public List<Publicacion> carritoActual { get; set; }
         
         public int UsuarioActual { get; set; }
-        public Usuario user;
-        public NegocioUsuario NegocioUsuario { get; set; }
+        public Usuario user=new Usuario();
+        public NegocioUsuario negocioUsuario { get; set; }
         public NegocioImagen negocioImg = new NegocioImagen();
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             // Generacion de los datos de las CARDS
             NegocioPublicacion negocio = new NegocioPublicacion();
+            negocioUsuario = new NegocioUsuario();
+
             ListaArticulos = negocio.Listar();
             ListaArticulosFeatured = negocio.listarFeatured();
 
@@ -49,8 +51,9 @@ namespace WebApplication1
             //
             if (this.Session["activeUser"] != null)
             {
-                user.usuario = this.Session["activeUser"].ToString();
-                user = NegocioUsuario.ListarXUsuario(user.usuario); 
+                string nusuario = this.Session["activeUser"].ToString();
+                user.usuario =nusuario ;
+                user = negocioUsuario.ListarXUsuario(nusuario); 
             }
 
             Session.Add("user", user);
@@ -73,9 +76,9 @@ namespace WebApplication1
                 {/*/
                 if (this.Session["activeUser"] != null)
                 {
-                    user.usuario = this.Session["activeUser"].ToString();
-                    user = NegocioUsuario.ListarXUsuario(user.usuario);
-
+                    string nusuario = Session["activeUser"].ToString();
+                    user.usuario = nusuario;
+                    user = negocioUsuario.ListarXUsuario(nusuario);
                 }
                 //}
                 //FiltroAvanzado = false;
@@ -85,8 +88,9 @@ namespace WebApplication1
 
                 if (this.Session["activeUser"] != null)
                 {
-                    user.usuario = this.Session["activeUser"].ToString();
-                    user = NegocioUsuario.ListarXUsuario(user.usuario);
+                    string nusuario = Session["activeUser"].ToString();
+                    user.usuario = nusuario;
+                    user = negocioUsuario.ListarXUsuario(nusuario);
 
                 }
 
