@@ -42,7 +42,7 @@
      <section class="articulos">
         <div class="mega-main">
                 <div class="main">
-                    <h2 class="titleT">Todos los productos</h2>
+                    <h2 class="titleT">Mas productos de <%:SelectedUser.usuario %></h2>
                     <div class="container-items">
                     <asp:Repeater ID="rprCards" runat="server">
                      <ItemTemplate>

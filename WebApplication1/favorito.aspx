@@ -3,18 +3,24 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <%if (contador == 0)
-         {
+     <%if (contador == 0 && this.Session["activeUser"] != null )
+       {
 %>
-      <h1>No hay elementos favoritos</h1>
-      <asp:Button ID="btnIrADefault" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Continuar Comprando" />  
+            <h1 class="titleT">No hay elementos favoritos</h1>
+            <asp:Button ID="btnIrADefault" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Continuar Comprando" />  
     <% }
-        else
-        {  %>
+       else if(this.Session["activeUser"] == null)
+       {%>
+            <h1 class="titleT">Logueate para ver tus articulos favoritos!</h1>
+            <a class="btn-info" runat="server" href="Login.aspx" id="liLogin">Login</a>
+     <%}
+        
+       else
+       {  %>
              <section class="articulos">
                 <div class="mega-main">
                         <div class="main">
-                            <h2 class="titleT">Todos los productos</h2>
+                            <h2 class="titleT">Mis favoritos</h2>
                             <div class="container-items">
                             <asp:Repeater ID="rprCards" runat="server">
                              <ItemTemplate>

@@ -13,13 +13,19 @@ namespace WebApplication1
     {
 
         public Publicacion listaDeCompras;
+        public Usuario usuarioCompra;
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioPublicacion negocio = new NegocioPublicacion();
+            NegocioUsuario negocioUsuario = new NegocioUsuario();
             string id = Request.QueryString["Id"];
             listaDeCompras = negocio.ListarXId(id);
+            usuarioCompra = negocioUsuario.ListarXUsuario(Session["activeUser"].ToString());
 
             TotalLiteral.Text = listaDeCompras.Precio.ToString();
+            txtMail.Text = usuarioCompra.mail;
+            txtNombre.Text = usuarioCompra.nombre;
+            txtStock.Text = "1";
         }
 
         protected string ReturnUrl(object oItem)

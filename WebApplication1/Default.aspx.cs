@@ -123,23 +123,31 @@ namespace WebApplication1
         }
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            
             string valor = ((Button)sender).CommandArgument;
-
             var aux = buscarArticulo(valor);
-            var lugar = 0;
-            if (ContainsArticulo(valor, ref lugar))
-            {
-                carritoActual[lugar].Cantidad++;
 
+            if (user.Id == aux.Id_Usuario)
+            {
+                var lugar = 0;
+                if (ContainsArticulo(valor, ref lugar))
+                {
+                    carritoActual[lugar].Cantidad++;
+
+                }
+                else
+                {
+                    carritoActual.Add(buscarArticulo(valor));
+                }
+
+                this.Session.Add("listaDeCompras", carritoActual);
+                Response.Redirect("Default.aspx", false);
             }
+
             else
             {
-                carritoActual.Add(buscarArticulo(valor));
+                string script = "alert('No puede hacer esto.');";
+                ClientScript.RegisterStartupScript(this.GetType(), "NoPuedeHacerEsto", script, true);
             }
-
-            this.Session.Add("listaDeCompras", carritoActual);
-            Response.Redirect("Default.aspx", false);
             
         }
         public bool ContainsArticulo(string id, ref int index)
@@ -191,6 +199,7 @@ namespace WebApplication1
             }  
             return string.Empty;
         }
+
         protected void imgPublicacion_PreRender(object sender, EventArgs e)
         {
 

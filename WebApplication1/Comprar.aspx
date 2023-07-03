@@ -2,6 +2,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $('.stockBox').on('input', function() {
+            var value = $(this).val();
+            if (value < 1) {
+                $(this).val(1);
+            }
+        });
+    });
+    </script>
 
     <div class="row">
         <div class="col-6" style="padding: 10px">
@@ -10,18 +22,14 @@
                     <div class="form-group">
                         <label for="email">Correo electrónico:</label>
                         <asp:TextBox ID="txtMail" runat="server" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail" TextMode="Email"></asp:TextBox>
+                        <label for="name">Nombre:</label>
+                        <asp:TextBox ID="txtNombre" runat="server" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre"></asp:TextBox>
                     </div>
                 <h2>Entrega</h2>
                 <div class="radio-group">
-                    <label>
-                        <input type="radio" name="entrega" value="coordinar" checked />
-                        A coordinar con el vendedor
-                    </label>
-                    <label>
-                        <input type="radio" name="entrega" value="retirar" />
-                        Retirar en X
-                    </label>
-                </div>              
+                    <asp:RadioButton ID="rbCoordinar" runat="server" Text="Coordinar con vendedor" TextAlign="Right" GroupName="opcion" />
+                    <asp:RadioButton ID="rbRetirar" runat="server" Text="Retirar en x" TextAlign="Right" GroupName="opcion" />
+                </div>               
             </div>
         </div>
     <div class="col-6 col-md-4" style="padding: 10px">
@@ -35,8 +43,12 @@
                             <div>
                                <h2><%:listaDeCompras.Titulo%></h2>
                                <p>Precio: $<%:listaDeCompras.Precio%></p>
+                                <div class="stock-container">
+                                    <p>Cantidad:</p>
+                                    <asp:TextBox ID="txtStock" runat="server" type="number" CssClass="stockBox"></asp:TextBox>
+                                </div> 
                            </div>
-                        </div>
+                       </div>
                 <p>Total de compra: $<asp:Literal ID="TotalLiteral" runat="server" /></p>
             </div>
 
@@ -70,7 +82,7 @@
         }
 
         .form-group label {
-            display: block;
+            display: flex;
             font-weight: bold;
             margin-bottom: 5px;
         }
@@ -131,6 +143,15 @@
 
         .discount-code {
             margin-top: 10px;
+        }
+
+        .stock-container{
+            display: flex;
+            align-items: center;
+        }
+
+        .stockBox{
+            max-width: 35px;
         }
     </style>
 </asp:Content>

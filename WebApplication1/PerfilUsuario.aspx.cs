@@ -36,7 +36,8 @@ namespace WebApplication1
             if (this.Session["selectedUser"] != null)
                 {
                     string selUser = this.Session["selectedUser"].ToString();
-                    SelectedUser.usuario = selUser;
+                   //SelectedUser.usuario = selUser;
+                   SelectedUser = negocioUser.ListarXUsuario(selUser);
                     
                     Tel.Text = SelectedUser.usuario;
                     EMail.Text = SelectedUser.mail;
@@ -56,36 +57,36 @@ namespace WebApplication1
 
             
 
-            if (!IsPostBack)
-            {
-                ListaArticulos = negocioPublicacion.Listar();
-                ListaArticulosFeatured = negocioPublicacion.listarFeatured();
-                SelecUser = Request.QueryString["User"];
-                if (SelecUser != null)
-                {
-                    SelectedUser = negocioUser.ListarXUsuario(SelecUser);
-                }
-                if (this.Session["selectedUser"] != null)
-                {
-                    string selUser = this.Session["selectedUser"].ToString();
-                    SelectedUser.usuario = selUser;
+            //if (!IsPostBack)
+            //{
+            //    ListaArticulos = negocioPublicacion.Listar();
+            //    ListaArticulosFeatured = negocioPublicacion.listarFeatured();
+            //    SelecUser = Request.QueryString["User"];
+            //    if (SelecUser != null)
+            //    {
+            //        SelectedUser = negocioUser.ListarXUsuario(SelecUser);
+            //    }
+            //    if (this.Session["selectedUser"] != null)
+            //    {
+            //        string selUser = this.Session["selectedUser"].ToString();
+            //        SelectedUser.usuario = selUser;
 
-                    Tel.Text = SelectedUser.usuario;
-                    EMail.Text = SelectedUser.mail;
-                    UsuarioNombre.Text = SelectedUser.usuario;
-                    List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuario(SelectedUser.Id);
+            //        Tel.Text = SelectedUser.usuario;
+            //        EMail.Text = SelectedUser.mail;
+            //        UsuarioNombre.Text = SelectedUser.usuario;
+            //        List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuario(SelectedUser.Id);
 
-                    ListaArticulos = publicaciones;
-                    carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
-                    rprCards.DataSource = ListaArticulos;
-                    rprCards.DataBind();
-                }
-                else
-                {
-                    Response.Redirect("Default.aspx", false);
+            //        ListaArticulos = publicaciones;
+            //        carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
+            //        rprCards.DataSource = ListaArticulos;
+            //        rprCards.DataBind();
+            //    }
+            //    else
+            //    {
+            //        Response.Redirect("Default.aspx", false);
 
-                }
-            }
+            //    }
+            //}
 
         }
 

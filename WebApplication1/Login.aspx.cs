@@ -42,7 +42,7 @@ namespace WebApplication1
                         lblMessage.Text = message;
                         lblMessage.ForeColor = System.Drawing.Color.Green;
                         idUsuario = ListaUsuarios[i].Id;
-                    Session.Add("idUsuario", idUsuario);
+                        Session.Add("idUsuario", idUsuario);
                     break;
                     }
                     else if(ListaUsuarios[i].usuario == txtUsername.Text &&
