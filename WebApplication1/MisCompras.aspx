@@ -3,10 +3,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-    <asp:GridView ID="gvCompras" runat="server">
-        
+    <asp:Repeater ID="rprCompras" runat="server">
 
-    </asp:GridView>
+
+    </asp:Repeater>
 
 
 </asp:Content>

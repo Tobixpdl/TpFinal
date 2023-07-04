@@ -25,7 +25,7 @@
                         <label for="email">Correo electrónico:</label>
                         <asp:TextBox ID="txtMail" runat="server" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail" TextMode="Email"></asp:TextBox>
                         <label for="name">DNI:</label>
-                        <asp:TextBox ID="TxtDni" runat="server" AutoPostBack="true" AutoComplete="off" PlaceHolder="DNI" type="number"></asp:TextBox>                    
+                        <asp:TextBox ID="TxtDni" runat="server" AutoPostBack="true" AutoComplete="off"></asp:TextBox>                    
                     </div>
                 <h2>Entrega</h2>
                 <div class="radio-group">

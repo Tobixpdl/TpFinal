@@ -29,14 +29,14 @@ namespace negocio
                     v.DNIVendedor = datos.Lector.GetInt32(9);
                     v.Usuario = (string)datos.Lector["USUARIO"];
                     v.Titulo= (string)datos.Lector["TITULO"];
-                    v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
+                    v.FechaCompra =(DateTime)datos.Lector["FECHACOMPRA"];
 
                     if(datos.Lector["FECHAENTREGA"].ToString() == "" )
                     {
-                        v.FechaEntrega = "No Entregado";
+                        v.FechaEntrega = new DateTime(1, 1, 1, 1, 1, 1);
                     }else
                     {
-                        v.FechaEntrega=(datos.Lector["FECHAENTREGA"]).ToString();
+                        v.FechaEntrega= (DateTime)datos.Lector["FECHAENTREGA"];
 
                     }
 
@@ -71,15 +71,59 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,titulo,fechacompra, fachaentrega,idestado,cantidad,preciofinal )" +
-                " values ('" + v.DNIVendedor+ "','" + v.DNIComprador + "','" + v.Usuario + "','" + v.Titulo + "','" + v.FechaCompra + "','" + v.FechaEntrega + "','1','" + v.Cantidad + "','" + v.PrecioFinal + "')");
-                
+                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal )" +
+                " values ('" + v.DNIVendedor+ "','" + v.DNIComprador + "','" + v.Usuario + "','" + v.Titulo + "',@fechacompra,@fechaentrega,'1','" + v.Cantidad + "','" + v.PrecioFinal + "')");
+
+                datos.setearParametro("@fechacompra", v.FechaCompra);
+                datos.setearParametro("@fechaentrega", v.FechaEntrega);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
 
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Publicacion> getCompras(string comprador)
+        {
+            List<Publicacion> lista = new List<Publicacion>();
+            AccesoDatos datos = new AccesoDatos();
+            NegocioImagen negocioImagen = new NegocioImagen();
+
+            try
+            {
+                datos.setearConsulta("select p.*, v.USUARIO as Comprador from publicaciones p \r\ninner join ventas v on v.TITULO = p.TITULO\r\nwhere usuario = @usuario");
+
+                datos.setearParametro("@usuario", comprador);
+
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Publicacion aux = new Publicacion();
+                    aux.Id = datos.Lector.GetInt32(0);
+                    aux.Titulo = (string)datos.Lector["titulo"];
+                    aux.Precio = (decimal)datos.Lector["precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Stock = (long)datos.Lector["STOCK"];
+                    aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
+                    aux.imagenes = negocioImagen.Listar(aux.Id);
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["idCategoria"];
+                    cat.Nombre = (string)datos.Lector["categoria"];
+                    aux.Categoria = cat;
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
             finally
             {

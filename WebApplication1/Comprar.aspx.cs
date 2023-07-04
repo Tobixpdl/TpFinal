@@ -24,11 +24,14 @@ namespace WebApplication1
             usuarioCompra = negocioUsuario.ListarXUsuario(Session["activeUser"].ToString());
             usuarioVenta = negocioUsuario.ListarXUsuario(listaDeCompras.Id_Usuario);
 
-            TotalLiteral.Text = listaDeCompras.Precio.ToString();
-            txtMail.Text = usuarioCompra.mail;
-            txtNombre.Text = usuarioCompra.nombre;
-            txtStock.Text = "1";
-            TxtDni.Text = Convert.ToInt32(usuarioCompra.dni).ToString();
+            if (!IsPostBack)
+            {
+                TotalLiteral.Text = listaDeCompras.Precio.ToString();
+                txtMail.Text = usuarioCompra.mail;
+                txtNombre.Text = usuarioCompra.nombre;
+                txtStock.Text = "1";
+                TxtDni.Text = usuarioCompra.dni.ToString();
+            }
         }
 
         protected string ReturnUrl(object oItem)
@@ -50,14 +53,12 @@ namespace WebApplication1
             //Mandar a la base de datos el estado de la compra (en espera de confirmacion)
             NegocioVentas negocio = new NegocioVentas();
             Venta venta = new Venta();
-            DateTime fechaActual = DateTime.Now;
-            DateTime fechaFinal = fechaActual.AddDays(14);
             venta.DNIComprador = Convert.ToInt32(usuarioCompra.dni);
             venta.DNIVendedor = Convert.ToInt32(usuarioVenta.dni);
             venta.Usuario = usuarioCompra.usuario;
             venta.Titulo = listaDeCompras.Titulo;
-            venta.FechaCompra = fechaActual.ToString();
-            venta.FechaCompra = fechaFinal.ToString();
+            venta.FechaCompra = DateTime.Now;
+            venta.FechaEntrega = DateTime.Now.AddDays(14);
             
             string texto = txtStock.Text; 
             int cantidad;
