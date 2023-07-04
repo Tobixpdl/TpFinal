@@ -87,6 +87,15 @@ namespace WebApplication1
         protected global::System.Web.UI.HtmlControls.HtmlAnchor liMiPerfil4;
 
         /// <summary>
+        /// Control liMiPerfil5.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor liMiPerfil5;
+
+        /// <summary>
         /// Control salirbtn.
         /// </summary>
         /// <remarks>

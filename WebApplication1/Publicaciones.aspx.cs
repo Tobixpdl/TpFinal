@@ -35,7 +35,7 @@ namespace WebApplication1
             }
             else
             {
-                idUsuario =0;
+               
 
                 Response.Redirect("Default.aspx", false);
 
@@ -55,11 +55,11 @@ namespace WebApplication1
         {
             for (int i = 0; i < listaDePublicaciones.Count; i++)
             {
-                if (listaDePublicaciones[i].Id==id)
+                if (listaDePublicaciones[i].Id == id)
                 {
                     return i;
                 }
-            } 
+            }
             return 0;
         }
 
@@ -69,60 +69,59 @@ namespace WebApplication1
 
         }
 
-      
+
         protected void btnCrear_Click(object sender, EventArgs e)
         {
             Response.Redirect("Crear.aspx", false);
         }
+        protected string RUrl(object oItem)
+        {
+            string id = (DataBinder.Eval(oItem, "Id")).ToString();
+            NegocioPublicacion negocio = new NegocioPublicacion();
+            var imagenes = negocio.ListarXId(id).imagenes;
 
+            if (imagenes != null && imagenes.Count > 0)
+            {
+                return imagenes[0].Url;
+            }
+            return string.Empty;
+        }
         protected void dgvPublicaciones_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-         
-           
-                if (e.CommandName == "Erase")
-                {
+
+
+            if (e.CommandName == "Erase")
+            {
                 int index = Convert.ToInt32(e.CommandArgument);
-
-                string message = "Seguro que quieres eliminar?";
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-                sb.Append("return confirm('");
-
-                sb.Append(message);
-
-                sb.Append("');");
-
-                ClientScript.RegisterOnSubmitStatement(this.GetType(), "alert", sb.ToString());
-               
 
                 NegocioPublicacion negocio = new NegocioPublicacion();
                 NegocioImagen negocioImg = new NegocioImagen();
                 ContarItems(ref listaDePublicaciones);
-                index = GetIndex(Convert.ToInt32(e.CommandArgument)); 
-              if(contador>0)
+                index = GetIndex(Convert.ToInt32(e.CommandArgument));
+                if (contador > 0)
                 {
                     negocioImg.EliminarImagen(listaDePublicaciones[index].Id);
                     negocio.EliminarPublicacion(listaDePublicaciones[index].Id);
-                }else
+                }
+                else
                 {
                     listaDePublicaciones = new List<Publicacion>();
                 }
-                   
-               
-                
 
-              
+                Response.Redirect("Publicaciones.aspx");
+
+
+
             }
-                else
-               
-                if (e.CommandName == "Modify")
-                {
+            else
+
+            if (e.CommandName == "Modify")
+            {
                 int index = Convert.ToInt32(e.CommandArgument);
                 Response.Redirect("Modificar.aspx?id=" + listaDePublicaciones[index].Id.ToString());
-                }
+            }
 
-            
+
         }
     }
 }

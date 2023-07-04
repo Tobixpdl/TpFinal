@@ -4,33 +4,41 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Volver" />  
 <div class="container">
-  <div class="row border border-dark-subtle">
-  <div class="col-12 " style="background:#0094ff;text-align:center;">
+    <div class="mp">
+
+         <div class="row ">
+  <div class="col-12 ">
       
    
       <%if (contador == 0)
         {
 %>
     <h1>No has publicado nada aún</h1>
-       
-      <asp:Button ID="btnIrADefault" runat="server" OnClick="btnCrear_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Crear Publicacion" />  
+        
     <% }
         else
         {  %>
       <h1>Mis Publicaciones</h1>
-     <div class="row">
-       <div class="col-8" style="text-align:center">
+     <div class="row ">
+       <div class="col-12 " >
 
          
              <h1></h1>
-              
-           <asp:GridView ID="dgvPublicaciones" runat="server" OnRowCommand="dgvPublicaciones_RowCommand" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" >
+              <div class="cp">
+
+                     <asp:GridView ID="dgvPublicaciones" runat="server" OnRowCommand="dgvPublicaciones_RowCommand" CssClass="table " DataKeyNames="Id" AutoGenerateColumns="false" >
                
                <Columns>
-                   <asp:BoundField  HeaderText="Foto" />
+                     <asp:templatefield headertext="">
+            <itemtemplate>
+              <asp:Image ID="imgPublicacion" runat="server" Height="40" Width="40"
+                                     CssClass="fp" ImageUrl=<%#RUrl(Container.DataItem)%>/>     
+            </itemtemplate>
+          </asp:templatefield>
+                   
                    <asp:BoundField  HeaderText="Producto" DataField="Titulo" />
                    <asp:BoundField  HeaderText="Precio" DataField="Precio" />
-                    <asp:BoundField  HeaderText="Imagen" DataField="Titulo" />
+                
                     <asp:ButtonField   ButtonType="Button"
             commandname="Modify" 
             headertext="Acciones" 
@@ -50,16 +58,14 @@
 
 
                 </asp:GridView>
+              </div>
+        
            
-            <div class="nueva publicacion" >
-               <asp:Button ID="btnCrear" runat="server" OnClick="btnCrear_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Crear Publicación" /> 
-           </div>
        </div>
 
 
         
      </div>
-    
        
 
 
@@ -71,8 +77,15 @@
     <%} %>
   </div>
  
+     <div class="nueva publicacion" >
+               <asp:Button ID="btnCrear" runat="server" OnClick="btnCrear_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Crear Publicación" /> 
+           </div>
+
+           
+    </div>
+ 
   </div>
-</div> 
+
 
 
     
@@ -80,8 +93,19 @@
 
  
   
+    <style>
 
+
+body{
+    background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
+        background-repeat: no-repeat;
+    
+        width: 1920px;
+    height: 1080px;
+   
+
+}
+    </style>
     
 </asp:Content>
-
 

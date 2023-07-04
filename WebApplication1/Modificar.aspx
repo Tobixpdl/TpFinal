@@ -5,12 +5,14 @@
 
      <asp:ScriptManager runat="server" ID="ScriptManager1"></asp:ScriptManager>
     <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Volver" />  
-     <div class="container2">   
-         <div class="col-12 " style="background:#0094ff;text-align:center;">
+     <div class="container2">
+         <div class="mp">
+
+         <div class="col-12">
 
               <div class="row">
 
-                  <div class="col-8" style="text-align:center">
+                  <div class="col-8">
 
                        <div class="mb-3">
                     <h2>Modificar Publicacion</h2>
@@ -96,9 +98,20 @@
 
 
          </div>
+         </div>
             
 
             </div>
 
+      <style>
+        body{
+    background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
+        background-repeat: no-repeat;
+    
+        width: 1920px;
+    height: 1080px;
+   
 
+}
+    </style>
 </asp:Content>

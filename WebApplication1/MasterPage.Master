@@ -43,6 +43,7 @@
                                   <a class="nav-linkT" runat="server" href="Mi_Perfil.aspx" id="liMiPerfil2">Mi Perfil</a>
                                   <a class="nav-linkT" runat="server" href="Publicaciones.aspx" id="liMiPerfil3">Publicaciones</a>
                                   <a class="nav-linkT" runat="server" href="MisCompras.aspx" id="liMiPerfil4">Mis Compras</a>
+                                    <a class="nav-linkT" runat="server" href="Ventas.aspx" id="liMiPerfil5">Ventas</a>
                                   <asp:Button runat="server" CssClass="btn-botones" id="salirbtn" OnClick="salirbtn_OnClick" Text="Salir" />                
                               </div>
                           </li>

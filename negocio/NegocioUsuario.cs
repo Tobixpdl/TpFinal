@@ -86,7 +86,7 @@ namespace negocio
                 usuario.password = (string)datos.Lector["CONTRASEÑA"];
                 usuario.nombre = (string)datos.Lector["NOMBRES"];
                 usuario.apellido = (string)datos.Lector["APELLIDOS"];
-                //usuario.dni= datos.Lector.GetInt32(5);
+                usuario.dni= datos.Lector.GetInt64(5);
                 try
                 {
                     usuario.telefono = (string)datos.Lector["TELEFONO"];

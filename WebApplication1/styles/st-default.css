@@ -10,11 +10,39 @@
     align-items: center;
     position: relative;
 }
+
 .invisible {
-   opacity:0;
+    opacity: 0;
 }
+
 .btnCarrito {
     position: relative;
     left: 1157px;
     top: 10px;
+}
+
+.mp {
+    margin-left: 200px;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 5px solid #e5e5e5;
+}
+
+.cp {
+    border-bottom: 1px solid #0094ff;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.fp {
+    width: 40px;
+}
+
+.tl {
+    text-align: center;
+    position: relative;
+    font-size: 55px;
 }
