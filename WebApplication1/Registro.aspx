@@ -6,7 +6,7 @@
     <div class="account-login">
         <div class="rowT">
             <div class="col-2T">
-                <img src="\Images\messi.png" alt="Alternate Text" />
+                <img src="\Images\imgProductos.png" alt="Alternate Text" />
             </div>
             <div class="col-2T">
                 <div class="form-container">
@@ -74,7 +74,7 @@
         .account-login{
             padding:50px 0;
             background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
-            height:75vh;
+            height:100vh;
         }
         .form-container{
             background:var(--textColorWhite);

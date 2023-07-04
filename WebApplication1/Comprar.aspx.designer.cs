@@ -15,6 +15,15 @@ namespace WebApplication1
     {
 
         /// <summary>
+        /// Control txtNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+
+        /// <summary>
         /// Control txtMail.
         /// </summary>
         /// <remarks>
@@ -24,13 +33,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtMail;
 
         /// <summary>
-        /// Control txtNombre.
+        /// Control TxtDni.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+        protected global::System.Web.UI.WebControls.TextBox TxtDni;
 
         /// <summary>
         /// Control rbCoordinar.

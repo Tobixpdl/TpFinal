@@ -48,9 +48,6 @@
                          <div class="container text-center btnCarrito " id="count">
                            <>--%>
     <div class="headerT">
-                
-                         <%--  </div><>--%>
-    
         <div class="rowT">
             <div class="col-2T">
                 <h1>Compra todo <br/>en un mismo lugar!</h1>
@@ -58,7 +55,7 @@
             </div>
             <div class="col-2T">
                 <%-- ACA VA UNA IMAGEN PARA LA DEFAULT --%>
-                <img src="\Images\messi.png" alt="Alternate Text" />
+                <img src="\Images\imgProductos.png" alt="Alternate Text" />
             </div>
         </div>
     </div>

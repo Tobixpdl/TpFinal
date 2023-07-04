@@ -14,6 +14,7 @@ namespace WebApplication1
 
         public Publicacion listaDeCompras;
         public Usuario usuarioCompra;
+        public Usuario usuarioVenta;
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioPublicacion negocio = new NegocioPublicacion();
@@ -21,11 +22,13 @@ namespace WebApplication1
             string id = Request.QueryString["Id"];
             listaDeCompras = negocio.ListarXId(id);
             usuarioCompra = negocioUsuario.ListarXUsuario(Session["activeUser"].ToString());
+            usuarioVenta = negocioUsuario.ListarXUsuario(listaDeCompras.Id_Usuario);
 
             TotalLiteral.Text = listaDeCompras.Precio.ToString();
             txtMail.Text = usuarioCompra.mail;
             txtNombre.Text = usuarioCompra.nombre;
             txtStock.Text = "1";
+            TxtDni.Text = Convert.ToInt32(usuarioCompra.dni).ToString();
         }
 
         protected string ReturnUrl(object oItem)
@@ -45,7 +48,32 @@ namespace WebApplication1
         {
             //Session para agregar los articulos comprados
             //Mandar a la base de datos el estado de la compra (en espera de confirmacion)
+            NegocioVentas negocio = new NegocioVentas();
+            Venta venta = new Venta();
+            DateTime fechaActual = DateTime.Now;
+            DateTime fechaFinal = fechaActual.AddDays(14);
+            venta.DNIComprador = Convert.ToInt32(usuarioCompra.dni);
+            venta.DNIVendedor = Convert.ToInt32(usuarioVenta.dni);
+            venta.Usuario = usuarioCompra.usuario;
+            venta.Titulo = listaDeCompras.Titulo;
+            venta.FechaCompra = fechaActual.ToString();
+            venta.FechaCompra = fechaFinal.ToString();
             
+            string texto = txtStock.Text; 
+            int cantidad;
+            if (int.TryParse(texto, out cantidad))
+            {
+                venta.Cantidad = cantidad;
+            }
+            else
+            {
+                venta.Cantidad = 1;
+            }
+
+            venta.PrecioFinal = listaDeCompras.Precio * cantidad;
+
+            negocio.agregarVenta(venta);
+
         }
     }
 }

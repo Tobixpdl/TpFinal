@@ -20,10 +20,12 @@
              <div class="container">
                 <h2>Datos de contacto</h2>
                     <div class="form-group">
-                        <label for="email">Correo electrónico:</label>
-                        <asp:TextBox ID="txtMail" runat="server" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail" TextMode="Email"></asp:TextBox>
                         <label for="name">Nombre:</label>
                         <asp:TextBox ID="txtNombre" runat="server" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre"></asp:TextBox>
+                        <label for="email">Correo electrónico:</label>
+                        <asp:TextBox ID="txtMail" runat="server" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail" TextMode="Email"></asp:TextBox>
+                        <label for="name">DNI:</label>
+                        <asp:TextBox ID="TxtDni" runat="server" AutoPostBack="true" AutoComplete="off" PlaceHolder="DNI" type="number"></asp:TextBox>                    
                     </div>
                 <h2>Entrega</h2>
                 <div class="radio-group">
@@ -58,7 +60,7 @@
             </div>
 
             <asp:Button ID="btnComprar" runat="server" CssClass="btn-info" Text="Confirmar Compra" OnClick="btnComprar_Click"/>
-       </div>
+         </div>
         </div>
         </div>
       <style>

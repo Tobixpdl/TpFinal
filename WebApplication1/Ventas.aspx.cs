@@ -24,20 +24,14 @@ namespace WebApplication1
             {
 
                 idUsuario = (int)Session["idUsuario"];
-
-
                 ContarItems(ref listaDeVentas);
-
 
                 dgvVentas.DataSource = listaDeVentas;
                 dgvVentas.DataBind();
             }
             else
             {
-
-
                 Response.Redirect("Default.aspx", false);
-
             }
         }
 

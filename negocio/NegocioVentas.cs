@@ -65,5 +65,27 @@ namespace negocio
 
         }
 
+        public void agregarVenta(Venta v)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,titulo,fechacompra, fachaentrega,idestado,cantidad,preciofinal )" +
+                " values ('" + v.DNIVendedor+ "','" + v.DNIComprador + "','" + v.Usuario + "','" + v.Titulo + "','" + v.FechaCompra + "','" + v.FechaEntrega + "','1','" + v.Cantidad + "','" + v.PrecioFinal + "')");
+                
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

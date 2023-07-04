@@ -126,7 +126,7 @@ namespace WebApplication1
             string valor = ((Button)sender).CommandArgument;
             var aux = buscarArticulo(valor);
 
-            if (user.Id == aux.Id_Usuario)
+            if (user.Id != aux.Id_Usuario)
             {
                 var lugar = 0;
                 if (ContainsArticulo(valor, ref lugar))

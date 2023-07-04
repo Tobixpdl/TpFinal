@@ -6,7 +6,7 @@
     <div class="account-login">
         <div class="rowT">
             <div class="col-2T">
-                <img src="\Images\messi.png" alt="Alternate Text" />
+                <img src="\Images\imgProductos.png" alt="Alternate Text" />
             </div>
             <div class="col-2T">
                 <div class="form-container">
