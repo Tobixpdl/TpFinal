@@ -16,9 +16,11 @@ namespace dominio
         public string Titulo { get; set; }
         public string FechaCompra { get; set; }
         public string FechaEntrega { get; set; }
-        public  string Estado { get; set; }
+        public string Estado { get; set; }
         public int Cantidad { get; set; }
         public decimal PrecioFinal { get; set; }
-        public char metodo { get; set; }
+        public string metodo { get; set; }
+
+        public string urlImagen { get; set; }
     }
 }

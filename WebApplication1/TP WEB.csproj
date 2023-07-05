@@ -66,6 +66,7 @@
   <ItemGroup>
     <Content Include="Carrito.aspx" />
     <Content Include="Comprar.aspx" />
+    <Content Include="Comprobante.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="Crear.aspx" />
     <Content Include="Default.aspx" />
@@ -99,6 +100,13 @@
     </Compile>
     <Compile Include="Comprar.aspx.designer.cs">
       <DependentUpon>Comprar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Comprobante.aspx.cs">
+      <DependentUpon>Comprobante.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Comprobante.aspx.designer.cs">
+      <DependentUpon>Comprobante.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contacto.aspx.cs">
       <DependentUpon>Contacto.aspx</DependentUpon>

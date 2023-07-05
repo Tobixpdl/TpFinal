@@ -21,7 +21,7 @@
         {  %>
       <h1>Mis Ventas</h1>
      <div class="row ">
-       <div class="col-12 " >
+       <div class="col-14 " >
 
          
              <h1></h1>
@@ -31,18 +31,20 @@
                
                <Columns>
                     
-                   
+                    <asp:templatefield headertext="Ver Detalles">
+            <itemtemplate>
+               <a class="nav-linkT" href="Contacto.aspx?Usuario=<%#Eval("Usuario")%>&Id=<%#Eval("Id")%>" id="lblId">Click Acá</a>
+            </itemtemplate>
+          </asp:templatefield>
                    <asp:BoundField  HeaderText="Producto" DataField="Titulo" />
                     <asp:BoundField  HeaderText="Cantidad" DataField="Cantidad" />
                    <asp:BoundField  HeaderText="Precio Final" DataField="PrecioFinal" />
-                      <asp:templatefield headertext="Comprador">
-            <itemtemplate>
-               <a class="nav-linkT" href="Contacto.aspx?Usuario=<%#Eval("Usuario")%>" id="lblComprador"><%#Eval("Usuario")%></a>
-            </itemtemplate>
-          </asp:templatefield>
+                    <asp:BoundField  HeaderText="Comprador" DataField="Usuario" />
+                     
                  <asp:BoundField  HeaderText="Fecha de Compra" DataField="FechaCompra" />
                    <asp:BoundField  HeaderText="Estado" DataField="Estado" />
                    <asp:BoundField  HeaderText="Fecha de Entrega" DataField="FechaEntrega" />
+                   <asp:BoundField  HeaderText="Metodo de Pago" DataField="metodo" />
                     
                         
                </Columns>

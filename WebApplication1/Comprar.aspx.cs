@@ -74,14 +74,16 @@ namespace WebApplication1
 
             venta.PrecioFinal = listaDeCompras.Precio * cantidad;
 
-            if(rbEfectivo.Checked)
+
+            if (rbEfectivo.Checked)
             {
-                venta.metodo = 'e';
+                venta.metodo = "e";
             }
             else
             {
-                venta.metodo = 't';
+                venta.metodo = "t";
             }
+
 
             negocio.agregarVenta(venta);
 
