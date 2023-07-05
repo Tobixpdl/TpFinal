@@ -12,6 +12,79 @@ namespace negocio
 {
     public class NegocioVentas
     {
+        public List<Venta> ListarTodo()
+        {
+            List<Venta> lista = new List<Venta>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta(" select v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA," +
+                    "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " );
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Venta v = new Venta();
+                    v.Id = datos.Lector.GetInt32(0);
+
+                    v.DNIComprador = datos.Lector.GetInt32(1);
+                    v.DNIVendedor = datos.Lector.GetInt32(10);
+                    v.Usuario = (string)datos.Lector["USUARIO"];
+                    v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
+                    v.Titulo = (string)datos.Lector["TITULO"];
+                    v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
+                    if (datos.Lector["URLIMAGEN"].ToString() == "")
+                    {
+                        v.urlImagen = (string)datos.Lector["URLIMAGEN"];
+                    }
+                    if (datos.Lector["FECHAENTREGA"].ToString() == "")
+                    {
+                        v.FechaEntrega = "No Entregado";
+                    }
+                    else
+                    {
+                        v.FechaEntrega = (datos.Lector["FECHAENTREGA"]).ToString();
+                    }
+
+                    v.Estado = (string)datos.Lector["DESCRIPCION"];
+                    v.Cantidad = (int)datos.Lector["CANTIDAD"];
+                    v.PrecioFinal = (decimal)datos.Lector["PRECIOFINAL"];
+                    if (datos.Lector["METODO"] != null)
+                    {
+                        char letra = Convert.ToChar(datos.Lector["METODO"]);
+                        switch (letra)
+                        {
+                            case 'e':
+                                v.metodo = "Efectivo";
+                                break;
+                            case 't':
+                                v.metodo = "Transferencia Bancaria";
+                                break;
+
+                        }
+
+                    }
+
+
+                    lista.Add(v);
+                }
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return lista;
+
+        }
+
+
         public List<Venta> Listar(long dni)
         {
             List<Venta> lista = new List<Venta>();
@@ -34,7 +107,10 @@ namespace negocio
                     v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     v.Titulo = (string)datos.Lector["TITULO"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
-                    v.urlImagen = (string)datos.Lector["URLIMAGEN"];
+                    if (datos.Lector["URLIMAGEN"].ToString() == "")
+                    {
+                        v.urlImagen = (string)datos.Lector["URLIMAGEN"];
+                    }
                     if (datos.Lector["FECHAENTREGA"].ToString() == "")
                     {
                         v.FechaEntrega = "No Entregado";
@@ -117,7 +193,10 @@ namespace negocio
                 {
 
                     aux.Id = datos.Lector.GetInt32(0);
-                    aux.urlImagen = (string)datos.Lector["URLIMAGEN"];
+                    if (datos.Lector["URLIMAGEN"].ToString() == "")
+                    {
+                        aux.urlImagen = (string)datos.Lector["URLIMAGEN"];
+                    }
                     aux.DNIComprador = datos.Lector.GetInt32(1);
                     aux.DNIVendedor = datos.Lector.GetInt32(10);
                     aux.Usuario = (string)datos.Lector["USUARIO"];
@@ -204,8 +283,8 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo )" +
-                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.Usuario + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "')");
+                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo,URLIMAGEN )" +
+                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.Usuario + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "','null')");
 
                 datos.ejecutarAccion();
             }
@@ -242,7 +321,10 @@ namespace negocio
                     v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     v.Titulo = (string)datos.Lector["TITULO"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
-                    v.urlImagen= (string)datos.Lector["URLIMAGEN"];
+                    if (datos.Lector["URLIMAGEN"].ToString() == "")
+                    {
+                        v.urlImagen = (string)datos.Lector["URLIMAGEN"];
+                    }
                     if (datos.Lector["FECHAENTREGA"].ToString() == "")
                     {
                         v.FechaEntrega = "No Entregado";

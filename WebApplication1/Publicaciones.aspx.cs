@@ -20,12 +20,24 @@ namespace WebApplication1
         public int idUsuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(this.Session["activeUser"] != null && this.Session["activeUser"].ToString() == "usuario0")
+            {
+                btnCrear.Enabled = false;
+            }
             if (this.Session["idUsuario"] != null)
             {
 
-                idUsuario = (int)Session["idUsuario"];
+                object datoSession = this.Session["idUsuario"];
 
+                if (datoSession is Usuario)
+                {
+                    Usuario usuario = (Usuario)this.Session["idUsuario"];
+                    idUsuario = usuario.Id;
+                }
+                else
+                {
+                    idUsuario = (int)Session["idUsuario"];
+                }
 
                 ContarItems(ref listaDePublicaciones);
 
@@ -48,8 +60,15 @@ namespace WebApplication1
             list = new List<Publicacion>();
             NegocioPublicacion negocio = new NegocioPublicacion();
 
-            list = negocio.ListarXUsuario(idUsuario);
-            contador = list.Count;
+            if (this.Session["activeUser"] != null && this.Session["activeUser"].ToString() == "usuario0")
+            {
+                list = negocio.Listar();
+            }
+            else
+            {
+                list = negocio.ListarXUsuario(idUsuario);
+            }
+                contador = list.Count;
         }
         public int GetIndex(int id)
         {
@@ -97,7 +116,6 @@ namespace WebApplication1
                 NegocioPublicacion negocio = new NegocioPublicacion();
                 NegocioImagen negocioImg = new NegocioImagen();
                 ContarItems(ref listaDePublicaciones);
-                index = GetIndex(Convert.ToInt32(e.CommandArgument));
                 if (contador > 0)
                 {
                     negocioImg.EliminarImagen(listaDePublicaciones[index].Id);
@@ -105,12 +123,11 @@ namespace WebApplication1
                 }
                 else
                 {
+                   
                     listaDePublicaciones = new List<Publicacion>();
                 }
 
                 Response.Redirect("Publicaciones.aspx");
-
-
 
             }
             else

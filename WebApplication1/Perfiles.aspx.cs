@@ -24,20 +24,21 @@ namespace WebApplication1
         public NegocioImagen negocioImg = new NegocioImagen();
 
         public string creador;
+
+        public int contador { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
-            if (!IsPostBack)
-            {
-                rptUsuarios.ItemDataBound += rptUsuarios_ItemDataBound;
-
-
                 ListaUsuarios = usuarios.Listar();
-                rptUsuarios.DataSource = ListaUsuarios;
-                rptUsuarios.DataBind();
 
-            }
+                dgvPerfiles.DataSource = ListaUsuarios;
+                dgvPerfiles.DataBind();
+                //rptUsuarios.ItemDataBound += rptUsuarios_ItemDataBound;
+
+
+                //rptUsuarios.DataSource = ListaUsuarios;
+                //rptUsuarios.DataBind();
+
+            
       
 
 
@@ -95,6 +96,23 @@ namespace WebApplication1
             return string.Empty;
         }
 
+        protected void dgvPerfiles_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            if (e.CommandName == "Erase")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                contador = negocio.Listar().Count;
+                if (contador > 0)
+                {
+                    usuarios.eliminarUsuario(ListaUsuarios[index].Id);
+                }
+
+                Response.Redirect("Perfiles.aspx");
+
+            }
+        }
     }
 
 }

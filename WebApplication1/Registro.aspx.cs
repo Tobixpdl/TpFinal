@@ -29,14 +29,14 @@ namespace WebApplication1
         protected void btnEnter_Click(object sender, EventArgs e)
         {
 
-            txtUsername.CssClass = " ";
-            txtMail.CssClass = " ";
-            txtDNI.CssClass = " ";
-            TextBox1.CssClass = " ";
-            txtNombres.CssClass = " ";
-            txtApellidos.CssClass = " ";
-            TextBox1.CssClass = " ";
-            txtPassword.CssClass = " ";
+            txtUsername.CssClass = "inputs";
+            txtMail.CssClass = "inputs";
+            txtDNI.CssClass = "inputs";
+            TextBox1.CssClass = "inputs";
+            txtNombres.CssClass = "inputs";
+            txtApellidos.CssClass = "inputs";
+            TextBox1.CssClass = "inputs";
+            txtPassword.CssClass = "inputs";
 
             Regex rex = new Regex(@"^[a-zA-Z\s]+$");
 
@@ -53,61 +53,78 @@ namespace WebApplication1
             else
             {
                 txtDNI.CssClass = "wrongInput";
+                lblWrongDNI.Visible = true;
             }
             newUser.telefono = txtTelefono.Text;
             newUser.mail = txtMail.Text;
 
-            if (newUser.usuario.Length == 0)
+            if (string.IsNullOrEmpty(newUser.usuario))
             {
                 lblMissing.Visible = true;
+                lblWrongUser.Text = "Debe ingresar un usuario";
+                lblWrongUser.Visible = true;
                 txtUsername.CssClass = "wrongInput";
                 canCreateUser = false;
             }
-            if (newUser.nombre.Length == 0 || !rex.IsMatch(newUser.nombre))
+
+            if (string.IsNullOrEmpty(newUser.nombre) || !rex.IsMatch(newUser.nombre))
             {
                 txtNombres.CssClass = "wrongInput";
                 canCreateUser = false;
                 lblWrongName.Visible = true;
             }
-            if (newUser.apellido.Length == 0 || !rex.IsMatch(newUser.apellido))
+
+            if (string.IsNullOrEmpty(newUser.apellido) || !rex.IsMatch(newUser.apellido))
             {
                 txtApellidos.CssClass = "wrongInput";
                 canCreateUser = false;
                 lblWrongApellido.Visible = true;
             }
-            if (newUser.mail.Length == 0)
+
+            if (string.IsNullOrEmpty(newUser.mail))
             {
+                lblWrongMail.Visible = true;
                 txtMail.CssClass = "wrongInput";
                 canCreateUser = false;
             }
-            if (newUser.password.Length == 0)
+
+            if (string.IsNullOrEmpty(newUser.password) || newUser.password != TextBox1.Text)
             {
                 txtPassword.CssClass = "wrongInput";
                 TextBox1.CssClass = "wrongInput";
                 canCreateUser = false;
+                lblWrongPass2.Visible = true;
             }
 
-            for (int i = 0; i < ListaUsuarios.Count; i++)
+            if (string.IsNullOrEmpty(txtDNI.Text))
             {
-                if (ListaUsuarios[i].usuario == newUser.usuario && newUser.usuario.Length != 0)
+                lblWrongDNI.Text = "Debes ingresar un DNI";
+                lblWrongDNI.Visible = true;
+            }
+
+            foreach (Usuario existingUser in ListaUsuarios)
+            {
+                if (existingUser.usuario == newUser.usuario && !string.IsNullOrEmpty(newUser.usuario))
                 {
+                    lblWrongUser.Text = "Este usuario ya existe";
                     lblWrongUser.Visible = true;
                     txtUsername.CssClass = "wrongInput";
                     canCreateUser = false;
                 }
-                if (ListaUsuarios[i].dni == newUser.dni)
+                if (existingUser.dni == newUser.dni)
                 {
                     lblDNI.Visible = true;
                     canCreateUser = false;
                     txtDNI.CssClass = "wrongInput";
                 }
-                if (ListaUsuarios[i].mail == newUser.mail && newUser.mail.Length != 0)
+                if (existingUser.mail == newUser.mail && !string.IsNullOrEmpty(newUser.mail))
                 {
                     lblWrongMail.Visible = true;
                     canCreateUser = false;
                     txtMail.CssClass = "wrongInput";
                 }
             }
+
             if (newUser.password != TextBox1.Text)
             {
                 lblWrongPass2.Visible = true;
@@ -115,17 +132,17 @@ namespace WebApplication1
                 TextBox1.CssClass = "wrongInput";
             }
 
-            if (canCreateUser)
-            {
+                //CREACION DEL USUARIO
+                if (canCreateUser)
+                {
                 negocioU.AgregarUsuario(newUser);
                 lblIsUserCreated.Text = "Usuario creado";
                 lblIsUserCreated.Visible = true;
                 Session.Add("activeUser", txtUsername.Text);
                 NegocioUsuario negocio=new NegocioUsuario();
-                Session.Add("idUsuario", negocio.ListarXUsuario(txtUsername.Text));
+                Session.Add("idUsuario", negocio.ListarXUsuario(txtUsername.Text).Id);
                 Response.Redirect("Mi_Perfil.aspx", false);
-
-            }
+                }
             else
             {
                 lblIsUserCreated.Text = "No fue posible crear el usuario";
@@ -146,6 +163,7 @@ namespace WebApplication1
                 lblIsUserCreated.Visible = false;
                 lblWrongApellido.Visible = false;
                 lblWrongName.Visible = false;
+                lblWrongDNI.Visible = false;
             }
             else
             {
@@ -157,6 +175,7 @@ namespace WebApplication1
                 lblIsUserCreated.Visible = true;
                 lblWrongApellido.Visible = true;
                 lblWrongName.Visible = true;
+                lblWrongDNI.Visible = true;
             }
         }
 

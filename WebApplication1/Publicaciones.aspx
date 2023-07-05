@@ -18,7 +18,14 @@
     <% }
         else
         {  %>
+      <%  if (this.Session["activeUser"] != null && this.Session["activeUser"].ToString() == "usuario0")
+          {%>
+                <h1>Publicaciones</h1>
+       <%  }
+           else
+           {  %>
       <h1>Mis Publicaciones</h1>
+      <% }%>
      <div class="row ">
        <div class="col-12 " >
 
@@ -26,8 +33,7 @@
              <h1></h1>
               <div class="cp">
 
-                     <asp:GridView ID="dgvPublicaciones" runat="server" OnRowCommand="dgvPublicaciones_RowCommand" CssClass="table " DataKeyNames="Id" AutoGenerateColumns="false" >
-               
+     <asp:GridView ID="dgvPublicaciones" runat="server" OnRowCommand="dgvPublicaciones_RowCommand" CssClass="table " DataKeyNames="Id" AutoGenerateColumns="false" >
                <Columns>
                      <asp:templatefield headertext="">
             <itemtemplate>
@@ -35,7 +41,8 @@
                                      CssClass="fp" ImageUrl=<%#RUrl(Container.DataItem)%>/>     
             </itemtemplate>
           </asp:templatefield>
-                   
+
+                   <%--<asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />--%>
                    <asp:BoundField  HeaderText="Producto" DataField="Titulo" />
                    <asp:BoundField  HeaderText="Precio" DataField="Precio" />
                 

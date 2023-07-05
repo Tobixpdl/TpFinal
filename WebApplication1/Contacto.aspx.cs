@@ -17,7 +17,7 @@ namespace WebApplication1
         public int IdVenta;
         public string UrlImagen;
         public List<Comentario> Mensajes;
-       
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string nombre = Request.QueryString["Usuario"];
@@ -29,11 +29,8 @@ namespace WebApplication1
             NegocioComentarios nc = new NegocioComentarios();
             Mensajes = nc.Listar(IdVenta);
 
-
-            
             dgvComentarios.DataSource = Mensajes;
             dgvComentarios.DataBind();
-
 
         }
 
@@ -42,7 +39,6 @@ namespace WebApplication1
             Response.Redirect("Ventas.aspx", false);
         }
 
-   
             protected void btnUpload_Click(object sender, EventArgs e)
             {
 

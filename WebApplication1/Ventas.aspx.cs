@@ -22,7 +22,6 @@ namespace WebApplication1
         {
             if (this.Session["idUsuario"] != null)
             {
-
                 idUsuario = (int)Session["idUsuario"];
                 ContarItems(ref listaDeVentas);
 
@@ -43,7 +42,14 @@ namespace WebApplication1
             NegocioVentas negocio = new NegocioVentas();
             NegocioUsuario nu = new NegocioUsuario();
 
-            list = negocio.Listar((nu.ListarXUsuario(idUsuario)).dni);
+            if (this.Session["activeUser"] != null && this.Session["activeUser"].ToString() == "usuario0")
+            {
+                list = negocio.ListarTodo();
+            }
+            else
+            {
+                list = negocio.Listar((nu.ListarXUsuario(idUsuario)).dni);
+            }
            
             contador = list.Count;
         }

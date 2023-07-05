@@ -177,6 +177,7 @@ namespace WebApplication1
         {
             negocioU.eliminarUsuario(usuarioActivo.Id);
             eliminarOpciones();
+            this.Session["activeUser"] = null;
         }
 
         private void eliminarOpciones()

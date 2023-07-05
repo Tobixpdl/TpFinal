@@ -3,7 +3,44 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <section class="articulosXPerfil">
+     <h1>Todos los usuarios</h1>
+     <div class="row ">
+       <div class="col-12" >
+             <h1></h1>
+              <div class="cp">
+
+     <asp:GridView ID="dgvPerfiles" runat="server" OnRowCommand="dgvPerfiles_RowCommand" CssClass="table " DataKeyNames="Id" AutoGenerateColumns="false" >
+               <Columns>
+
+                   <%--<asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />--%>
+                   <asp:BoundField  HeaderText="Usuario" DataField="usuario" />
+                   <asp:BoundField  HeaderText="DNI" DataField="dni" />
+                   <asp:BoundField  HeaderText="Mail" DataField="mail" />
+
+                   <asp:ButtonField  ButtonType="Button"
+            commandname="Erase" 
+            headertext="Acciones" 
+            text="Eliminar"  />
+
+               </Columns>
+                </asp:GridView>
+              </div>
+       </div>
+     </div>
+    <style>
+        body {
+            background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
+            background-repeat: no-repeat;
+            width: 1920px;
+            height: 1080px;
+        }
+
+    </style>
+  
+    
+    
+    
+    <%--<section class="articulosXPerfil">
         <div class="mega-main">
                 <div class="main">
 
@@ -56,4 +93,5 @@
 }
  
 </style>
+    --%>
 </asp:Content>

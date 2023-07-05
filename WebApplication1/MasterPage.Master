@@ -20,23 +20,35 @@
        <div class="containerT">
            <div class="navbarT">
               <div class="logoT">
-                  <%-- < ACÁ VA EL LOGO img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-MzasUukIvqC1l8DqGfzHVq2V0poOyF_PTuTLysFATy0QSt5S" alt="Alternate Text" width="150px" /> --%>
                   <asp:Image ID="logoImage" runat="server" ImageUrl="~/Images/LogoSized.png" AlternateText="Logo" />
 
               </div>
              <nav class="navT">
                  <ul>
                       <li ><a class="nav-linkT" runat="server" href="Default.aspx">Inicio</a></li>
-                      <li ><a class="nav-linkT" runat="server" href="Perfiles.aspx">Perfiles</a></li>
-                   <%--  <li ><a class="nav-linkT" runat="server" href="#start-products">Productos</a></li>--%>
+                      <li ><a class="nav-linkT" runat="server" href="default.aspx#start-products">Productos</a></li>
 
                       
                      <%if (this.Session["activeUser"] == null)
                        {%>
                          <li><a class="nav-linkT" runat="server" href="Login.aspx" id="liLogin">Login</a></li>
                      <%}
-                       else
-                       {%>
+                         else if(this.Session["activeUser"] != null && this.Session["activeUser"].ToString() == "usuario0")
+                         {%>
+                             <li class="dropdown">
+                              <a class="nav-linkT" runat="server" href="#" id="A1"><%:Session["activeUser"] %></a>
+                              <div class="dropdown-content">
+                                  <a class="nav-linkT" runat="server" href="Perfiles.aspx" id="A2">Perfiles</a>
+                                  <a class="nav-linkT" runat="server" href="Publicaciones.aspx" id="A3">Publicaciones</a>
+                                  <a class="nav-linkT" runat="server" href="MisCompras.aspx" id="A4">Compras</a>
+                                    <a class="nav-linkT" runat="server" href="Ventas.aspx" id="A5">Ventas</a>
+                                  <asp:Button runat="server" CssClass="btn-botones" id="Button1" OnClick="salirbtn_OnClick" Text="Salir" />                
+                              </div>
+                          </li>
+                                
+                         <%}
+                         else
+                         {%>
                          <li class="dropdown">
                               <a class="nav-linkT" runat="server" href="#" id="liMiPerfil"><%:Session["activeUser"] %></a>
                               <div class="dropdown-content">

@@ -40,13 +40,11 @@
                     <asp:BoundField  HeaderText="Cantidad" DataField="Cantidad" />
                    <asp:BoundField  HeaderText="Precio Final" DataField="PrecioFinal" />
                     <asp:BoundField  HeaderText="Comprador" DataField="Usuario" />
-                     
                  <asp:BoundField  HeaderText="Fecha de Compra" DataField="FechaCompra" />
                    <asp:BoundField  HeaderText="Estado" DataField="Estado" />
                    <asp:BoundField  HeaderText="Fecha de Entrega" DataField="FechaEntrega" />
                    <asp:BoundField  HeaderText="Metodo de Pago" DataField="metodo" />
                     
-                        
                </Columns>
 
 

@@ -15,52 +15,6 @@ namespace WebApplication1
         {
             lblCompra.Text = this.Session["listaDeCompras"] != null && ((List<Publicacion>)Session["listaDeCompras"]).Count != 0 ? ((List<Publicacion>)Session["listaDeCompras"]).Count.ToString() : lblCompra.CssClass = "invisible";
 
-            //liMiPerfil.Visible = false;
-            //liMiPerfil2.Visible = false;
-            //liMiPerfil3.Visible = false;
-            //liMiPerfil4.Visible = false;
-            //salirbtn.Visible = false;
-
-            //if (!IsPostBack)
-            //{
-            //    if (this.Session["activeUser"] != null)
-            //    {
-            //        liLogin.Visible = false;
-            //        liMiPerfil.Visible = true;
-            //        liMiPerfil2.Visible = true;
-            //        liMiPerfil3.Visible = true;
-            //        liMiPerfil4.Visible = true;
-            //        salirbtn.Visible = true;
-            //    }
-            //    else
-            //    {
-            //        liLogin.Visible = true;
-            //        liMiPerfil.Visible = false;
-            //        liMiPerfil2.Visible = false;
-            //        liMiPerfil3.Visible = false;
-            //        liMiPerfil4.Visible = false;
-            //        salirbtn.Visible = false;
-
-            //    }
-            //}
-            //else
-            //{
-            //    if (this.Session["activeUser"] != null)
-            //    {
-            //        liLogin.Visible = false;
-            //        liMiPerfil.Visible = true;
-            //        salirbtn.Visible = true;
-
-            //    }
-            //    else
-            //    {
-            //        liLogin.Visible = true;
-            //        liMiPerfil.Visible = false;
-            //        salirbtn.Visible = false;
-
-            //    }
-            //}
-
         }
         protected void salirbtn_OnClick(object sender, EventArgs e)
         {

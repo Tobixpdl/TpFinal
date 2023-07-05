@@ -14,50 +14,67 @@
                     <hr id="indicator"/>
 
                     <div class="container-types">
-                    <asp:Label runat="server" ID="lblNombres" Text="Ingrese sus nombres:" CssClass="lbls"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtNombres" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombres" CssClass="inputs"></asp:TextBox>
-                    <asp:Label ID="lblWrongName" runat="server" Text="Nombre no puede tener numeros" CssClass="lblWrong"></asp:Label>                 
+                        <div class="container-row">
+                            <asp:Label runat="server" ID="lblNombres" Text="Ingrese sus nombres:" CssClass="lbls"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtNombres" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombres" CssClass="inputs"></asp:TextBox>
+                        </div>
+                      <asp:Label ID="lblWrongName" runat="server" Text="Nombre no puede tener numeros" CssClass="lblWrong"></asp:Label>                 
                     </div>
                      
                     <div class="container-types">
-                    <asp:Label runat="server" ID="lblApellidos" Text="Ingrese sus apellidos:" CssClass="lbls"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtApellidos" AutoPostBack="true" AutoComplete="off" PlaceHolder="Apellidos" CssClass="inputs"></asp:TextBox>
-                    <asp:Label ID="lblWrongApellido" runat="server" Text="Apellido no puede tener numeros" CssClass="lblWrong"></asp:Label>
-</div>
-
-                    <div class="container-types">
-                    <asp:Label runat="server" ID="lblDNI" Text="Ingrese su DNI:" CssClass="lbls"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtDNI" AutoPostBack="true" AutoComplete="off" PlaceHolder="DNI" CssClass="inputs"></asp:TextBox>
-</div>
-
-                    <div class="container-types">
-                    <asp:Label runat="server" ID="lblTelefono" Text="Ingrese su teléfono:" CssClass="lbls"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtTelefono" AutoPostBack="true" AutoComplete="off" PlaceHolder="Número telefónico" CssClass="inputs"></asp:TextBox>
-                    <asp:Label ID="lblWrongTelefono" runat="server" Text="No es posible tener ese numero" CssClass="lblWrong"></asp:Label>
-</div>
-
-                    <div class="container-types">
-                    <asp:Label runat="server" ID="lblMail" Text="Ingrese sus mail:" CssClass="lbls"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtMail" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail" TextMode="Email" CssClass="inputs"></asp:TextBox>
-                    <asp:Label ID="lblWrongMail" runat="server" Text="Mail incorrecto" CssClass="lblWrong"></asp:Label>
+                        <div class="container-row">
+                            <asp:Label runat="server" ID="lblApellidos" Text="Ingrese sus apellidos:" CssClass="lbls"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtApellidos" AutoPostBack="true" AutoComplete="off" PlaceHolder="Apellidos" CssClass="inputs"></asp:TextBox>
+                        </div>
+                            <asp:Label ID="lblWrongApellido" runat="server" Text="Apellido no puede tener numeros" CssClass="lblWrong"></asp:Label>
                     </div>
 
                     <div class="container-types">
-                    <asp:Label runat="server" ID="lblUsername" Text="Ingrese un nombre de usuario:" CssClass="lbls"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtUsername" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre de usuario" CssClass="inputs"></asp:TextBox>
-                    <asp:Label ID="lblWrongUser" runat="server" Text="Este usuario ya existe" CssClass="lblWrong"></asp:Label>
-</div>
+                        <div class="container-row">
+                            <asp:Label runat="server" ID="lblDNI" Text="Ingrese su DNI:" CssClass="lbls"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtDNI" AutoPostBack="true" AutoComplete="off" PlaceHolder="DNI" CssClass="inputs"></asp:TextBox>
+                        </div>
+                            <asp:Label ID="lblWrongDNI" runat="server" Text="Debes ingresar un DNI" CssClass="lblWrong"></asp:Label>
+                    </div>
 
                     <div class="container-types">
-                    <asp:Label runat="server" ID="lblPassword" Text="Ingrese una contraseña:" CssClass="lbls"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtPassword" AutoPostBack="true" AutoComplete="off" PlaceHolder="Contraseña" CssClass="inputs"></asp:TextBox>
-</div>
+                        <div class="container-row">
+                            <asp:Label runat="server" ID="lblTelefono" Text="Ingrese su teléfono:" CssClass="lbls"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtTelefono" AutoPostBack="true" AutoComplete="off" PlaceHolder="Número telefónico" CssClass="inputs"></asp:TextBox>
+                        </div>
+                            <asp:Label ID="lblWrongTelefono" runat="server" Text="No es posible tener ese numero" CssClass="lblWrong"></asp:Label>
+                    </div>
 
                     <div class="container-types">
-                    <asp:Label runat="server" ID="Label1" Text="Ingrese su contraseña nuevamente:" CssClass="lbls"></asp:Label>
-                    <asp:TextBox runat="server" ID="TextBox1" AutoPostBack="true" AutoComplete="off" PlaceHolder="Contraseña" CssClass="inputs"></asp:TextBox>
-                    <asp:Label ID="lblWrongPass2" runat="server" Text="Contraseña mal copiada" CssClass="lblWrong"></asp:Label>
-</div>
+                        <div class="container-row">
+                            <asp:Label runat="server" ID="lblMail" Text="Ingrese sus mail:" CssClass="lbls"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtMail" AutoPostBack="true" AutoComplete="off" PlaceHolder="Mail" TextMode="Email" CssClass="inputs"></asp:TextBox>
+                        </div>
+                            <asp:Label ID="lblWrongMail" runat="server" Text="Mail incorrecto" CssClass="lblWrong"></asp:Label>
+                    </div>
+
+                    <div class="container-types">
+                        <div class="container-row">
+                            <asp:Label runat="server" ID="lblUsername" Text="Ingrese un nombre de usuario:" CssClass="lbls"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtUsername" AutoPostBack="true" AutoComplete="off" PlaceHolder="Nombre de usuario" CssClass="inputs"></asp:TextBox>
+                       </div>
+                            <asp:Label ID="lblWrongUser" runat="server" Text="Este usuario ya existe" CssClass="lblWrong"></asp:Label>
+                  </div>
+
+                    <div class="container-types">
+                        <div class="container-row">
+                            <asp:Label runat="server" ID="lblPassword" Text="Ingrese una contraseña:" CssClass="lbls"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtPassword" AutoPostBack="true" AutoComplete="off" PlaceHolder="Contraseña" CssClass="inputs"></asp:TextBox>
+                       </div>
+                   </div>
+
+                    <div class="container-types">
+                        <div class="container-row">
+                            <asp:Label runat="server" ID="Label1" Text="Ingrese contraseña nuevamente:" CssClass="lbls"></asp:Label>
+                            <asp:TextBox runat="server" ID="TextBox1" AutoPostBack="true" AutoComplete="off" PlaceHolder="Contraseña" CssClass="inputs"></asp:TextBox>
+                       </div>   
+                            <asp:Label ID="lblWrongPass2" runat="server" Text="Contraseña mal copiada" CssClass="lblWrong"></asp:Label>
+                    </div>
 
                         <div class="buttons">
                         <asp:Button runat="server" ID="btnEnter" OnClick="btnEnter_Click" Text="Ingresar"></asp:Button>
@@ -164,9 +181,8 @@
         }
 
         .container-types {
-            display:flex;
-            justify-content:space-around;
-            gap:10px;
+            display:grid;
+            align-items:self-end;
         }
 
         .container-types .lbls{
@@ -178,8 +194,32 @@
             display:flex;
             justify-content:space-between;
             padding-top:5px;
-      
         }
+
+        .wrongInput {
+            width: 250px;
+            padding: 6px;
+            border-radius: 5px;
+            color: red;
+            border: 2px solid red;
+        }
+
+        .lblWrong{
+            text-align: right;
+            padding-right: 10px;
+            color:red;        
+            margin-bottom: 10px;
+            font-size:10px;
+            font-weight:300;
+        }
+
+        .container-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
 
 
     </style>

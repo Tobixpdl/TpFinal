@@ -11,12 +11,7 @@
                   <h3 class="card-title"><%:usuario.usuario%></h3>
                   <h5 class="card-desc">Nombre: <%:usuario.nombre %></h5>
                   <h5 class="card-precio">Telefono: <%:usuario.telefono %></h5>
-                   <h5 class="card-cat">Email : <%:usuario.mail %></h5>                 
-                 
-
-                 
-                 
-             
+                   <h5 class="card-cat">Email : <%:usuario.mail %></h5>        
           </div>   
      <div class="Venta">
                 
