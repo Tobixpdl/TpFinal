@@ -19,7 +19,7 @@
     <% }
         else
         {  %>
-      <h1>Mis Ventas</h1>
+      <h1>Mis Compras</h1>
      <div class="row ">
        <div class="col-12 " >
 
@@ -35,7 +35,7 @@
                    <asp:BoundField  HeaderText="Precio Final" DataField="PrecioFinal" />
                       <asp:templatefield headertext="Vendedor">
             <itemtemplate>
-               <a class="nav-linkT" href="Contacto.aspx?Usuario=<%#Eval("Usuario")%>" id="lblVendedor"><%#Eval("Usuario")%></a>
+               <a class="nav-linkT" href="Contacto.aspx?Usuario=<%#Eval("UsuarioVendedor")%>" id="lblVendedor"><%#Eval("UsuarioVendedor")%></a>
             </itemtemplate>
           </asp:templatefield>
                  <asp:BoundField  HeaderText="Fecha de Compra" DataField="FechaCompra" />

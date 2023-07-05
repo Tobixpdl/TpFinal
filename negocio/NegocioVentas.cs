@@ -16,7 +16,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta(" select v.ID,DNICOMPRADOR,USUARIO,TITULO,FECHACOMPRA,FECHAENTREGA," +
+                datos.setearConsulta(" select v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA," +
                     "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " +
                     "where DNIVENDEDOR=@dni");
                 datos.setearParametro("@dni", dni);
@@ -27,8 +27,9 @@ namespace negocio
                     v.Id = datos.Lector.GetInt32(0);
 
                     v.DNIComprador = datos.Lector.GetInt32(1);
-                    v.DNIVendedor = datos.Lector.GetInt32(9);
+                    v.DNIVendedor = datos.Lector.GetInt32(10);
                     v.Usuario = (string)datos.Lector["USUARIO"];
+                    v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     v.Titulo = (string)datos.Lector["TITULO"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
 
@@ -71,8 +72,8 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo )" +
-                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.Usuario + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "')");
+                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo )" +
+                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.Usuario + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "')");
 
                 datos.ejecutarAccion();
             }
@@ -93,8 +94,8 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta(" select v.ID,DNICOMPRADOR,USUARIO,TITULO,FECHACOMPRA,FECHAENTREGA," +
-                    "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR, metodo FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " +
+                datos.setearConsulta(" select v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA," +
+                    "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " +
                     "where DNICOMPRADOR=@dni");
                 datos.setearParametro("@dni", dni);
                 datos.ejecutarLectura();
@@ -104,8 +105,9 @@ namespace negocio
                     v.Id = datos.Lector.GetInt32(0);
 
                     v.DNIComprador = datos.Lector.GetInt32(1);
-                    v.DNIVendedor = datos.Lector.GetInt32(9);
+                    v.DNIVendedor = datos.Lector.GetInt32(10);
                     v.Usuario = (string)datos.Lector["USUARIO"];
+                    v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     v.Titulo = (string)datos.Lector["TITULO"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
 

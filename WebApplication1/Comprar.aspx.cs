@@ -56,6 +56,7 @@ namespace WebApplication1
             venta.DNIComprador = Convert.ToInt32(usuarioCompra.dni);
             venta.DNIVendedor = Convert.ToInt32(usuarioVenta.dni);
             venta.Usuario = usuarioCompra.usuario;
+            venta.UsuarioVendedor = usuarioVenta.usuario;
             venta.Titulo = listaDeCompras.Titulo;
             venta.FechaCompra = DateTime.Now.ToString();
             venta.FechaEntrega = "no entregado";
