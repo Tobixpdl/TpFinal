@@ -57,9 +57,9 @@ namespace WebApplication1
             venta.DNIVendedor = Convert.ToInt32(usuarioVenta.dni);
             venta.Usuario = usuarioCompra.usuario;
             venta.Titulo = listaDeCompras.Titulo;
-            venta.FechaCompra = DateTime.Now;
-            venta.FechaEntrega = DateTime.Now.AddDays(14);
-            
+            venta.FechaCompra = DateTime.Now.ToString();
+            venta.FechaEntrega = "no entregado";
+
             string texto = txtStock.Text; 
             int cantidad;
             if (int.TryParse(texto, out cantidad))
@@ -72,6 +72,15 @@ namespace WebApplication1
             }
 
             venta.PrecioFinal = listaDeCompras.Precio * cantidad;
+
+            if(rbEfectivo.Checked)
+            {
+                venta.metodo = 'e';
+            }
+            else
+            {
+                venta.metodo = 't';
+            }
 
             negocio.agregarVenta(venta);
 

@@ -12,18 +12,39 @@ namespace WebApplication1
 {
     public partial class MisCompras : System.Web.UI.Page
     {
-        public List<Publicacion> listaCompras = new List<Publicacion>();
+        public List<Venta> listaCompras = new List<Venta>();
+        public int contador { get; set; }
+        public int idUsuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            NegocioVentas nV = new NegocioVentas();
-            
-            listaCompras = nV.getCompras(Session["activeUser"].ToString());
-
-            if (!IsPostBack)
+            if (this.Session["idUsuario"] != null)
             {
-                rprCompras.DataSource = listaCompras;
-                rprCompras.DataBind();
+                idUsuario = (int)Session["idUsuario"];
+                ContarItems(ref listaCompras);
+
+                dvgCompras.DataSource = listaCompras;
+                dvgCompras.DataBind();
             }
+            else
+            {
+                Response.Redirect("Default.aspx", false);
+            }
+        }
+
+        public void ContarItems(ref List<Venta> list)
+        {
+            list = new List<Venta>();
+            NegocioVentas negocio = new NegocioVentas();
+            NegocioUsuario nu = new NegocioUsuario();
+
+            list = negocio.ListarCompras((nu.ListarXUsuario(idUsuario)).dni);
+
+            contador = list.Count;
+        }
+
+        protected void dvgCompras_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
         }
     }
 }

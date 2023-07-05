@@ -42,22 +42,22 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox TxtDni;
 
         /// <summary>
-        /// Control rbCoordinar.
+        /// Control rbEfectivo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbCoordinar;
+        protected global::System.Web.UI.WebControls.RadioButton rbEfectivo;
 
         /// <summary>
-        /// Control rbRetirar.
+        /// Control rbTrans.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbRetirar;
+        protected global::System.Web.UI.WebControls.RadioButton rbTrans;
 
         /// <summary>
         /// Control imgPublicacion.

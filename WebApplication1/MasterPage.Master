@@ -28,7 +28,7 @@
                  <ul>
                       <li ><a class="nav-linkT" runat="server" href="Default.aspx">Inicio</a></li>
                       <li ><a class="nav-linkT" runat="server" href="Perfiles.aspx">Perfiles</a></li>
-                      <li ><a class="nav-linkT" runat="server" href="#start-products">Productos</a></li>
+                   <%--  <li ><a class="nav-linkT" runat="server" href="#start-products">Productos</a></li>--%>
 
                       
                      <%if (this.Session["activeUser"] == null)

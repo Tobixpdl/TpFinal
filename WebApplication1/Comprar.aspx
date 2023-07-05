@@ -27,10 +27,10 @@
                         <label for="name">DNI:</label>
                         <asp:TextBox ID="TxtDni" runat="server" AutoPostBack="true" AutoComplete="off"></asp:TextBox>                    
                     </div>
-                <h2>Entrega</h2>
+                <h2>Metodo de Pago</h2>
                 <div class="radio-group">
-                    <asp:RadioButton ID="rbCoordinar" runat="server" Text="Coordinar con vendedor" TextAlign="Right" GroupName="opcion" />
-                    <asp:RadioButton ID="rbRetirar" runat="server" Text="Retirar en x" TextAlign="Right" GroupName="opcion" />
+                    <asp:RadioButton ID="rbEfectivo" runat="server" Text="Efectivo" TextAlign="Right" GroupName="opcion" />
+                    <asp:RadioButton ID="rbTrans" runat="server" Text="Transferencia" TextAlign="Right" GroupName="opcion" />
                 </div>               
             </div>
         </div>

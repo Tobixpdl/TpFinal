@@ -13,10 +13,11 @@ namespace dominio
         public int DNIVendedor { get; set; }
         public string Usuario { get; set; }
         public string Titulo { get; set; }
-        public DateTime FechaCompra { get; set; }
-        public DateTime FechaEntrega { get; set; }
+        public string FechaCompra { get; set; }
+        public string FechaEntrega { get; set; }
         public  string Estado { get; set; }
         public int Cantidad { get; set; }
         public decimal PrecioFinal { get; set; }
+        public char metodo { get; set; }
     }
 }

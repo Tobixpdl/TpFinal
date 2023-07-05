@@ -3,18 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
        
-                             <div class="container text-center btnCarrito " id="count">
-                           <div class="row">
-                               <div class="col">
-                                  <asp:Button ID="btnCarro" runat="server" CssClass="btn btn-primary "  OnClick="btnCarro_Click" type="button" Text="Carrito " />
-                               </div>
-                               <div class="col">
-                                   <div>           
-                                       <asp:Label ID="lblCompra"  runat="server" CssClass="count" ></asp:Label>
-                                  </div>  
-                               </div>
-                            </div>
-                       </div>
     <h2>Perfil de Usuario</h2>
     <div>
         <div>
@@ -37,12 +25,10 @@
 
     <hr />
 
-    <h3>Publicaciones</h3>
-
      <section class="articulos">
         <div class="mega-main">
                 <div class="main">
-                    <h2 class="titleT">Mas productos de <%:SelectedUser.usuario %></h2>
+                    <h2 class="titleT">Productos de <%:SelectedUser.usuario %></h2>
                     <div class="container-items">
                     <asp:Repeater ID="rprCards" runat="server">
                      <ItemTemplate>

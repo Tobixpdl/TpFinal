@@ -27,7 +27,7 @@
              <h1></h1>
               <div class="cp">
 
-                     <asp:GridView ID="dgvVentas" runat="server" OnRowCommand="dgvVentas_RowCommand" CssClass="table " DataKeyNames="Id" AutoGenerateColumns="false" >
+                     <asp:GridView ID="dgvVentas" runat="server" OnRowCommand="dgvVentas_RowCommand" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" >
                
                <Columns>
                     
