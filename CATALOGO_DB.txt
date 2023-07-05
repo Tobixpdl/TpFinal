@@ -31,6 +31,12 @@ STOCK BIGINT NOT NULL,
 ID_USUARIO INT not null FOREIGN KEY  REFERENCES USUARIOS(ID)
 
 )
+create TABLE IMAGENES(
+  ID int not null PRIMARY key IDENTITY(1,1),
+  IdPublicacion int not null FOREIGN key REFERENCES PUBLICACIONES(id),
+  imagenUrl VARCHAR(2000) not null 
+
+)
 insert into USUARIOS(USUARIO,CONTRASEÑA,NOMBRES,APELLIDOS,DNI,TELEFONO,MAIL)
 VALUES('usuario0','1234','Usuario','0',0,null,'usuario0@yahoo.com')
 GO
@@ -50,12 +56,7 @@ VALUES('Cuello Polar Capucha Pasamontaña Térmico Moto',2998.00,'Especificacion
 - Color: CONSULTAR',1,1,0)
 
 
-create TABLE IMAGENES(
-  ID int not null PRIMARY key IDENTITY(1,1),
-  IdPublicacion int not null FOREIGN key REFERENCES PUBLICACIONES(id),
-  imagenUrl VARCHAR(2000) not null 
 
-)
 insert into CATEGORIAS(NOMBRE)
 VALUES('JUEGOS')
 
