@@ -4,6 +4,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>       
 
+
+ 
       <%--    <%
   <div id="search-container">
          <input type="text" id="search-box" placeholder="Buscar">
@@ -11,13 +13,7 @@
     <>--%>
 
      <%--    <%
-           <div id="search-container">
-                      <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoPostBack="true" OnTextChanged="Busqueda_TextChanged" AutoComplete="off" PlaceHolder="Búsqueda"/>
-                      <asp:CheckBox runat="server" ID="chBusqueda" Text="Filtrar" OnCheckedChanged="chBusqueda_CheckedChanged" AutoPostBack="true"></asp:CheckBox>
-   <asp:Button runat="server" Text="Button"></asp:Button>                   <asp:Label runat="server" ID="BusquedaNull" Text="No se encontraron resultados" CssClass="lblBusqueda"></asp:Label>
-                      <asp:CheckBox runat="server" CssClass="FiltroPrecio" ID="chMenorPrecio" Text="Menor precio" OnCheckedChanged="chMenorPrecio_CheckedChanged" AutoPostBack="true"></asp:CheckBox>
-                      <asp:CheckBox runat="server" CssClass="FiltroPrecio" ID="chMayorPrecio" Text="Mayor precio" OnCheckedChanged="chMayorPrecio_CheckedChanged" AutoPostBack="true"></asp:CheckBox>
-           </div>        
+        
 
             <%if (FiltroAvanzado) {%> 
             <div class="BusquedaAvanzadaContenido">
@@ -59,8 +55,50 @@
             </div>
         </div>
     </div>
+          <%-- Buscador --%>
+          <asp:UpdatePanel ID="updatePanel" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>              
+                        <section id="search-box">
+                             <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoComplete="off" PlaceHolder="Búsqueda"/>
+                       <asp:Button runat="server" Text="Buscar" OnClick="btnEnter_Click" CssClass="btn-Enter" AutoPostBack="false"></asp:Button>                   
+                      <asp:Label runat="server" ID="BusquedaNull" Text="No se encontraron resultados" CssClass="lblBusqueda"></asp:Label>
+                        </section>
+                     
 
-      <%-- ARTICULOS TOP --%>
+    <%-- TODOS LOS ARTICULOS y filtro --%>
+
+    <section class="articulos">
+        <div class="mega-main">
+                <div class="main">
+
+                    <h2 class="titleT">Todos los productos</h2>
+                    <div class="container-items">
+                    <asp:Repeater ID="rprCards" runat="server">
+                     <ItemTemplate>
+			                    <div class="item">
+				                    <figure>
+					                     <asp:Image ID="imgPublicacion" runat="server" 
+                                         CssClass="img-" OnPreRender="imgPublicacion_PreRender" ImageUrl=<%#ReturnUrl(Container.DataItem)%>/>                                                                          
+				                    </figure>
+				                    <div class="info-product">
+                                        <h2 class="info-title"><%#Eval("Titulo")%></h2>
+					                    <p class="price">$<%#Eval("Precio")%></p>
+                                       <%if (this.Session["activeUser"] != null)
+                                        {%>
+                                            <asp:Button ID="Button1" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar" 
+                                            CommandArgument ='<% #Eval("Id")%>' CommandName="artId" /> 
+                                        <%}%>
+                                        <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>
+                                    </div>
+			                   </div>
+                      </ItemTemplate>
+                    </asp:Repeater>
+                  </div>
+                 </div>
+            </div>
+            </ContentTemplate>
+</asp:UpdatePanel>
+              <%-- ARTICULOS TOP --%>
     <div id="start-products" class="CT">
           <h2 class="titleT">Productos top</h2>
            <div class="container-items2">
@@ -87,35 +125,7 @@
            </div>
     </div>
     
-    <%-- TODOS LOS ARTICULOS --%>
-    <section class="articulos">
-        <div class="mega-main">
-                <div class="main">
-                    <h2 class="titleT">Todos los productos</h2>
-                    <div class="container-items">
-                    <asp:Repeater ID="rprCards" runat="server">
-                     <ItemTemplate>
-			                    <div class="item">
-				                    <figure>
-					                     <asp:Image ID="imgPublicacion" runat="server" 
-                                         CssClass="img-" OnPreRender="imgPublicacion_PreRender" ImageUrl=<%#ReturnUrl(Container.DataItem)%>/>                                                                          
-				                    </figure>
-				                    <div class="info-product">
-                                        <h2 class="info-title"><%#Eval("Titulo")%></h2>
-					                    <p class="price">$<%#Eval("Precio")%></p>
-                                       <%if (this.Session["activeUser"] != null)
-                                        {%>
-                                            <asp:Button ID="Button1" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar" 
-                                            CommandArgument ='<% #Eval("Id")%>' CommandName="artId" /> 
-                                        <%}%>
-                                        <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>
-                                    </div>
-			                   </div>
-                      </ItemTemplate>
-                    </asp:Repeater>
-                  </div>
-                 </div>
-            </div>
+
         </section>
 
     <style>
@@ -123,7 +133,7 @@
         .headerT{
             /*background: var(--bgColor);*/
             background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
-            height: 75vh;
+            height: 25vh;
         }
 
         .rowT{
@@ -137,7 +147,7 @@
             text-shadow: 1px 1px 1px var(--textColorBlack);
             flex-basis: 50%;
             min-width: 300px;
-            padding: 100px;
+            padding: 20px;
         }
 
         .col-2T img{
@@ -160,8 +170,8 @@
             position:relative;
             line-height:60px;
             color:var(--textColorBlack);
-            padding-top: 20px;
-            margin: 0 auto 80px;
+            padding-top: 5px;
+            margin: 0 auto 10px;
         }
 
         .titleT::after{
@@ -256,10 +266,12 @@
         
 
  #search-box {
-        width: 200px;
-        padding: 5px;
+        width: 350px;
+        padding: 20px;
         border: none;
         border-radius: 0,5px;
+        align-content:center;
+        margin:25px;
   } 
  .lblBusqueda {
    
@@ -288,7 +300,18 @@ float:right;
 margin:5px;
 padding:5px;
  }
-        
+  .btn-Enter{
+    width: 25%;
+    padding: 3px;
+    background-color: var(--otherColor);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+  }     
 
     </style>
 

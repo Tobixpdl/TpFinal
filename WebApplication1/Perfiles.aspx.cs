@@ -43,6 +43,14 @@ namespace WebApplication1
 
         }
 
+        protected void Label_Click(object sender, EventArgs e)
+        {
+            Label myLabel = (Label)sender;
+            string palabraClic = myLabel.Text;
+
+            Session.Add("selectedUser", palabraClic);
+            Response.Redirect("PerfilUsuario.aspx?User="+palabraClic);
+        }
 
         protected void rptUsuarios_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -51,7 +59,6 @@ namespace WebApplication1
                 Repeater rprCards = (Repeater)e.Item.FindControl("rprCards");
 
                 Usuario usuario = (Usuario)e.Item.DataItem;
-                creador = usuario.usuario;
 
                 rprCards.DataSource = negocio.ListarXUsuario(usuario.Id);
                 rprCards.DataBind();

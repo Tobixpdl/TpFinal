@@ -10,7 +10,8 @@
 <asp:Repeater ID="rptUsuarios" runat="server">
     <ItemTemplate>
         <div id="DivNombre">
-           <a id="Link" href='PerfilUsuario.aspx?User=<%#Eval("usuario")%>' class="card-user"><%#Eval("usuario") %> </a>
+            <asp:Label id="Link" runat="server" CssClass="card-user" OnClick="Label_Click"><%#Eval("usuario") %></asp:Label>
+
         </div>
         <div class="container-items">
             <asp:Repeater ID="rprCards" runat="server">
@@ -22,7 +23,6 @@
                         <div class="info-product">
                             <h2 class="info-title"><%#Eval("Titulo")%></h2>
                             <p class="price">$<%#Eval("Precio")%></p>
-                            <asp:Button ID="btnAdd" runat="server" CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar" CommandArgument='<% #Eval("Id")%>' CommandName="artId" />
                             <a href='DetallesArticulos.aspx?Id=<%#Eval("Id") %>' class="btn-info">Detalles</a>					                    
                         </div>
                     </div>

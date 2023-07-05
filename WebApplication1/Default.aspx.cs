@@ -30,7 +30,7 @@ namespace WebApplication1
             // Generacion de los datos de las CARDS
             NegocioPublicacion negocio = new NegocioPublicacion();
             negocioUsuario = new NegocioUsuario();
-
+            BusquedaNull.Visible = false;
             ListaArticulos = negocio.Listar();
             ListaArticulosFeatured = negocio.listarFeatured();
 
@@ -72,6 +72,7 @@ namespace WebApplication1
                 rprCards.DataBind();
                 rprFeatured.DataSource = ListaArticulosFeatured;
                 rprFeatured.DataBind();
+
                 /*/if (this.Session[] == null)
                 {/*/
                 if (this.Session["activeUser"] != null)
@@ -200,6 +201,32 @@ namespace WebApplication1
             return string.Empty;
         }
 
+        protected void btnEnter_Click(object sender, EventArgs e)
+        {
+
+            List<Publicacion> listaFiltrada = ListaArticulos.FindAll(x => x.Descripcion.ToUpper().Contains(txtBusqueda.Text.ToUpper()));
+            if (listaFiltrada.Count == 0)
+            {
+                BusquedaNull.Visible = true;
+                rprCards.DataSource = ListaArticulos;
+                rprCards.DataBind();
+                updatePanel.Update();
+
+
+            }
+            else
+            {
+
+                rprCards.DataSource = listaFiltrada;
+                rprCards.DataBind();
+                BusquedaNull.Visible = false;
+                updatePanel.Update();
+
+            }
+
+        }
+
+
         protected void imgPublicacion_PreRender(object sender, EventArgs e)
         {
 
@@ -211,25 +238,7 @@ namespace WebApplication1
             
         }
         /*/
-protected void Busqueda_TextChanged(object sender, EventArgs e)
-{
 
-  List<Articulo> listaFiltrada = ListaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(txtBusqueda.Text.ToUpper()));
-  if (listaFiltrada.Count == 0)
-  {
-      BusquedaNull.Visible = true;
-      rprCards.DataSource = ListaArticulos;
-      rprCards.DataBind();
-
-  }
-  else {
-
-      rprCards.DataSource = listaFiltrada;
-      rprCards.DataBind();
-      BusquedaNull.Visible = false;
-  }
-
-}
 
 protected void chBusqueda_CheckedChanged(object sender, EventArgs e)
 {
