@@ -55,7 +55,7 @@ namespace WebApplication1
             Venta venta = new Venta();
             venta.DNIComprador = Convert.ToInt32(usuarioCompra.dni);
             venta.DNIVendedor = Convert.ToInt32(usuarioVenta.dni);
-            venta.Usuario = usuarioCompra.usuario;
+            venta.UsuarioComprador = usuarioCompra.usuario;
             venta.UsuarioVendedor = usuarioVenta.usuario;
             venta.Titulo = listaDeCompras.Titulo;
             venta.FechaCompra = DateTime.Now.ToString();
@@ -86,6 +86,7 @@ namespace WebApplication1
 
 
             negocio.agregarVenta(venta);
+            Response.Redirect("MisCompras.aspx",false);
 
         }
     }

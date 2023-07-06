@@ -2,6 +2,7 @@
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.EnterpriseServices.CompensatingResourceManager;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,7 +13,8 @@ namespace WebApplication1
 {
     public partial class Contacto : System.Web.UI.Page
     {
-        public Usuario usuario;
+        public Usuario usuarioReceptor;
+        public Usuario usuarioEmisor;
         public Venta venta;
         public int IdVenta;
         public string UrlImagen;
@@ -20,12 +22,15 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string nombre = Request.QueryString["Usuario"];
+            string emisor = Request.QueryString["UsuarioEmisor"];
+            string receptor = Request.QueryString["UsuarioReceptor"];
             IdVenta = int.Parse(Request.QueryString["Id"]);
             NegocioUsuario negocio = new NegocioUsuario();
             NegocioVentas negocioVenta = new NegocioVentas();
-            usuario = negocio.ListarXUsuario(nombre);
+            usuarioEmisor = negocio.ListarXUsuario(emisor);
+            usuarioReceptor = negocio.ListarXUsuario(receptor);
             venta = negocioVenta.RV(IdVenta);
+            
             NegocioComentarios nc = new NegocioComentarios();
             Mensajes = nc.Listar(IdVenta);
 
@@ -54,8 +59,8 @@ namespace WebApplication1
                        UrlImagen = "~/Images/Receipt/" + System.IO.Path.GetFileName(FileUpload1.PostedFile.FileName);
                     NegocioVentas negocio = new NegocioVentas();
                     negocio.AC(IdVenta, UrlImagen);
-                    Response.Redirect("Contacto.aspx?Usuario=" + venta.Usuario + "&Id=" + IdVenta, false);
-
+                    Response.Redirect("Contacto.aspx?UsuarioReceptor="+usuarioReceptor.usuario+"&Id="+IdVenta+"&UsuarioEmisor="+usuarioEmisor.usuario, false);
+                   
                     /* Image img = (Image)imgPublicacion;
                      img.ImageUrl = finalRuta;*/
 
@@ -83,8 +88,8 @@ namespace WebApplication1
             NegocioComentarios negocioComentarios = new NegocioComentarios();
             NegocioUsuario negocioUsuario = new NegocioUsuario();
             
-            negocioComentarios.newComent(IdVenta,venta.UsuarioVendedor,venta.Usuario,tbMensaje.Text,5);
-            Response.Redirect("Contacto.aspx?Usuario=" + venta.Usuario + "&Id=" + IdVenta, false);
+            negocioComentarios.newComent(IdVenta,usuarioEmisor.usuario,usuarioReceptor.usuario,tbMensaje.Text,5);
+                Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario, false);
             }
 
         }
@@ -99,28 +104,43 @@ namespace WebApplication1
             
             if (rbEntregado.Checked)
             {
-                negocioComentarios.newComent(IdVenta, venta.UsuarioVendedor, venta.Usuario, "Venta Concluida", 10);
-                nventas.ME(IdVenta, 2);
-                Response.Redirect("Default.aspx", false);
+                if(venta.metodo== "Transferencia Bancaria")
+                {
+                    if(venta.urlImagen!=null)
+                    {
+
+                        negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Venta Concluida", 10);
+                        nventas.ME(IdVenta, 2);
+                        Response.Redirect("Default.aspx", false);
+                    }
+
+                }else
+                {
+                    negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Venta Concluida", 10);
+                    nventas.ME(IdVenta, 2);
+                    Response.Redirect("Default.aspx", false);
+
+                }
+                
             }
             if (rbEnProceso.Checked)
             {
-                negocioComentarios.newComent(IdVenta, venta.UsuarioVendedor, venta.Usuario, "Sigo en la espera del producto", 1);
+                negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario,"Sigo en la espera del producto", 1);
                 nventas.ME(IdVenta, 1);
-                Response.Redirect("Contacto.aspx?Usuario=" + venta.Usuario + "&Id=" + IdVenta, false);
+                Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario, false);
             }
             if (rbReclamo.Checked)
             {
-                negocioComentarios.newComent(IdVenta, venta.UsuarioVendedor, venta.Usuario, "Hubo un problema", 5);
+                negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Hubo un problema", 5);
                 nventas.ME(IdVenta, 3);
-                Response.Redirect("Contacto.aspx?Usuario=" + venta.Usuario + "&Id=" + IdVenta, false);
+                Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario, false);
 
             }
             if (rbCancelar.Checked)
             {
-                negocioComentarios.newComent(IdVenta, venta.UsuarioVendedor, venta.Usuario, "Voy a Cancelar la Venta", 1);
+                negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Voy a Cancelar la Venta", 1);
                 nventas.ME(IdVenta, 4);
-                Response.Redirect("Contacto.aspx?Usuario=" + venta.Usuario + "&Id=" + IdVenta, false);
+                Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario, false);
 
             }
         }

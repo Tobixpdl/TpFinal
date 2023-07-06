@@ -13,12 +13,12 @@
                     <h2>Inicio de Sesión</h2>
                      <hr id="indicator"/>
                      <asp:Label runat="server" ID="lblUsername" Text="Usuario:" CssClass="lblForm"></asp:Label>
-                     <asp:TextBox runat="server" ID="txtUsername" AutoComplete="off" PlaceHolder="Nombre de usuario" Text="usuario0"></asp:TextBox>                  
+                     <asp:TextBox runat="server" ID="txtUsername" AutoComplete="off" PlaceHolder="Nombre de usuario" Text=""></asp:TextBox>                  
                      
                      <asp:Label runat="server" ID="lblPassword" Text="Contraseña:" CssClass="lblForm"></asp:Label>
                      <asp:TextBox runat="server" ID="txtPassword" AutoComplete="off" TextMode="Password" PlaceHolder="Ingrese su contraseña" Text="1234"></asp:TextBox>
 
-                     <asp:Button runat="server" ID="btnEnter" Text="Ingresar" OnClick="btnEnter_Click" CssClass="btn-Universal"></asp:Button>
+                     <asp:Button runat="server" ID="btnEnter" Text="Ingresar" OnClick="btnEnter_Click" ></asp:Button>
                      <label>No tenes cuenta? </label><a href="Registro.aspx">Registrate</a>
                      <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
                 </div>

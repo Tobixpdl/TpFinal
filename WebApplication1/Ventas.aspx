@@ -33,13 +33,13 @@
                     
                     <asp:templatefield headertext="Ver Detalles">
             <itemtemplate>
-               <a class="nav-linkT" href="Contacto.aspx?Usuario=<%#Eval("Usuario")%>&Id=<%#Eval("Id")%>" id="lblId">Click Acá</a>
+               <a class="nav-linkT" href="Contacto.aspx?UsuarioReceptor=<%#Eval("UsuarioComprador")%>&Id=<%#Eval("Id")%>&UsuarioEmisor=<%#Eval("UsuarioVendedor")%>" id="lblVendedor">Click Acá</a>
             </itemtemplate>
           </asp:templatefield>
                    <asp:BoundField  HeaderText="Producto" DataField="Titulo" />
                     <asp:BoundField  HeaderText="Cantidad" DataField="Cantidad" />
                    <asp:BoundField  HeaderText="Precio Final" DataField="PrecioFinal" />
-                    <asp:BoundField  HeaderText="Comprador" DataField="Usuario" />
+                    <asp:BoundField  HeaderText="Comprador" DataField="UsuarioComprador" />
                  <asp:BoundField  HeaderText="Fecha de Compra" DataField="FechaCompra" />
                    <asp:BoundField  HeaderText="Estado" DataField="Estado" />
                    <asp:BoundField  HeaderText="Fecha de Entrega" DataField="FechaEntrega" />

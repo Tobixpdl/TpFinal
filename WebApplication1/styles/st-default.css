@@ -46,3 +46,13 @@
     position: relative;
     font-size: 55px;
 }
+
+.cf {
+    margin-left: 200px;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 5px solid #e5e5e5;
+}

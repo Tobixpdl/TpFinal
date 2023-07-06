@@ -11,7 +11,7 @@ namespace dominio
         public int Id { get; set; }
         public int DNIComprador { get; set; }
         public int DNIVendedor { get; set; }
-        public string Usuario { get; set; }
+        public string UsuarioComprador { get; set; }
         public string UsuarioVendedor { get; set; }
         public string Titulo { get; set; }
         public string FechaCompra { get; set; }

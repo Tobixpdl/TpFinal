@@ -102,7 +102,7 @@
         <div>
             <footer>
                 <hr />
-                Manuel Blanco - Tobias Ponce de Leon - Marcos Zorzoli © 2023
+               <%-- Manuel Blanco - Tobias Ponce de Leon - Marcos Zorzoli © 2023--%>
             </footer>
         </div>
 

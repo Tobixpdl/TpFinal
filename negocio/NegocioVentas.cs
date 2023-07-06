@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace negocio
 {
@@ -28,7 +29,7 @@ namespace negocio
 
                     v.DNIComprador = datos.Lector.GetInt32(1);
                     v.DNIVendedor = datos.Lector.GetInt32(10);
-                    v.Usuario = (string)datos.Lector["USUARIO"];
+                    v.UsuarioComprador = (string)datos.Lector["USUARIO"];
                     v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     v.Titulo = (string)datos.Lector["TITULO"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
@@ -103,14 +104,12 @@ namespace negocio
 
                     v.DNIComprador = datos.Lector.GetInt32(1);
                     v.DNIVendedor = datos.Lector.GetInt32(10);
-                    v.Usuario = (string)datos.Lector["USUARIO"];
+                    v.UsuarioComprador = (string)datos.Lector["USUARIO"];
                     v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     v.Titulo = (string)datos.Lector["TITULO"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
-                    if (datos.Lector["URLIMAGEN"].ToString() == "")
-                    {
-                        v.urlImagen = (string)datos.Lector["URLIMAGEN"];
-                    }
+                    v.urlImagen = (string)datos.Lector["URLIMAGEN"] != "null" ? (string)datos.Lector["URLIMAGEN"] : "null";
+
                     if (datos.Lector["FECHAENTREGA"].ToString() == "")
                     {
                         v.FechaEntrega = "No Entregado";
@@ -193,13 +192,10 @@ namespace negocio
                 {
 
                     aux.Id = datos.Lector.GetInt32(0);
-                    if (datos.Lector["URLIMAGEN"].ToString() == "")
-                    {
-                        aux.urlImagen = (string)datos.Lector["URLIMAGEN"];
-                    }
+                
                     aux.DNIComprador = datos.Lector.GetInt32(1);
                     aux.DNIVendedor = datos.Lector.GetInt32(10);
-                    aux.Usuario = (string)datos.Lector["USUARIO"];
+                    aux.UsuarioComprador = (string)datos.Lector["USUARIO"];
                     aux.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     aux.Titulo = (string)datos.Lector["TITULO"];
                     aux.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
@@ -212,6 +208,9 @@ namespace negocio
                     {
                         aux.FechaEntrega = (datos.Lector["FECHAENTREGA"]).ToString();
                     }
+                    aux.urlImagen = (string)datos.Lector["URLIMAGEN"] != "null" ? (string)datos.Lector["URLIMAGEN"] : "null";
+                     
+                    
 
                     aux.Estado = (string)datos.Lector["DESCRIPCION"];
                     aux.Cantidad = (int)datos.Lector["CANTIDAD"];
@@ -284,7 +283,7 @@ namespace negocio
             try
             {
                 datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo,URLIMAGEN )" +
-                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.Usuario + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "','null')");
+                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.UsuarioComprador + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "','null')");
 
                 datos.ejecutarAccion();
             }
@@ -317,14 +316,12 @@ namespace negocio
 
                     v.DNIComprador = datos.Lector.GetInt32(1);
                     v.DNIVendedor = datos.Lector.GetInt32(10);
-                    v.Usuario = (string)datos.Lector["USUARIO"];
+                    v.UsuarioComprador = (string)datos.Lector["USUARIO"];
                     v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     v.Titulo = (string)datos.Lector["TITULO"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
-                    if (datos.Lector["URLIMAGEN"].ToString() == "")
-                    {
-                        v.urlImagen = (string)datos.Lector["URLIMAGEN"];
-                    }
+                    v.urlImagen = (string)datos.Lector["URLIMAGEN"] != null ? (string)datos.Lector["URLIMAGEN"].ToString() : "null";
+
                     if (datos.Lector["FECHAENTREGA"].ToString() == "")
                     {
                         v.FechaEntrega = "No Entregado";

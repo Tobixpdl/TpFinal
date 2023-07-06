@@ -54,10 +54,10 @@
                 <p>Total de compra: $<asp:Literal ID="TotalLiteral" runat="server" /></p>
             </div>
 
-            <div class="discount-code">
+            <%--<div class="discount-code">
                 <label for="codigo-descuento">Código de descuento:</label>
                 <input type="text" id="codigo-descuento" name="codigo-descuento" />
-            </div>
+            </div>--%>
 
             <asp:Button ID="btnComprar" runat="server" CssClass="btn-info" Text="Confirmar Compra" OnClick="btnComprar_Click"/>
          </div>
