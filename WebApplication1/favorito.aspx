@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
 
       <%if (contador == 0 && this.Session["activeUser"] != null )
        {
@@ -33,8 +34,9 @@
                                                 <h2 class="info-title"><%#Eval("Titulo")%></h2>
 					                            <p class="price">$<%#Eval("Precio")%></p>
                                                 <a href="Comprar.aspx?Id=<%#Eval("Id") %>" class="btn-info">Comprar</a>
-                                                <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>
-                                            </div>
+                                                <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>                     
+                                                <asp:Button ID="btnEliminarFav" OnClick="btnEliminarFav_Click" runat="server" CssClass="btn-info" Text="Quitar" />
+                                           </div>
 			                           </div>
                               </ItemTemplate>
                             </asp:Repeater>

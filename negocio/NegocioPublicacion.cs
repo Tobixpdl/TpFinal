@@ -160,6 +160,19 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void EliminarFavoritos(Publicacion e, int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("delete from FAVORITOS where ID_PUBLICACION = "+ e.Id+ " and ID_USUARIO = "+id+" ");
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public List<Publicacion> ListarXUsuario(int id)
         {

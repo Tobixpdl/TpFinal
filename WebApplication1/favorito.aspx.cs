@@ -27,35 +27,22 @@ namespace WebApplication1
 
             contador = listaDeCompras != null ? listaDeCompras.Count : 0;
 
-            if (contador != 0)
+            if (!IsPostBack)
             {
-
                 rprCards.DataSource = listaDeCompras;
                 rprCards.DataBind();
             }
+            if (contador != 0)
+            {
+                //rprCards.DataSource = listaDeCompras;
+               // rprCards.DataBind();
+            }
         }
-
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("Default.aspx", false);
 
-        }
-
-        protected decimal CastPriceType(object oItem)
-        {
-            decimal precio = (decimal)DataBinder.Eval(oItem, "Precio") * (int)DataBinder.Eval(oItem, "Cantidad");
-
-            // rest of your code
-            return precio;
-        }
-
-        protected string ReturnCant(object oItem)
-        {
-            string cantidad = (DataBinder.Eval(oItem, "Cantidad")).ToString();
-
-            // rest of your code
-            return cantidad;
         }
 
         protected string ReturnUrl(object oItem)
@@ -82,6 +69,35 @@ namespace WebApplication1
             {
                 Response.Redirect("Login.aspx", false);
             }
+        }
+
+        protected void btnEliminarFav_Click(object sender, EventArgs e)
+        {   
+            Button btnEliminar = (Button)sender;
+            RepeaterItem item = (RepeaterItem)btnEliminar.NamingContainer;
+            int posicion = item.ItemIndex;
+
+            var aux = listaDeCompras[posicion];
+            np.EliminarFavoritos(aux, (int)this.Session["idUsuario"]);
+
+            Response.Redirect("favorito.aspx",false);
+
+        }
+
+        public Publicacion buscarArticulo(string id)
+        {
+            Publicacion aux = new Publicacion();
+            int val = 0;
+            bool numero = int.TryParse(id, out val);
+            foreach (var item in listaDeCompras)
+            {
+                if (item.Id == val)
+                {
+                    aux = item;
+
+                }
+            }
+            return aux;
         }
     }
 }
