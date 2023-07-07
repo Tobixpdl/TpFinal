@@ -62,21 +62,21 @@
         </div>
     </div>
           <%-- Buscador --%>
-          <asp:UpdatePanel ID="updatePanel" runat="server" UpdateMode="Conditional">
-    <ContentTemplate>              
+   
                         <section id="search-box">
                              <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoComplete="off" PlaceHolder="Búsqueda" onkeydown="return bloquearEnter(event)"/>
                              <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" CssClass="btn-Enter" OnClick="BtnBuscar_Click" />                                          
                              <asp:Label runat="server" ID="BusquedaNull" Text="No se encontraron resultados" CssClass="lblBusqueda"></asp:Label>
                         </section>           
-
     <%-- TODOS LOS ARTICULOS y filtro --%>
-
+   
     <section class="articulos">
         <div class="mega-main">
                 <div class="main">
-
+                    <%if (!FiltroAvanzado)
+                      {%>
                     <h2 class="titleT">Todos los productos</h2>
+                  <%  }%>
                     <div class="container-items">
                     <asp:Repeater ID="rprCards" runat="server">
                      <ItemTemplate>
@@ -90,7 +90,7 @@
 					                    <p class="price">$<%#Eval("Precio")%></p>
                                        <%if (this.Session["activeUser"] != null)
                                         {%>
-                                            <asp:Button ID="Button1" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar" 
+                                            <asp:Button ID="Button1" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar a favoritos" 
                                             CommandArgument ='<% #Eval("Id")%>' CommandName="artId" /> 
                                         <%}%>
                                         <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>
@@ -101,11 +101,40 @@
                   </div>
                  </div>
             </div>
-            </ContentTemplate>
-</asp:UpdatePanel>
 
               <%-- ARTICULOS TOP --%>
-
+        <%-- <%if (!FiltroAvanzado)
+                      {%>
+                 <div class="mega-main">
+                      <div class="main">
+                    
+                    <h2 class="titleT">Articulos TOP</h2>
+                 
+                    <div class="container-items">
+                    <asp:Repeater ID="Repeater1" runat="server">
+                     <ItemTemplate>
+			                    <div class="item">
+				                    <figure>
+					                     <asp:Image ID="imgPublicacion" runat="server" 
+                                         CssClass="img-" OnPreRender="imgPublicacion_PreRender" ImageUrl=<%#ReturnUrl(Container.DataItem)%>/>                                                                          
+				                    </figure>
+				                    <div class="info-product">
+                                        <h2 class="info-title"><%#Eval("Titulo")%></h2>
+					                    <p class="price">$<%#Eval("Precio")%></p>
+                                       <%if (this.Session["activeUser"] != null)
+                                        {%>
+                                            <asp:Button ID="Button1" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar a favoritos" 
+                                            CommandArgument ='<% #Eval("Id")%>' CommandName="artId" /> 
+                                        <%}%>
+                                        <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>
+                                    </div>
+			                   </div>
+                      </ItemTemplate>
+                    </asp:Repeater>
+                  </div>
+                 </div>
+            </div>
+                  <%  }%>--%>
     
 
         </section>
@@ -263,6 +292,7 @@
         
 
  #search-box {
+        align-items:end;
         width: 350px;
         padding: 20px;
         border: none;
