@@ -10,33 +10,29 @@ namespace WebApplication1
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
-       
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblCompra.Text = this.Session["listaDeCompras"] != null && ((List<Publicacion>)Session["listaDeCompras"]).Count != 0 ? ((List<Publicacion>)Session["listaDeCompras"]).Count.ToString() : lblCompra.CssClass = "invisible";
+            if (this.Session["activeUser"] != null && this.Session["listaDeCompras"] != null)
+            {
+                lblCompra.Text = ((List<Publicacion>)this.Session["listaDeCompras"]).Count.ToString();
+            }
+            else
+            {
+                lblCompra.Visible = false;
+            }
 
         }
         protected void salirbtn_OnClick(object sender, EventArgs e)
         {
-            if (this.Session["activeUser"] != null)
-            {
-                this.Session["activeUser"] = null;
-                this.Session["idUsuario"] = null;
-                liLogin.Visible = true;
-                liMiPerfil.Visible = false;
-                salirbtn.Visible = false;
-                Response.Redirect("Login.aspx", false);
-
-            }
-            else
-            {
-                liLogin.Visible = true;
-                liMiPerfil.Visible = false;
-                salirbtn.Visible = false;
-                Response.Redirect("Login.aspx", false);
-
-            }
+            //this.Session["activeUser"] = null;
+            //this.Session["idUsuario"] = null;
+            Session.Clear();
+            liLogin.Visible = true;
+            liMiPerfil.Visible = false;
+            salirbtn.Visible = false;
+            Response.Redirect("Login.aspx", false);
         }
 
-            }
+    }
 }

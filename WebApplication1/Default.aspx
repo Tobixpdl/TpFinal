@@ -3,9 +3,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>       
-
-
  
+    <script type="text/javascript">
+        function bloquearEnter(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                return false;
+            }
+        }
+    </script>
       <%--    <%
   <div id="search-container">
          <input type="text" id="search-box" placeholder="Buscar">
@@ -59,11 +65,10 @@
           <asp:UpdatePanel ID="updatePanel" runat="server" UpdateMode="Conditional">
     <ContentTemplate>              
                         <section id="search-box">
-                             <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoComplete="off" PlaceHolder="Búsqueda"/>
-                       <asp:Button runat="server" Text="Buscar" OnClick="btnEnter_Click" CssClass="btn-Enter" AutoPostBack="false"></asp:Button>                   
-                      <asp:Label runat="server" ID="BusquedaNull" Text="No se encontraron resultados" CssClass="lblBusqueda"></asp:Label>
-                        </section>
-                     
+                             <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoComplete="off" PlaceHolder="Búsqueda" onkeydown="return bloquearEnter(event)"/>
+                             <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" CssClass="btn-Enter" OnClick="BtnBuscar_Click" />                                          
+                             <asp:Label runat="server" ID="BusquedaNull" Text="No se encontraron resultados" CssClass="lblBusqueda"></asp:Label>
+                        </section>           
 
     <%-- TODOS LOS ARTICULOS y filtro --%>
 
@@ -98,32 +103,9 @@
             </div>
             </ContentTemplate>
 </asp:UpdatePanel>
+
               <%-- ARTICULOS TOP --%>
-    <div id="start-products" class="CT">
-          <h2 class="titleT">Productos top</h2>
-           <div class="container-items2">
-            <asp:Repeater ID="rprFeatured" runat="server">
-                <ItemTemplate>
-                         <div class="item">
-				                <figure>
-					                 <asp:Image ID="imgPublicacion" runat="server" 
-                                     CssClass="img-" OnPreRender="imgPublicacion_PreRender" ImageUrl=<%#ReturnUrl(Container.DataItem)%>/>                                                                          
-				                </figure>
-				                <div class="info-product">
-                                    <h2 class="info-title"><%#Eval("Titulo")%></h2>
-					                <p class="price">$<%#Eval("Precio")%></p>
-                                    <%if (this.Session["activeUser"] != null)
-                                        {%>
-                                            <asp:Button ID="Button1" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar" 
-                                            CommandArgument ='<% #Eval("Id")%>' CommandName="artId" /> 
-                                    <%}%>
-                                    <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Detalles</a>
-                                </div>           
-                          </div>
-                </ItemTemplate>
-           </asp:Repeater>
-           </div>
-    </div>
+
     
 
         </section>
@@ -261,6 +243,21 @@
 
         .info-product .btn-info:hover{
             background:grey;
+        }
+
+        .btn-favs {
+            max-width: 30px;
+            max-height: 30px;
+            background-color: transparent;
+            border: 2px solid red;
+            color: black;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-favs.clicked {
+            background-color: red;
+            border: none;
+            color: white;
         }
         
         

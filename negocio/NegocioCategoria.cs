@@ -35,12 +35,32 @@ namespace negocio
             return lista;
         }
 
-        public void AgregarCategoria(Categoria cat)
+        public void AgregarCategoria(string cat)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("insert into CATEGORIAS values ('"+cat.Nombre + "')");
+                datos.setearConsulta("insert into CATEGORIAS values ('"+cat+ "')");
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void EliminarCategoria(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("delete from CATEGORIAS where id = @id");
+                datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

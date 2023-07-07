@@ -41,7 +41,8 @@
                                   <a class="nav-linkT" runat="server" href="Perfiles.aspx" id="A2">Perfiles</a>
                                   <a class="nav-linkT" runat="server" href="Publicaciones.aspx" id="A3">Publicaciones</a>
                                   <a class="nav-linkT" runat="server" href="MisCompras.aspx" id="A4">Compras</a>
-                                    <a class="nav-linkT" runat="server" href="Ventas.aspx" id="A5">Ventas</a>
+                                  <a class="nav-linkT" runat="server" href="Ventas.aspx" id="A5">Ventas</a>
+                                  <a class="nav-linkT" runat="server" href="Categorias.aspx" id="A6">Categorias</a>
                                   <asp:Button runat="server" CssClass="btn-botones" id="Button1" OnClick="salirbtn_OnClick" Text="Salir" />                
                               </div>
                           </li>

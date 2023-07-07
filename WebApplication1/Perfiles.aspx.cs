@@ -32,16 +32,6 @@ namespace WebApplication1
 
                 dgvPerfiles.DataSource = ListaUsuarios;
                 dgvPerfiles.DataBind();
-                //rptUsuarios.ItemDataBound += rptUsuarios_ItemDataBound;
-
-
-                //rptUsuarios.DataSource = ListaUsuarios;
-                //rptUsuarios.DataBind();
-
-            
-      
-
-
         }
 
         protected void Label_Click(object sender, EventArgs e)

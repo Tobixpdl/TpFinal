@@ -11,61 +11,52 @@ namespace WebApplication1
 {
 
 
-    public partial class Default
+    public partial class Categorias
     {
 
         /// <summary>
-        /// Control ScriptManager1.
+        /// Control dgvCategorias.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.GridView dgvCategorias;
 
         /// <summary>
-        /// Control updatePanel.
+        /// Control lblAviso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanel;
+        protected global::System.Web.UI.WebControls.Label lblAviso;
 
         /// <summary>
-        /// Control txtBusqueda.
+        /// Control btnAddCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBusqueda;
+        protected global::System.Web.UI.WebControls.Button btnAddCategoria;
 
         /// <summary>
-        /// Control BtnBuscar.
+        /// Control txtNuevaCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnBuscar;
+        protected global::System.Web.UI.WebControls.TextBox txtNuevaCategoria;
 
         /// <summary>
-        /// Control BusquedaNull.
+        /// Control btnAddedCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label BusquedaNull;
-
-        /// <summary>
-        /// Control rprCards.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rprCards;
+        protected global::System.Web.UI.WebControls.Button btnAddedCategoria;
     }
 }

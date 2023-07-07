@@ -12,6 +12,7 @@ namespace WebApplication1
     public partial class favorito : System.Web.UI.Page
     {
         public List<Publicacion> listaDeCompras;
+        public NegocioPublicacion np = new NegocioPublicacion();
         public int contador { get; set; }
         public int cantidad = 1;
         public decimal precioPorCantidad = 0;
@@ -19,16 +20,21 @@ namespace WebApplication1
         {
 
             listaDeCompras = new List<Publicacion>();
-            listaDeCompras = (List<Publicacion>)Session["listaDeCompras"];
+            if (this.Session["idUsuario"] != null)
+            {
+                listaDeCompras = np.listarFavoritos((int)this.Session["idUsuario"]);
+            }
 
             contador = listaDeCompras != null ? listaDeCompras.Count : 0;
 
             if (contador != 0)
             {
+
                 rprCards.DataSource = listaDeCompras;
                 rprCards.DataBind();
             }
         }
+
 
         protected void btnBack_Click(object sender, EventArgs e)
         {

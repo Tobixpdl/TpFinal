@@ -83,7 +83,7 @@ namespace WebApplication1
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
             if(tbMensaje.Text!="")
-            {
+            { 
 
             NegocioComentarios negocioComentarios = new NegocioComentarios();
             NegocioUsuario negocioUsuario = new NegocioUsuario();

@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <%if (contador == 0 && this.Session["activeUser"] != null )
+      <%if (contador == 0 && this.Session["activeUser"] != null )
        {
 %>
             <h1 class="titleT">No hay elementos favoritos</h1>
@@ -43,5 +43,6 @@
                     </div>
                 </section>
     <%} %>
+
 
 </asp:Content>

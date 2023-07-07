@@ -97,6 +97,70 @@ namespace negocio
             }
         }
 
+        public List<Publicacion> listarFavoritos(int id)
+        {
+            List<Publicacion> lista = new List<Publicacion>();
+            AccesoDatos datos = new AccesoDatos();
+            NegocioImagen negocioImagen = new NegocioImagen();
+
+            try
+            {
+                datos.setearConsulta("SELECT p.id, p.titulo, p.precio, p.descripcion, c.id as idCategoria, c.nombre as categoria, p.stock, p.id_usuario\r\nFROM PUBLICACIONES p\r\ninner JOIN CATEGORIAS c ON p.categoria = c.id\r\ninner JOIN favoritos f ON f.id_publicacion = p.id\r\nWHERE f.id_usuario = @id;");
+
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Publicacion aux = new Publicacion();
+                    aux.Id = datos.Lector.GetInt32(0);
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Stock = (long)datos.Lector["STOCK"];
+                    aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["idCategoria"];
+                    cat.Nombre = (string)datos.Lector["categoria"];
+                    aux.Categoria = cat;
+                    aux.Cantidad = 1;
+                    aux.imagenes = negocioImagen.Listar(aux.Id);
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void AgregarFavoritos(Publicacion agregar, int idUsuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT into FAVORITOS(ID_PUBLICACION,ID_USUARIO)" +
+                    " values ('" + agregar.Id + "','" + idUsuario + "')");
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public List<Publicacion> ListarXUsuario(int id)
         {
             List<Publicacion> lista = new List<Publicacion>();
