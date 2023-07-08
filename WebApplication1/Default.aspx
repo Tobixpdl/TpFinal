@@ -12,7 +12,9 @@
             }
         }
     </script>
-      <%--    <%
+
+        
+        <%--    <%
   <div id="search-container">
          <input type="text" id="search-box" placeholder="Buscar">
          </div>
@@ -65,8 +67,8 @@
    
                         <section id="search-box" >
                              <p id="start-products"></p>
-                             <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoComplete="off" PlaceHolder="Búsqueda" onkeydown="return bloquearEnter(event)"/>
-                             <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" CssClass="btn-Enter" OnClick="BtnBuscar_Click" />                                          
+                             <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoComplete="off" PlaceHolder="Búsqueda" AutoPostBack="false" onkeydown="return bloquearEnter(event)"/>
+                             <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" CssClass="btn-Enter" OnClick="BtnBuscar_Click" AutoPostBack="false" />                                          
                              <asp:Label runat="server" ID="BusquedaNull" Text="No se encontraron resultados" CssClass="lblBusqueda"></asp:Label>
                         </section>           
     <%-- TODOS LOS ARTICULOS y filtro --%>
@@ -78,8 +80,10 @@
                       {%>
                     <h2 class="titleT">Todos los productos</h2>
                   <%  }%>
+          <asp:UpdatePanel ID="updatePanel" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>    
                     <div class="container-items">
-                    <asp:Repeater ID="rprCards" runat="server">
+                    <asp:Repeater ID="rprCards" runat="server" >
                      <ItemTemplate>
 			                    <div class="item">
 				                    <figure>
@@ -100,6 +104,9 @@
                       </ItemTemplate>
                     </asp:Repeater>
                   </div>
+  </ContentTemplate>
+</asp:UpdatePanel>
+
                  </div>
             </div>
 

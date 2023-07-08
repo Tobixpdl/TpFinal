@@ -31,7 +31,7 @@ namespace WebApplication1
             // Generacion de los datos de las CARDS
             negocioUsuario = new NegocioUsuario();
             BusquedaNull.Visible = false;
-            ListaArticulos = negocio.Listar();
+            ListaArticulos = negocio.ListarSinCero();
 
             Session.Add("todosLosArticulos", ListaArticulos);
 
@@ -200,6 +200,9 @@ namespace WebApplication1
                 BusquedaNull.Visible = true;
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
+                updatePanel.Update();
+
+
             }
             else
             {
@@ -207,7 +210,11 @@ namespace WebApplication1
                 rprCards.DataSource = listaFiltrada;
                 rprCards.DataBind();
                 BusquedaNull.Visible = false;
+                updatePanel.Update();
+
+
             }
+
         }
         /*/
 

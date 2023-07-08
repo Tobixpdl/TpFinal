@@ -25,7 +25,7 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ListaArticulos = negocioPublicacion.Listar();
+            ListaArticulos = negocioPublicacion.ListarSinCero();
             ListaArticulosFeatured = negocioPublicacion.listarFeatured();
             SelecUser = Request.QueryString["User"];
             if (SelecUser != null)
@@ -38,11 +38,9 @@ namespace WebApplication1
                 string selUser = this.Session["selectedUser"].ToString();
                 SelectedUser = negocioUser.ListarXUsuario(selUser);
 
-                Tel.Text = SelectedUser.telefono;
-                EMail.Text = SelectedUser.mail;
                 UsuarioNombre.Text = SelectedUser.usuario;
 
-                List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuario(SelectedUser.Id);
+                List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuarioSinCero(SelectedUser.Id);
                 ListaArticulos = publicaciones;
 
                 carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();

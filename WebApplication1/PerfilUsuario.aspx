@@ -9,16 +9,7 @@
 <p><strong> Usuario:</strong></p>
 <asp:Label ID="UsuarioNombre" runat="server"></asp:Label>
         </div>        
-        <div>
-<p><strong>Correo Electrónico:</strong></p>
-<asp:Label ID="EMail" runat="server"></asp:Label>
 
-        </div>
-        <div>
-<p><strong>Teléfono:</strong></p>
-<asp:Label ID="Tel" runat="server"></asp:Label>
-
-        </div>
         
 
     </div>

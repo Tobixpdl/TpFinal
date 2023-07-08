@@ -12,12 +12,13 @@ namespace WebApplication1
     public partial class Modificar : System.Web.UI.Page
     {
         public Publicacion target;
+
         public List<Categoria> categorias;
         public Categoria catAux { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioPublicacion negocio = new NegocioPublicacion();
-            
+
             target = negocio.GetPublicacion(int.Parse(Request.QueryString["Id"].ToString()));
 
             categorias = new List<Categoria>();
@@ -40,18 +41,28 @@ namespace WebApplication1
                 txtstock.Text=target.Stock.ToString();
                 txtPrecio.Text = target.Precio.ToString();
                 ddlCategorias.SelectedIndex = target.Categoria.Id;
-                Image img = (Image)imgPublicacion;
-              
+                target = negocio.SeleccionarXTitulo(target.Titulo);
+                NegocioImagen negocioImagen = new NegocioImagen();
+                Imagen img = new Imagen();
+                img = negocioImagen.SeleccionarImagen(target.Id);
+                if(string.IsNullOrEmpty(target.imagenes[0].Url))
+                {
+                    img.Url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeXR8gZ-8oV4U4WiYO1Ikdvc8_bp97R3FcDc8Nm4CD1Dlm1XwY7yCMQ3Y9vdbJo0R746Y&usqp=CAU";
 
-                img.ImageUrl = target.imagenes[0].Url;
+                }
+                else
+                {
+                    img.Url = target.imagenes[0].Url;
 
+                }
+
+
+
+
+            }
             }
 
 
-
-
-
-        }
         protected void ddlCategorias_SelectedIndexChanged(object sender, EventArgs e)
         {
 

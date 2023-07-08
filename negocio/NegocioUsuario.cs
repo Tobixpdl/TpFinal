@@ -198,6 +198,8 @@ namespace negocio
             return user;
         }
 
+       
+
         public Usuario ListarXDNI(long dni)
         {
             Usuario user = new Usuario();

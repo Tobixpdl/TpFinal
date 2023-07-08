@@ -30,7 +30,7 @@ namespace negocio
                     c.Remitente = (string)datos.Lector["remitente"];
                     c.Destinatario = (string)datos.Lector["destinatario"];
                     c.Mensaje = (string)datos.Lector["mensaje"];
-                    c.Reputacion= datos.Lector.GetInt32(5) != null? datos.Lector.GetInt32(5):1;
+                    c.Reputacion = !datos.Lector.IsDBNull(5) ? datos.Lector.GetInt32(5) : 1;
                     c.Fecha= datos.Lector["fecha"].ToString();
                     lista.Add(c);
 
