@@ -20,23 +20,28 @@
               
               <div class="mb-3">
                         <asp:Label runat="server" ID="lblTitulo" PlaceHolder="¿Qué vas a vender?" Text="Título:"></asp:Label>
-                        <asp:TextBox runat="server" ID="txtTitulo"   ></asp:TextBox>      
+                        <asp:TextBox runat="server" ID="txtTitulo"  Width="600" ></asp:TextBox> 
+                 <asp:Label runat="server" style="color:red" > (*)</asp:Label>
+
                     </div>
+                            <asp:Label ID="lblWrongTitulo" runat="server" Text="Completar Campo" style="color:red"></asp:Label>
                             <div class="mb-3">
                                  <asp:Label runat="server" ID="lblDesc" Text="Descripción:" PlaceHolder="¿Qué características tiene?"></asp:Label>
                  
                                 </div>
                <div class="mb-3">
                    
-                    <asp:TextBox runat="server" ID="txtDescripcion"  Height="300" MaxLength="500" TextMode="MultiLine" Width="500"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtDescripcion"  Height="300" MaxLength="500" TextMode="MultiLine" Width="600"></asp:TextBox>
                     </div>
                     <div class="mb-3">
                     <asp:label runat="server" id="lblstock"  placeholder="¿cuántos hay?" text="Cantidad:"></asp:label>
-                    <asp:textbox runat="server" id="txtstock" ></asp:textbox>
+                    <asp:textbox runat="server" id="txtstock" type="number" CssClass="stockBox" min="1" ></asp:textbox>  <asp:Label runat="server" style="color:red" > (*)</asp:Label>
+                            <asp:Label ID="lblWrongStock" runat="server" Text="Completar Campo" style="color:red"></asp:Label>
                          </div>
                <div class="mb-3">
                     <asp:Label runat="server" ID="lblPrecio" Text="Precio: $" PlaceHolder="¿A qué precio lo vendes?"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtPrecio" TextMode="Number" ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtPrecio" TextMode="Number" min="0" ></asp:TextBox> <asp:Label runat="server" style="color:red" > (*)</asp:Label>
+                     <asp:Label ID="lblWrongPrecio" runat="server" Text="Completar Campo" style="color:red"></asp:Label>
                          </div>
 
            <asp:UpdatePanel runat="server">
@@ -56,12 +61,13 @@
                          <div class="mb-3">
                     <asp:Button runat="server" ID="btnCrear" Text="Crear Publicacíon" OnClick="btnCrear_Click"></asp:Button>
                </div> 
+                      <p style="color:red">Campo Obligatorio (*)</p>
             </div>
                     <div class="col-4" >
-                        <div class="tl">
+                       <div class="tl">
+                   Imagenes
 
-     Imagenes 
-                        </div>
+                      </div>
                         
           
 
@@ -69,13 +75,13 @@
                 <div class="mb-3">
   
      <label for="formFile" class="form-label">Subi tu imagen acá!</label>
-     <asp:FileUpload runat="server" ID="url" class="form-control"  />
-  
+     <asp:FileUpload runat="server" ID="url" class="form-control" accept=".png,.jpg,.jpeg,.gif" />
  <asp:Button runat="server" ID="btnUpload" Text="Cargar Imagen" OnClick="btnUpload_Click"></asp:Button>
               
                        
 </div>
-                        
+    <asp:Label ID="lblWrongImg" runat="server" Text="No has seleccionado ninguna imagen"  style="color:red"></asp:Label>
+               <asp:Label ID="lblWrongFormato" runat="server" Text="Formato Invalido"  style="color:red"></asp:Label>             
                         <asp:Image ID="imgPublicacion" runat="server" 
                            CssClass="img-fluid mb-3"
                             

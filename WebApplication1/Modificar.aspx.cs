@@ -2,7 +2,9 @@
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,6 +17,7 @@ namespace WebApplication1
 
         public List<Categoria> categorias;
         public Categoria catAux { get; set; }
+        public bool isValid, isImgValid;
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioPublicacion negocio = new NegocioPublicacion();
@@ -25,10 +28,16 @@ namespace WebApplication1
             NegocioCategoria negocioCat = new NegocioCategoria();
             categorias = negocioCat.Listar();
             catAux = new Categoria();
-
+            isValid = Session["validar"] != null ? (bool)Session["validar"] : true;
+            isImgValid = Session["vImg"] != null ? (bool)Session["vImg"] : true;
+            lblWrongTitulo.Visible = false;
+            lblWrongStock.Visible = false;
+            lblWrongPrecio.Visible = false;
+            lblWrongImg.Visible = false;
+            lblWrongFormato.Visible = false;
             if (!IsPostBack)
             {
-               
+
                 catAux = new Categoria();
                 ddlCategorias.DataSource = categorias;
                 ddlCategorias.DataValueField = "Id";
@@ -36,31 +45,30 @@ namespace WebApplication1
 
                 ddlCategorias.DataBind();
 
-                txtTitulo.Text=target.Titulo;
-                txtDescripcion.Text=target.Descripcion;
-                txtstock.Text=target.Stock.ToString();
+                txtTitulo.Text = target.Titulo;
+                txtDescripcion.Text = target.Descripcion;
+                txtstock.Text = target.Stock.ToString();
                 txtPrecio.Text = target.Precio.ToString();
-                ddlCategorias.SelectedIndex = target.Categoria.Id;
-                target = negocio.SeleccionarXTitulo(target.Titulo);
-                NegocioImagen negocioImagen = new NegocioImagen();
-                Imagen img = new Imagen();
-                img = negocioImagen.SeleccionarImagen(target.Id);
-                if(string.IsNullOrEmpty(target.imagenes[0].Url))
-                {
-                    img.Url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeXR8gZ-8oV4U4WiYO1Ikdvc8_bp97R3FcDc8Nm4CD1Dlm1XwY7yCMQ3Y9vdbJo0R746Y&usqp=CAU";
+                ddlCategorias.SelectedIndex = target.Categoria.Id-1;
+                Image img = (Image)imgPublicacion;
 
-                }
-                else
-                {
-                    img.Url = target.imagenes[0].Url;
 
-                }
+                img.ImageUrl = target.imagenes[0].Url;
+
+
 
 
 
 
             }
+            if (isValid == false)
+            {
+                lblWrongTitulo.Visible = true;
+                lblWrongStock.Visible = true;
+                lblWrongPrecio.Visible = true;
             }
+
+        }
 
 
         protected void ddlCategorias_SelectedIndexChanged(object sender, EventArgs e)
@@ -78,9 +86,10 @@ namespace WebApplication1
         }
         protected void btnUpload_Click(object sender, EventArgs e)
         {
+
             if (url.HasFile)
             {
-                 
+
                 try
                 {
                     string ruta = Server.MapPath("./Images/");
@@ -88,19 +97,27 @@ namespace WebApplication1
                     //FileURL.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
                     url.PostedFile.SaveAs(ruta + System.IO.Path.GetFileName(url.PostedFile.FileName));
                     string finalRuta = "~/Images/" + System.IO.Path.GetFileName(url.PostedFile.FileName);
+                    string extension = Path.GetExtension(finalRuta);
+                    if (extension == ".jpg" || extension == ".png" || extension == ".gif" || extension == ".jpeg")
+                    {
+                        Image img = (Image)imgPublicacion;
+                        img.ImageUrl = finalRuta;
+                    }
+                    else
+                    {
+                        lblWrongFormato.Visible = true;
 
-                    Image img = (Image)imgPublicacion;
-                    img.ImageUrl = finalRuta;
-
-
-                    /* Session.Add("url", finalRuta);
-                     Response.Redirect("Crear.aspx", false);*/
+                    }
                 }
                 catch (Exception)
                 {
 
                     throw;
                 }
+            }
+            else
+            {
+                lblWrongImg.Visible = true;
             }
 
 
@@ -111,37 +128,55 @@ namespace WebApplication1
         }
         protected void btnBack_Click(object sender, EventArgs e)
         {
+            Session.Add("validar", true);
             Response.Redirect("Publicaciones.aspx", false);
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            NegocioPublicacion negocioPublicacion = new NegocioPublicacion();
-            NegocioImagen negocioImagen = new NegocioImagen();
-            Publicacion aux = new Publicacion();
-            aux.Id = target.Id;
-            aux.Titulo = txtTitulo.Text;
-            aux.Descripcion = txtDescripcion.Text;
-            aux.Precio = txtPrecio.Text.Count() != 0 ? decimal.Parse(txtPrecio.Text) : 0;
-            //aux.Precio = decimal.Parse(txtPrecio.Text) ;
-            aux.Stock = txtstock.Text.Count() != 0 ? long.Parse(txtstock.Text) : 0;
-            //aux.Stock = int.Parse(txtstock.Text);
-            /*Categoria cat = new Categoria();
-            cat.Id = 1;
-            cat.Nombre = "ROPA";*/
-            catAux.Id = (int.Parse(ddlCategorias.SelectedValue));
+            isValid = true;
 
-            catAux.Nombre = ddlCategorias.SelectedItem.Value;
-            aux.Categoria = catAux;
-            negocioPublicacion.ModificarPublicacion(aux);
-           
-            negocioImagen.ModificarImagen(imgPublicacion.ImageUrl, aux.Id);
+            if (txtTitulo.Text == "" || txtstock.Text == "" || txtPrecio.Text == "")
+            {
+                isValid = false;
+            }
 
 
+            if (isValid)
+            {
+                NegocioPublicacion negocioPublicacion = new NegocioPublicacion();
+                NegocioImagen negocioImagen = new NegocioImagen();
+                Publicacion aux = new Publicacion();
+                aux.Id = target.Id;
+                aux.Titulo = txtTitulo.Text;
+                aux.Descripcion = txtDescripcion.Text;
+                aux.Precio = txtPrecio.Text.Count() != 0 ? decimal.Parse(txtPrecio.Text) : 0;
+                //aux.Precio = decimal.Parse(txtPrecio.Text) ;
+                aux.Stock = txtstock.Text.Count() != 0 ? long.Parse(txtstock.Text) : 0;
+                //aux.Stock = int.Parse(txtstock.Text);
+                /*Categoria cat = new Categoria();
+                cat.Id = 1;
+                cat.Nombre = "ROPA";*/
+                catAux.Id = (int.Parse(ddlCategorias.SelectedValue));
+
+                catAux.Nombre = ddlCategorias.SelectedItem.Value;
+                aux.Categoria = catAux;
+                negocioPublicacion.ModificarPublicacion(aux);
+
+                negocioImagen.ModificarImagen(imgPublicacion.ImageUrl, aux.Id);
 
 
 
-            Response.Redirect("Publicaciones.aspx", false);
+
+
+                Session.Add("validar", true);
+                Response.Redirect("Publicaciones.aspx", false);
+            }
+            else
+            {
+                this.Session.Add("validar", false);
+                Response.Redirect("Modificar.aspx?id=" + target.Id,false);
+            }
         }
     }
 }

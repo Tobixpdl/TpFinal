@@ -2,6 +2,7 @@
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Web;
@@ -16,6 +17,8 @@ namespace WebApplication1
         public Usuario user;
         public List<Categoria> categorias ;
         public Categoria catAux { get; set; }
+
+        public bool isValid,isImgValid;
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioUsuario negocioUsuario = new NegocioUsuario();
@@ -27,7 +30,13 @@ namespace WebApplication1
             categorias = negocio.Listar();
             catAux = new Categoria();
            
-
+            isValid = Session["validar"] != null ? (bool)Session["validar"] : true;
+            isImgValid = Session["vImg"] != null ? (bool)Session["vImg"] : true;
+            lblWrongTitulo.Visible = false;
+            lblWrongStock.Visible = false;
+            lblWrongPrecio.Visible = false;
+            lblWrongImg.Visible = false;
+            lblWrongFormato.Visible = false;
             if (!IsPostBack)
             {
                 imgPublicacion.ImageUrl = Session["url"] != null ? (string)Session["url"] :
@@ -38,13 +47,32 @@ namespace WebApplication1
                 ddlCategorias.DataTextField = "Nombre";
                 
                 ddlCategorias.DataBind();
+
             }
             
+            if(isValid==false)
+            {
+                lblWrongTitulo.Visible = true;
+                lblWrongStock.Visible = true;
+                lblWrongPrecio.Visible = true;
+            }
 
+         
         }
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
+            isValid = true;
+
+            if(txtTitulo.Text =="" || txtstock.Text=="" ||txtPrecio.Text=="")
+            {               
+                isValid = false;
+            }
+
+
+            if(isValid)
+            {
+
             NegocioPublicacion negocioPublicacion = new NegocioPublicacion();
             NegocioImagen negocioImagen = new NegocioImagen();
             Publicacion aux = new Publicacion();
@@ -64,17 +92,24 @@ namespace WebApplication1
             negocioPublicacion.AgregarPublicacion(aux, idUsuario);
             var id = negocioPublicacion.GetLastPublicacion().Id;
             negocioImagen.CrearImagen(imgPublicacion.ImageUrl,id );
+                Session.Add("validar", true);
+                Response.Redirect("Publicaciones.aspx", false);
+            }else
+            {
+                this.Session.Add("validar", false);
+                Response.Redirect("Crear.aspx", false);
+            }
             
            
 
             
 
-            Response.Redirect("Publicaciones.aspx", false);
 
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
+            Session.Add("validar", true);
             Response.Redirect("Default.aspx", false);
         }
 
@@ -105,9 +140,18 @@ namespace WebApplication1
                     //FileURL.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
                     url.PostedFile.SaveAs(ruta + System.IO.Path.GetFileName(url.PostedFile.FileName));
                     string finalRuta = "~/Images/" + System.IO.Path.GetFileName(url.PostedFile.FileName);
-
+                   
+                    string extension = Path.GetExtension(finalRuta);
+                    if(extension==".jpg" || extension == ".png" || extension == ".gif" || extension == ".jpeg")
+                    {
                     Image img = (Image)imgPublicacion;
                     img.ImageUrl = finalRuta;
+                    }
+                    else
+                    {
+                        lblWrongFormato.Visible = true;
+
+                    }
 
                     /* Session.Add("url", finalRuta);
                      Response.Redirect("Crear.aspx", false);*/
@@ -117,6 +161,9 @@ namespace WebApplication1
 
                     throw;
                 }
+            }else
+            {
+                lblWrongImg.Visible = true;
             }
            
                
