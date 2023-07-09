@@ -51,6 +51,46 @@ namespace negocio
 
 
         }
+        public List<Comentario> ListarPorUsuario(string name)
+        {
+            List<Comentario> lista = new List<Comentario>();
+            AccesoDatos datos = new AccesoDatos();
+
+
+            try
+            {
+                datos.setearConsulta("select distinct remitente,mensaje,reputacion,fecha from comentarios where destinatario = @name");
+                datos.setearParametro("@name", name);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Comentario c = new Comentario();
+              
+               
+                    c.Remitente = (string)datos.Lector["remitente"];
+               
+                    c.Mensaje = (string)datos.Lector["mensaje"];
+                    c.Reputacion = datos.Lector.GetInt32(2) ;
+                    c.Fecha = datos.Lector["fecha"].ToString();
+                    lista.Add(c);
+
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return lista;
+
+
+        }
 
         public void newComent(int venta,string remitente,string destinatario,string mensaje,int reputacion)
         {
@@ -77,6 +117,35 @@ namespace negocio
                 throw;
             }
             finally { datos.cerrarConexion();}
+
+        }
+        public float getRep(string name,ref int cantidad)
+        {
+            var rate=0;
+            var sumatoria = 0;
+            cantidad = 0;
+            AccesoDatos datos=new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select SUM(reputacion)as 'Sumatoria',COUNT(distinct id) as 'Cantidad' from comentarios where id in (select distinct id from comentarios where destinatario = @name)");
+                datos.setearParametro("@name", name);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    sumatoria = (int)datos.Lector.GetInt32(0);
+                    cantidad = (int)datos.Lector.GetInt32(1);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { datos.cerrarConexion();}
+
+            rate = sumatoria / cantidad;
+            return rate;
 
         }
 
