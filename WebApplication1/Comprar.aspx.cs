@@ -61,7 +61,7 @@ namespace WebApplication1
             venta.Titulo = listaDeCompras.Titulo;
             venta.FechaCompra = DateTime.Now.ToString();
             venta.FechaEntrega = "no entregado";
-
+            venta.finalizada = false;
             string texto = txtStock.Text; 
             int cantidad;
             if (int.TryParse(texto, out cantidad))

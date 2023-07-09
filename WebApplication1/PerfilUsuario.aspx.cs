@@ -14,6 +14,7 @@ namespace WebApplication1
         public List<Publicacion> ListaArticulos { get; set; }
         public List<Publicacion> ListaArticulosFeatured { get; set; }
         public List<Comentario> ListaComentarios { get; set; }
+        public List<Comentario> ListaComentariosFinales { get; set; }
         NegocioUsuario negocioUser = new NegocioUsuario();
         NegocioPublicacion negocioPublicacion = new NegocioPublicacion();
         NegocioComentarios negocioComentarios = new NegocioComentarios();
@@ -26,6 +27,8 @@ namespace WebApplication1
 
         public Usuario user = new Usuario();
 
+        public float reputacion;
+        public int compradores;
         protected void Page_Load(object sender, EventArgs e)
         {
              
@@ -38,10 +41,10 @@ namespace WebApplication1
 
             listComentarios = negocioComentarios.ListarPorUsuario(Request.QueryString["User"]);
 
+            ListaComentariosFinales = negocioComentarios.listarUltimos(Request.QueryString["User"]);
 
-
-
-            carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
+            calcularReputacion();
+              carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
 
             if (this.Session["activeUser"] != null)
             {
@@ -54,7 +57,8 @@ namespace WebApplication1
 
             if (!IsPostBack)
             {
-                rprComentarios.DataSource = listComentarios;
+               
+                rprComentarios.DataSource = ListaComentariosFinales;
                 rprComentarios.DataBind();
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
@@ -64,6 +68,7 @@ namespace WebApplication1
                     user.usuario = nusuario;
                     user = negocioUser.ListarXUsuario(nusuario);
                 }
+
             }
             else
             {
@@ -74,6 +79,7 @@ namespace WebApplication1
                     user = negocioUser.ListarXUsuario(nusuario);
                 }
             }
+            //reputacion = negocioComentarios.getRep(SelectedUser.usuario, ref compradores);
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -115,6 +121,24 @@ namespace WebApplication1
             }
 
             return false;
+        }
+        public void calcularReputacion()
+        {
+            cantidadDeCompradores = ListaComentariosFinales.Count();
+            var sumatoria = 0;
+            for (int i = 0;i<ListaComentariosFinales.Count();i++)
+            {
+                sumatoria += ListaComentariosFinales[i].Reputacion;
+
+            }
+            if(cantidadDeCompradores!=0)
+            {
+                reputacion = sumatoria / cantidadDeCompradores;
+            }else
+            {
+                reputacion = sumatoria;
+            }
+            
         }
         public Publicacion buscarArticulo(string id)
         {

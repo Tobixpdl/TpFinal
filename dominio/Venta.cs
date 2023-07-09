@@ -22,5 +22,6 @@ namespace dominio
         public string metodo { get; set; }
 
         public string urlImagen { get; set; }
+        public bool finalizada { get; set; }
     }
 }

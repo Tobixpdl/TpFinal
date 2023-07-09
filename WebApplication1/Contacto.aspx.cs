@@ -37,6 +37,14 @@ namespace WebApplication1
             dgvComentarios.DataSource = Mensajes;
             dgvComentarios.DataBind();
 
+            if(!IsPostBack)
+            {
+                rbAtencionB.Checked = true;
+                rbCalidadB.Checked = true;
+                rbTiempoB.Checked = true;
+
+            }
+
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -94,6 +102,7 @@ namespace WebApplication1
 
         }
 
+
         protected void btnConfirmar_Click(object sender, EventArgs e)
         {
             NegocioComentarios negocioComentarios = new NegocioComentarios();
@@ -118,7 +127,7 @@ namespace WebApplication1
                 {
                     negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Venta Concluida", 10);
                     nventas.ME(IdVenta, 2);
-                    Response.Redirect("Default.aspx", false);
+                    Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario, false);
 
                 }
                 
@@ -131,7 +140,8 @@ namespace WebApplication1
             }
             if (rbReclamo.Checked)
             {
-                negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Hubo un problema", 5);
+                negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Alguien de Administracion se pondra en contacto con los participantes de esta venta y llegaremos a una pronta solucion para ambas partes." +
+                    "Pueden contactarnos enviando un mail a ayuda@administracion o via por mensaje telefonico al +541122359559", 1);
                 nventas.ME(IdVenta, 3);
                 Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario, false);
 
@@ -142,6 +152,34 @@ namespace WebApplication1
                 nventas.ME(IdVenta, 4);
                 Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario, false);
 
+            }
+        }
+
+        protected void btnEnviar2_Click(object sender, EventArgs e)
+        {
+            if (tbFinal.Text != "")
+            {
+                int puntaje = 10;
+
+                NegocioComentarios negocioComentarios = new NegocioComentarios();
+                NegocioUsuario negocioUsuario = new NegocioUsuario();
+               if(rbTiempoM.Checked==true)
+                {
+                    puntaje -= 3;
+                }
+                if (rbAtencionM.Checked == true)
+                {
+                    puntaje -= 3;
+                }
+                if (rbCalidadM.Checked == true)
+                {
+                    puntaje -= 3;
+                }
+
+                negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, tbFinal.Text, puntaje);
+                NegocioVentas negocioVentas = new NegocioVentas();
+                negocioVentas.finalizarVenta(IdVenta);
+                Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario, false);
             }
         }
     }

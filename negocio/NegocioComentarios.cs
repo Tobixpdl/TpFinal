@@ -1,5 +1,6 @@
 ﻿using dominio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -119,6 +120,52 @@ namespace negocio
             finally { datos.cerrarConexion();}
 
         }
+        public List<Comentario> listarUltimos(string name) {
+
+            AccesoDatos datos = new AccesoDatos();
+            List<Comentario> lista = new List<Comentario>();
+            try
+            {
+                datos.setearConsulta("  SELECT V.ID AS VentaID, C.MENSAJE, C.REPUTACION,c.remitente\r\nFROM VENTAS V\r\nINNER JOIN (\r\n  SELECT IDVenta, MENSAJE, REPUTACION,remitente, ROW_NUMBER() OVER (PARTITION BY IDVenta ORDER BY fecha DESC) AS rn\r\n  FROM Comentarios where destinatario=@name\r\n) C ON C.IDVenta = V.ID AND C.rn = 1 ");
+                datos.setearParametro("@name", name);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Comentario c = new Comentario();
+
+
+                    c.Remitente = (string)datos.Lector["remitente"];
+
+                    c.Mensaje = (string)datos.Lector["MENSAJE"];
+                    c.Reputacion = datos.Lector.GetInt32(2);
+                    
+                    lista.Add(c);
+                }
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { datos.cerrarConexion(); }
+
+
+
+            return lista;
+         }
+
+
+
+
+
+
+
+
+
         public float getRep(string name,ref int cantidad)
         {
             var rate=0;
@@ -127,7 +174,7 @@ namespace negocio
             AccesoDatos datos=new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT ISNULL(SUM(reputacion), 0) AS 'Sumatoria', ISNULL(COUNT(DISTINCT id), 0) AS 'Cantidad'\r\nFROM comentarios\r\nWHERE id IN (SELECT DISTINCT id FROM comentarios WHERE destinatario = @name)");
+                datos.setearConsulta(" SELECT V.ID AS VentaID, C.MENSAJE AS UltimoComentario, C.REPUTACION,c.remitente\r\nFROM VENTAS V\r\nINNER JOIN (\r\n  SELECT IDVenta, MENSAJE, REPUTACION,remitente, ROW_NUMBER() OVER (PARTITION BY IDVenta ORDER BY fecha DESC) AS rn\r\n  FROM Comentarios where destinatario=@name\r\n) C ON C.IDVenta = V.ID AND C.rn = 1 ");
                 datos.setearParametro("@name", name);
                 datos.ejecutarLectura();
 

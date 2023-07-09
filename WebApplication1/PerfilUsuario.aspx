@@ -9,18 +9,22 @@
 <p><strong> Usuario:</strong></p>
 <asp:Label ID="UsuarioNombre" runat="server"></asp:Label>
 
-            <p><strong> Reputacion:</strong></p>
+            <p><strong> Reputacion: <%:reputacion%></strong></p>
 <asp:Label ID="lblRep" runat="server"></asp:Label>
         </div>        
 
-         <asp:Button ID="btnAdd" runat="server"   type="button" Text="Agregar a favoritos" />
+    </div>
 
-        <asp:Repeater id="rprComentarios" runat="server">
+
+        <div>
+       <asp:Repeater id="rprComentarios" runat="server">
             <ItemTemplate>
-
+                <p> <%#Eval("Remitente")%> </p>
+                 <p> <%#Eval("Mensaje")%> </p>
+                 <p> <%#Eval("Reputacion")%> </p>
             </ItemTemplate>
         </asp:Repeater>
-    </div>
+        </div>
 
     <hr />
 

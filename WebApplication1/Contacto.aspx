@@ -65,7 +65,7 @@
     </div>
 
                 
-    <%if (venta.Estado == "En proceso" ||venta.Estado == "En reclamo"  )
+    <%if (venta.Estado == "En proceso" || venta.Estado == "En reclamo")
         {  %>
     <div class="mp">
           <div class="card-header" style="background:#5d11f8;color: #ffffff;">     
@@ -117,8 +117,8 @@
            <div class="cp"> 
 
 
- <%if (venta.Estado == "En proceso" ||venta.Estado == "En reclamo"  )
-        {  %>
+ <%if (venta.Estado == "En proceso" || venta.Estado == "En reclamo")
+     {  %>
            <div>
 
            <div class="input-group mb-3">
@@ -127,9 +127,125 @@
                <asp:Button cssclass="btn btn-success" runat="server" ID="btnEnviar" Text="Enviar" OnClick="btnEnviar_Click"></asp:Button>
            </div>
 </div>
-             <%} %>
+             <%}%>
 
     </div>
+           <%if (venta.finalizada == false) { %>
+
+         
+
+
+           <%if (venta.UsuarioComprador == usuarioEmisor.usuario )
+               {  %>
+
+
+        
+           
+ <%if (venta.Estado == "Entregada" ||venta.Estado == "Cancelada"  )
+        {  %>
+           <div class="Comentario Final">
+               <div class="card-header" style="background:#4800ff;color: #ffffff;">
+                 <label for="formFile" class="form-label " style="-webkit-text-stroke: 0.1px black;">Comentario Final</label>
+                   <div class="campos" style="background:#ffffff;color:#000000">
+
+
+                 <ul class="list-group list-group-flush"> 
+                      <li class="list-group-item">             <asp:Label Text="¿Como fue tu experiencia en esta compra?" runat="server" />                          </li>
+                    
+                       <li class="list-group-item">
+                        <div class="radio-group">
+
+                            <div class="container text-center">
+
+                                 <div class="row">
+    <div class="col">
+        <div class="row">
+         <div class="col">
+        <label>Atencion:</label>
+        </div>
+            <div class="col">
+                <div class="col">
+
+        <asp:RadioButton ID="rbAtencionB" runat="server" Text="Buena" TextAlign="Right" GroupName="opcion1" />
+                </div>
+                <div class="col">
+                 <asp:RadioButton ID="rbAtencionM" runat="server" Text="Mala" TextAlign="Right" GroupName="opcion1" />
+                    </div>
+                 </div>
+        </div>
+    </div>
+    <div class="col">
+         <div class="row">
+             <div class="col">
+
+        <label>Tiempo:</label>
+             </div>
+              <div class="col">
+
+ <div class="col">
+
+     <asp:RadioButton ID="rbTiempoB" runat="server" Text="Buena" TextAlign="Right" GroupName="opcion2" />
+
+ </div>
+                   <div class="col">
+
+     <asp:RadioButton ID="rbTiempoM" runat="server" Text="Mala" TextAlign="Right" GroupName="opcion2" />
+
+ </div>
+
+
+
+              </div>
+     
+    </div>
+         </div>
+   <div class="col">
+        <div class="row">
+         <div class="col">
+        <label>Calidad:</label>
+        </div>
+            <div class="col">
+                <div class="col">
+
+        <asp:RadioButton ID="rbCalidadB" runat="server" Text="Buena" TextAlign="Right" GroupName="opcion3" />
+                </div>
+                <div class="col">
+                 <asp:RadioButton ID="rbCalidadM" runat="server" Text="Mala" TextAlign="Right" GroupName="opcion3" />
+                    </div>
+                 </div>
+        </div>
+    </div>
+
+
+  </div>
+
+                            </div>
+
+
+          
+                    
+                   
+             
+                </div> 
+
+                   </li>
+                 </ul>  
+                   </div> 
+                   
+                   
+                   
+                   
+                   <div class="input-group mb-3">
+  
+               <asp:TextBox ID="tbFinal" runat="server" Height="100" MaxLength="500" TextMode="MultiLine" Width="1643" ></asp:TextBox>
+               <asp:Button cssclass="btn btn-success" runat="server" ID="btnEnviar2" Text="Enviar" OnClick="btnEnviar2_Click"></asp:Button>
+           </div>
+           </div>
+
+                   <%} %>
+   <%} %>
+                 <% }%>
+
     <%if (venta.metodo != "Efectivo")
 
         {  %>

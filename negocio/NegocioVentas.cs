@@ -20,7 +20,7 @@ namespace negocio
             try
             {
                 datos.setearConsulta(" select v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA," +
-                    "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " );
+                    "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN,estado FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " );
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -32,6 +32,7 @@ namespace negocio
                     v.UsuarioComprador = (string)datos.Lector["USUARIO"];
                     v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     v.Titulo = (string)datos.Lector["TITULO"];
+                    v.finalizada = (bool)datos.Lector["estado"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
                     if (datos.Lector["URLIMAGEN"].ToString() == "")
                     {
@@ -93,7 +94,7 @@ namespace negocio
             try
             {
                 datos.setearConsulta(" select v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA," +
-                    "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " +
+                    "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN,estado FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " +
                     "where DNIVENDEDOR=@dni");
                 datos.setearParametro("@dni", dni);
                 datos.ejecutarLectura();
@@ -109,7 +110,7 @@ namespace negocio
                     v.Titulo = (string)datos.Lector["TITULO"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
                     v.urlImagen = (string)datos.Lector["URLIMAGEN"] != "null" ? (string)datos.Lector["URLIMAGEN"] : "null";
-
+                    v.finalizada = (bool)datos.Lector["estado"];
                     if (datos.Lector["FECHAENTREGA"].ToString() == "")
                     {
                         v.FechaEntrega = "No Entregado";
@@ -185,7 +186,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta(" SELECT v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA,e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN FROM VENTAS V inner join Estados e  on v.IDESTADO = e.ID where V.ID = @id");
+                datos.setearConsulta(" SELECT v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA,e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN,estado FROM VENTAS V inner join Estados e  on v.IDESTADO = e.ID where V.ID = @id");
                 datos.setearParametro("@id", n);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -199,7 +200,8 @@ namespace negocio
                     aux.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
                     aux.Titulo = (string)datos.Lector["TITULO"];
                     aux.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
-
+                    aux.finalizada = (bool)datos.Lector["estado"];
+                   
                     if (datos.Lector["FECHAENTREGA"].ToString() == "")
                     {
                         aux.FechaEntrega = "No Entregado";
@@ -275,6 +277,30 @@ namespace negocio
             }
 
         }
+        public void finalizarVenta(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+               
+
+                    datos.setearConsulta(" update ventas set estado=1 where id=@id");
+                
+              
+
+                datos.setearParametro("@id", id);
+               
+                datos.ejecutarLectura();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
 
         public void agregarVenta(Venta v)
         {
@@ -282,8 +308,8 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo,URLIMAGEN )" +
-                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.UsuarioComprador + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "','null')");
+                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo,URLIMAGEN,estado )" +
+                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.UsuarioComprador + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "','null',0)");
 
                 datos.ejecutarAccion();
             }
@@ -305,7 +331,7 @@ namespace negocio
             try
             {
                 datos.setearConsulta(" select v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA," +
-                    "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " +
+                    "e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN,estado FROM VENTAS V\r\ninner join Estados e  on v.IDESTADO=e.ID " +
                     "where DNICOMPRADOR=@dni");
                 datos.setearParametro("@dni", dni);
                 datos.ejecutarLectura();
@@ -321,7 +347,7 @@ namespace negocio
                     v.Titulo = (string)datos.Lector["TITULO"];
                     v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
                     v.urlImagen = (string)datos.Lector["URLIMAGEN"] != null ? (string)datos.Lector["URLIMAGEN"].ToString() : "null";
-
+                    v.finalizada = (bool)datos.Lector["estado"];
                     if (datos.Lector["FECHAENTREGA"].ToString() == "")
                     {
                         v.FechaEntrega = "No Entregado";
