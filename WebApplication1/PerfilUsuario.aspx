@@ -13,7 +13,8 @@
 <asp:Label ID="lblRep" runat="server"></asp:Label>
         </div>        
 
-        
+         <asp:Button ID="btnAdd" runat="server"   type="button" Text="Agregar a favoritos" 
+                                      />
 
     </div>
 
@@ -34,8 +35,11 @@
 				                    <div class="info-product">
                                         <h2 class="info-title"><%#Eval("Titulo")%></h2>
 					                    <p class="price">$<%#Eval("Precio")%></p>
-                                        <asp:Button ID="btnAdd" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar al carrito" 
-                                        CommandArgument ='<% #Eval("Id")%>' CommandName="artId" />
+                                       <%if (this.Session["activeUser"] != null)
+                                        {%>
+                                            <asp:Button ID="Button1" runat="server"  CssClass="btn-info" OnClick="btnAdd_Click" type="button" Text="Agregar a favoritos" 
+                                            CommandArgument ='<% #Eval("Id")%>' CommandName="artId" /> 
+                                        <%}%>
                                         <a href="DetallesArticulos.aspx?Id=<%#Eval("Id") %>" class="btn-info">Ver detalles</a>
                                     </div>
 			                   </div>

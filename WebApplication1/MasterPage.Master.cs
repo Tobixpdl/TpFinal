@@ -13,14 +13,14 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.Session["activeUser"] != null && this.Session["listaDeCompras"] != null)
-            {
-                lblCompra.Text = ((List<Publicacion>)this.Session["listaDeCompras"]).Count.ToString();
-            }
-            else
-            {
-                lblCompra.Visible = false;
-            }
+           if (this.Session["activeUser"] != null && this.Session["listaDeCompras"] != null)
+           {
+               lblCompra.Text = ((List<Publicacion>)this.Session["listaDeCompras"]).Count.ToString();
+           }
+           else
+           {
+               lblCompra.Visible = false;
+           }
 
         }
         protected void salirbtn_OnClick(object sender, EventArgs e)

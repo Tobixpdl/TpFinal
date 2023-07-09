@@ -21,83 +21,94 @@ namespace WebApplication1
         public Usuario SelectedUser { get; set; }
         public int cantidadDeCompradores;
         public string SelecUser;
+        public NegocioPublicacion negocio = new NegocioPublicacion();
 
+        public Usuario user = new Usuario();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ListaArticulos = negocioPublicacion.ListarSinCero();
-            ListaArticulosFeatured = negocioPublicacion.listarFeatured();
-            SelecUser = Request.QueryString["User"];
-           
-            if (SelecUser != null)
+          
+
+             
+            SelectedUser = negocioUser.ListarXUsuario(Request.QueryString["User"]);
+
+            UsuarioNombre.Text = SelectedUser.usuario;
+
+            List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuarioSinCero(SelectedUser.Id);
+            ListaArticulos = publicaciones;
+
+            carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
+
+            if (this.Session["activeUser"] != null)
             {
-             SelectedUser = negocioUser.ListarXUsuario(SelecUser);
+                string nusuario = this.Session["activeUser"].ToString();
+                user.usuario = nusuario;
+                user = negocioUser.ListarXUsuario(nusuario);
+                carritoActual = negocio.listarFavoritos((int)this.Session["idUsuario"]);
+                this.Session.Add("listaDeCompras", carritoActual);
             }
 
-            if (this.Session["selectedUser"] != null)
+            if (!IsPostBack)
             {
-                string selUser = this.Session["selectedUser"].ToString();
-                SelectedUser = negocioUser.ListarXUsuario(selUser);
-
-                UsuarioNombre.Text = SelectedUser.usuario;
-
-                List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuarioSinCero(SelectedUser.Id);
-                ListaArticulos = publicaciones;
-
-                carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
-
-                rprCards.DataSource = ListaArticulos;
-                rprCards.DataBind();
-                NegocioComentarios negocioComentarios = new NegocioComentarios();
-                lblRep.Text = negocioComentarios.getRep(SelectedUser.usuario,ref cantidadDeCompradores).ToString();
-                ListaComentarios = negocioComentarios.ListarPorUsuario(SelectedUser.usuario);
+            rprCards.DataSource = ListaArticulos;
+            rprCards.DataBind();
+                if (this.Session["activeUser"] != null)
+                {
+                    string nusuario = Session["activeUser"].ToString();
+                    user.usuario = nusuario;
+                    user = negocioUser.ListarXUsuario(nusuario);
+                }
             }
             else
             {
-                Response.Redirect("Default.aspx", false);
+                if (this.Session["activeUser"] != null)
+                {
+                    string nusuario = Session["activeUser"].ToString();
+                    user.usuario = nusuario;
+                    user = negocioUser.ListarXUsuario(nusuario);
+                }
             }
-
-
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
 
+            Button btnAdd = (Button)sender;
+            btnAdd.Enabled = false;
+
             string valor = ((Button)sender).CommandArgument;
-
             var aux = buscarArticulo(valor);
-            var lugar = 0;
-            if (ContainsArticulo(valor, ref lugar))
-            {
-                carritoActual[lugar].Cantidad++;
 
+            if (user.Id != aux.Id_Usuario)
+            {
+                if (!ContainsArticulo(aux))
+                {
+                    negocio.AgregarFavoritos(aux, (int)this.Session["idUsuario"]);
+                    carritoActual.Add(buscarArticulo(valor));
+                }
+
+
+                
             }
             else
             {
-                carritoActual.Add(buscarArticulo(valor));
+                string script = "alert('No puede hacer esto.');";
+                ClientScript.RegisterStartupScript(this.GetType(), "NoPuedeHacerEsto", script, true);
             }
 
-
-            this.Session.Add("listaDeCompras", carritoActual);
-
-            Response.Redirect("Default.aspx", false);
 
         }
-        public bool ContainsArticulo(string id, ref int index)
+        public bool ContainsArticulo(Publicacion p)
         {
-            bool aux = false;
-            int val = 0;
-            bool numero = int.TryParse(id, out val);
-            for (int i = 0; i < carritoActual.Count; i++)
+            foreach (Publicacion pu in carritoActual)
             {
-                if (carritoActual[i].Id == val)
+                if (pu.Id == p.Id)
                 {
-                    aux = true;
-                    index = i;
-                    return aux;
+                    return true;
                 }
             }
-            return aux;
+
+            return false;
         }
         public Publicacion buscarArticulo(string id)
         {

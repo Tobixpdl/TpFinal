@@ -28,7 +28,7 @@ namespace WebApplication1
                 artADetallar = negocio.ListarXId(id);
                 userDetalle = negocioUser.ListarXUsuario(artADetallar.Id_Usuario);
                 string Creador = userDetalle.usuario;
-                this.Session.Add("selectedUser", Creador);
+                Session.Add("selectedUser", Creador);
 
                 if (artADetallar != null && artADetallar.imagenes != null && artADetallar.imagenes.Count > 0)
                 {
