@@ -8,6 +8,9 @@
         <div>
 <p><strong> Usuario:</strong></p>
 <asp:Label ID="UsuarioNombre" runat="server"></asp:Label>
+
+            <p><strong> Reputacion:</strong></p>
+<asp:Label ID="lblRep" runat="server"></asp:Label>
         </div>        
 
         

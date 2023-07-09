@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Security.Policy;
 using System.Web;
 using System.Web.Handlers;
@@ -18,6 +19,9 @@ namespace WebApplication1
         public List<Publicacion> listaDePublicaciones;
         public int contador { get; set; }
         public int idUsuario { get; set; }
+
+        public bool isRequested;
+        public int index;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(this.Session["activeUser"] != null && this.Session["activeUser"].ToString() == "usuario0")
@@ -38,12 +42,31 @@ namespace WebApplication1
                 {
                     idUsuario = (int)Session["idUsuario"];
                 }
+                if(!IsPostBack)
+                {
 
+                   
+                   
+                }
                 ContarItems(ref listaDePublicaciones);
 
 
                 dgvPublicaciones.DataSource = listaDePublicaciones;
                 dgvPublicaciones.DataBind();
+                index = this.Session["index"] != null ? (int)this.Session["index"] : -1;
+                hideRows(index, contador, 7);
+                //isRequested = this.Session["request"] != null ? (bool)this.Session["request"] : false;
+                //index = this.Session["index"] != null ? (int)this.Session["index"] : 0;
+               
+                 //if(!isRequested)
+                 //   {
+                 //   dgvPublicaciones.Columns[5].Visible = false;
+                 //   dgvPublicaciones.Columns[6].Visible = false;
+
+                 //   }
+
+               // dgvPublicaciones.Rows[1].Cells[6].Visible = true;
+
             }
             else
             {
@@ -53,6 +76,7 @@ namespace WebApplication1
 
             }
 
+               
 
         }
         public void ContarItems(ref List<Publicacion> list)
@@ -87,7 +111,20 @@ namespace WebApplication1
             Response.Redirect("Default.aspx", false);
 
         }
+        public void hideRows(int index,int filas,int columnas)
+        {
+            for (int i = 0; i < filas && i!=index; i++)
+            {
+                for(int j = 5;j< columnas; j++)
+                {
+                    dgvPublicaciones.Rows[i].Cells[j].Visible = false;
+                }
 
+
+               
+            }
+
+        }
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
@@ -137,8 +174,28 @@ namespace WebApplication1
                 int index = Convert.ToInt32(e.CommandArgument);
                 Response.Redirect("Modificar.aspx?id=" + listaDePublicaciones[index].Id.ToString());
             }
+            else
+               if(e.CommandName =="Request")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+            
+                
+                this.Session.Add("index", index);
+                
+                //Response.Redirect("Publicaciones.aspx");
+            }
+            else
+                if(e.CommandName =="Cancelar")
+            {
+             
+                this.Session.Add("index", -1);
+             
+
+            }
 
 
         }
+
+      
     }
 }

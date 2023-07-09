@@ -30,7 +30,6 @@ namespace WebApplication1
                 txtMail.Text = usuarioCompra.mail;
                 txtNombre.Text = usuarioCompra.nombre;
                 txtStock.Text = "1";
-                rbEfectivo.Checked = true;
                 TxtDni.Text = usuarioCompra.dni.ToString();
             }
         }

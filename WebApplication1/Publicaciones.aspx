@@ -51,12 +51,23 @@
             headertext="Acciones" 
                        
             text="Modificar"   />
+
+                       
+                  
+
+       
                    <asp:ButtonField  ButtonType="Button"
-            commandname="Erase" 
+            commandname="Request" 
             headertext="Acciones" 
             text="Eliminar"  />
-
-
+                    <asp:ButtonField  ButtonType="Button" 
+            commandname="Erase" 
+            headertext="Acciones" 
+            text="Confirmar"  />
+                      <asp:ButtonField  ButtonType="Button"
+            commandname="Cancelar" 
+            headertext="Acciones" 
+            text="Cancelar"  />
                     
                   
                </Columns>

@@ -13,13 +13,13 @@ namespace WebApplication1
     {
         public List<Publicacion> ListaArticulos { get; set; }
         public List<Publicacion> ListaArticulosFeatured { get; set; }
-
+        public List<Comentario> ListaComentarios { get; set; }
         NegocioUsuario negocioUser = new NegocioUsuario();
         NegocioPublicacion negocioPublicacion = new NegocioPublicacion();
         public List<Publicacion> carritoActual { get; set; }
         public Usuario usuario { get; set; }
         public Usuario SelectedUser { get; set; }
-
+        public int cantidadDeCompradores;
         public string SelecUser;
 
 
@@ -28,6 +28,7 @@ namespace WebApplication1
             ListaArticulos = negocioPublicacion.ListarSinCero();
             ListaArticulosFeatured = negocioPublicacion.listarFeatured();
             SelecUser = Request.QueryString["User"];
+           
             if (SelecUser != null)
             {
              SelectedUser = negocioUser.ListarXUsuario(SelecUser);
@@ -47,6 +48,9 @@ namespace WebApplication1
 
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
+                NegocioComentarios negocioComentarios = new NegocioComentarios();
+                lblRep.Text = negocioComentarios.getRep(SelectedUser.usuario,ref cantidadDeCompradores).ToString();
+                ListaComentarios = negocioComentarios.ListarPorUsuario(SelectedUser.usuario);
             }
             else
             {
