@@ -194,7 +194,7 @@ namespace WebApplication1
         protected void BtnBuscar_Click(object sender, EventArgs e)
         {
             List<Publicacion> listaFiltrada = ListaArticulos.FindAll(x => x.Titulo.ToUpper().Contains(txtBusqueda.Text.ToUpper()));
-            if (listaFiltrada.Count == 0)
+            if (listaFiltrada.Count == 0 || string.IsNullOrWhiteSpace(txtBusqueda.Text))
             {
                 FiltroAvanzado = false;
                 BusquedaNull.Visible = true;
