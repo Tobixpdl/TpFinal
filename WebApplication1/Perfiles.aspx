@@ -14,7 +14,8 @@
 
                    <%--<asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />--%>
                    <asp:BoundField  HeaderText="Usuario" DataField="usuario" />
-                   <asp:BoundField  HeaderText="DNI" DataField="dni" />
+                   <asp:BoundField  HeaderText="Nombre" DataField="nombre" />
+                   <asp:BoundField  HeaderText="Apellido" DataField="apellido" />
                    <asp:BoundField  HeaderText="Mail" DataField="mail" />
 
                    <asp:ButtonField  ButtonType="Button"

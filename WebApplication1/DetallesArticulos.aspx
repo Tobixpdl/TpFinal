@@ -3,14 +3,36 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+
+    <%--<div class="container text-center">
+          <div class="row">
+            <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+            <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+
+            <!-- Force next columns to break to new line -->
+            <div class="w-100"></div>
+
+            <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+            <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+          </div>
+        </div>--%>
  
     <section class="detalles">
-         <div class="card-detalle">
-                   <asp:Image ID="imgPublicacion" runat="server" CssClass="img-fluid mb-3" />
-                   <asp:Image ID="imgP2" runat="server" CssClass="img-fluid mb-3" />
-                   <asp:Image ID="imgP3" runat="server" CssClass="img-fluid mb-3" />
-                   <asp:Image ID="imgP4" runat="server" CssClass="img-fluid mb-3" />
+         <div class="card-imgs">
+                   <asp:Image ID="imgPublicacion" runat="server" CssClass="img1" />
+                   <div class="grilla">
+                      <div class="grid-items">
+                          <asp:Image ID="imgP2" runat="server" CssClass="img1" />
+                      </div>
+                      <div class="grid-items">
+                          <asp:Image ID="imgP3" runat="server" CssClass="img1" />
+                      </div>
+                       <div class="grid-items">
+                          <asp:Image ID="imgP4" runat="server" CssClass="img1" />
+                      </div>
+                  </div>
          </div>
+
         <div class="card-detalle">
                <div class="card">  
                   <h3 class="card-title"><%:artADetallar.Titulo%></h3>
@@ -26,6 +48,47 @@
     </section>
 
     <style>
+
+        .card-imgs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 700px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .img1 {
+            width: 100%;
+            max-width: 100%;
+            transition:  transform 1s ease;
+        }
+
+            .img1:first-child {
+                max-width: 300px; 
+                max-height:auto;
+            }
+
+        .grilla {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-items:center;
+            transition: transform 1s ease;
+        }
+
+        .grid-items {
+            flex-grow: 1;
+            max-width:50%;
+        }
+            .grid-items:hover {
+                transform: scale(2);
+                border: 2px solid black;
+            }
+
+
         .card-detalle{
             display:flex;
             justify-content:center;

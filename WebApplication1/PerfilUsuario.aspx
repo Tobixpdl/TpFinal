@@ -13,9 +13,13 @@
 <asp:Label ID="lblRep" runat="server"></asp:Label>
         </div>        
 
-         <asp:Button ID="btnAdd" runat="server"   type="button" Text="Agregar a favoritos" 
-                                      />
+         <asp:Button ID="btnAdd" runat="server"   type="button" Text="Agregar a favoritos" />
 
+        <asp:Repeater id="rprComentarios" runat="server">
+            <ItemTemplate>
+
+            </ItemTemplate>
+        </asp:Repeater>
     </div>
 
     <hr />

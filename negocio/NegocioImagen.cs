@@ -98,13 +98,13 @@ namespace negocio
 
 
         }
-        public void ModificarImagen(string url, int id)
+        public void ModificarImagen(string url, int idI)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update IMAGENES set imagenUrl=@url where IdPublicacion= @idPublicacion");
-                datos.setearParametro("@idPublicacion", id);
+                datos.setearConsulta("update IMAGENES set imagenUrl=@url where Id = @idImagen ");
+                datos.setearParametro("@idImagen", idI);
                 datos.setearParametro("@url", url);
                 datos.ejecutarAccion();
             }
@@ -117,9 +117,6 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
-
-
-
         }
 
         public Imagen SeleccionarImagen(int id)

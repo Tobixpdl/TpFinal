@@ -45,7 +45,7 @@
     Informacion del Producto
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">Titulo: <%:venta.Titulo%>></li>
+    <li class="list-group-item">Titulo: <%:venta.Titulo%></li>
     <li class="list-group-item">Cantidad: <%:venta.Cantidad %></li>
     <li class="list-group-item">Precio : <%:venta.PrecioFinal %></li>
        <li class="list-group-item">Estado de la venta: <%:venta.Estado %></li>

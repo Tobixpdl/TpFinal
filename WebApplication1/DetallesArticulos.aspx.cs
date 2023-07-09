@@ -30,16 +30,26 @@ namespace WebApplication1
                 string Creador = userDetalle.usuario;
                 Session.Add("selectedUser", Creador);
 
-                if (artADetallar != null && artADetallar.imagenes != null && artADetallar.imagenes.Count > 0)
+                List<Image> img = new List<Image>
                 {
-                    Image img = (Image)imgPublicacion;
-                    img.ImageUrl = artADetallar.imagenes[0].Url;
-                    img.Visible = true; 
-                }
-                else
+                    imgPublicacion,
+                    imgP2,
+                    imgP3,
+                    imgP4
+                };
+
+                for (int i = 0; i < img.Count; i++)
                 {
-                    imgPublicacion.Visible = false;
+                    if (i < artADetallar.imagenes.Count && artADetallar.imagenes[i].Url != null)
+                    {
+                        img[i].ImageUrl = artADetallar.imagenes[i].Url;
+                    }
+                    if (img[i].ImageUrl == "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930")
+                    {
+                        img[i].Visible = false;
+                    }
                 }
+                
             }
             else
             {

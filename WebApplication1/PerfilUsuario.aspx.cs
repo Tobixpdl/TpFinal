@@ -16,19 +16,18 @@ namespace WebApplication1
         public List<Comentario> ListaComentarios { get; set; }
         NegocioUsuario negocioUser = new NegocioUsuario();
         NegocioPublicacion negocioPublicacion = new NegocioPublicacion();
+        NegocioComentarios negocioComentarios = new NegocioComentarios();
         public List<Publicacion> carritoActual { get; set; }
+        public List<Comentario> listComentarios { get; set; }
         public Usuario usuario { get; set; }
         public Usuario SelectedUser { get; set; }
         public int cantidadDeCompradores;
         public string SelecUser;
-        public NegocioPublicacion negocio = new NegocioPublicacion();
 
         public Usuario user = new Usuario();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-          
-
              
             SelectedUser = negocioUser.ListarXUsuario(Request.QueryString["User"]);
 
@@ -37,6 +36,11 @@ namespace WebApplication1
             List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuarioSinCero(SelectedUser.Id);
             ListaArticulos = publicaciones;
 
+            listComentarios = negocioComentarios.ListarPorUsuario(Request.QueryString["User"]);
+
+
+
+
             carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
 
             if (this.Session["activeUser"] != null)
@@ -44,14 +48,16 @@ namespace WebApplication1
                 string nusuario = this.Session["activeUser"].ToString();
                 user.usuario = nusuario;
                 user = negocioUser.ListarXUsuario(nusuario);
-                carritoActual = negocio.listarFavoritos((int)this.Session["idUsuario"]);
+                carritoActual = negocioPublicacion.listarFavoritos((int)this.Session["idUsuario"]);
                 this.Session.Add("listaDeCompras", carritoActual);
             }
 
             if (!IsPostBack)
             {
-            rprCards.DataSource = ListaArticulos;
-            rprCards.DataBind();
+                rprComentarios.DataSource = listComentarios;
+                rprComentarios.DataBind();
+                rprCards.DataSource = ListaArticulos;
+                rprCards.DataBind();
                 if (this.Session["activeUser"] != null)
                 {
                     string nusuario = Session["activeUser"].ToString();
@@ -83,7 +89,7 @@ namespace WebApplication1
             {
                 if (!ContainsArticulo(aux))
                 {
-                    negocio.AgregarFavoritos(aux, (int)this.Session["idUsuario"]);
+                    negocioPublicacion.AgregarFavoritos(aux, (int)this.Session["idUsuario"]);
                     carritoActual.Add(buscarArticulo(valor));
                 }
 
@@ -135,8 +141,7 @@ namespace WebApplication1
         protected string ReturnUrl(object oItem)
         {
             string id = (DataBinder.Eval(oItem, "Id")).ToString();
-            NegocioPublicacion negocio = new NegocioPublicacion();
-            var imagenes = negocio.ListarXId(id).imagenes;
+            var imagenes = negocioPublicacion.ListarXId(id).imagenes;
 
             if (imagenes != null && imagenes.Count > 0)
             {

@@ -382,8 +382,12 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("delete from IMAGENES where IdPublicacion = @idpub");
+                datos.setearConsulta("delete from FAVORITOS where Id_Publicacion = @idpub");
                 datos.setearParametro("@idpub", IdPubli);
+                datos.ejecutarAccion();
+
+                datos.setearConsulta("delete from IMAGENES where IdPublicacion = @idpubl");
+                datos.setearParametro("@idpubl", IdPubli);
                 datos.ejecutarAccion();
 
                 datos.setearConsulta("delete from PUBLICACIONES where Id = @id");

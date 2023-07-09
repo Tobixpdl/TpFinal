@@ -49,15 +49,23 @@ namespace WebApplication1
                 txtDescripcion.Text = target.Descripcion;
                 txtstock.Text = target.Stock.ToString();
                 txtPrecio.Text = target.Precio.ToString();
-                ddlCategorias.SelectedIndex = target.Categoria.Id-1;
-                Image img = (Image)imgPublicacion;
+                ddlCategorias.SelectedIndex = target.Categoria.Id - 1;
 
+                List<Image> img = new List<Image>
+                {
+                    imgPublicacion,
+                    imgP2,
+                    imgP3,
+                    imgP4
+                };
 
-                img.ImageUrl = target.imagenes[0].Url;
-
-
-
-
+                for (int i = 0; i < img.Count; i++)
+                {
+                    if (i < target.imagenes.Count && target.imagenes[i].Url != null)
+                    {
+                        img[i].ImageUrl = target.imagenes[i].Url;
+                    }
+                }
 
 
             }
@@ -84,9 +92,9 @@ namespace WebApplication1
 
             //Response.Redirect("Crear.aspx", false);
         }
-        protected void btnUpload_Click(object sender, EventArgs e)
-        {
 
+        public void subirIMG(Image p)
+        {
             if (url.HasFile)
             {
 
@@ -100,7 +108,7 @@ namespace WebApplication1
                     string extension = Path.GetExtension(finalRuta);
                     if (extension == ".jpg" || extension == ".png" || extension == ".gif" || extension == ".jpeg")
                     {
-                        Image img = (Image)imgPublicacion;
+                        Image img = (Image)p;
                         img.ImageUrl = finalRuta;
                     }
                     else
@@ -120,16 +128,32 @@ namespace WebApplication1
                 lblWrongImg.Visible = true;
             }
 
+        }
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
 
-
-
-
+            subirIMG(imgPublicacion);
 
         }
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Session.Add("validar", true);
             Response.Redirect("Publicaciones.aspx", false);
+        }
+
+        protected void btnUpload2_Click(object sender, EventArgs e)
+        {
+            subirIMG(imgP2);
+        }
+
+        protected void btnUpload3_Click(object sender, EventArgs e)
+        {
+            subirIMG(imgP3);
+        }
+
+        protected void btnUpload4_Click(object sender, EventArgs e)
+        {
+            subirIMG(imgP4);
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
@@ -163,10 +187,50 @@ namespace WebApplication1
                 aux.Categoria = catAux;
                 negocioPublicacion.ModificarPublicacion(aux);
 
-                negocioImagen.ModificarImagen(imgPublicacion.ImageUrl, aux.Id);
-
-
-
+                if (imgPublicacion.ImageUrl != null)
+                {
+                    if (target.imagenes == null || target.imagenes.Count == 0 || target.imagenes[0] == null)
+                    {
+                        negocioImagen.CrearImagen(imgPublicacion.ImageUrl, aux.Id);
+                    }
+                    else
+                    {
+                        negocioImagen.ModificarImagen(imgPublicacion.ImageUrl, target.imagenes[0].Id);
+                    }
+                }
+                if (!string.IsNullOrEmpty(imgP2.ImageUrl))
+                {
+                    if (target.imagenes == null || target.imagenes.Count <= 1 || target.imagenes[1] == null)
+                    {
+                        negocioImagen.CrearImagen(imgP2.ImageUrl, aux.Id);
+                    }
+                    else
+                    {
+                        negocioImagen.ModificarImagen(imgP2.ImageUrl, target.imagenes[1].Id);
+                    }
+                }
+                if (!string.IsNullOrEmpty(imgP3.ImageUrl))
+                {
+                    if (target.imagenes == null || target.imagenes.Count <= 2 || target.imagenes[2] == null)
+                    {
+                        negocioImagen.CrearImagen(imgP3.ImageUrl, aux.Id);
+                    }
+                    else
+                    {
+                        negocioImagen.ModificarImagen(imgP3.ImageUrl, target.imagenes[2].Id);
+                    }
+                }
+                if (!string.IsNullOrEmpty(imgP4.ImageUrl))
+                {
+                    if (target.imagenes == null || target.imagenes.Count <= 3 || target.imagenes[3] == null)
+                    {
+                        negocioImagen.CrearImagen(imgP4.ImageUrl, aux.Id);
+                    }
+                    else
+                    {
+                        negocioImagen.ModificarImagen(imgP4.ImageUrl, target.imagenes[3].Id);
+                    }
+                }
 
 
                 Session.Add("validar", true);
@@ -175,7 +239,7 @@ namespace WebApplication1
             else
             {
                 this.Session.Add("validar", false);
-                Response.Redirect("Modificar.aspx?id=" + target.Id,false);
+                Response.Redirect("Modificar.aspx?id=" + target.Id, false);
             }
         }
     }

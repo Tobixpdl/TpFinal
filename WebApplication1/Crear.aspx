@@ -82,10 +82,30 @@
 </div>
     <asp:Label ID="lblWrongImg" runat="server" Text="No has seleccionado ninguna imagen"  style="color:red"></asp:Label>
                <asp:Label ID="lblWrongFormato" runat="server" Text="Formato Invalido"  style="color:red"></asp:Label>             
-                        <asp:Image ID="imgPublicacion" runat="server" 
-                           CssClass="img-fluid mb-3"
-                            
-                           />
+                         <div class="container text-center">
+                          <div class="row g-2">
+                            <div class="col-6">
+                              <div class="p-3"
+                                  ><asp:Image ID="imgPublicacion" runat="server" CssClass="img-fluid mb-3"/>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="p-3">
+                                  <asp:Image ID="imgP2" runat="server" CssClass="img-fluid mb-3"/>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="p-3">
+                                  <asp:Image ID="imgP3" runat="server" CssClass="img-fluid mb-3"/>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="p-3">
+                                  <asp:Image ID="imgP4" runat="server" CssClass="img-fluid mb-3"/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
                         
 
