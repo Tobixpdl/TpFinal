@@ -37,7 +37,7 @@
     <div class="col-6 col-md-4" style="padding: 10px">
         <div class="container">
             <div class="card">
-                        <div class="card">
+                        <div>
                             <div class="img-container">
                               <asp:Image ID="imgPublicacion" runat="server" 
                               CssClass="card-img"  ImageUrl=<%#ReturnUrl(listaDeCompras)%>/> 
@@ -47,7 +47,7 @@
                                <p>Precio: $<%:listaDeCompras.Precio%></p>
                                 <div class="stock-container">
                                     <p>Cantidad:</p>
-                                    <asp:TextBox ID="txtStock" runat="server" type="number" CssClass="stockBox"></asp:TextBox>
+                                    <asp:TextBox ID="txtStock" runat="server" type="number" CssClass="stockBox" AutoPostBack ="true" OnTextChanged="txtStock_TextChanged"></asp:TextBox>
                                 </div> 
                            </div>
                        </div>

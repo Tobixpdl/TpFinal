@@ -127,7 +127,7 @@ namespace negocio
             AccesoDatos datos=new AccesoDatos();
             try
             {
-                datos.setearConsulta("select SUM(reputacion)as 'Sumatoria',COUNT(distinct id) as 'Cantidad' from comentarios where id in (select distinct id from comentarios where destinatario = @name)");
+                datos.setearConsulta("SELECT ISNULL(SUM(reputacion), 0) AS 'Sumatoria', ISNULL(COUNT(DISTINCT id), 0) AS 'Cantidad'\r\nFROM comentarios\r\nWHERE id IN (SELECT DISTINCT id FROM comentarios WHERE destinatario = @name)");
                 datos.setearParametro("@name", name);
                 datos.ejecutarLectura();
 
@@ -144,7 +144,10 @@ namespace negocio
             }
             finally { datos.cerrarConexion();}
 
-            rate = sumatoria / cantidad;
+            if (sumatoria != 0 && cantidad != 0)
+            {
+              rate = sumatoria / cantidad;
+            }
             return rate;
 
         }

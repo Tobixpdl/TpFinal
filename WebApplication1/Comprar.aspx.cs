@@ -30,6 +30,7 @@ namespace WebApplication1
                 txtMail.Text = usuarioCompra.mail;
                 txtNombre.Text = usuarioCompra.nombre;
                 txtStock.Text = "1";
+                rbEfectivo.Checked = true;
                 TxtDni.Text = usuarioCompra.dni.ToString();
             }
         }
@@ -87,6 +88,17 @@ namespace WebApplication1
 
             negocio.agregarVenta(venta);
             Response.Redirect("MisCompras.aspx",false);
+
+        }
+
+        protected void txtStock_TextChanged(object sender, EventArgs e)
+        {
+            decimal cantidad = 0;
+            if (decimal.TryParse(txtStock.Text, out cantidad))
+            {
+                decimal precioTotal = cantidad * listaDeCompras.Precio;
+                TotalLiteral.Text = precioTotal.ToString();
+            }
 
         }
     }

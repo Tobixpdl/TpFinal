@@ -106,6 +106,7 @@ namespace WebApplication1
                 negocioU.ModificarUsuario(newUser);
                 lblChangeUser.Text = "Usuario editado exitosamente";
                 lblChangeUser.Visible = true;
+                Session["activeUser"] = txtUsername.Text;
             }
             else
             {

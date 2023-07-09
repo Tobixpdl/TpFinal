@@ -6,8 +6,10 @@
  
     <section class="detalles">
          <div class="card-detalle">
-                   <asp:Image ID="imgPublicacion" runat="server" 
-                           CssClass="img-fluid mb-3" />
+                   <asp:Image ID="imgPublicacion" runat="server" CssClass="img-fluid mb-3" />
+                   <asp:Image ID="imgP2" runat="server" CssClass="img-fluid mb-3" />
+                   <asp:Image ID="imgP3" runat="server" CssClass="img-fluid mb-3" />
+                   <asp:Image ID="imgP4" runat="server" CssClass="img-fluid mb-3" />
          </div>
         <div class="card-detalle">
                <div class="card">  
