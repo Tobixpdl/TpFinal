@@ -150,6 +150,12 @@ namespace WebApplication1
             {
                 negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Voy a Cancelar la Venta", 1);
                 nventas.ME(IdVenta, 4);
+
+                NegocioPublicacion negocioPublicacion = new NegocioPublicacion();
+                Publicacion publicacion = new Publicacion();
+                publicacion = negocioPublicacion.SeleccionarXTitulo(venta.Titulo);
+                publicacion.Stock += venta.Cantidad;
+                negocioPublicacion.ModificarPublicacion(publicacion);
                 Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario, false);
 
             }

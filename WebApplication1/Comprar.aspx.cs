@@ -24,6 +24,8 @@ namespace WebApplication1
             usuarioCompra = negocioUsuario.ListarXUsuario(Session["activeUser"].ToString());
             usuarioVenta = negocioUsuario.ListarXUsuario(listaDeCompras.Id_Usuario);
 
+
+
             if (!IsPostBack)
             {
                 TotalLiteral.Text = listaDeCompras.Precio.ToString();
@@ -62,7 +64,7 @@ namespace WebApplication1
             venta.FechaCompra = DateTime.Now.ToString();
             venta.FechaEntrega = "no entregado";
             venta.finalizada = false;
-            string texto = txtStock.Text; 
+            string texto = txtStock.Text;
             int cantidad;
             if (int.TryParse(texto, out cantidad))
             {
@@ -87,6 +89,13 @@ namespace WebApplication1
 
 
             negocio.agregarVenta(venta);
+            Publicacion publicacion = new Publicacion();
+            NegocioPublicacion negocioP = new NegocioPublicacion();
+            string id = Request.QueryString["Id"];
+            int vOut = Convert.ToInt32(id);
+            publicacion = negocioP.GetPublicacion(vOut);
+            publicacion.Stock-=venta.Cantidad;
+            negocioP.ModificarPublicacion(publicacion);
             Response.Redirect("MisCompras.aspx",false);
 
         }

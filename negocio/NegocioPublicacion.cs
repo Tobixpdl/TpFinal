@@ -501,10 +501,11 @@ namespace negocio
 
             Publicacion aux = new Publicacion();
             NegocioImagen negocioImagen = new NegocioImagen();
+           int Id= Int32.Parse(id);
             try
             {
                 datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria,c.Nombre as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID AND p.ID=@id");
-                datos.setearParametro("@id", id);
+                datos.setearParametro("@id", Id);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
