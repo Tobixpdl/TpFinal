@@ -125,6 +125,7 @@
   
                <asp:TextBox ID="tbMensaje" runat="server" Height="100" MaxLength="500" TextMode="MultiLine" Width="1600" ></asp:TextBox>
                <asp:Button cssclass="btn btn-success" runat="server" ID="btnEnviar" Text="Enviar" OnClick="btnEnviar_Click"></asp:Button>
+           <asp:Label ID="lbText1" runat="server" Text="Campo Obligatorio" style="color:red" Visible="false"></asp:Label>
            </div>
 </div>
              <%}%>
@@ -239,63 +240,63 @@
   
                <asp:TextBox ID="tbFinal" runat="server" Height="100" MaxLength="500" TextMode="MultiLine" Width="1643" ></asp:TextBox>
                <asp:Button cssclass="btn btn-success" runat="server" ID="btnEnviar2" Text="Enviar" OnClick="btnEnviar2_Click"></asp:Button>
-           </div>
+               <asp:Label ID="lbtex2" runat="server" Text="Campo Obligatorio" style="color:red" Visible="false"></asp:Label>
+
+                   </div>
            </div>
 
                    <%} %>
    <%} %>
                  <% }%>
 
-    <%if (venta.metodo != "Efectivo")
+    <%if (venta.metodo != "Efectivo"  )
 
-        {  %>
+        {
 
-
-     <div class="Comprobante">
-                    <div class="card-header" style="background:#ff6a00;color: #ffffff;">
+%>  <div class="Comprobante">
+     <div class="card-header" style="background:#ff6a00;color: #ffffff;">
                  <label for="formFile" class="form-label " style="-webkit-text-stroke: 0.1px black;">Subí el comprobante!</label>
 
-            </div>    
+            </div>
+               <%if (venta.Estado == "En proceso" ||venta.Estado == "En reclamo"  )
+                {
+
+                    %>
+
+
                           <asp:FileUpload runat="server" ID="FileUpload1" class="form-control"  />
-  
+
  <asp:Button CssClass="btn btn-warning" runat="server" ID="Button1" Text="Subir Archivo" OnClick="btnUpload_Click"></asp:Button>
+
+
+
+               <%
+
+                } %>
          <%-- <label for="formFile" class="form-label">No hay archivos adjuntados</label>--%>
-                   
-        
-   
-          </div>  
+
+
+          </div>
 
 
      <div>
          <%if ( venta.urlImagen != "null")
              { %>
-         
-  <a class="nav-linkT" href="Comprobante.aspx?UsuarioEmisor=<%:usuarioEmisor.usuario%>&Id=<%:venta.Id%>&Url=<%:venta.urlImagen%>&UsuarioReceptor=<%:usuarioReceptor.usuario%>" id="lblUrl">Archivo</a>
+
+  <a class="nav-linkT" href="Comprobante.aspx?UsuarioEmisor=<%:usuarioEmisor.usuario%>&Id=<%:venta.Id%>&Url=<%:venta.urlImagen%>&UsuarioReceptor=<%:usuarioReceptor.usuario%>&PaginaOrigen=<%:origen%>" id="lblUrl">Archivo</a>
 
 <%} %>
+           <asp:Label ID="lblWrongTitulo" runat="server" Text="Usted no subio el comprobante aun" style="color:red" Visible="false"></asp:Label>
+
          </div>
      <%}
          else
          { %>
-    
+
            <%} %>
  
 
            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <style>
 
@@ -303,10 +304,10 @@
 body{
     background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
         background-repeat: no-repeat;
-    
+
         width: 1920px;
     height: 1080px;
-   
+
 
 }
 .send{
@@ -315,9 +316,6 @@ body{
 }
     </style>
 </asp:Content>
-
-
-
 
 
 

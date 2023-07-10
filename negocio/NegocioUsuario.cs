@@ -25,7 +25,7 @@ namespace negocio
                     usuario.password = (string)datos.Lector["CONTRASEÑA"];
                     usuario.nombre = (string)datos.Lector["NOMBRES"];
                     usuario.apellido = (string)datos.Lector["APELLIDOS"];
-                    //usuario.dni= datos.Lector.GetInt32(5);
+                    usuario.dni = datos.Lector.GetInt64(5);
                     try
                     {
                         usuario.telefono = (string)datos.Lector["TELEFONO"];
@@ -68,7 +68,6 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-
 
         public Usuario ListarXUsuario(int id)
         {
@@ -138,9 +137,9 @@ namespace negocio
 
         public void eliminarUsuario(int id)
         {
+            AccesoDatos datos = new AccesoDatos();
             try
             {
-                AccesoDatos datos = new AccesoDatos();
                 datos.setearConsulta("delete from FAVORITOS where Id_Usuario = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();

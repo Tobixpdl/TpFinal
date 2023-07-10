@@ -40,6 +40,10 @@
             height: 1080px;
         }
 
+        .row{
+            height:80vh;
+        }
+
         .labelContainer {
             text-align: center;
             margin-bottom: 10px;

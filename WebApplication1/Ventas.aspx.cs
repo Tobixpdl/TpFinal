@@ -58,5 +58,21 @@ namespace WebApplication1
         {
 
         }
+
+        protected void dgvVentas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dgvVentas_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dgvVentas_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvVentas.PageIndex = e.NewPageIndex;
+            dgvVentas.DataBind();
+        }
     }
 }

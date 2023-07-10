@@ -380,8 +380,15 @@ namespace negocio
         public void EliminarPublicacion(int IdPubli)
         {
             AccesoDatos datos = new AccesoDatos();
+            NegocioPublicacion np = new NegocioPublicacion();
+            Publicacion elim = np.ListarXId(IdPubli.ToString());
             try
             {
+                datos.setearConsulta("update VENTAS set IDESTADO = 4 where TITULO = @titulo");
+                datos.setearParametro("@titulo", elim.Titulo);
+                datos.ejecutarAccion();
+
+
                 datos.setearConsulta("delete from FAVORITOS where Id_Publicacion = @idpub");
                 datos.setearParametro("@idpub", IdPubli);
                 datos.ejecutarAccion();
@@ -625,27 +632,47 @@ namespace negocio
 
             }
 
-            public void ModificarPublicacion(Publicacion modificado)
+        public void ModificarPublicacion(Publicacion modificado)
         {
             AccesoDatos datos = new AccesoDatos();
-
+            int count = 0;
 
             try
             {
-                datos.setearConsulta("update PUBLICACIONES set TITULO=@titulo,PRECIO=@precio,DESCRIPCION=@descripcion,CATEGORIA=@idcategoria,STOCK=@idstock where id=@id");
+                datos.setearConsulta("SELECT COUNT(*) as cantidad FROM PUBLICACIONES WHERE id = @id");
                 datos.setearParametro("@id", modificado.Id);
-                datos.setearParametro("@titulo", modificado.Titulo);
+                datos.ejecutarLectura();
 
-                datos.setearParametro("@descripcion", modificado.Descripcion);
-                datos.setearParametro("@idstock", modificado.Stock);
-                datos.setearParametro("@idcategoria", modificado.Categoria.Id);
-                datos.setearParametro("@precio", modificado.Precio);
-                datos.EjecutarAccion();
+                if (datos.Lector.Read())
+                {
+                    if (datos.Lector["cantidad"] != DBNull.Value)
+                    {
+                        count = Convert.ToInt32(datos.Lector["cantidad"]);
+                    }
+                }
+
+                datos.cerrarConexion(); 
+
+                if (count > 0)
+                {
+                    datos.setearConsulta("UPDATE PUBLICACIONES SET TITULO = @titulo, PRECIO = @precio, DESCRIPCION = @descripcion, CATEGORIA = @idcategoria, STOCK = @idstock WHERE id = @id");
+                    datos.setearParametro("@titulo", modificado.Titulo);
+                    datos.setearParametro("@descripcion", modificado.Descripcion);
+                    datos.setearParametro("@idstock", modificado.Stock);
+                    datos.setearParametro("@idcategoria", modificado.Categoria.Id);
+                    datos.setearParametro("@precio", modificado.Precio);
+                    datos.EjecutarAccion();
+                }
+                else
+                {
+                   
+                    throw new Exception("No existe una publicación con el ID proporcionado.");
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+               
+                throw new Exception("Error al modificar la publicación.", ex);
             }
             finally
             {

@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
      <asp:ScriptManager runat="server" ID="ScriptManager1"></asp:ScriptManager>
-    <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click"  CssClass="btn-botones" type="button" Text="Volver" />  
+    <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click"  CssClass="btn-botones2" type="button" Text="Volver" />  
      <div class="container2">
          <div class="mp">
 
@@ -60,7 +60,7 @@
 
                  </div>
                          <div class="mb-3">
-                    <asp:Button runat="server" ID="btnModificar" Text="Modificar Publicacíon" OnClick="btnModificar_Click" CssClass="btn-botones2"></asp:Button>
+                    <asp:Button runat="server" ID="btnModificar" Text="Modificar Publicacíon" OnClick="btnModificar_Click" CssClass="btn-botones"></asp:Button>
 
                </div> 
                               <asp:Label runat="server" style="color:red" > Campo Obligatorio(*)</asp:Label>
@@ -146,37 +146,39 @@
             </div>
 
       <style>
-        body{
-    background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
-        background-repeat: no-repeat;
-    
-        width: 1920px;
-    height: 1080px;
-   
+          body {
+              background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
+              background-repeat: no-repeat;
+              width: 1920px;
+              height: 1080px;
+          }
 
-}
+          .btn-botones {
+              width: 7%;
+              padding: 1px;
+              background-color: var(--otherColor);
+              color: #fff;
+              border: none;
+              border-radius: 2px;
+              cursor: pointer;
+              margin: 20px;
+          }
 
-    .btn-botones{
-    width: 10%;
-    padding: 1px;
-    background-color: var(--otherColor);
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    margin:20px;
-  }
-    .btn-botones2{
-    width: 5%;
-    padding: 3px;
-    background-color: var(--otherColor);
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    margin-left: 3px;
-    margin-right: 3px;
-    margin:20px;
-  }
+          .btn-botones2 {
+              width: 5%;
+              padding: 3px;
+              background-color: var(--otherColor);
+              color: #fff;
+              border: none;
+              border-radius: 2px;
+              cursor: pointer;
+              margin-left: 3px;
+              margin-right: 3px;
+              margin: 20px;
+          }
+
+          .container2{
+              height: 100vh;
+          }
     </style>
 </asp:Content>

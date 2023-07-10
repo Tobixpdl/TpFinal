@@ -117,15 +117,15 @@ namespace WebApplication1
         }
         public void hideRows(int index,int filas,int columnas)
         {
-            for (int i = 0; i < filas && i!=index; i++)
+            for (int i = 0; i < filas; i++)
             {
                 for(int j = 5;j< columnas; j++)
                 {
-                    dgvPublicaciones.Rows[i].Cells[j].Visible = false;
+                    if (i != index)
+                    {
+                        dgvPublicaciones.Rows[i].Cells[j].Visible = false;
+                    }
                 }
-
-
-               
             }
 
         }
@@ -148,8 +148,6 @@ namespace WebApplication1
         }
         protected void dgvPublicaciones_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
-
             if (e.CommandName == "Erase")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
@@ -164,42 +162,42 @@ namespace WebApplication1
                 }
                 else
                 {
-                   
+
                     listaDePublicaciones = new List<Publicacion>();
                 }
 
                 Response.Redirect("Publicaciones.aspx");
 
             }
-            else
+
 
             if (e.CommandName == "Modify")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 Response.Redirect("Modificar.aspx?id=" + listaDePublicaciones[index].Id.ToString());
             }
-            else
-               if(e.CommandName =="Request")
+
+            if (e.CommandName == "Request")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-            
-                
+
+
                 this.Session.Add("index", index);
-                
-                //Response.Redirect("Publicaciones.aspx");
+
+                Response.Redirect("Publicaciones.aspx");
             }
-            else
-                if(e.CommandName =="Cancelar")
+
+            if (e.CommandName == "Cancelar")
             {
-             
+
                 this.Session.Add("index", -1);
-             
+                Response.Redirect("Publicaciones.aspx");
 
             }
 
 
         }
 
-      
+       
     }
 }

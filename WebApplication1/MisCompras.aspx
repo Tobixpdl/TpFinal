@@ -25,12 +25,15 @@
 
              <h1></h1>
               <div class="cp">
-                  <asp:GridView ID="dvgCompras" runat="server" OnRowCommand="dvgCompras_RowCommand" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false">
+                  <asp:GridView ID="dvgCompras" runat="server" OnRowCommand="dvgCompras_RowCommand" 
+                      OnSelectedIndexChanged="dvgCompras_SelectedIndexChanged" 
+                      OnPageIndexChanging="dvgCompras_PageIndexChanging" AllowPaging="true" PageSize="10"
+                      CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false">
 
                <Columns>
                      <asp:templatefield headertext="Ver Detalles">
             <itemtemplate>
-                    <a class="nav-linkT" href="Contacto.aspx?UsuarioReceptor=<%#Eval("UsuarioVendedor")%>&Id=<%#Eval("Id")%>&UsuarioEmisor=<%#Eval("UsuarioComprador")%>" id="lblVendedor">Click Acá</a>
+                    <a href="Contacto.aspx?UsuarioReceptor=<%#Eval("UsuarioVendedor")%>&Id=<%#Eval("Id")%>&UsuarioEmisor=<%#Eval("UsuarioComprador")%>&PaginaOrigen=MisCompras">Click aca</a>
             </itemtemplate>
           </asp:templatefield>
                    <asp:BoundField  HeaderText="Producto" DataField="Titulo" />
@@ -78,8 +81,9 @@ body{
     
         width: 1920px;
     height: 1080px;
-   
-
+}
+.row{
+    height:80vh;
 }
     </style>
 

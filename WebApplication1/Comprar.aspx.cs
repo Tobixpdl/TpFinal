@@ -28,7 +28,7 @@ namespace WebApplication1
             usuarioCompra = negocioUsuario.ListarXUsuario(Session["activeUser"].ToString());
             usuarioVenta = negocioUsuario.ListarXUsuario(listaDeCompras.Id_Usuario);
 
-
+            
 
             if (!IsPostBack)
             {
@@ -81,7 +81,6 @@ namespace WebApplication1
 
             venta.PrecioFinal = listaDeCompras.Precio * cantidad;
 
-
             if (rbEfectivo.Checked)
             {
                 venta.metodo = "e";
@@ -90,7 +89,6 @@ namespace WebApplication1
             {
                 venta.metodo = "t";
             }
-
 
             negocio.agregarVenta(venta);
             Publicacion publicacion = new Publicacion();
@@ -107,8 +105,13 @@ namespace WebApplication1
         protected void txtStock_TextChanged(object sender, EventArgs e)
         {
             decimal cantidad = 0;
+     
             if (decimal.TryParse(txtStock.Text, out cantidad))
             {
+                if(cantidad > listaDeCompras.Stock)
+                {
+                    txtStock.Text = listaDeCompras.Stock.ToString();
+                }
                 decimal precioTotal = cantidad * listaDeCompras.Precio;
                 TotalLiteral.Text = precioTotal.ToString();
             }

@@ -96,6 +96,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnEnviar;
 
         /// <summary>
+        /// Control lbText1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbText1;
+
+        /// <summary>
         /// Control rbAtencionB.
         /// </summary>
         /// <remarks>
@@ -168,6 +177,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnEnviar2;
 
         /// <summary>
+        /// Control lbtex2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbtex2;
+
+        /// <summary>
         /// Control FileUpload1.
         /// </summary>
         /// <remarks>
@@ -184,5 +202,14 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
+        /// Control lblWrongTitulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblWrongTitulo;
     }
 }

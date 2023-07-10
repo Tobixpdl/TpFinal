@@ -15,6 +15,7 @@ namespace WebApplication1
         public string emisor;
         public string receptor;
         public int id;
+        public string origen;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (this.Session["activeUser"] == null)
@@ -32,10 +33,9 @@ namespace WebApplication1
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Contacto.aspx?UsuarioReceptor=" + receptor + "&Id="+id+ "&UsuarioEmisor="+ emisor, false);
+            origen = Request.QueryString["PaginaOrigen"];
+            Response.Redirect("Contacto.aspx?UsuarioReceptor=" + receptor + "&Id="+id+ "&UsuarioEmisor="+ emisor + "&PaginaOrigen=" + origen, false);
          
-
-
         }
     }
 }

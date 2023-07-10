@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Pedidos Truchos</title>
+    <title>Buy Everything!</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
      <link  href="styles/st-default.css" rel="stylesheet" type="text/css">
@@ -100,12 +100,15 @@
                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                                              </asp:ContentPlaceHolder>
 
-        <div>
-            <footer>
-                <hr />
-               <%-- Manuel Blanco - Tobias Ponce de Leon - Marcos Zorzoli © 2023--%>
-            </footer>
-        </div>
+        
+           <footer>
+              <ul>
+                <li>Contacto: <a href="mailto:ayuda.buyeverything@gmail.com">ayuda.buyeverything@gmail.com</a></li>
+                <li>Teléfono: +54 9 11 2537-2242</li>
+              </ul>
+              <p>Buy Everything © 2023</p>
+          </footer>
+        
 
     </form>
 </body>
@@ -124,9 +127,34 @@
       --otherColor: #000080; /* azul marino */
     }
 
-    .HT{
-
+    footer {
+        position:relative;
+        background-color: #000;
+        color: #fff;
+        padding: 20px;
+        align-content:end;
+        bottom:0px;
+        width:125%;
     }
+
+        footer ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        footer li {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
 
     .navbarT{
         display:flex;

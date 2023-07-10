@@ -46,5 +46,16 @@ namespace WebApplication1
         {
 
         }
+
+        protected void dvgCompras_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dvgCompras_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dvgCompras.PageIndex = e.NewPageIndex;
+            dvgCompras.DataBind();
+        }
     }
 }

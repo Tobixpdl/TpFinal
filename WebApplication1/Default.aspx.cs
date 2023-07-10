@@ -27,6 +27,7 @@ namespace WebApplication1
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            FiltroAvanzado = false;
             Page.MaintainScrollPositionOnPostBack = true;
             // Generacion de los datos de las CARDS
             negocioUsuario = new NegocioUsuario();
@@ -69,7 +70,7 @@ namespace WebApplication1
                     user = negocioUsuario.ListarXUsuario(nusuario);
                 }
                 //}
-                FiltroAvanzado = false;
+                
                 // ddlCategoria_Llenado(sender, e);
             }
             else{
@@ -201,8 +202,13 @@ namespace WebApplication1
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
                 updatePanel.Update();
-
-
+            }
+            else if(listaFiltrada.Count == ListaArticulos.Count)
+            {
+                FiltroAvanzado = false;
+                rprCards.DataSource = ListaArticulos;
+                rprCards.DataBind();
+                updatePanel.Update();
             }
             else
             {

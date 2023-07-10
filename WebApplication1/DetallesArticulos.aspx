@@ -58,6 +58,7 @@
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            max-height: 500px;
         }
 
         .img1 {
@@ -103,8 +104,11 @@
         }        
 
         .detalles{
+            height:100vh;
             display:flex;
             justify-content:space-evenly;
+            align-items: flex-start;
+            margin-top: 50px;
         }
         
         /* Card container */

@@ -33,7 +33,8 @@
              <h1></h1>
               <div class="cp">
 
-     <asp:GridView ID="dgvPublicaciones" runat="server" OnRowCommand="dgvPublicaciones_RowCommand" CssClass="table " DataKeyNames="Id" AutoGenerateColumns="false" >
+     <asp:GridView ID="dgvPublicaciones" runat="server" OnRowCommand="dgvPublicaciones_RowCommand"
+         CssClass="table " DataKeyNames="Id" AutoGenerateColumns="false" >
                <Columns>
                      <asp:templatefield headertext="">
             <itemtemplate>
@@ -114,38 +115,39 @@
     <style>
 
 
-body{
-    background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
-        background-repeat: no-repeat;
-    
-        width: 1920px;
-    height: 1080px;
-   
+        body {
+            background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
+            background-repeat: no-repeat;
+            width: 1920px;
+            height: 1080px;
+        }
 
-}
+        .row{
+            height:70vh;
+        }
 
-  .btn-botones{
-    width: 15%;
-    padding: 1px;
-    background-color: var(--otherColor);
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    margin:20px;
-  }
-    .btn-botones2{
-    width: 5%;
-    padding: 3px;
-    background-color: var(--otherColor);
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    margin-left: 3px;
-    margin-right: 3px;
-    margin:20px;
-  }
+        .btn-botones {
+            width: 15%;
+            padding: 1px;
+            background-color: var(--otherColor);
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        .btn-botones2 {
+            width: 5%;
+            padding: 3px;
+            background-color: var(--otherColor);
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            margin-left: 3px;
+            margin-right: 3px;
+            margin: 20px;
+        }
 
     </style>
     

@@ -308,7 +308,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo,URLIMAGEN,estado )" +
+                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo,URLIMAGEN,estado)" +
                 " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.UsuarioComprador + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "','null',0)");
 
                 datos.ejecutarAccion();
