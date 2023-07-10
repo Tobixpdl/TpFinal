@@ -44,6 +44,7 @@ namespace WebApplication1
             ListaComentariosFinales = negocioComentarios.listarUltimos(Request.QueryString["User"]);
 
             calcularReputacion();
+            cantidadVentas();
               carritoActual = this.Session["listaDeCompras"] != null ? (List<Publicacion>)Session["listaDeCompras"] : new List<Publicacion>();
 
             if (this.Session["activeUser"] != null)
@@ -139,6 +140,25 @@ namespace WebApplication1
                 reputacion = sumatoria;
             }
             
+        }
+        public int cantidadVentas()
+        {
+            cantidadDeCompradores = ListaComentariosFinales.Count();
+            var sumatoria = 0;
+            for (int i = 0; i < ListaComentariosFinales.Count(); i++)
+            {
+                sumatoria += ListaComentariosFinales[i].Reputacion;
+
+            }
+            if (cantidadDeCompradores != 0)
+            {
+                return 0;
+            }
+            else
+            {
+               return cantidadDeCompradores;
+            }
+
         }
         public Publicacion buscarArticulo(string id)
         {

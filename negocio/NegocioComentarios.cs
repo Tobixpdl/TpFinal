@@ -52,7 +52,7 @@ namespace negocio
 
 
         }
-        public List<Comentario> ListarPorUsuario(string name)
+        public List<Comentario> ListarPorUsuario(string Name)
         {
             List<Comentario> lista = new List<Comentario>();
             AccesoDatos datos = new AccesoDatos();
@@ -61,7 +61,7 @@ namespace negocio
             try
             {
                 datos.setearConsulta("select distinct remitente,mensaje,reputacion,fecha from comentarios where destinatario = @name");
-                datos.setearParametro("@name", name);
+                datos.setearParametro("@name", Name);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {

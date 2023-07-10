@@ -22,7 +22,7 @@ namespace negocio
         //DESKTOP-6024H1Q
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=DESKTOP-E8MHNDC\\SQLLAB3; database=CATALOGO_FINAL_DB; integrated security=true");
+            conexion = new SqlConnection("server=DESKTOP-6024H1Q; database=CATALOGO_FINAL_DB; integrated security=true");
             comando = new SqlCommand();
 
         }

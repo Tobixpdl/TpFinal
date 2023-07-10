@@ -22,10 +22,13 @@
 
       <div class="rep">
 
-<p><strong> Usuario</strong></p>
+<p><strong> Usuario:</strong></p>
 <asp:Label ID="UsuarioNombre" runat="server" ></asp:Label>
 
-            <p><strong> Reputacion: <%:reputacion%></strong></p>
+            <p><strong > Reputacion: <%:reputacion%></strong></p>
+          
+          <asp:Label runat="server" >Calculo sobre <%:cantidadDeCompradores%> venta/s</asp:Label>
+
 <asp:Label ID="lblRep" runat="server"></asp:Label>
         </div>  
      </div>
@@ -226,6 +229,10 @@
             bottom:0;
             left:50%;
             transform: translateX(-50%);
+        }
+
+        .rep{
+            width:100px;
         }
     </style>
 
