@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Volver" />  
+     <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click"  CssClass="btn-botones2" type="button" Text="Volver" />  
 <div class="container">
     <div class="mp">
 
@@ -96,7 +96,7 @@
   </div>
  
      <div class="nueva publicacion" >
-               <asp:Button ID="btnCrear" runat="server" OnClick="btnCrear_Click"  CssClass="btn btn-primary me-md-2" type="button" Text="Crear Publicación" /> 
+               <asp:Button ID="btnCrear" runat="server" OnClick="btnCrear_Click"  CssClass="btn-botones" type="button" Text="Crear Publicación" /> 
            </div>
 
            
@@ -123,6 +123,30 @@ body{
    
 
 }
+
+  .btn-botones{
+    width: 15%;
+    padding: 1px;
+    background-color: var(--otherColor);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin:20px;
+  }
+    .btn-botones2{
+    width: 5%;
+    padding: 3px;
+    background-color: var(--otherColor);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin:20px;
+  }
+
     </style>
     
 </asp:Content>

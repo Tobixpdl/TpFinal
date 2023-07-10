@@ -335,17 +335,7 @@ float:right;
 margin:5px;
 padding:5px;
  }
-  .btn-Enter{
-    width: 25%;
-    padding: 3px;
-    background-color: var(--otherColor);
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    margin-left: 3px;
-    margin-right: 3px;
-}
+
   }     
 
     </style>

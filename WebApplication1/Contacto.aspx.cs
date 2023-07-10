@@ -22,6 +22,10 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (this.Session["activeUser"] == null)
+            {
+                Response.Redirect("Default.aspx", false);
+            }
             string emisor = Request.QueryString["UsuarioEmisor"];
             string receptor = Request.QueryString["UsuarioReceptor"];
             IdVenta = int.Parse(Request.QueryString["Id"]);

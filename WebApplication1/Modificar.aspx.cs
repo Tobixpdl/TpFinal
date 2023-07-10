@@ -24,6 +24,11 @@ namespace WebApplication1
 
             target = negocio.GetPublicacion(int.Parse(Request.QueryString["Id"].ToString()));
 
+            if (this.Session["activeUser"] == null)
+            {
+                Response.Redirect("Default.aspx", false);
+            }
+
             categorias = new List<Categoria>();
             NegocioCategoria negocioCat = new NegocioCategoria();
             categorias = negocioCat.Listar();

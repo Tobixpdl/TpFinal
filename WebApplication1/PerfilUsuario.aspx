@@ -19,9 +19,9 @@
         <div>
        <asp:Repeater id="rprComentarios" runat="server">
             <ItemTemplate>
-                <p> <%#Eval("Remitente")%> </p>
+                <p>Comprador: <%#Eval("Remitente")%> </p>
                  <p> <%#Eval("Mensaje")%> </p>
-                 <p> <%#Eval("Reputacion")%> </p>
+                 <p>Promedio de reputación: <%#Eval("Reputacion")%> </p>
             </ItemTemplate>
         </asp:Repeater>
         </div>

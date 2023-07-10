@@ -21,6 +21,10 @@ namespace WebApplication1
         public bool isValid,isImgValid;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (this.Session["activeUser"] == null)
+            {
+                Response.Redirect("Default.aspx", false);
+            }
             NegocioUsuario negocioUsuario = new NegocioUsuario();
             idUsuario = Session["idUsuario"] != null ? (int)Session["idUsuario"] : idUsuario = 0;
             user = Session["user"] != null ? (Usuario)Session["user"] : negocioUsuario.ListarXUsuario(idUsuario);

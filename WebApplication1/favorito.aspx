@@ -12,8 +12,15 @@
     <% }
        else if(this.Session["activeUser"] == null)
        {%>
+
             <h1 class="titleT">Logueate para ver tus articulos favoritos!</h1>
-            <a class="btn-info" runat="server" href="Login.aspx" id="liLogin">Login</a>
+    <div class="ContenidoCentrado">
+            <asp:Button ID="btnBuscar" runat="server" Text="Login" CssClass="btn-Redirect" OnClick="btnLogin_Click" AutoPostBack="false" />                                        
+    </div>
+    <div class="ContenidoCentrado">
+        <label>No tenes cuenta? </label><a style=margin:10px; href="Registro.aspx">Registrate</a>
+    </div>
+    
      <%}
         
        else
@@ -46,5 +53,25 @@
                 </section>
     <%} %>
 
+    <style>
+  .btn-Redirect{
+    
+    width: 10%;
+    padding: 3px;
+    background-color: var(--otherColor);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin:10px;
+}
+  .ContenidoCentrado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+  }
+    </style>
 </asp:Content>

@@ -17,6 +17,10 @@ namespace WebApplication1
         public int id;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (this.Session["activeUser"] == null)
+            {
+                Response.Redirect("Default.aspx", false);
+            }
             url = (Request.QueryString["Url"]);
             emisor = (Request.QueryString["UsuarioEmisor"]);
             receptor = (Request.QueryString["UsuarioReceptor"]);

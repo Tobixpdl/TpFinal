@@ -24,7 +24,11 @@ namespace WebApplication1
         public int index;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(this.Session["activeUser"] != null && this.Session["activeUser"].ToString() == "usuario0")
+            if (this.Session["activeUser"] == null)
+            {
+                Response.Redirect("Default.aspx", false);
+            }
+            if (this.Session["activeUser"] != null && this.Session["activeUser"].ToString() == "usuario0")
             {
                 btnCrear.Enabled = false;
             }

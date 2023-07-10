@@ -17,6 +17,10 @@ namespace WebApplication1
         public Usuario usuarioVenta;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (this.Session["activeUser"] == null)
+            {
+                Response.Redirect("Default.aspx", false);
+            }
             NegocioPublicacion negocio = new NegocioPublicacion();
             NegocioUsuario negocioUsuario = new NegocioUsuario();
             string id = Request.QueryString["Id"];

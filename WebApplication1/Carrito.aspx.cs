@@ -19,7 +19,10 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
+            if (this.Session["activeUser"] == null)
+            {
+                Response.Redirect("Default.aspx", false);
+            }
             listaDeCompras = new List<Publicacion>();
             listaDeCompras = (List<Publicacion>)Session["listaDeCompras"];
 
