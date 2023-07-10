@@ -3,20 +3,37 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
        
-    <h2>Perfil de Usuario</h2>
+
+  
+
+
+    
+
     <div>
-        <div>
-<p><strong> Usuario:</strong></p>
-<asp:Label ID="UsuarioNombre" runat="server"></asp:Label>
+    <h2 class="titleProductos" >Perfil de Usuario</h2>
+        </div>
+
+
+
+       <div class="mp">
+
+           <div class="row justify-content-around">
+ <div class="col-1">
+
+      <div class="rep">
+
+<p><strong> Usuario</strong></p>
+<asp:Label ID="UsuarioNombre" runat="server" ></asp:Label>
 
             <p><strong> Reputacion: <%:reputacion%></strong></p>
 <asp:Label ID="lblRep" runat="server"></asp:Label>
-        </div>        
+        </div>  
+     </div>
 
-    </div>
 
 
-         <div class="container-commits">
+  <div class="col-9">
+       <div class="container-commits">
        <asp:Repeater id="rprComentarios" runat="server">
             <ItemTemplate>
 
@@ -33,6 +50,26 @@
             </ItemTemplate>
         </asp:Repeater>
         </div>
+
+     </div>
+
+           
+           
+
+           
+
+
+
+
+</div>
+
+           </div>
+
+
+    
+
+
+        
 
     <hr />
 
@@ -68,6 +105,10 @@
 
 
     <style>
+        .rep{
+
+           
+        }
         .container-commits {
             display: grid;
             grid-template-columns: repeat(3,1fr);

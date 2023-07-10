@@ -133,14 +133,21 @@ namespace negocio
                 while (datos.Lector.Read())
                 {
                     Comentario c = new Comentario();
-
+                    Venta venta = new Venta();
 
                     c.Remitente = (string)datos.Lector["remitente"];
 
                     c.Mensaje = (string)datos.Lector["MENSAJE"];
                     c.Reputacion = datos.Lector.GetInt32(2);
-                    
+                    NegocioVentas negocio = new NegocioVentas();
+
+                    venta =negocio.RV((int)datos.Lector["VentaID"]);
+                    if(venta.Estado!="En proceso"&& venta.Estado!="En reclamo" && venta.UsuarioComprador!=name)
+                    {
+
                     lista.Add(c);
+                    }
+                    
                 }
 
 
