@@ -145,7 +145,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("SELECT p.id, p.titulo, p.precio, p.descripcion, c.id as idCategoria, c.nombre as categoria, p.stock, p.id_usuario\r\nFROM PUBLICACIONES p\r\ninner JOIN CATEGORIAS c ON p.categoria = c.id\r\ninner JOIN favoritos f ON f.id_publicacion = p.id\r\nWHERE f.id_usuario = @id;");
+                datos.setearConsulta("SELECT p.id, p.titulo, p.precio, p.descripcion, c.id as idCategoria, c.nombre as categoria, p.stock, p.id_usuario\r\nFROM PUBLICACIONES p\r\ninner JOIN CATEGORIAS c ON p.categoria = c.id\r\ninner JOIN favoritos f ON f.id_publicacion = p.id\r\nWHERE f.id_usuario = @id and p.stock>0;");
 
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
