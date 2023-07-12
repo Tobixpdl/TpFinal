@@ -1,6 +1,7 @@
 ﻿using dominio;
 using negocio;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,15 +12,17 @@ namespace WebApplication1
 {
     public partial class Mi_Perfil : System.Web.UI.Page
     {
-        public List<Usuario> ListaUsuarios { get; set; }
+        public List<Usuario> ListaUsuarios { get; set;}
         public NegocioUsuario negocioU = new NegocioUsuario();
         public Usuario usuarioActivo { get; set; }
+        public Usuario lastUser {  get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (this.Session["activeUser"] != null)
             {
                 string usuarioSession = Session["activeUser"].ToString();
                 ListaUsuarios = negocioU.Listar();
+                lastUser = negocioU.ListarXUsuario(usuarioSession);
 
 
 
@@ -103,7 +106,7 @@ namespace WebApplication1
 
             if (canChange)
             {
-                negocioU.ModificarUsuario(newUser);
+                negocioU.ModificarUsuario(newUser, lastUser);
                 lblChangeUser.Text = "Usuario editado exitosamente";
                 lblChangeUser.Visible = true;
                 Session["activeUser"] = txtUsername.Text;

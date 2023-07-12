@@ -117,12 +117,13 @@ namespace negocio
             try
             {
                 datos.setearConsulta("update usuarios set usuario=@usuario, contraseña=@password, mail=@mail, telefono=@telefono where Id=@id");
+                
                 datos.setearParametro("@id", modificado.Id);
                 datos.setearParametro("@usuario", modificado.usuario);
                 datos.setearParametro("@password", modificado.password);
                 datos.setearParametro("@mail", modificado.mail);
                 datos.setearParametro("@telefono", modificado.telefono);
-                datos.EjecutarAccion();
+                datos.ejecutarAccion();
             }
             catch (Exception)
             {
@@ -134,8 +135,35 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void ModificarUsuario(Usuario modificado, Usuario anterior)
+        {
+            AccesoDatos datos = new AccesoDatos();
 
-        public void eliminarUsuario(int id)
+            try
+            {
+                datos.setearConsulta("UPDATE ventas SET usuarioVendedor = @usuario WHERE usuarioVendedor = @lastUser");
+                datos.setearParametro("@lastUser", anterior.usuario);
+                datos.setearParametro("@usuario", modificado.usuario);
+                datos.ejecutarAccion();
+                datos.setearConsulta("UPDATE ventas SET usuario = @usuario WHERE usuario = @lastUser");
+                datos.ejecutarAccion();
+                datos.setearConsulta("UPDATE usuarios SET usuario = @usuario, contraseña = @password, mail = @mail, telefono = @telefono WHERE Id = @id");     
+                datos.setearParametro("@id", modificado.Id);
+                datos.setearParametro("@password", modificado.password);
+                datos.setearParametro("@mail", modificado.mail);
+                datos.setearParametro("@telefono", modificado.telefono);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+            public void eliminarUsuario(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -153,12 +181,12 @@ namespace negocio
             }
             catch (Exception)
             {
-
                 throw;
             }
 
         }
 
+        
         public Usuario ListarXUsuario(string usuario)
         {
             Usuario user = new Usuario();
