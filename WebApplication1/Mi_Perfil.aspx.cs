@@ -13,6 +13,7 @@ namespace WebApplication1
     public partial class Mi_Perfil : System.Web.UI.Page
     {
         public List<Usuario> ListaUsuarios { get; set;}
+        public List<Usuario> ListaUsuariosCheck { get; set; }
         public NegocioUsuario negocioU = new NegocioUsuario();
         public Usuario usuarioActivo { get; set; }
         public Usuario lastUser {  get; set; }
@@ -22,9 +23,6 @@ namespace WebApplication1
             {
                 string usuarioSession = Session["activeUser"].ToString();
                 ListaUsuarios = negocioU.Listar();
-                lastUser = negocioU.ListarXUsuario(usuarioSession);
-
-
 
                 for (int i = 0; i < ListaUsuarios.Count; i++)
                 {
@@ -36,7 +34,6 @@ namespace WebApplication1
 
                 if (!IsPostBack)
                 {
-
                     txtUsername.Text = usuarioActivo.usuario;
                     txtPassword.Text = usuarioActivo.password;
                     txtMail.Text = usuarioActivo.mail;
@@ -68,9 +65,10 @@ namespace WebApplication1
             txtTelefono.CssClass = " ";
             txtMail.CssClass = " ";
 
+            lastUser = negocioU.ListarXUsuario(Session["activeUser"].ToString());
+            ListaUsuariosCheck = negocioU.Listar();
             bool canChange = true;
-            Usuario newUser = new Usuario();
-            newUser = usuarioActivo;
+            Usuario newUser = negocioU.ListarXUsuario(Session["activeUser"].ToString());
             newUser.usuario = txtUsername.Text;
             newUser.password = txtPassword.Text;
             newUser.telefono = txtTelefono.Text;
@@ -82,18 +80,25 @@ namespace WebApplication1
            //
            //
            //
-            if (usuarioActivo.mail != newUser.mail && usuarioActivo.usuario != newUser.usuario)
+            if (lastUser.mail != newUser.mail) 
             {
-                for (int i = 0; i < ListaUsuarios.Count; i++)
+                for (int i = 0; i < ListaUsuariosCheck.Count; i++)
                 {
-                    if (ListaUsuarios[i].usuario == newUser.usuario)
-                    {
-                        lblWrongUser.Visible = true;
-                        canChange = false;
-                    }
-                    if (ListaUsuarios[i].mail == newUser.mail)
+                    if (ListaUsuariosCheck[i].mail == newUser.mail)
                     {
                         lblWrongMail.Visible = true;
+                        canChange = false;
+                        break;
+                    }
+                }
+            }
+            if(lastUser.usuario != newUser.usuario)
+            {
+                for (int i = 0; i < ListaUsuariosCheck.Count; i++)
+                {
+                    if (ListaUsuariosCheck[i].usuario == newUser.usuario)
+                    {
+                        lblWrongUser.Visible = true;
                         canChange = false;
                     }
                 }

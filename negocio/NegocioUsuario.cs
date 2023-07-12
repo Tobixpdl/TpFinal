@@ -152,6 +152,7 @@ namespace negocio
                 datos.setearParametro("@password", modificado.password);
                 datos.setearParametro("@mail", modificado.mail);
                 datos.setearParametro("@telefono", modificado.telefono);
+                datos.ejecutarAccion();
             }
             catch (Exception)
             {
