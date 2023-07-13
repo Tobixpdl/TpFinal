@@ -60,6 +60,7 @@ namespace WebApplication1
 
         protected void BtnChange_Click(object sender, EventArgs e)
         {
+            NegocioComentarios negocioComentarios =new NegocioComentarios();
             txtUsername.CssClass = " ";
             txtPassword.CssClass = " ";
             txtTelefono.CssClass = " ";
@@ -112,6 +113,8 @@ namespace WebApplication1
             if (canChange)
             {
                 negocioU.ModificarUsuario(newUser, lastUser);
+                negocioComentarios.changeUserName(lastUser.usuario, newUser.usuario,1);
+                negocioComentarios.changeUserName(lastUser.usuario, newUser.usuario, 2);
                 lblChangeUser.Text = "Usuario editado exitosamente";
                 lblChangeUser.Visible = true;
                 Session["activeUser"] = txtUsername.Text;

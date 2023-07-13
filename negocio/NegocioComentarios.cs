@@ -52,6 +52,55 @@ namespace negocio
 
 
         }
+        public void changeUserName(string old,string newName,int decision)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            if(decision%2==0)
+            {
+
+            try
+            {
+                datos.setearConsulta("UPDATE  comentarios set remitente = @new where remitente=@old");
+                datos.setearParametro("@new", newName);
+                datos.setearParametro("@old", old);
+                datos.ejecutarAccion();
+                /*datos.setearConsulta("UPDATE  comentarios set destinatario = @new where remitente=@old");
+                datos.setearParametro("@new", newName);
+                datos.setearParametro("@old", old);
+                datos.ejecutarAccion();*/
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            }else
+            {
+                try
+                {
+                   
+                    datos.setearConsulta("UPDATE  comentarios set destinatario = @new where destinatario=@old");
+                    datos.setearParametro("@new", newName);
+                    datos.setearParametro("@old", old);
+                    datos.ejecutarAccion();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+            }
+            
+        }
         public List<Comentario> ListarPorUsuario(string Name)
         {
             List<Comentario> lista = new List<Comentario>();
