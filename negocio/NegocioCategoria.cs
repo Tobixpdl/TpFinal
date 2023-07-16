@@ -73,5 +73,58 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+
+        public Categoria SeleccionarXNombre(string nombreCAT)
+        {
+            Categoria categoria = new Categoria();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select ID, Nombre from CATEGORIAS WHERE Nombre=@catNombre");
+                datos.setearParametro("@catNombre", nombreCAT);
+                datos.ejecutarLectura();
+                if(datos.Lector.Read())
+                {
+                    categoria.Id = datos.Lector.GetInt32(0);
+                    categoria.Nombre = (string)datos.Lector["Nombre"];
+                    
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return categoria;
+        }
+        public Categoria Seleccionar(int Id)
+        {
+            Categoria categoria = new Categoria();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select ID, Nombre from CATEGORIAS WHERE ID=@ID");
+                datos.setearParametro("@ID", Id);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    categoria.Id = datos.Lector.GetInt32(0);
+                    categoria.Nombre = (string)datos.Lector["Nombre"];
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return categoria;
+        }
+
+
+
     }
 }

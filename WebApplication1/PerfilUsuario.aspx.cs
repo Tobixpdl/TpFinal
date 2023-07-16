@@ -36,7 +36,7 @@ namespace WebApplication1
 
             UsuarioNombre.Text = SelectedUser.usuario;
 
-            List<Publicacion> publicaciones = negocioPublicacion.ListarXUsuarioSinCero(SelectedUser.Id);
+            List<Publicacion> publicaciones = negocioPublicacion.ListarXCategoriaSinCero(SelectedUser.Id);
             ListaArticulos = publicaciones;
 
             listComentarios = negocioComentarios.ListarPorUsuario(Request.QueryString["User"]);
