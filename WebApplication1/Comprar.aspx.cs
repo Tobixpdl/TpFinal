@@ -98,6 +98,13 @@ namespace WebApplication1
             publicacion = negocioP.GetPublicacion(vOut);
             publicacion.Stock-=venta.Cantidad;
             negocioP.ModificarPublicacion(publicacion);
+
+            EmailService mail = new EmailService();
+
+            mail.armarCorreo(usuarioVenta.mail, "Nueva Venta!", "Hola " + usuarioVenta.usuario + "! " + usuarioCompra.usuario + " quiere comprarte tu producto: " + publicacion.Titulo, true);
+            mail.enviarEmail();
+
+
             Response.Redirect("MisCompras.aspx",false);
 
         }

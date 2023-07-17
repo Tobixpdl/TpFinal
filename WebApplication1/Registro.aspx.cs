@@ -141,6 +141,14 @@ namespace WebApplication1
                 Session.Add("activeUser", txtUsername.Text);
                 NegocioUsuario negocio=new NegocioUsuario();
                 Session.Add("idUsuario", negocio.ListarXUsuario(txtUsername.Text).Id);
+
+                EmailService mail = new EmailService();
+
+                mail.armarCorreo(newUser.mail, "Bienvenido!", "Hola " + newUser.usuario + "! \r\n" +
+                    "¡Gracias por registrarte en BuyEverything! Esperamos que tengas una gran experiencia en nuestro" +
+                    " sitio de compras y ventas.\r\n      En BuyEverything, puedes comprar una amplia variedad de productos y también vender tus propios artículos. ¡Explora las ofertas y encuentra lo que necesitas!\r\n      Si tienes alguna pregunta o necesitas ayuda, no dudes en ponerte en contacto con nuestro equipo de soporte.\r\n\n\n¡Disfruta de tu experiencia en BuyEverything!", true);
+                mail.enviarEmail();
+
                 Response.Redirect("Mi_Perfil.aspx", false);
                 }
             else

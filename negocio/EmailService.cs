@@ -16,7 +16,7 @@ namespace negocio
         public EmailService()
         {
             server = new SmtpClient();
-            server.Credentials = new NetworkCredential("ayuda.buyeverything@gmail.com", "BuyEverything1234");
+            server.Credentials = new NetworkCredential("ayuda.buyeverything@gmail.com", "utxnqmbbylcrkzwm");
             server.EnableSsl = true;
             server.Port = 587;
             server.Host = "smtp.gmail.com";
