@@ -69,13 +69,17 @@
                              <p id="start-products"></p>
                              <asp:TextBox runat="server" ID="txtBusqueda" CssClass="search-box" AutoComplete="off" PlaceHolder="Búsqueda" AutoPostBack="false" onkeydown="return bloquearEnter(event)"/>
                              <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" CssClass="btn-Enter" OnClick="BtnBuscar_Click" AutoPostBack="false" />                                          
-                             <asp:Label runat="server" ID="BusquedaNull" Text="No se encontraron resultados" CssClass="lblBusqueda"></asp:Label>
                             <div>
                             <asp:CheckBox runat="server" ID="chBusquedaAvanzada" Text="Búsqueda avanzada" OnCheckedChanged="chBusquedaAvanzada_Checked" AutoPostBack="true" />
                             <%if (FiltroChecked){%>
                     <h4>Categorías: </h4>
                     <asp:DropDownList ID="ddlCategorias" runat="server" OnSelectedIndexChanged="ddlCategorias_IndexChanged" AutoPostBack="true"></asp:DropDownList>
                   <%}%>
+                  <div>
+                   <asp:Label runat="server" ID="BusquedaNull" Text="No se encontraron resultados" CssClass="lblBusqueda"></asp:Label>
+
+                  </div>
+
                             </div>
                         </section>           
     <%-- TODOS LOS ARTICULOS y filtro --%>

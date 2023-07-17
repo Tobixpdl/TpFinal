@@ -42,15 +42,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button BtnBuscar;
 
         /// <summary>
-        /// Control BusquedaNull.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label BusquedaNull;
-
-        /// <summary>
         /// Control chBusquedaAvanzada.
         /// </summary>
         /// <remarks>
@@ -67,6 +58,15 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCategorias;
+
+        /// <summary>
+        /// Control BusquedaNull.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label BusquedaNull;
 
         /// <summary>
         /// Control updatePanel.

@@ -20,7 +20,8 @@ namespace WebApplication1
         public List<Publicacion> listaFiltradaPro { get; set; }
 
         public List<Publicacion> carritoActual { get; set; }
-        
+
+
         public int UsuarioActual { get; set; }
         public Usuario user=new Usuario();
         public NegocioUsuario negocioUsuario { get; set; }
@@ -215,64 +216,41 @@ namespace WebApplication1
             
         }
 
-        protected void BtnBuscar_Click(object sender, EventArgs e)
-        {
-            List<Publicacion> listaFiltrada = ListaArticulos.FindAll(x => x.Titulo.ToUpper().Contains(txtBusqueda.Text.ToUpper()));
-            if (listaFiltrada.Count == 0)
-            {
-                FiltroAvanzado = false;
-                BusquedaNull.Visible = true;
-                rprCards.DataSource = ListaArticulos;
-                rprCards.DataBind();
-                updatePanel.Update();
-            }
-            else if(listaFiltrada.Count == ListaArticulos.Count)
-            {
-                FiltroAvanzado = false;
-                rprCards.DataSource = ListaArticulos;
-                rprCards.DataBind();
-                updatePanel.Update();
-            }
-            else
-            {
-                FiltroAvanzado = true;
-                rprCards.DataSource = listaFiltrada;
-                rprCards.DataBind();
-                BusquedaNull.Visible = false;
-                updatePanel.Update();
-            }
-
-        }
+  
         protected void chBusquedaAvanzada_Checked(object sender, EventArgs e)
         {
             if (chBusquedaAvanzada.Checked==true)
             {
                 FiltroChecked = true;
+                ddlCategorias.SelectedIndex = 0;
+
 
             }
             else
             {
                 FiltroChecked = false;
+                txtBusqueda.Text = string.Empty;
+                rprCards.DataSource = ListaArticulos;
+                rprCards.DataBind();
+                txtBusqueda.Enabled = true;
+                BtnBuscar.Enabled = true;
             }
 
         }
-        
+
         protected void ddlCategorias_IndexChanged(object sender, EventArgs e)
         {
-
-            if(ddlCategorias.SelectedValue == "Seleccione una Categoría")
+            if (ddlCategorias.SelectedValue == "Seleccione una Categoría")
             {
                 rprCards.DataSource = ListaArticulos;
                 rprCards.DataBind();
                 BusquedaNull.Visible = false;
                 FiltroChecked = true;
-
-
+                FiltroEncontrado = false;
             }
             else
             {
                 FiltroChecked = true;
-
                 int selectedIndex = ddlCategorias.SelectedIndex;
                 listaFiltradaPro = negocio.ListarXCategoriaSinCero(selectedIndex);
 
@@ -281,7 +259,10 @@ namespace WebApplication1
                     FiltroChecked = true;
                     rprCards.DataSource = listaFiltradaPro;
                     rprCards.DataBind();
+                    FiltroAvanzado = true;
                     FiltroEncontrado = true;
+                    txtBusqueda.Enabled = true;
+                    BtnBuscar.Enabled = true;
                 }
                 else
                 {
@@ -289,12 +270,127 @@ namespace WebApplication1
                     BusquedaNull.Visible = true;
                     rprCards.DataSource = ListaArticulos;
                     rprCards.DataBind();
+                    FiltroEncontrado = false;
+                    FiltroAvanzado = false;
+                    txtBusqueda.Enabled = false;
+                    BtnBuscar.Enabled = false;
+                    txtBusqueda.Text = string.Empty;
                 }
-
             }
-            
-
         }
+
+        protected void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            if (!chBusquedaAvanzada.Checked)
+            {
+                if (string.IsNullOrEmpty(txtBusqueda.Text))
+                {
+                    FiltroAvanzado = false;
+                    BusquedaNull.Visible = false;
+                    FiltroChecked = false;
+                    FiltroEncontrado = false;
+                    rprCards.DataSource = ListaArticulos;
+                    rprCards.DataBind();
+                }
+                else
+                {
+                    List<Publicacion> listaFiltrada = ListaArticulos.FindAll(x => x.Titulo.ToUpper().Contains(txtBusqueda.Text.ToUpper()));
+                    if (listaFiltrada.Count == 0)
+                    {
+                        FiltroAvanzado = false;
+                        BusquedaNull.Visible = true;
+                        rprCards.DataSource = ListaArticulos;
+                        rprCards.DataBind();
+                    }
+                    else
+                    {
+                        FiltroAvanzado = true;
+                        rprCards.DataSource = listaFiltrada;
+                        rprCards.DataBind();
+                        BusquedaNull.Visible = false;
+                    }
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(txtBusqueda.Text))
+                {
+                    FiltroAvanzado = true;
+                    BusquedaNull.Visible = false;
+                    FiltroChecked =true;
+                    FiltroEncontrado = false;
+                    ddlCategorias.SelectedIndex = 0;
+                    rprCards.DataSource = ListaArticulos;
+                    rprCards.DataBind();
+                }
+                else
+                {
+                    if (ddlCategorias.SelectedValue == "Seleccione una Categoría")
+                    {
+                        rprCards.DataSource = ListaArticulos;
+                        rprCards.DataBind();
+                        BusquedaNull.Visible = false;
+                        FiltroChecked = true;
+                        FiltroEncontrado = false;
+                    }
+                    else
+                    {
+                        if (FiltroEncontrado)
+                        {
+                            List<Publicacion> listaFiltrada = listaFiltradaPro.FindAll(x => x.Titulo.ToUpper().Contains(txtBusqueda.Text.ToUpper()));
+                            if (listaFiltrada.Count == 0)
+                            {
+                                FiltroChecked = true;
+                                BusquedaNull.Visible = true;
+                                FiltroAvanzado = true;
+                                FiltroEncontrado = true;
+                                rprCards.DataSource = listaFiltradaPro;
+                                rprCards.DataBind();
+
+                            }
+                            else
+                            {
+                                BusquedaNull.Visible = false;
+                                FiltroEncontrado = true;
+                                FiltroAvanzado = true;
+                                FiltroChecked = true;
+                                rprCards.DataSource = listaFiltradaPro;
+                                rprCards.DataBind();
+
+                            }
+                        }
+                        else
+                        {
+
+                            int selectedIndex = ddlCategorias.SelectedIndex;
+                            listaFiltradaPro = negocio.ListarXCategoriaSinCero(selectedIndex);
+                            List<Publicacion> listaFiltrada = listaFiltradaPro.FindAll(x => x.Titulo.ToUpper().Contains(txtBusqueda.Text.ToUpper()));
+
+                            if (listaFiltrada.Count == 0)
+                            {
+                                FiltroAvanzado = true;
+                                FiltroEncontrado = false;
+                                FiltroChecked = true;
+                                BusquedaNull.Visible = true;
+                            }
+                            else
+                            {
+                                FiltroAvanzado = true;
+                                FiltroEncontrado = true;
+                                BusquedaNull.Visible = false;
+                                FiltroChecked = true;
+                            }
+                            rprCards.DataSource = listaFiltrada;
+                            rprCards.DataBind();
+                            FiltroEncontrado = (listaFiltrada.Count > 0);
+                            FiltroAvanzado = true;
+                        }
+                    }
+                }
+                   
+            }
+        }
+
         private void CargarCategorias()
         {
             NegocioCategoria negocioCategoria = new NegocioCategoria();
