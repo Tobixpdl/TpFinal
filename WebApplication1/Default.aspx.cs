@@ -252,7 +252,9 @@ namespace WebApplication1
             {
                 FiltroChecked = true;
                 int selectedIndex = ddlCategorias.SelectedIndex;
-                listaFiltradaPro = negocio.ListarXCategoriaSinCero(selectedIndex);
+                string sl = ddlCategorias.SelectedItem.ToString();
+              //listaFiltradaPro = negocio.ListarXCategoriaSinCero(selectedIndex);
+                listaFiltradaPro = negocio.ListarXCategoriaSinCeroString(sl);
 
                 if (listaFiltradaPro.Count != 0)
                 {

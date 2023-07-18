@@ -205,7 +205,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("delete from FAVORITOS where ID_PUBLICACION = "+ e.Id+ " and ID_USUARIO = "+id+" ");
+                datos.setearConsulta("delete from FAVORITOS where ID_PUBLICACION = " + e.Id + " and ID_USUARIO = " + id + " ");
                 datos.ejecutarAccion();
             }
             catch (Exception)
@@ -508,7 +508,7 @@ namespace negocio
 
             Publicacion aux = new Publicacion();
             NegocioImagen negocioImagen = new NegocioImagen();
-           int Id= Int32.Parse(id);
+            int Id = Int32.Parse(id);
             try
             {
                 datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria,c.Nombre as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.categoria=c.ID AND p.ID=@id");
@@ -628,7 +628,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
 
-            }
+        }
 
         public void ModificarPublicacion(Publicacion modificado)
         {
@@ -649,7 +649,7 @@ namespace negocio
                     }
                 }
 
-                datos.cerrarConexion(); 
+                datos.cerrarConexion();
 
                 if (count > 0)
                 {
@@ -663,13 +663,13 @@ namespace negocio
                 }
                 else
                 {
-                   
+
                     throw new Exception("No existe una publicación con el ID proporcionado.");
                 }
             }
             catch (Exception ex)
             {
-               
+
                 throw new Exception("Error al modificar la publicación.", ex);
             }
             finally
@@ -1107,50 +1107,95 @@ namespace negocio
             }
         }
 
-   
-    public List<Publicacion> ListarXCategoriaSinCero(int categoria)
-    {
-        List<Publicacion> lista = new List<Publicacion>();
-        AccesoDatos datos = new AccesoDatos();
-        NegocioImagen negocioImagen = new NegocioImagen();
 
-        try
+        public List<Publicacion> ListarXCategoriaSinCero(int categoria)
         {
-            datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria,c.Nombre as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.CATEGORIA=c.ID AND p.CATEGORIA=@cate and p.Stock>0");
+            List<Publicacion> lista = new List<Publicacion>();
+            AccesoDatos datos = new AccesoDatos();
+            NegocioImagen negocioImagen = new NegocioImagen();
 
-
-            datos.setearParametro("@cate", categoria);
-
-            datos.ejecutarLectura();
-            while (datos.Lector.Read())
+            try
             {
-                Publicacion aux = new Publicacion();
-                aux.Id = datos.Lector.GetInt32(0);
-                aux.Titulo = (string)datos.Lector["Titulo"];
-                aux.Precio = (decimal)datos.Lector["Precio"];
-                aux.Descripcion = (string)datos.Lector["Descripcion"];
-                //aux.Stock = datos.Lector.GetInt32(6);
-                aux.Stock = (long)datos.Lector["STOCK"];
-                aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
-                Categoria cat = new Categoria();
-                cat.Id = (int)datos.Lector["idCategoria"];
-                cat.Nombre = (string)datos.Lector["categoria"];
-                aux.Categoria = cat;
-                aux.Cantidad = 1;
-                aux.imagenes = negocioImagen.Listar(aux.Id);
-                lista.Add(aux);
-            }
-            return lista;
-        }
-        catch (Exception)
-        {
+                datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria,c.Nombre as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.CATEGORIA=c.ID AND p.CATEGORIA=@cate and p.Stock>0");
 
-            throw;
+
+                datos.setearParametro("@cate", categoria);
+
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Publicacion aux = new Publicacion();
+                    aux.Id = datos.Lector.GetInt32(0);
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    //aux.Stock = datos.Lector.GetInt32(6);
+                    aux.Stock = (long)datos.Lector["STOCK"];
+                    aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["idCategoria"];
+                    cat.Nombre = (string)datos.Lector["categoria"];
+                    aux.Categoria = cat;
+                    aux.Cantidad = 1;
+                    aux.imagenes = negocioImagen.Listar(aux.Id);
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
-        finally
+        public List<Publicacion> ListarXCategoriaSinCeroString(string categoria)
         {
-            datos.cerrarConexion();
-        }
+            List<Publicacion> lista = new List<Publicacion>();
+            AccesoDatos datos = new AccesoDatos();
+            NegocioImagen negocioImagen = new NegocioImagen();
+
+            try
+            {
+                datos.setearConsulta("select p.id, p.titulo, p.precio, p.DESCRIPCION, c.id as idCategoria,c.Nombre as categoria, p.STOCK, p.ID_USUARIO from PUBLICACIONES p, CATEGORIAS c where p.CATEGORIA=c.ID AND c.Nombre=@cate and p.Stock>0");
+
+
+                datos.setearParametro("@cate", categoria);
+
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Publicacion aux = new Publicacion();
+                    aux.Id = datos.Lector.GetInt32(0);
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    //aux.Stock = datos.Lector.GetInt32(6);
+                    aux.Stock = (long)datos.Lector["STOCK"];
+                    aux.Id_Usuario = (int)datos.Lector["ID_USUARIO"];
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["idCategoria"];
+                    cat.Nombre = (string)datos.Lector["categoria"];
+                    aux.Categoria = cat;
+                    aux.Cantidad = 1;
+                    aux.imagenes = negocioImagen.Listar(aux.Id);
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
 
         }
     }

@@ -56,10 +56,9 @@
             <div class="col-2T">
                 <h1>Compra todo <br/>en un mismo lugar!</h1>
                 <p>Descubre un mundo de compras ilimitadas donde tus deseos se hacen realidad.<br/> Encuentra todo lo que necesitas aquí.</p>
-            </div>
-            <div class="col-2T">
-                <%-- ACA VA UNA IMAGEN PARA LA DEFAULT --%>
-                <img src="\Images\imgProductos.png" alt="Alternate Text" />
+            </div>  
+             <div class="col-2T">
+                <img src="\Images\imgProductosNew.png" alt="Alternate Text" />
             </div>
         </div>
     </div>
@@ -160,12 +159,6 @@
 
     <style>
 
-        .headerT{
-            /*background: var(--bgColor);*/
-            background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
-            height: 25vh;
-        }
-
         .rowT{
             display:flex;
             flex-wrap: wrap;
@@ -219,7 +212,7 @@
         .container-items2{
             flex-basis:25%;
             display:grid;
-            grid-template-columns:repeat(3,1fr);
+            grid-template-columns:repeat(5,1fr);
             margin: 0 150px;
             gap: 100px;
         }
@@ -232,7 +225,7 @@
         }
         .container-items{
             display:grid;
-            grid-template-columns:repeat(4,1fr);
+            grid-template-columns:repeat(5,1fr);
             gap:100px;
         }
 
@@ -254,6 +247,7 @@
 
         .info-product .info-title{
             height:70px;
+            justify-content:center;
         }
 
         .item .img-{
@@ -308,7 +302,6 @@
             color: white;
         }
         
-        
 
  #search-box {
         align-items:end;
@@ -319,6 +312,14 @@
         align-content:center;
         margin:25px;
   } 
+ .search-box {
+  width: 250px;
+  height: 40px;
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
  .lblBusqueda {
    
      margin-left:50px;
@@ -345,9 +346,7 @@
 float:right;    
 margin:5px;
 padding:5px;
- }
-
-  }     
+ }  
 
     </style>
 
