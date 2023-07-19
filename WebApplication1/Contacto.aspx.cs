@@ -23,7 +23,8 @@ namespace WebApplication1
         EmailService mail = new EmailService();
         NegocioUsuario negocioUsuario = new NegocioUsuario();
         Usuario duenoPublicacion = new Usuario();
-
+        public bool solicitud;
+        public string solicitante;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -33,7 +34,7 @@ namespace WebApplication1
             }
             string emisor = Request.QueryString["UsuarioEmisor"];
             string receptor = Request.QueryString["UsuarioReceptor"];
-
+   
             IdVenta = int.Parse(Request.QueryString["Id"]);
             NegocioUsuario negocio = new NegocioUsuario();
             NegocioVentas negocioVenta = new NegocioVentas();
@@ -44,7 +45,8 @@ namespace WebApplication1
 
             NegocioComentarios nc = new NegocioComentarios();
             Mensajes = nc.Listar(IdVenta);
-
+            solicitud = venta.solicitud;
+            solicitante = venta.solicitante;
             dgvComentarios.DataSource = Mensajes;
             dgvComentarios.DataBind();
             origen = Request.QueryString["PaginaOrigen"];
@@ -131,8 +133,12 @@ namespace WebApplication1
                 {
                     if (string.IsNullOrEmpty(venta.urlImagen) || venta.urlImagen != "null")
                     {
-                        negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Venta Concluida", 10);
-                        nventas.ME(IdVenta, 2);
+                        solicitud = true;
+                     
+                        solicitante = usuarioEmisor.usuario;
+                        nventas.modificarSolicitante(IdVenta, solicitante, solicitud);
+                        negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Ha solicitado concluir la venta", 5);
+                     
 
                         Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario + "&PaginaOrigen=" + origen, false);
                     }
@@ -144,8 +150,12 @@ namespace WebApplication1
                 }
                 else
                 {
-                    negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Venta Concluida", 10);
-                    nventas.ME(IdVenta, 2);
+                    solicitud = true;
+
+                    solicitante = usuarioEmisor.usuario;
+                    nventas.modificarSolicitante(IdVenta, solicitante, solicitud);
+                    negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Ha solicitado concluir la venta", 5);
+                
                     Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario + "&PaginaOrigen=" + origen, false);
                 }
 
@@ -245,6 +255,28 @@ namespace WebApplication1
             else
             {
                 lbtex2.Visible = true;
+            }
+        }
+        protected void btnConfirmarSolicitud_Click(object sender, EventArgs e)
+        {
+            if (rbConfirmar.Checked == true)
+            {
+                NegocioComentarios negocioComentarios = new NegocioComentarios();
+                NegocioVentas negocioVentas = new NegocioVentas();
+                negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Venta Concluida", 10);
+                negocioVentas.ME(IdVenta, 2);
+            }
+            if (rbDenegar.Checked == true)
+            {
+                NegocioComentarios negocioComentarios = new NegocioComentarios();
+              
+                negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Solicitud rechazada, venta en proceso", 10);
+                solicitud = false;
+
+                NegocioVentas negocioVentas = new NegocioVentas();
+                solicitante = usuarioEmisor.usuario;
+                negocioVentas.modificarSolicitante(IdVenta, "null", solicitud);
+                Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario + "&PaginaOrigen=" + origen, false);
             }
         }
     }

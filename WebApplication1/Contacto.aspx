@@ -65,7 +65,7 @@
     </div>
 
                 
-    <%if (venta.Estado == "En proceso" || venta.Estado == "En reclamo")
+    <%if (solicitud==false)
         {  %>
     <div class="mp">
           <div class="card-header" style="background:#5d11f8;color: #ffffff;">     
@@ -93,7 +93,37 @@
              
 
     </div>
-    <%} %>
+    <%}else if(venta.solicitante!=usuarioEmisor.usuario &&venta.Estado!="Entregada")
+            {%>
+     <div class="mp">
+          <div class="card-header" style="background:#5d11f8;color: #ffffff;">     
+         <label for="formFile" class="form-label">Han solicitado concluir la venta!</label>
+              <ul class="list-group list-group-flush">
+
+                   <li class="list-group-item">
+                        <div class="radio-group">
+             <asp:RadioButton ID="rbConfirmar" runat="server" Text="Si, quiero confirmar la compra" TextAlign="Right" GroupName="opcion" />
+                    <asp:RadioButton ID="rbDenegar" runat="server" Text="No, aun no quiero confirmar la compra" TextAlign="Right" GroupName="opcion" />
+                    
+                            </div> 
+
+                   </li>
+    <li class="list-group-item">
+
+         <asp:Button cssclass="btn btn-primary me-md-2" runat="server" ID="btnConfirmarSolicitud" Text="Aceptar" OnClick="btnConfirmarSolicitud_Click"></asp:Button>
+    </li>
+
+              </ul>
+   
+  </div>
+           
+             
+
+    </div>
+    
+    
+    
+    <%}%>
        <div class="mp">
             <div class="card-header" style="background:#1cbf0f;color: #ffffff;">
                  <label for="formFile" class="form-label " style="-webkit-text-stroke: 0.1px black;">Sala de Chat</label>

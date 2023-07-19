@@ -23,5 +23,7 @@ namespace dominio
 
         public string urlImagen { get; set; }
         public bool finalizada { get; set; }
+        public bool solicitud { get; set; }
+        public  string solicitante { get; set; }
     }
 }

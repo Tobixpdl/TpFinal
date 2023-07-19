@@ -186,7 +186,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta(" SELECT v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA,e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN,estado FROM VENTAS V inner join Estados e  on v.IDESTADO = e.ID where V.ID = @id");
+                datos.setearConsulta(" SELECT v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA,e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN,estado,solicitante,solicitud FROM VENTAS V inner join Estados e  on v.IDESTADO = e.ID where V.ID = @id");
                 datos.setearParametro("@id", n);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -201,7 +201,8 @@ namespace negocio
                     aux.Titulo = (string)datos.Lector["TITULO"];
                     aux.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
                     aux.finalizada = (bool)datos.Lector["estado"];
-                   
+                    aux.solicitud = (bool)datos.Lector["solicitud"];
+                    aux.solicitante = (string)datos.Lector["solicitante"];
                     if (datos.Lector["FECHAENTREGA"].ToString() == "")
                     {
                         aux.FechaEntrega = "No Entregado";
@@ -277,6 +278,35 @@ namespace negocio
             }
 
         }
+        public void modificarSolicitante(int id, string solicitante,bool solicitud)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+               
+
+                    datos.setearConsulta(" update ventas set solicitante=@solicitante,solicitud=@solicitud where id=@id");
+                
+               
+
+                   
+
+                
+
+                datos.setearParametro("@id", id);
+                datos.setearParametro("@solicitud", solicitud);
+                datos.setearParametro("@solicitante", solicitante);
+                datos.ejecutarLectura();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         public void finalizarVenta(int id)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -308,8 +338,8 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo,URLIMAGEN,estado)" +
-                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.UsuarioComprador + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "','null',0)");
+                datos.setearConsulta("INSERT into Ventas(dnivendedor,dnicomprador,usuario,usuariovendedor,titulo,fechacompra, fechaentrega,idestado,cantidad,preciofinal,metodo,URLIMAGEN,estado,solicitante,solicitud)" +
+                " values ('" + v.DNIVendedor + "','" + v.DNIComprador + "','" + v.UsuarioComprador + "','" + v.UsuarioVendedor + "','" + v.Titulo + "',getdate(),null,'1','" + v.Cantidad + "','" + v.PrecioFinal + "','" + v.metodo + "','null',0,'null',0)");
 
                 datos.ejecutarAccion();
             }
