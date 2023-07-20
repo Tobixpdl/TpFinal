@@ -135,7 +135,7 @@ namespace WebApplication1
                 lblWrongTelefono.Visible = false;
                 lblWrongUser.Visible = false;
                 lblChangeUser.Visible = false;
-                lblSeguroBorrar.Visible = false;
+                //lblSeguroBorrar.Visible = false;
             }
             else
             {
@@ -143,7 +143,7 @@ namespace WebApplication1
                 lblWrongTelefono.Visible = true;
                 lblWrongUser.Visible = true;
                 lblChangeUser.Visible = true;
-                lblSeguroBorrar.Visible = true;
+                //lblSeguroBorrar.Visible = true;
             }
         }
 
@@ -180,7 +180,7 @@ namespace WebApplication1
 
         protected void btnEliminarUser_Click(object sender, EventArgs e)
         {
-            lblSeguroBorrar.Visible = true;
+            //lblSeguroBorrar.Visible = true;
             btnYes.Visible = true;
             btnNo.Visible = true;
         }

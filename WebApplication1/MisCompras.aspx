@@ -83,7 +83,12 @@ body{
     height: 1080px;
 }
 .row{
-    height:80vh;
+    justify-content:center;
+}
+
+.col-12 {
+    max-width:90%;
+    padding: 40px;
 }
     </style>
 

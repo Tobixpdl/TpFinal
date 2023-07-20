@@ -76,7 +76,6 @@
                   <%}%>
                   <div>
                    <asp:Label runat="server" ID="BusquedaNull" Text="No se encontraron resultados" CssClass="lblBusqueda"></asp:Label>
-
                   </div>
 
                             </div>

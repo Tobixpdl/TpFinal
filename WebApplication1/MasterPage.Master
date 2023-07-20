@@ -133,7 +133,6 @@
         padding: 20px;
         align-content:end;
         bottom:0px;
-        width:125%;
     }
 
         footer ul {
@@ -156,8 +155,7 @@
             }
 
     .HT {
-    background:var(--newBg);
-    
+        background: var(--newBg);
     }
 
     .navbarT{
@@ -451,7 +449,7 @@
         .headerT{
             background: var(--newBg);
             /*background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);*/
-            height: 75vh;
+            height: 90vh;
         }
 
         .rowT{

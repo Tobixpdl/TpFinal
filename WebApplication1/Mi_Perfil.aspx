@@ -6,7 +6,7 @@
      <div class="account-login">
         <div class="rowT">
             <div class="col-2T">
-                <img src="\Images\imgProductos.png" alt="Alternate Text" />
+                <img src="\Images\imgProductosNew.png" alt="Alternate Text" />
             </div>
             <div class="col-2T">
                 <div class="form-container">
@@ -48,7 +48,7 @@
             </div>
             <div class="eraseButtons">
                    <asp:Button ID="btnEliminarUser" runat="server" Text="Borrar usuario" CssClass="btnErase" OnClick="btnEliminarUser_Click"/>
-                   <asp:Label ID="lblSeguroBorrar" runat="server" Text="Estas Seguro?"></asp:Label>
+                   <%--<asp:Label ID="lblSeguroBorrar" runat="server" Text="Estas Seguro?"></asp:Label>--%>
                    <asp:Button ID="btnYes" runat="server" Text="Borrar definitivamente" OnClick="btnYes_Click" CssClass="btnErase" />
                    <asp:Button ID="btnNo" runat="server" Text="Me arrepiento" CssClass="btnErase green" />
             </div>
@@ -65,7 +65,7 @@
     <style>
         .account-login{
             padding:50px 0;
-            background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
+            background: linear-gradient(to bottom, var(--newBg) 5%, #ffffff 95%);
             height:100vh;
         }
         .form-container{

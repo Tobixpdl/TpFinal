@@ -92,14 +92,19 @@ body{
     background: linear-gradient(to top, var(--bgColor) 5%, #ffffff 95%);
         background-repeat: no-repeat;
     
-        width: 1920px;
+    width: 1920px;
     height: 1080px;
    
 
 }
 
 .row{
-    height:80vh;
+    justify-content:center;
+}
+
+.col-12 {
+    max-width:90%;
+    padding: 40px;
 }
     </style>
 
