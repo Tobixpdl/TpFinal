@@ -159,15 +159,6 @@ namespace WebApplication1
                     Response.Redirect("Contacto.aspx?UsuarioReceptor=" + usuarioReceptor.usuario + "&Id=" + IdVenta + "&UsuarioEmisor=" + usuarioEmisor.usuario + "&PaginaOrigen=" + origen, false);
                 }
 
-                if (lblWrongTitulo.Visible == false)
-                {
-
-
-                    mail.armarCorreo(duenoPublicacion.mail, "Venta concluida!", "Hola " + duenoPublicacion.usuario + "! "
-                        + " Tu producto: " + venta.Titulo + ", fue vendido!", true);
-                    mail.enviarEmail();
-                }
-
             }
             if (rbEnProceso.Checked)
             {
@@ -265,6 +256,9 @@ namespace WebApplication1
                 NegocioVentas negocioVentas = new NegocioVentas();
                 negocioComentarios.newComent(IdVenta, usuarioEmisor.usuario, usuarioReceptor.usuario, "Venta Concluida", 10);
                 negocioVentas.ME(IdVenta, 2);
+                mail.armarCorreo(duenoPublicacion.mail, "Venta concluida!", "Hola " + duenoPublicacion.usuario + "! "
+                 + " Tu producto: " + venta.Titulo + ", fue vendido!", true);
+                mail.enviarEmail();
             }
             if (rbDenegar.Checked == true)
             {

@@ -19,7 +19,15 @@
     <% }
         else
         {  %>
+
+      <%if (this.Session["activeUser"] != null && this.Session["activeUser"].ToString() == "usuario0")
+          {%>
+      <h1>Todas las ventas</h1>
+<%                }%>
+      <%else
+          {  %>
       <h1>Mis Ventas</h1>
+      <%} %>
      <div class="row ">
        <div class="col-14 " >
 
@@ -36,7 +44,7 @@
                     
                     <asp:templatefield headertext="Ver Detalles">
             <itemtemplate>
-               <a class="nav-linkT" href="Contacto.aspx?UsuarioReceptor=<%#Eval("UsuarioComprador")%>&Id=<%#Eval("Id")%>&UsuarioEmisor=<%#Eval("UsuarioVendedor")%>&PaginaOrigen=Ventas" id="lblVendedor">Click Acá</a>
+               <a href="Contacto.aspx?UsuarioReceptor=<%#Eval("UsuarioComprador")%>&Id=<%#Eval("Id")%>&UsuarioEmisor=<%#Eval("UsuarioVendedor")%>&PaginaOrigen=Ventas" id="lblVendedor">Click Acá</a>
             </itemtemplate>
           </asp:templatefield>
                    <asp:BoundField  HeaderText="Producto" DataField="Titulo" />

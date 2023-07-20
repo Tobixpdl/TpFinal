@@ -201,17 +201,9 @@ namespace negocio
                     aux.Titulo = (string)datos.Lector["TITULO"];
                     aux.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
                     aux.finalizada = (bool)datos.Lector["estado"];
-                    //aux.solicitud = (bool)datos.Lector["solicitud"];
-
-                    if (!datos.Lector.IsDBNull(datos.Lector.GetOrdinal("solicitud")))
-                    {
-                        aux.solicitud = datos.Lector.GetBoolean(datos.Lector.GetOrdinal("solicitud"));
-                    }
-
-                    if (datos.Lector["solicitante"].ToString() != "")
-                    {
-                        aux.solicitante = (string)datos.Lector["solicitante"];
-                    }
+                    aux.solicitud = (bool)datos.Lector["solicitud"];
+                    aux.solicitud = (bool)datos.Lector["solicitud"];
+                    aux.solicitante = (string)datos.Lector["solicitante"];
 
                     if (datos.Lector["FECHAENTREGA"].ToString() == "")
                     {
