@@ -38,10 +38,6 @@
         <div class="container">
             <div class="card">
                         <div>
-                            <div class="img-container">
-                              <asp:Image ID="imgPublicacion" runat="server" 
-                              CssClass="card-img"  ImageUrl=<%#ReturnUrl(listaDeCompras)%>/> 
-                            </div>
                             <div>
                                <h2><%:listaDeCompras.Titulo%></h2>
                                <p>Precio: $<%:listaDeCompras.Precio%></p>
