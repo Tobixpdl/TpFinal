@@ -32,6 +32,7 @@
          
              <h1></h1>
               <div class="cp">
+              <asp:DropDownList ID="ddlPublicaciones" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPublicaciones_SelectedIndexChanged"></asp:DropDownList>
 
      <asp:GridView ID="dgvPublicaciones" runat="server" OnRowCommand="dgvPublicaciones_RowCommand"
          CssClass="table " DataKeyNames="Id" AutoGenerateColumns="false" >

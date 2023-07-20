@@ -101,13 +101,13 @@
 
     </form>
 </body>
-           <footer>
+ <%--          <footer>
               <ul>
                 <li>Contacto: <a href="mailto:ayuda.buyeverything@gmail.com">ayuda.buyeverything@gmail.com</a></li>
                 <li>Teléfono: +54 9 11 2537-2242</li>
               </ul>
               <p>Buy Everything © 2023</p>
-          </footer>
+          </footer>--%>
         
 
 </html>
@@ -173,6 +173,14 @@
         text-align:right;
     }
 
+    li a:hover{
+        font-size:21px;
+    }
+
+    .favourites a:hover{
+        color:red;
+    }
+
     .navT ul{
         display:inline-block;
         list-style-type:none;
@@ -222,8 +230,9 @@
         }
 
         .dropdown-content a:hover {
-            background-color: var(--bgColor);
-            color: var(--textColorBlack);
+            /*background-color: var(--bgColor);*/
+            transform:scale(1.2);
+            color: var(--newBg);
         }
 
         /* FAVOURITES*/

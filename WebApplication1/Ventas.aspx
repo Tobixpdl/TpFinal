@@ -33,7 +33,9 @@
 
          
              <h1></h1>
-              <div class="cp">
+              <div class="cp">   
+               
+                     <asp:DropDownList ID="ddlEstados" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlEstados_SelectedIndexChanged"></asp:DropDownList>
 
                      <asp:GridView ID="dgvVentas" runat="server" OnRowCommand="dgvVentas_RowCommand"
                            OnSelectedIndexChanged="dgvVentas_SelectedIndexChanged1" OnPageIndexChanging="dgvVentas_PageIndexChanging"

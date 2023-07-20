@@ -426,6 +426,74 @@ namespace negocio
             return lista;
 
         }
+
+        public List<Venta> listarXEstado(string estado)
+        {
+            List<Venta> lista = new List<Venta>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select v.ID,DNICOMPRADOR,USUARIO, USUARIOVENDEDOR,TITULO,FECHACOMPRA,FECHAENTREGA,\r\n e.DESCRIPCION,CANTIDAD,PRECIOFINAL,DNIVENDEDOR,metodo,URLIMAGEN,estado" +
+                    " FROM VENTAS V inner join Estados e  on v.IDESTADO=e.ID \r\n  where e.DESCRIPCION = @estado");
+                datos.setearParametro("@estado", estado);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Venta v = new Venta();
+                    v.Id = datos.Lector.GetInt32(0);
+
+                    v.DNIComprador = datos.Lector.GetInt32(1);
+                    v.DNIVendedor = datos.Lector.GetInt32(10);
+                    v.UsuarioComprador = (string)datos.Lector["USUARIO"];
+                    v.UsuarioVendedor = (string)datos.Lector["USUARIOVENDEDOR"];
+                    v.Titulo = (string)datos.Lector["TITULO"];
+                    v.FechaCompra = (datos.Lector["FECHACOMPRA"]).ToString();
+                    v.urlImagen = (string)datos.Lector["URLIMAGEN"] != null ? (string)datos.Lector["URLIMAGEN"].ToString() : "null";
+                    v.finalizada = (bool)datos.Lector["estado"];
+                    if (datos.Lector["FECHAENTREGA"].ToString() == "")
+                    {
+                        v.FechaEntrega = "No Entregado";
+                    }
+                    else
+                    {
+                        v.FechaEntrega = (datos.Lector["FECHAENTREGA"]).ToString();
+                    }
+
+                    v.Estado = (string)datos.Lector["DESCRIPCION"];
+                    v.Cantidad = (int)datos.Lector["CANTIDAD"];
+                    v.PrecioFinal = (decimal)datos.Lector["PRECIOFINAL"];
+                    if (datos.Lector["METODO"] != null)
+                    {
+                        char letra = Convert.ToChar(datos.Lector["METODO"]);
+                        switch (letra)
+                        {
+                            case 'e':
+                                v.metodo = "Efectivo";
+                                break;
+                            case 't':
+                                v.metodo = "Transferencia Bancaria";
+                                break;
+
+                        }
+
+                    }
+
+                    lista.Add(v);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return lista;
+
+        }
     }
 
 

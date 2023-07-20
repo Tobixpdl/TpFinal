@@ -17,6 +17,7 @@ namespace WebApplication1
     {
 
         public List<Publicacion> listaDePublicaciones;
+
         public int contador { get; set; }
         public int idUsuario { get; set; }
 
@@ -48,9 +49,7 @@ namespace WebApplication1
                 }
                 if(!IsPostBack)
                 {
-
-                   
-                   
+                    CargarCategorias();
                 }
                 ContarItems(ref listaDePublicaciones);
 
@@ -194,9 +193,38 @@ namespace WebApplication1
 
             }
 
-
         }
 
-       
+        protected void ddlPublicaciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlPublicaciones.SelectedValue != "Todas las categoría")
+            {
+                NegocioPublicacion negocio = new NegocioPublicacion();
+
+                listaDePublicaciones = negocio.ListarXCategoriaSinCeroString(ddlPublicaciones.SelectedItem.ToString());
+
+                dgvPublicaciones.DataSource = listaDePublicaciones;
+                dgvPublicaciones.DataBind();
+                index = this.Session["index"] != null ? (int)this.Session["index"] : -1;
+                hideRows(index, listaDePublicaciones.Count, 7);
+            }
+            
+        }
+
+        private void CargarCategorias()
+        {
+            NegocioCategoria negocioCategoria = new NegocioCategoria();
+
+            List<Categoria> ListaCategorias = negocioCategoria.Listar();
+
+            List<string> cats = new List<string>();
+
+            ddlPublicaciones.Items.Add("Todas las categoría");
+
+            foreach (Categoria categoria in ListaCategorias)
+            {
+                ddlPublicaciones.Items.Add(categoria.Nombre);
+            }
+        }
     }
 }

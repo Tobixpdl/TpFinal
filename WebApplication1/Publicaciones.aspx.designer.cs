@@ -24,6 +24,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnBack;
 
         /// <summary>
+        /// Control ddlPublicaciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPublicaciones;
+
+        /// <summary>
         /// Control dgvPublicaciones.
         /// </summary>
         /// <remarks>

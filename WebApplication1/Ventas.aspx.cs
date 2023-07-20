@@ -32,9 +32,12 @@ namespace WebApplication1
             {
                 Response.Redirect("Default.aspx", false);
             }
-        }
 
-     
+            if(!IsPostBack)
+            {
+                CargarEstados();
+            }
+        }
 
         public void ContarItems(ref List<Venta> list)
         {
@@ -53,26 +56,40 @@ namespace WebApplication1
            
             contador = list.Count;
         }
-
         protected void dgvVentas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
         }
-
         protected void dgvVentas_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
-
         protected void dgvVentas_SelectedIndexChanged1(object sender, EventArgs e)
         {
-
         }
-
         protected void dgvVentas_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvVentas.PageIndex = e.NewPageIndex;
             dgvVentas.DataBind();
+        }
+
+        protected void ddlEstados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NegocioVentas negocioVentas = new NegocioVentas();
+
+            if (ddlEstados.SelectedValue != "Todos los estados")
+            {
+                listaDeVentas = negocioVentas.listarXEstado(ddlEstados.SelectedValue);
+                dgvVentas.DataSource = listaDeVentas;
+                dgvVentas.DataBind();
+            }
+        }
+
+        private void CargarEstados()
+        {
+            ddlEstados.Items.Add("Todos los estados");
+            ddlEstados.Items.Add("En proceso");
+            ddlEstados.Items.Add("Entregada");
+            ddlEstados.Items.Add("En reclamo");
+            ddlEstados.Items.Add("Cancelada");
         }
     }
 }

@@ -18,10 +18,7 @@ namespace WebApplication1
     {
         public List<Publicacion> ListaArticulos { get; set; }
         public List<Publicacion> listaFiltradaPro { get; set; }
-
         public List<Publicacion> carritoActual { get; set; }
-
-
         public int UsuarioActual { get; set; }
         public Usuario user=new Usuario();
         public NegocioUsuario negocioUsuario { get; set; }
